@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import ImagenLR from "../assets/ImagenLR.png";
 import LogoHorizontal from "../assets/LogoHorizontal.png";
 import EscudoVertical from "../assets/EscudoVertical.png";
 import Collage from "../assets/Collage.png"
