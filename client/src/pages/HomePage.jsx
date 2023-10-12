@@ -1,6 +1,17 @@
+import CarouselImages from "../components/CarouselImages"
+import CarouselNews from "../components/CarouselNews"
+import NavBar from "../components/NavBar"
+
 function HomePage() {
   return (
-    <div>HomePage</div>
+    <div>
+      <NavBar />
+      <CarouselImages />
+      <CarouselNews />
+      <div>
+
+      </div>
+    </div>
   )
 }
 
