@@ -1,11 +1,8 @@
 import { useForm } from "react-hook-form";
 import LogoHorizontal from "../assets/LogoHorizontal.png";
 import EscudoVertical from "../assets/EscudoVertical.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faCircleXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { FaSearch } from "react-icons/fa";
+import { FaCircleXmark } from "react-icons/fa6";
 import NavBarOptions from "./NavBarOptions";
 
 
@@ -13,7 +10,7 @@ function NavBar() {
   const { register } = useForm();
   return (
     <div>
-      <div className="flex bg-[#6D1610] font-montserrat text-xs text-white w-screen h-8 items-center justify-center">
+      <div className="flex bg-[#6D1610] font-montserrat text-xs text-white w-full h-8 items-center justify-center">
         <p>GOBIERNO DE TEOCELO 2022 - 2025</p>
       </div>
       <div className="grid grid-cols-2 gap-0">
@@ -39,16 +36,14 @@ function NavBar() {
                 className="w-full text-black pr-10 pl-10 py-2 rounded-3xl border border-black bg-[#efefef] block"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center text-sm leading-5">
-                <FontAwesomeIcon
-                  icon={faMagnifyingGlass}
-                  size="lg"
+                <FaSearch
+                  size="1.5em"
                   style={{ color: "#848488" }}
                 />
               </div>
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                <FontAwesomeIcon
-                  icon={faCircleXmark}
-                  size="xl"
+                <FaCircleXmark
+                  size="1.5em"
                   style={{ color: "#848488" }}
                 />
               </div>

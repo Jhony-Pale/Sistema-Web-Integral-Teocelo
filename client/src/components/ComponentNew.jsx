@@ -1,32 +1,38 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineClockCircle } from "react-icons/ai";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography
+} from "@material-tailwind/react";
 
 function ComponentNew({ newComponent }) {
-    const urlImage = "/" + newComponent.image
+  const urlImage = "/" + newComponent.image;
   return (
-    <div>
-      <img src={urlImage} alt="Imagen" className="w-full rounded-t-2xl" />
-      <h1 className="font-montserrat text-[#494848] text-lg font-bold py-2">
-        {newComponent.title}
-      </h1>
-      <h2 className="font-montserrat text-[#A3A3A2] py-2">
-        {newComponent.description}
-      </h2>
-      <h3 className="mx-3 grid grid-cols-2">
-        <div className="mb-3 flex items-center justify-start">
-          <FontAwesomeIcon icon={faClock} size="xs"/>
-          <span className="font-montserrat text-black text-xs ml-2">
-            {newComponent.date}
-          </span>
-        </div>
-        <div className="mb-3 flex items-center justify-end">
-        <button className="bg-[#6d1610] text-white rounded-2xl py-1 px-2 font-montserrat">
-          Leer más
-        </button>
-            
-        </div>
-      </h3>
-    </div>
+    <Card className="mt-6 w-full">
+      <CardHeader className="relative h-56 w-full mx-0 rounded-b-none">
+        <img src={urlImage} alt="Imagen" className="w-full rounded-t-2xl h-full" />
+      </CardHeader>
+      <CardBody>
+        <Typography variant="h5" color="blue-gray" className="mb-2 font-montserrat text-[#494848]">
+          {newComponent.title}
+        </Typography>
+        <Typography className="font-montserrat text-[#A3A3A2]">
+          {newComponent.description}
+        </Typography>
+      </CardBody>
+      <CardFooter className="flex items-center justify-between">
+          <div className="flex items-center">
+            <AiOutlineClockCircle />
+            <span className="font-montserrat text-black text-xs ml-2">
+              {newComponent.date}
+            </span>
+          </div>
+        
+          <button className="bg-[#6d1610] text-white rounded-2xl py-1 px-5 font-montserrat">Leer más</button>
+      </CardFooter>
+    </Card>
   );
 }
 

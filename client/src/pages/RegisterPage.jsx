@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { FaEye } from "react-icons/fa";
 import LogoHorizontal from "../assets/LogoHorizontal.png";
 import EscudoVertical from "../assets/EscudoVertical.png";
 import Collage from "../assets/Collage.png";
@@ -75,7 +74,7 @@ function RegisterPage() {
                     className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                    <FontAwesomeIcon icon={faEye} size="xl" />
+                    <FaEye size="1.5em" />
                   </div>
                 </div>
 

@@ -1,6 +1,8 @@
-import CarouselImages from "../components/CarouselImages"
-import CarouselNews from "../components/CarouselNews"
-import NavBar from "../components/NavBar"
+import CarouselImages from "../components/CarouselImages";
+import CarouselNews from "../components/CarouselNews";
+import Directors from "../components/Directors";
+import NavBar from "../components/NavBar";
+import ServicesAnnouncement from "../components/ServicesAnnouncement";
 
 function HomePage() {
   return (
@@ -8,11 +10,10 @@ function HomePage() {
       <NavBar />
       <CarouselImages />
       <CarouselNews />
-      <div>
-
-      </div>
+      <ServicesAnnouncement />
+      <Directors />
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
