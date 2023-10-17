@@ -30,7 +30,7 @@ function NavBar() {
           <form method="get" className="mr-5">
             <div className="relative">
               <input
-                type="password"
+                type="text"
                 placeholder="Buscar"
                 {...register("search", { required: true })}
                 className="w-full text-black pr-10 pl-10 py-2 rounded-3xl border border-black bg-[#efefef] block"

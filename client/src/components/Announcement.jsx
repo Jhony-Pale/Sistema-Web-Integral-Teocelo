@@ -46,8 +46,8 @@ function Announcement() {
               </IconButton>
             )}
             className="w-[90%]"
-            autoplay="true"
-            loop="true"
+            autoplay={true}
+            loop={true}
           >
             <div className="flex h-full w-full">
               <div className="flex justify-center items-center">
