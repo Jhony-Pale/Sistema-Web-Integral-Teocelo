@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import LogoHorizontal from "../assets/LogoHorizontal.png";
-import EscudoVertical from "../assets/EscudoVertical.png";
+import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
+import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import { FaSearch } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
 import NavBarOptions from "./NavBarOptions";
@@ -88,7 +88,7 @@ function NavBar() {
             }
         }}/>
         <NavBarOptions options={{
-            "title" : "TRANSPARENCIAS",
+            "title" : "TRANSPARENCIA",
             "others" : {
                 "Opción 1" : "#",
                 "Opción 2" : "#",

@@ -1,7 +1,7 @@
-import Logo075 from "../assets/Logo075.png"
-import Logo911 from "../assets/Logo911.png"
-import LogoAlerta from "../assets/LogoAlerta.png"
-import LogoDenuncia from "../assets/LogoDenuncia.png"
+import Logo075 from "../assets/Logos/Logo075.png"
+import Logo911 from "../assets/Logos/Logo911.png"
+import LogoAlerta from "../assets/Logos/LogoAlerta.png"
+import LogoDenuncia from "../assets/Logos/LogoDenuncia.png"
 import ReportHomeForm from "./ReportHomeForm";
 
 function NumbersReports() {

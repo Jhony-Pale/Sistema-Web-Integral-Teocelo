@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { FaEye } from "react-icons/fa";
-import LogoHorizontal from "../assets/LogoHorizontal.png";
-import EscudoVertical from "../assets/EscudoVertical.png";
-import Collage from "../assets/Collage.png";
+import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
+import EscudoVertical from "../assets/Logos/EscudoVertical.png";
+import Collage from "../assets/Photos/Collage.png";
 
 function RegisterPage() {
   const { register } = useForm();

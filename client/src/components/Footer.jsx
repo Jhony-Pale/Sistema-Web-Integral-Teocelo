@@ -1,9 +1,9 @@
-import MapaTeocelo from "../assets/MapaTeocelo.png";
-import LogoVerticalBlanco from "../assets/LogoVerticalBlanco.png";
-import EscudoVerticalP from "../assets/EscudoVerticalP.png";
-import IconoFacebook from "../assets/IconoFacebook.png";
-import IconoTwitter from "../assets/IconoTwitter.png";
-import IconoInstagram from "../assets/IconoInstagram.png";
+import MapaTeocelo from "../assets/Extras/MapaTeocelo.png";
+import LogoVerticalBlanco from "../assets/Logos/LogoVerticalBlanco.png";
+import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.png";
+import IconoFacebook from "../assets/Icons/IconoFacebook.png";
+import IconoTwitter from "../assets/Icons/IconoTwitter.png";
+import IconoInstagram from "../assets/Icons/IconoInstagram.png";
 import { BiCopyright, BiSolidPhone } from "react-icons/bi";
 import { RiMapPin2Fill } from "react-icons/ri";
 

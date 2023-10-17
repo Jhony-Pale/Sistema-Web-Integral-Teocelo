@@ -1,4 +1,4 @@
-import InauguracionObra from "../assets/InauguracionObra.png";
+import InauguracionObra from "../assets/Photos/InauguracionObra.png";
 import { Carousel, Typography } from "@material-tailwind/react";
 
 function CarouselImages() {

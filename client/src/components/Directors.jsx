@@ -1,7 +1,7 @@
 import { Carousel } from "@material-tailwind/react";
-import LogoIMM from "../assets/LogoIMM.png";
-import PCTeocelo from "../assets/PCTeocelo.png";
-import DIFH from "../assets/DIFH.png";
+import LogoIMM from "../assets/Logos/LogoIMM.png";
+import PCTeocelo from "../assets/Logos/PCTeocelo.png";
+import DIFH from "../assets/Logos/DIFH.png";
 
 function Directors() {
   return (

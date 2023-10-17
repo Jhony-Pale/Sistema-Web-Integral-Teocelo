@@ -1,5 +1,5 @@
-import SeparadorIzquierdo from "../assets/SeparadorIzquierdo.png";
-import SeparadorDerecho from "../assets/SeparadorDerecho.png";
+import SeparadorIzquierdo from "../assets/Extras/SeparadorIzquierdo.png";
+import SeparadorDerecho from "../assets/Extras/SeparadorDerecho.png";
 import ComponentNew from "./ComponentNew";
 import { Carousel } from "@material-tailwind/react";
 
