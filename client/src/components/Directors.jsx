@@ -23,13 +23,13 @@ function Directors() {
             </div>
           </div>
           <div className="flex items-center w-full px-4 gap-10 mb-10">
-            <div className="grow">
+            <div className="grow basis-[14%]">
               <img src={LogoIMM} alt="Imagen del logo IMM" />
             </div>
-            <div className="grow">
+            <div className="grow basis-1/6">
               <img src={PCTeocelo} alt="Imagen del logo Teocelo" />
             </div>
-            <div className="grow">
+            <div className="grow basis-[14%]">
               <img src={DIFH} alt="Imagen del logo DIF" />
             </div>
           </div>
