@@ -9,27 +9,27 @@ function Directors() {
       <div className="font-extrabold text-center text-4xl pt-5 mb-10">
         DIRECCIONES
       </div>
-      <div className="bg-[#EFEEEE] px-4">
-        <Carousel autoplay={true} loop={true}>
-          <div className="flex h-full w-full px-4 gap-10">
-            <div className="m-10 bg-white rounded-2xl">
+      <div className="bg-[#EFEEEE] px-4 pt-10">
+        <Carousel autoplay={false} loop={false}>
+          <div className="flex items-center w-full px-4 gap-10 mb-10">
+            <div className="grow basis-[14%]">
               <img src={LogoIMM} alt="Imagen del logo IMM" />
             </div>
-            <div className="m-10 bg-white rounded-2xl">
+            <div className="grow basis-1/6">
               <img src={PCTeocelo} alt="Imagen del logo Teocelo" />
             </div>
-            <div className="m-10 bg-white rounded-2xl">
+            <div className="grow basis-[14%]">
               <img src={DIFH} alt="Imagen del logo DIF" />
             </div>
           </div>
-          <div className="flex h-full w-full px-4 gap-10">
-            <div className="m-10 bg-white rounded-2xl">
+          <div className="flex items-center w-full px-4 gap-10 mb-10">
+            <div className="grow">
               <img src={LogoIMM} alt="Imagen del logo IMM" />
             </div>
-            <div className="m-10 bg-white rounded-2xl">
+            <div className="grow">
               <img src={PCTeocelo} alt="Imagen del logo Teocelo" />
             </div>
-            <div className="m-10 bg-white rounded-2xl">
+            <div className="grow">
               <img src={DIFH} alt="Imagen del logo DIF" />
             </div>
           </div>

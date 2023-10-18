@@ -10,7 +10,9 @@ import {
 function ComponentNew({ newComponent }) {
   const urlImage = "/" + newComponent.image;
   return (
-    <Card className="mt-6 w-full">
+    <div className="mt-6 w-full h-full">
+
+    <Card className="h-full">
       <CardHeader className="relative h-56 w-full mx-0 rounded-b-none">
         <img src={urlImage} alt="Imagen" className="w-full rounded-t-2xl h-full" />
       </CardHeader>
@@ -22,7 +24,9 @@ function ComponentNew({ newComponent }) {
           {newComponent.description}
         </Typography>
       </CardBody>
-      <CardFooter className="flex items-center justify-between">
+      <CardFooter className="grow">
+        <div className="grid grid-cols-2 items-center content-end h-full w-full">
+
           <div className="flex items-center">
             <AiOutlineClockCircle />
             <span className="font-montserrat text-black text-xs ml-2">
@@ -30,9 +34,11 @@ function ComponentNew({ newComponent }) {
             </span>
           </div>
         
-          <button className="bg-[#6d1610] text-white rounded-2xl py-1 px-5 font-montserrat">Leer más</button>
+          <button className="bg-[#6d1610] text-white rounded-2xl py-1 px-5 font-montserrat w-2/3 justify-self-end">Leer más</button>
+        </div>
       </CardFooter>
     </Card>
+    </div>
   );
 }
 

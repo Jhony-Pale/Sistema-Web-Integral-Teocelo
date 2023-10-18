@@ -16,7 +16,7 @@ function CarouselImages() {
         />
       </div>
       <Carousel autoplay={true} loop={true}>
-        <div className="flex h-full w-full px-4">
+        <div className="flex h-full w-full px-4 pb-6">
           <div className="m-10 bg-white rounded-2xl">
             <ComponentNew
               newComponent={{
