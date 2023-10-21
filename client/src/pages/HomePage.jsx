@@ -9,7 +9,7 @@ import ServicesAnnouncement from "../components/ServicesAnnouncement";
 function HomePage() {
   return (
     <div>
-      <NavBar />
+      
       <CarouselImages />
       <CarouselNews />
       <ServicesAnnouncement />
