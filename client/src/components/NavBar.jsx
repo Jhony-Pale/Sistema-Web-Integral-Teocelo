@@ -13,6 +13,7 @@ import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
 import IconoQuejas from "../assets/Icons/IconoQuejas.png";
+import IconoX from "../assets/Icons/IconoX.png";
 import NavBarOptions from "./NavBarOptions";
 
 function NavBar() {
@@ -149,7 +150,9 @@ function NavBar() {
               <div className="justify-self-start ml-5 font-montserrat text-3xl">
                 Me gustaría...
               </div>
-              <div className="justify-self-end mr-5">Exit</div>
+              <button className="justify-self-end mr-5 mt-2" onClick={handleOpen}>
+                <img src={IconoX} alt="Icono de la marca X" className="w-[80%]" />
+              </button>
             </div>
           </DialogHeader>
           <DialogBody>
