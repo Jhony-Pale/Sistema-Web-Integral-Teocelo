@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
@@ -71,7 +71,7 @@ function NavBar() {
           options={{
             title: "INICIO",
             others: {
-              INICIO: "#",
+              INICIO: "/",
             },
           }}
         />
@@ -79,9 +79,9 @@ function NavBar() {
           options={{
             title: "TEOCELO",
             others: {
-              "Opción 1": "#",
-              "Opción 2": "#",
-              "Opción 3": "#",
+              "Historia": "#",
+              "Escudo de armas": "#",
+              "Acontecimientos históricos": "#",
             },
           }}
         />
@@ -89,9 +89,11 @@ function NavBar() {
           options={{
             title: "GOBIERNO MUNICIPAL",
             others: {
-              "Opción 1": "#",
-              "Opción 2": "#",
-              "Opción 3": "#",
+              "Misión y visión": "#",
+              "Valores de la administración": "#",
+              "Organigrama": "#",
+              "H. Cabildo": "#",
+              "Actas de cabildo": "#",
             },
           }}
         />
@@ -99,9 +101,8 @@ function NavBar() {
           options={{
             title: "DIRECTORIO",
             others: {
-              "Opción 1": "#",
-              "Opción 2": "#",
-              "Opción 3": "#",
+              "H. Cabildo": "#",
+              "Direcciones": "#",
             },
           }}
         />
@@ -109,9 +110,8 @@ function NavBar() {
           options={{
             title: "TRANSPARENCIA",
             others: {
-              "Opción 1": "#",
-              "Opción 2": "#",
-              "Opción 3": "#",
+              "Pendiente 1": "#",
+              "Pendiente 2": "#",
             },
           }}
         />
@@ -275,6 +275,8 @@ function NavBar() {
           </DialogFooter>
         </Dialog>
       </>
+
+      <Outlet />
     </div>
   );
 }

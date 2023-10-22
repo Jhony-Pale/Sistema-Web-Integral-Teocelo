@@ -10,7 +10,6 @@ function App() {
       <Routes>
         <Route element={<NavBar/>}>
           <Route path="/" element={<HomePage />} />
-
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage/>} />
