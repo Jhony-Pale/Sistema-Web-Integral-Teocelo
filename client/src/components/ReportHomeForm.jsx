@@ -10,7 +10,7 @@ function ReportHomeForm() {
         ATENCIÓN CIUDADANA
       </div>
       <div className="flex items-center justify-center">
-        <form className="flex flex-col w-[60%]">
+        <form className="flex flex-col w-full lg:w-[60%]">
           <div className="flex flex-col bg-[#EFEEEE] rounded-xl p-4">
             <div className="mb-11">
               <span className="font-bold text-xl font-serif">

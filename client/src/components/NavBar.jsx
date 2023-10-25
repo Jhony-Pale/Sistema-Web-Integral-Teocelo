@@ -3,11 +3,19 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Drawer,
+  ListItemPrefix,
+  List,
+  ListItem,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
 } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { FaCircleXmark } from "react-icons/fa6";
+import { FaCircleXmark, FaXmark } from "react-icons/fa6";
+import { BiMenu } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
@@ -15,12 +23,38 @@ import IconoConstancias from "../assets/Icons/IconoConstancias.png";
 import IconoQuejas from "../assets/Icons/IconoQuejas.png";
 import IconoX from "../assets/Icons/IconoX.png";
 import NavBarOptions from "./NavBarOptions";
+import NavBarOptionsMobileVersion from "./NavBarOptionsMobileVersion";
 
 function NavBar() {
   const { register } = useForm();
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(!open);
+  const [openDialog, setOpenDialog] = useState(false);
+  const handleOpenDialog = () => setOpenDialog(!openDialog);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Verifica el ancho de la ventana cuando el componente se monta
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Puedes ajustar el valor según tu diseño responsive
+    };
+
+    // Agrega un event listener para rastrear cambios en el tamaño de la ventana
+    window.addEventListener("resize", handleResize);
+
+    // Llama a handleResize para establecer el estado inicial
+    handleResize();
+
+    // Limpia el event listener cuando el componente se desmonta
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const showDrawer = () => setOpenDrawer(true);
+  const closeDrawer = () => setOpenDrawer(false);
 
   return (
     <div>
@@ -40,105 +74,224 @@ function NavBar() {
             className="my-5 h-20"
           />
         </div>
-        <div className="flex items-center justify-end mr-5">
-          <form method="get" className="mr-5">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Buscar"
-                {...register("search", { required: true })}
-                className="w-full text-black pr-10 pl-10 py-2 rounded-3xl border border-black bg-[#efefef] block"
-              />
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center text-sm leading-5">
-                <FaSearch size="1.5em" style={{ color: "#848488" }} />
+        {isMobile ? (
+          <></>
+        ) : (
+          <div className="flex items-center justify-end mr-5">
+            <form method="get" className="mr-5">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Buscar"
+                  {...register("search", { required: true })}
+                  className="w-full text-black pr-10 pl-10 py-2 rounded-3xl border border-black bg-[#efefef] block"
+                />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center text-sm leading-5">
+                  <FaSearch size="1.5em" style={{ color: "#848488" }} />
+                </div>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                  <FaCircleXmark size="1.5em" style={{ color: "#848488" }} />
+                </div>
               </div>
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                <FaCircleXmark size="1.5em" style={{ color: "#848488" }} />
-              </div>
-            </div>
-          </form>
-          <button
-            onClick={handleOpen}
-            className="bg-[#6d1610] text-white rounded-3xl font-playfair text-lg py-2 px-10"
-          >
-            Me gustaría...
-          </button>
-        </div>
+            </form>
+            <button
+              onClick={handleOpenDialog}
+              className="bg-[#6d1610] text-white rounded-3xl font-playfair text-lg py-2 px-10"
+            >
+              Me gustaría...
+            </button>
+          </div>
+        )}
       </div>
 
-      <div className="w-full h-10 flex items-center justify-center bg-[#efeeee] shadow-lg">
-        <NavBarOptions
-          options={{
-            title: "INICIO",
-            others: {
-              INICIO: "/",
-            },
-          }}
-        />
-        <NavBarOptions
-          options={{
-            title: "TEOCELO",
-            others: {
-              "Historia": "#",
-              "Escudo de armas": "#",
-              "Acontecimientos históricos": "#",
-            },
-          }}
-        />
-        <NavBarOptions
-          options={{
-            title: "GOBIERNO MUNICIPAL",
-            others: {
-              "Misión y visión": "#",
-              "Valores de la administración": "#",
-              "Organigrama": "#",
-              "H. Cabildo": "#",
-              "Actas de cabildo": "#",
-            },
-          }}
-        />
-        <NavBarOptions
-          options={{
-            title: "DIRECTORIO",
-            others: {
-              "H. Cabildo": "#",
-              "Direcciones": "#",
-            },
-          }}
-        />
-        <NavBarOptions
-          options={{
-            title: "TRANSPARENCIA",
-            others: {
-              "Pendiente 1": "#",
-              "Pendiente 2": "#",
-            },
-          }}
-        />
-        <NavBarOptions
-          options={{
-            title: "TURISMO",
-            others: {
-              "Opción 1": "#",
-              "Opción 2": "#",
-              "Opción 3": "#",
-            },
-          }}
-        />
-        <NavBarOptions
-          options={{
-            title: "TRÁMITES Y SERVICIOS",
-            others: {
-              INICIO: "#",
-            },
-          }}
-        />
-      </div>
+      {isMobile ? (
+        <>
+          <div className="w-full h-10 flex items-center justify-center bg-[#efeeee] shadow-lg">
+            <BiMenu
+              onClick={showDrawer}
+              className="cursor-pointer"
+              size="2em"
+            />
+          </div>
+          <Drawer open={openDrawer} onClose={closeDrawer} className="p-4">
+            <div className="mb-6 flex items-center justify-between">
+              <span>Menu</span>
+              <FaXmark className="cursor-pointer" onClick={closeDrawer} />
+            </div>
+            <div className="grid grid-cols-1 items-center justify-center">
+              <form method="get" className="">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Buscar"
+                    {...register("search", { required: true })}
+                    className="w-full text-black pr-10 pl-10 py-2 rounded-3xl border border-black bg-[#efefef] block"
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center text-sm leading-5">
+                    <FaSearch size="1.5em" style={{ color: "#848488" }} />
+                  </div>
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                    <FaCircleXmark size="1.5em" style={{ color: "#848488" }} />
+                  </div>
+                </div>
+              </form>
+              <button
+                onClick={handleOpenDialog}
+                className="bg-[#6d1610] text-white rounded-3xl font-playfair text-lg py-2 px-10 mt-5"
+              >
+                Me gustaría...
+              </button>
+            </div>
+            <div className="mb-8 pr-4 mt-10">
+              <List>
+                <NavBarOptionsMobileVersion
+                  options={{
+                    title: "INICIO",
+                    others: {
+                      INICIO: "/",
+                    },
+                  }}
+                />
+                <NavBarOptionsMobileVersion
+                  options={{
+                    title: "TEOCELO",
+                    others: {
+                      Historia: "/history",
+                      "Escudo de armas": "#",
+                      "Acontecimientos históricos": "#",
+                    },
+                  }}
+                />
+                <NavBarOptionsMobileVersion
+                  options={{
+                    title: "GOBIERNO MUNICIPAL",
+                    others: {
+                      "Misión y visión": "#",
+                      "Valores de la administración": "#",
+                      Organigrama: "#",
+                      "H. Cabildo": "#",
+                      "Actas de cabildo": "#",
+                    },
+                  }}
+                />
+                <NavBarOptionsMobileVersion
+                  options={{
+                    title: "DIRECTORIO",
+                    others: {
+                      "H. Cabildo": "#",
+                      Direcciones: "#",
+                    },
+                  }}
+                />
+                <NavBarOptionsMobileVersion
+                  options={{
+                    title: "TRANSPARENCIA",
+                    others: {
+                      "Pendiente 1": "#",
+                      "Pendiente 2": "#",
+                    },
+                  }}
+                />
+                <NavBarOptionsMobileVersion
+                  options={{
+                    title: "TURISMO",
+                    others: {
+                      "Opción 1": "#",
+                      "Opción 2": "#",
+                      "Opción 3": "#",
+                    },
+                  }}
+                />
+                <NavBarOptionsMobileVersion
+                  options={{
+                    title: "TRÁMITES Y SERVICIOS",
+                    others: {
+                      INICIO: "#",
+                    },
+                  }}
+                />
+              </List>
+            </div>
+            <div className="flex gap-2"></div>
+          </Drawer>
+        </>
+      ) : (
+        <>
+          <div className="w-full h-10 flex items-center justify-center bg-[#efeeee] shadow-lg">
+            <NavBarOptions
+              options={{
+                title: "INICIO",
+                others: {
+                  INICIO: "/",
+                },
+              }}
+            />
+            <NavBarOptions
+              options={{
+                title: "TEOCELO",
+                others: {
+                  Historia: "/history",
+                  "Escudo de armas": "#",
+                  "Acontecimientos históricos": "#",
+                },
+              }}
+            />
+            <NavBarOptions
+              options={{
+                title: "GOBIERNO MUNICIPAL",
+                others: {
+                  "Misión y visión": "#",
+                  "Valores de la administración": "#",
+                  Organigrama: "#",
+                  "H. Cabildo": "#",
+                  "Actas de cabildo": "#",
+                },
+              }}
+            />
+            <NavBarOptions
+              options={{
+                title: "DIRECTORIO",
+                others: {
+                  "H. Cabildo": "#",
+                  Direcciones: "#",
+                },
+              }}
+            />
+            <NavBarOptions
+              options={{
+                title: "TRANSPARENCIA",
+                others: {
+                  "Pendiente 1": "#",
+                  "Pendiente 2": "#",
+                },
+              }}
+            />
+            <NavBarOptions
+              options={{
+                title: "TURISMO",
+                others: {
+                  "Opción 1": "#",
+                  "Opción 2": "#",
+                  "Opción 3": "#",
+                },
+              }}
+            />
+            <NavBarOptions
+              options={{
+                title: "TRÁMITES Y SERVICIOS",
+                others: {
+                  INICIO: "#",
+                },
+              }}
+            />
+          </div>
+        </>
+      )}
 
       <>
         <Dialog
-          open={open}
-          handler={handleOpen}
+          open={openDialog}
+          handler={handleOpenDialog}
           size="lg"
           animate={{
             mount: { scale: 1, y: 0 },
@@ -150,8 +303,15 @@ function NavBar() {
               <div className="justify-self-start ml-5 font-montserrat text-3xl">
                 Me gustaría...
               </div>
-              <button className="justify-self-end mr-5 mt-2" onClick={handleOpen}>
-                <img src={IconoX} alt="Icono de la marca X" className="w-[80%]" />
+              <button
+                className="justify-self-end mr-5 mt-2"
+                onClick={handleOpenDialog}
+              >
+                <img
+                  src={IconoX}
+                  alt="Icono de la marca X"
+                  className="w-[80%]"
+                />
               </button>
             </div>
           </DialogHeader>

@@ -20,10 +20,22 @@ module.exports = withMT ({
           'from': {transform: 'translateX(-100%)'},
           'to': {transform: 'translateX(0%)'},
         },
+        moveupdisappear: {
+          '0%': { transform: 'translateY(0) scale(1)', opacity: '1' },
+          '50%': { transform: 'translateY(-50px) scale(1.5)', opacity: '0.5' },
+          '100%': { transform: 'translateY(-100px) scale(2)', opacity: '0' },
+        },
+        fadeapper: {
+          '0%': { opacity: '0' },
+          '50%': { opacity: '0.5' },
+          '100%': { opacity: '1' },
+        },
       },
       animation:{
         rightleft: 'rightleft 0.5s ease-in-out',
         leftright: 'leftright 0.5s ease-in-out',
+        moveupdisappear: 'moveupdisappear 1s ease-in-out',
+        fadeapper: 'fadeapper 1s ease-in-out',
       }
     },
   },

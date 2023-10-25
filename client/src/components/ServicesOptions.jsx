@@ -9,13 +9,13 @@ function ServicesOptions() {
   return (
     <div>
       <div>
-        <h1 className="font-extrabold text-center text-4xl pt-5 pb-28">
+        <h1 className="font-extrabold text-center text-2xl lg:text-4xl pt-5 pb-28">
           SERVICIOS
         </h1>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-5 text-center w-full">
-        <div className="w-full md:w-1/4 lg:w-1/4 flex flex-col items-center">
-          <div className="rounded-full bg-[#6D1610] max-h-[8em] max-w-[8em]">
+      <div className="flex flex-wrap justify-center gap-5 text-center w-full">
+        <div className="w-1/3 lg:w-1/4 flex flex-col items-center">
+          <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[8em] lg:max-w-[8em]">
             <img
               src={IconoAgua}
               alt="Icono de gotas de agua"
@@ -24,8 +24,8 @@ function ServicesOptions() {
           </div>
           <div className="font-extrabold">Agua potable</div>
         </div>
-        <div className="w-full md:w-1/4 lg:w-1/4 flex flex-col items-center">
-          <div className="rounded-full bg-[#6D1610] max-h-[8em] max-w-[8em]">
+        <div className="w-1/3 lg:w-1/4 flex flex-col items-center">
+          <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[8em] lg:max-w-[8em]">
             <img
               src={IconoAlumbrado}
               alt="Icono de gotas de agua"
@@ -34,8 +34,8 @@ function ServicesOptions() {
           </div>
           <div className="font-extrabold">Alumbrado Público</div>
         </div>
-        <div className="w-full md:w-1/4 lg:w-1/4 flex flex-col items-center">
-          <div className="rounded-full bg-[#6D1610] max-h-[8em] max-w-[8em]">
+        <div className="w-1/3 lg:w-1/4 flex flex-col items-center">
+          <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[8em] lg:max-w-[8em]">
             <img
               src={IconoLimpia}
               alt="Icono de gotas de agua"
@@ -44,8 +44,8 @@ function ServicesOptions() {
           </div>
           <div className="font-extrabold">Limpia Pública</div>
         </div>
-        <div className="w-full md:w-1/4 lg:w-1/4 flex flex-col items-center">
-          <div className="rounded-full bg-[#6D1610] max-h-[8em] max-w-[8em]">
+        <div className="w-1/3 lg:w-1/4 flex flex-col items-center">
+          <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[8em] lg:max-w-[8em]">
             <img
               src={IconoConstancias}
               alt="Icono de gotas de agua"
@@ -54,8 +54,8 @@ function ServicesOptions() {
           </div>
           <div className="font-extrabold">Constancias</div>
         </div>
-        <div className="w-full md:w-1/4 lg:w-1/4 flex flex-col items-center">
-          <div className="rounded-full bg-[#6D1610] max-h-[8em] max-w-[8em]">
+        <div className="w-1/3 lg:w-1/4 flex flex-col items-center">
+          <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[8em] lg:max-w-[8em]">
             <img
               src={IconoQuejas}
               alt="Icono de gotas de agua"
@@ -64,8 +64,8 @@ function ServicesOptions() {
           </div>
           <div className="font-extrabold">Quejas y reportes</div>
         </div>
-        <div className="w-full md:w-1/4 lg:w-1/4 flex flex-col items-center">
-          <div className="rounded-full bg-[#6D1610] max-h-[8em] max-w-[8em]">
+        <div className="w-1/3 lg:w-1/4 flex flex-col items-center">
+          <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[8em] lg:max-w-[8em]">
             <img
               src={IconoTurismo}
               alt="Icono de gotas de agua"

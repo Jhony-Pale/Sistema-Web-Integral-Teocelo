@@ -4,11 +4,11 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 function Announcement() {
   return (
     <div>
-      <div className="font-extrabold text-center text-4xl pt-5 pb-20">
+      <div className="font-extrabold text-center text-2xl lg:text-4xl pt-5 pb-20">
         CONVOCATORIAS
       </div>
-      <div className="flex items-center justify-center ">
-        <div className="flex items-center justify-center rounded-xl shadow-md shadow-[#d5d5d5] mx-24 w-[60%]">
+      <div className="grid grid-cols-1 place-items-center">
+        <div className="flex items-center justify-center rounded-xl shadow-md shadow-[#d5d5d5] mx-24 w-full lg:w-[60%]">
           <Carousel
             navigation={({ setActiveIndex, activeIndex, length }) => (
               <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
@@ -45,8 +45,8 @@ function Announcement() {
                 <FiChevronRight color="#000000" size="2em" />
               </IconButton>
             )}
-            className="w-[90%]"
-            autoplay={true}
+            className="w-full lg:w-[90%]"
+            autoplay={false}
             loop={true}
           >
             <div className="flex h-full w-full">

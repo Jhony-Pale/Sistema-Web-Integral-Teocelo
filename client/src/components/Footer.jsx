@@ -11,20 +11,20 @@ function Footer() {
   return (
     <div className="flex flex-col pt-10">
       <div className="bg-[#6D1610] flex items-center p-10 justify-around">
-        <div className="flex flex-col items-center shrink-0">
+        <div className="flex flex-col items-center lg:shrink-0">
           <span className="text-white text-3xl font-extrabold font-serif">
             UBICACIÓN:
           </span>
           <img
             src={MapaTeocelo}
             alt="Mapa de la ubicación de Teocelo"
-            className="w-[60%]"
+            className="w-full lg:w-[60%]"
           />
         </div>
-        <div className="grid grid-rows-2 shrink-0 gap-8">
+        <div className="grid grid-rows-2 shrink-0 gap-8 px-2 lg:px-0">
           <div className="flex items-center justify-start gap-5">
             <BiSolidPhone size="2em" style={{ color: "#ffffff" }} />
-            <span className="text-white font-serif font-bold">
+            <span className="text-white font-serif font-bold text-sm lg:text-base">
               Palacio Municipal: (228)8210007 <br />
               DIF Municipal: (228)2016930 <br />
               Protección Civil: (228)8210872 <br />
@@ -43,16 +43,36 @@ function Footer() {
         </div>
         <div className="flex flex-col w-full items-center gap-5">
           <div className="flex items-center justify-around">
-            <img src={LogoVerticalBlanco} alt="Logo vertical blanco" className="w-[30%]" />
-            <img src={EscudoVerticalP} alt="Logo vertical" className="w-[30%]" />
+            <img
+              src={LogoVerticalBlanco}
+              alt="Logo vertical blanco"
+              className="w-[40%] lg:w-[30%]"
+            />
+            <img
+              src={EscudoVerticalP}
+              alt="Logo vertical"
+              className="w-[40%] lg:w-[30%]"
+            />
           </div>
-          <div className="text-white font-montserrat text-3xl font-extrabold text-center">
+          <div className="text-white font-montserrat text-lg lg:text-3xl font-extrabold text-center">
             H. Ayuntamiento de Teocelo
           </div>
           <div className="grid grid-cols-3 place-items-center">
-            <img src={IconoFacebook} alt="Icono de Facebook" className="w-[40%]" />
-            <img src={IconoInstagram} alt="Icono de Instagram" className="w-[40%]" />
-            <img src={IconoTwitter} alt="Icono de Twitter" className="w-[40%]" />
+            <img
+              src={IconoFacebook}
+              alt="Icono de Facebook"
+              className="w-[80%] lg:w-[40%]"
+            />
+            <img
+              src={IconoInstagram}
+              alt="Icono de Instagram"
+              className="w-[80%] lg:w-[40%]"
+            />
+            <img
+              src={IconoTwitter}
+              alt="Icono de Twitter"
+              className="w-[80%] lg:w-[40%]"
+            />
           </div>
         </div>
       </div>
