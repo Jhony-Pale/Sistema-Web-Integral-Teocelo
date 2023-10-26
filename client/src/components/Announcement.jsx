@@ -45,8 +45,8 @@ function Announcement() {
                 <FiChevronRight color="#000000" size="2em" />
               </IconButton>
             )}
-            className="w-full lg:w-[90%]"
-            autoplay={false}
+            className="w-full lg:w-[90%] z-0"
+            autoplay={true}
             loop={true}
           >
             <div className="flex h-full w-full">

@@ -30,12 +30,18 @@ module.exports = withMT ({
           '50%': { opacity: '0.5' },
           '100%': { opacity: '1' },
         },
+        fadedesapper: {
+          '0%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+          '100%': { opacity: '0' },
+        },
       },
       animation:{
         rightleft: 'rightleft 0.5s ease-in-out',
         leftright: 'leftright 0.5s ease-in-out',
         moveupdisappear: 'moveupdisappear 1s ease-in-out',
         fadeapper: 'fadeapper 1s ease-in-out',
+        fadedesapper: 'fadedesapper 0.3s ease-in-out',
       }
     },
   },

@@ -10,7 +10,7 @@ function Directors() {
         DIRECCIONES
       </div>
       <div className="bg-[#EFEEEE] px-4 pt-10">
-        <Carousel autoplay={true} loop={true}>
+        <Carousel autoplay={true} loop={true} className="z-0">
           <div className="flex items-center w-full px-4 gap-10 mb-10">
             <div className="grow basis-[14%]">
               <img src={LogoIMM} alt="Imagen del logo IMM" />

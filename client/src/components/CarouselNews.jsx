@@ -15,7 +15,7 @@ function CarouselImages() {
           className="tranform scale-50 lg:scale-100 ml-[-50px] lg:ml-0"
         />
       </div>
-      <Carousel autoplay={true} loop={true}>
+      <Carousel autoplay={true} loop={true} className="z-0">
         <div className="flex h-full w-full px-4 pb-6">
           <div className="m-10 bg-white rounded-2xl">
             <ComponentNew

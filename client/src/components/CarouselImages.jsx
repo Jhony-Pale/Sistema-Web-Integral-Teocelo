@@ -4,7 +4,7 @@ import { Carousel, Typography } from "@material-tailwind/react";
 function CarouselImages() {
   return (
     <div className="bg-[#efeeee] mt-5 px-5">
-      <Carousel className="rounded-xl" autoplay={true} loop={true}>
+      <Carousel className="rounded-xl z-0" autoplay={true} loop={true}>
         <div className="relative h-full w-full">
           <img
             src={InauguracionObra}
