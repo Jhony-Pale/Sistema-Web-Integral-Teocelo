@@ -198,8 +198,8 @@ function NavBar() {
                         title: "TEOCELO",
                         others: {
                           Historia: "/history",
-                          "Escudo de armas": "#",
-                          "Acontecimientos históricos": "#",
+                          "Escudo de armas": "/coat-of-arms",
+                          "Acontecimientos históricos": "/historical-events",
                         },
                       }}
                     />
@@ -207,7 +207,7 @@ function NavBar() {
                       options={{
                         title: "GOBIERNO MUNICIPAL",
                         others: {
-                          "Misión y visión": "#",
+                          "Misión y visión": "/mission-and-vision",
                           "Valores de la administración": "#",
                           Organigrama: "#",
                           "H. Cabildo": "#",
@@ -271,8 +271,8 @@ function NavBar() {
                     title: "TEOCELO",
                     others: {
                       Historia: "/history",
-                      "Escudo de armas": "#",
-                      "Acontecimientos históricos": "#",
+                      "Escudo de armas": "/coat-of-arms",
+                      "Acontecimientos históricos": "/historical-events",
                     },
                   }}
                 />
@@ -280,7 +280,7 @@ function NavBar() {
                   options={{
                     title: "GOBIERNO MUNICIPAL",
                     others: {
-                      "Misión y visión": "#",
+                      "Misión y visión": "/mission-and-vision",
                       "Valores de la administración": "#",
                       Organigrama: "#",
                       "H. Cabildo": "#",
