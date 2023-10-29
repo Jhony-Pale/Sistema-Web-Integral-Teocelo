@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage";
 import NavBar from "./components/NavBar";
 import HistoryPage from "./pages/HistoryPage";
+import LoginRegisterPage from "./pages/LoginRegisterPage";
 
 function App() {
   return (
@@ -13,8 +12,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/history" element={<HistoryPage />} />
         </Route>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage/>} />
+        <Route path="/loginregister" element={<LoginRegisterPage/>} />
         <Route path="*" element={<h1>Not found.</h1>} />
       </Routes>
     </BrowserRouter>
