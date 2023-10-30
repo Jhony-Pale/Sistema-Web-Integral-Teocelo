@@ -10,7 +10,7 @@ function MissionVisionPage() {
           <span>H. Ayuntamiento de Teocelo</span>
         </div>
       </div>
-      <div className="px-40 lg:px-72 pt-10 text-justify tracking-wide mb-5 flex flex-col">
+      <div className="px-24 lg:px-40 pt-10 text-justify tracking-wide mb-5 flex flex-col">
         <div className="w-full grid grid-flow-row lg:grid-cols-2 gap-5 bg-[#EFEEEE] p-5 shadow-inner drop-shadow-md">
           <div className="flex flex-col">
             <h1 className="font-extrabold text-[#6D1610] text-4xl">Misión</h1>

@@ -1,4 +1,4 @@
-import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.png";
+import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.svg";
 import Footer from "../components/Footer";
 
 function CoatArmsPage() {

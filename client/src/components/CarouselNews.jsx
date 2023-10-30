@@ -7,12 +7,18 @@ function CarouselImages() {
   return (
     <div className="bg-[#efeeee]">
       <div className="flex items-center justify-center pt-8">
-        <img src={SeparadorIzquierdo} alt="Separador izquierdo" className="tranform scale-50 lg:scale-100 mr-[-50px] lg:mr-0" />
-        <p className="font-extrabold text-center text-2xl lg:text-3xl lg:mx-5">NOTICIAS Y COMUNICADOS</p>
+        <img
+          src={SeparadorIzquierdo}
+          alt="Separador izquierdo"
+          className="tranform scale-[0.4] lg:scale-100 mr-[-50px] lg:mr-0"
+        />
+        <p className="font-extrabold text-center text-2xl lg:text-3xl lg:mx-5">
+          NOTICIAS Y COMUNICADOS
+        </p>
         <img
           src={SeparadorDerecho}
           alt="Separador derecho"
-          className="tranform scale-50 lg:scale-100 ml-[-50px] lg:ml-0"
+          className="tranform scale-[0.4] lg:scale-100 ml-[-50px] lg:ml-0"
         />
       </div>
       <Carousel autoplay={true} loop={true} className="z-0">

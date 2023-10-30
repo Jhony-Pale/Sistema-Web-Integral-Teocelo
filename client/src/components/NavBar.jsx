@@ -8,7 +8,7 @@ import {
   ThemeProvider,
 } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaCircleXmark, FaXmark } from "react-icons/fa6";
 import { BiMenu } from "react-icons/bi";
@@ -24,26 +24,10 @@ import NavBarOptionsMobileVersion from "./NavBarOptionsMobileVersion";
 
 function NavBar() {
   const { register } = useForm();
-  const { changeIsLogin } = useContext(LoginRegisterContext);
+  const { changeIsLogin, isMobile } = useContext(LoginRegisterContext);
 
   const [openDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => setOpenDialog(!openDialog);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 890);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -208,8 +192,7 @@ function NavBar() {
                         title: "GOBIERNO MUNICIPAL",
                         others: {
                           "Misión y visión": "/mission-and-vision",
-                          "Valores de la administración": "#",
-                          Organigrama: "#",
+                          "Organigrama": "#",
                           "H. Cabildo": "#",
                           "Actas de cabildo": "#",
                         },
@@ -281,8 +264,7 @@ function NavBar() {
                     title: "GOBIERNO MUNICIPAL",
                     others: {
                       "Misión y visión": "/mission-and-vision",
-                      "Valores de la administración": "#",
-                      Organigrama: "#",
+                      "Organigrama": "#",
                       "H. Cabildo": "#",
                       "Actas de cabildo": "#",
                     },
@@ -340,8 +322,8 @@ function NavBar() {
             }}
           >
             <DialogHeader>
-              <div className="grid grid-cols-2 rounded-lg bg-[#6D1610] w-full h-16 items-center text-white">
-                <div className="justify-self-start ml-5 font-montserrat text-3xl">
+              <div className="grid grid-cols-2 rounded-lg bg-[#6D1610] w-full h-12 lg:h-16 items-center text-white">
+                <div className="justify-self-start ml-5 font-montserrat text-2xl lg:text-3xl">
                   Me gustaría...
                 </div>
                 <button
@@ -351,20 +333,24 @@ function NavBar() {
                   <img
                     src={IconoX}
                     alt="Icono de la marca X"
-                    className="w-[80%]"
+                    className="w-[70%] lg:w-[80%]"
                   />
                 </button>
               </div>
             </DialogHeader>
             <DialogBody>
-              <div className="flex gap-8">
-                <div className="flex-col basis-1/3 text-black">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em]">
+              <div className="flex flex-col lg:flex-row gap-8">
+                <div
+                  className={`${
+                    isMobile ? "grid grid-cols-2" : "flex-col basis-1/3"
+                  } text-black`}
+                >
+                  <div className="flex items-center gap-3 mb-8 col-span-2 h-[3em] w-[3em] lg:h-[5em] lg:w-[5em]">
+                    <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] min-h-[3em] min-w-[3em]">
                       <img
                         src={IconoConstancias}
                         alt="Icono de gotas de agua"
-                        className="py-3"
+                        className="py-1 lg:py-3 mt-1 lg:mt-0"
                       />
                     </div>
                     <span className="font-extrabold text-2xl">Solicitar</span>
@@ -406,13 +392,17 @@ function NavBar() {
                     </span>
                   </Link>
                 </div>
-                <div className="flex-col basis-1/3 text-black">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em]">
+                <div
+                  className={`${
+                    isMobile ? "grid grid-cols-2" : "flex-col basis-1/3"
+                  } text-black`}
+                >
+                  <div className="flex items-center gap-3 mb-8 col-span-2 h-[3em] w-[3em] lg:h-[5em] lg:w-[5em]">
+                    <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] min-h-[3em] min-w-[3em]">
                       <img
                         src={IconoQuejas}
                         alt="Icono de gotas de agua"
-                        className="py-3"
+                        className="py-1 lg:py-3 mt-1 lg:mt-0"
                       />
                     </div>
                     <span className="font-extrabold text-2xl">Reportar</span>
@@ -444,8 +434,11 @@ function NavBar() {
                 </div>
                 <div className="flex-col basis-1/4">
                   <div className="flex justify-center">
-                    <Link to="/loginregister" onClick={() => changeIsLogin(true)}>
-                      <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-3xl py-1 px-5">
+                    <Link
+                      to="/loginregister"
+                      onClick={() => changeIsLogin(true)}
+                    >
+                      <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
                         Iniciar sesión
                       </button>
                     </Link>
@@ -460,8 +453,11 @@ function NavBar() {
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <Link to="/loginregister" onClick={() => changeIsLogin(false)}>
-                      <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-3xl py-1 px-5">
+                    <Link
+                      to="/loginregister"
+                      onClick={() => changeIsLogin(false)}
+                    >
+                      <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
                         Registrarme
                       </button>
                     </Link>

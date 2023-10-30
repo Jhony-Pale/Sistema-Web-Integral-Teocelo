@@ -1,6 +1,6 @@
 import MapaTeocelo from "../assets/Extras/MapaTeocelo.png";
 import LogoVerticalBlanco from "../assets/Logos/LogoVerticalBlanco.png";
-import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.png";
+import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.svg";
 import IconoFacebook from "../assets/Icons/IconoFacebook.png";
 import IconoTwitter from "../assets/Icons/IconoTwitter.png";
 import IconoInstagram from "../assets/Icons/IconoInstagram.png";
