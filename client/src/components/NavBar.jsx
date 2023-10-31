@@ -192,8 +192,13 @@ function NavBar() {
                         title: "GOBIERNO MUNICIPAL",
                         others: {
                           "Misión y visión": "/mission-and-vision",
-                          "Organigrama": "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
+                          Organigrama:
+                            "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
                           "H. Cabildo": "#",
+                          "Códigos de ética":
+                            "https://drive.google.com/file/d/199G5l5-cCkN7ZvzknHVWCnl4PPa2LzhR/view?usp=sharing",
+                          "Códigos de conducta":
+                            "https://drive.google.com/file/d/1kKlEJBsb1S_oh5s-awpGM-w_xAoNAmwp/view?usp=sharing",
                         },
                       }}
                     />
@@ -263,8 +268,13 @@ function NavBar() {
                     title: "GOBIERNO MUNICIPAL",
                     others: {
                       "Misión y visión": "/mission-and-vision",
-                      "Organigrama": "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
+                      Organigrama:
+                        "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
                       "H. Cabildo": "#",
+                      "Códigos de ética":
+                        "https://drive.google.com/file/d/199G5l5-cCkN7ZvzknHVWCnl4PPa2LzhR/view?usp=sharing",
+                      "Códigos de conducta":
+                        "https://drive.google.com/file/d/1kKlEJBsb1S_oh5s-awpGM-w_xAoNAmwp/view?usp=sharing",
                     },
                   }}
                 />
