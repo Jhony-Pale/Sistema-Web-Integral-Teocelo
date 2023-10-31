@@ -194,7 +194,6 @@ function NavBar() {
                           "Misión y visión": "/mission-and-vision",
                           "Organigrama": "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
                           "H. Cabildo": "#",
-                          "Actas de cabildo": "#",
                         },
                       }}
                     />
@@ -266,7 +265,6 @@ function NavBar() {
                       "Misión y visión": "/mission-and-vision",
                       "Organigrama": "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
                       "H. Cabildo": "#",
-                      "Actas de cabildo": "#",
                     },
                   }}
                 />
