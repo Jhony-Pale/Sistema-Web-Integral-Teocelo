@@ -206,7 +206,7 @@ function NavBar() {
                       options={{
                         title: "DIRECTORIO",
                         others: {
-                          "DIRECTORIO": "/municipal-directory",
+                          DIRECTORIO: "/municipal-directory",
                         },
                       }}
                     />
@@ -214,8 +214,12 @@ function NavBar() {
                       options={{
                         title: "TRANSPARENCIA",
                         others: {
-                          "Pendiente 1": "#",
-                          "Pendiente 2": "#",
+                          "Acta circunstanciada de entrega y recepción":
+                            "/circumstantial-act",
+                          "Convenio DECLARANET": "#",
+                          "Avisos de privacidad": "#",
+                          "Plan Municipal de Desarrollo 2022 - 2025": "#",
+                          "Programa Anual de Evaluación 2023": "#",
                         },
                       }}
                     />
@@ -281,7 +285,7 @@ function NavBar() {
                   options={{
                     title: "DIRECTORIO",
                     others: {
-                      "DIRECTORIO": "/municipal-directory",
+                      DIRECTORIO: "/municipal-directory",
                     },
                   }}
                 />
@@ -289,8 +293,12 @@ function NavBar() {
                   options={{
                     title: "TRANSPARENCIA",
                     others: {
-                      "Pendiente 1": "#",
-                      "Pendiente 2": "#",
+                      "Acta circunstanciada de entrega y recepción":
+                        "/circumstantial-act",
+                      "Convenio DECLARANET": "#",
+                      "Avisos de privacidad": "#",
+                      "Plan Municipal de Desarrollo 2022 - 2025": "#",
+                      "Programa Anual de Evaluación 2023": "#",
                     },
                   }}
                 />

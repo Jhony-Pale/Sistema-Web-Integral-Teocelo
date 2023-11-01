@@ -8,6 +8,7 @@ import HistoricalEventsPage from "./pages/HistoricalEventsPage";
 import MissionVisionPage from "./pages/MissionVisionPage";
 import HCabildo from "./pages/HCabildo";
 import MunicipalDirectoryPage from "./pages/MunicipalDirectoryPage";
+import CircumstantialActPage from "./pages/CircumstantialActPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/mission-and-vision" element={<MissionVisionPage />} />
           <Route path="/h-cabildo" element={<HCabildo />} />
           <Route path="/municipal-directory" element={<MunicipalDirectoryPage />} />
+          <Route path="/circumstantial-act" element={<CircumstantialActPage />} />
         </Route>
         <Route path="/loginregister" element={<LoginRegisterPage/>} />
         <Route path="*" element={<h1>Not found.</h1>} />
