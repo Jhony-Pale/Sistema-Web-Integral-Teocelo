@@ -194,7 +194,7 @@ function NavBar() {
                           "Misión y visión": "/mission-and-vision",
                           Organigrama:
                             "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
-                          "H. Cabildo": "#",
+                          "H. Cabildo": "/h-cabildo",
                           "Códigos de ética":
                             "https://drive.google.com/file/d/199G5l5-cCkN7ZvzknHVWCnl4PPa2LzhR/view?usp=sharing",
                           "Códigos de conducta":
@@ -206,8 +206,7 @@ function NavBar() {
                       options={{
                         title: "DIRECTORIO",
                         others: {
-                          "H. Cabildo": "#",
-                          Direcciones: "#",
+                          "DIRECTORIO": "#",
                         },
                       }}
                     />
@@ -270,7 +269,7 @@ function NavBar() {
                       "Misión y visión": "/mission-and-vision",
                       Organigrama:
                         "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
-                      "H. Cabildo": "#",
+                      "H. Cabildo": "/h-cabildo",
                       "Códigos de ética":
                         "https://drive.google.com/file/d/199G5l5-cCkN7ZvzknHVWCnl4PPa2LzhR/view?usp=sharing",
                       "Códigos de conducta":
@@ -282,8 +281,7 @@ function NavBar() {
                   options={{
                     title: "DIRECTORIO",
                     others: {
-                      "H. Cabildo": "#",
-                      Direcciones: "#",
+                      "DIRECTORIO": "#",
                     },
                   }}
                 />
