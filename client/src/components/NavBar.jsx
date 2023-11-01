@@ -206,7 +206,7 @@ function NavBar() {
                       options={{
                         title: "DIRECTORIO",
                         others: {
-                          "DIRECTORIO": "#",
+                          "DIRECTORIO": "/municipal-directory",
                         },
                       }}
                     />
@@ -281,7 +281,7 @@ function NavBar() {
                   options={{
                     title: "DIRECTORIO",
                     others: {
-                      "DIRECTORIO": "#",
+                      "DIRECTORIO": "/municipal-directory",
                     },
                   }}
                 />
