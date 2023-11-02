@@ -664,7 +664,7 @@ function MunicipalDirectoryPage() {
                       <h1>{person.area}</h1>
                     </div>
                     <div className="bg-[#EFEFEF] mx-3 mb-5">
-                      <h1 className="bg-[#6D1610] text-center text-white py-2">
+                      <h1 className="bg-[#6D1610] text-lg text-center text-white py-2">
                         {person.name}
                       </h1>
                       <div className="flex flex-col gap-5 p-2 break-all">
