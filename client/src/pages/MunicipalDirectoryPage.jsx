@@ -660,7 +660,7 @@ function MunicipalDirectoryPage() {
                     className="shadow-lg shadow-gray-500 w-[90%] border-t-8 border-[#6D1610]"
                     key={index}
                   >
-                    <div className="flex items-center justify-center py-2 text-2xl font-extrabold text-[#6D1610]">
+                    <div className="flex items-center justify-center text-center py-2 text-2xl font-extrabold text-[#6D1610]">
                       <h1>{person.area}</h1>
                     </div>
                     <div className="bg-[#EFEFEF] mx-3 mb-5">

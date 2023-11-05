@@ -33,8 +33,8 @@ function HCabildo() {
       alt: "Cabildo - Sindica",
       commissions: [
         "Hacienda y patrimonio municipal",
-        "Asentamientos humanos, fraccionamientos, licencias y regularización de la tierra",
         "Fomento agropecuario",
+        "Asentamientos humanos, fraccionamientos, licencias y regularización de la tierra",
         "Agua potable, alcantarillado, tratamiento y disposiciones de aguas residuales",
         "Desempeño",
         "Transparencia y acceso a la información",
