@@ -82,7 +82,11 @@ function NavBar() {
         <div className="flex bg-[#6D1610] font-montserrat text-xs text-white w-full h-8 items-center justify-center">
           <p>GOBIERNO DE TEOCELO 2022 - 2025</p>
         </div>
-        <div className="grid grid-cols-2 gap-0">
+        <div
+          className={`grid gap-0 ${
+            isMobile ? "grid-cols-1 justify-items-center" : "grid-cols-2"
+          }`}
+        >
           <div className="flex">
             <img
               src={EscudoVertical}
@@ -195,10 +199,8 @@ function NavBar() {
                           Organigrama:
                             "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
                           "H. Cabildo": "/h-cabildo",
-                          "Códigos de ética":
-                            "https://drive.google.com/file/d/199G5l5-cCkN7ZvzknHVWCnl4PPa2LzhR/view?usp=sharing",
-                          "Códigos de conducta":
-                            "https://drive.google.com/file/d/1kKlEJBsb1S_oh5s-awpGM-w_xAoNAmwp/view?usp=sharing",
+                          "Códigos de ética": "/codes-ethics",
+                          "Códigos de conducta": "/codes-conduct",
                         },
                       }}
                     />
@@ -216,10 +218,12 @@ function NavBar() {
                         others: {
                           "Acta circunstanciada de entrega y recepción":
                             "/circumstantial-act",
-                          "Convenio DECLARANET": "#",
-                          "Avisos de privacidad": "#",
-                          "Plan Municipal de Desarrollo 2022 - 2025": "#",
-                          "Programa Anual de Evaluación 2023": "#",
+                          "Convenio DECLARANET": "/declaranet-convention",
+                          "Avisos de privacidad": "/privacy-notices",
+                          "Plan Municipal de Desarrollo 2022 - 2025": "/pmd-teocelo",
+                          "Programa Anual de Evaluación 2023": "/pae-teocelo",
+                          "Evaluación de desempeño FISM": "/fism-evaluation",
+                          "Evaluación de desempeño FORTAMUN": "/fortamun-evaluation",
                         },
                       }}
                     />
@@ -274,10 +278,8 @@ function NavBar() {
                       Organigrama:
                         "https://drive.google.com/file/d/1ug0zaMZGgvX3e79qur7hQSvDF17qJ-jr/view?usp=sharing",
                       "H. Cabildo": "/h-cabildo",
-                      "Códigos de ética":
-                        "https://drive.google.com/file/d/199G5l5-cCkN7ZvzknHVWCnl4PPa2LzhR/view?usp=sharing",
-                      "Códigos de conducta":
-                        "https://drive.google.com/file/d/1kKlEJBsb1S_oh5s-awpGM-w_xAoNAmwp/view?usp=sharing",
+                      "Códigos de ética": "/codes-ethics",
+                      "Códigos de conducta": "/codes-conduct",
                     },
                   }}
                 />
@@ -295,10 +297,12 @@ function NavBar() {
                     others: {
                       "Acta circunstanciada de entrega y recepción":
                         "/circumstantial-act",
-                      "Convenio DECLARANET": "#",
-                      "Avisos de privacidad": "#",
-                      "Plan Municipal de Desarrollo 2022 - 2025": "#",
-                      "Programa Anual de Evaluación 2023": "#",
+                      "Convenio DECLARANET": "/declaranet-convention",
+                      "Avisos de privacidad": "/privacy-notices",
+                      "Plan Municipal de Desarrollo 2022 - 2025": "/pmd-teocelo",
+                      "Programa Anual de Evaluación 2023": "/pae-teocelo",
+                      "Evaluación de desempeño FISM": "/fism-evaluation",
+                      "Evaluación de desempeño FORTAMUN": "/fortamun-evaluation",
                     },
                   }}
                 />

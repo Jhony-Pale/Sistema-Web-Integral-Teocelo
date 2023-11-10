@@ -11,7 +11,7 @@ function PDFViewer(props) {
       <Viewer
         fileUrl={props.document}
         plugins={[newPlugin]}
-        defaultScale={1}
+        defaultScale={props.scale}
         theme="dark"
       />
     </Worker>

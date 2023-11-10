@@ -74,6 +74,9 @@ function ServicesOptions() {
           </div>
           <div className="font-extrabold">Guía Turística</div>
         </div>
+        <div className="mt-16 w-full">
+          <button className="bg-[#6d1610] text-white rounded-3xl font-playfair text-xl lg:text-2xl font-extrabold p-2 w-1/2">Preguntas frecuentes</button>
+        </div>
       </div>
     </div>
   );
