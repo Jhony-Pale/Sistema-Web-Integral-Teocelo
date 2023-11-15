@@ -4,24 +4,21 @@ import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.svg";
 import IconoFacebook from "../assets/Icons/IconoFacebook.png";
 import IconoTwitter from "../assets/Icons/IconoTwitter.png";
 import IconoInstagram from "../assets/Icons/IconoInstagram.png";
+import GoogleMap from "../components/GoogleMap"
 import { BiCopyright, BiSolidPhone } from "react-icons/bi";
 import { RiMapPin2Fill } from "react-icons/ri";
 
 function Footer() {
   return (
     <div className="flex flex-col pt-10">
-      <div className="bg-[#6D1610] flex items-center p-10 justify-around">
-        <div className="flex flex-col items-center lg:shrink-0">
+      <div className="bg-[#6D1610] grid grid-cols-3 place-items-center p-10 max-h-[400px]">
+        <div className="flex flex-col items-center w-full">
           <span className="text-white text-3xl font-extrabold font-serif">
             UBICACIÓN:
           </span>
-          <img
-            src={MapaTeocelo}
-            alt="Mapa de la ubicación de Teocelo"
-            className="w-full lg:w-[60%]"
-          />
+          <GoogleMap />
         </div>
-        <div className="grid grid-rows-2 shrink-0 gap-8 px-2 lg:px-0">
+        <div className="grid grid-rows-2 shrink-0 gap-8 px-2 lg:px-0 lg:ml-20">
           <div className="flex items-center justify-start gap-5">
             <BiSolidPhone size="2em" style={{ color: "#ffffff" }} />
             <span className="text-white font-serif font-bold text-sm lg:text-base">
@@ -46,12 +43,12 @@ function Footer() {
             <img
               src={LogoVerticalBlanco}
               alt="Logo vertical blanco"
-              className="w-[40%] lg:w-[30%]"
+              className="w-[40%] lg:max-w-[20%]"
             />
             <img
               src={EscudoVerticalP}
               alt="Logo vertical"
-              className="w-[40%] lg:w-[30%]"
+              className="w-[40%] lg:max-w-[20%]"
             />
           </div>
           <div className="text-white font-montserrat text-lg lg:text-3xl font-extrabold text-center">
@@ -61,17 +58,17 @@ function Footer() {
             <img
               src={IconoFacebook}
               alt="Icono de Facebook"
-              className="w-[80%] lg:w-[40%]"
+              className="w-[80%] lg:max-w-[35%]"
             />
             <img
               src={IconoInstagram}
               alt="Icono de Instagram"
-              className="w-[80%] lg:w-[40%]"
+              className="w-[80%] lg:max-w-[35%]"
             />
             <img
               src={IconoTwitter}
               alt="Icono de Twitter"
-              className="w-[80%] lg:w-[40%]"
+              className="w-[80%] lg:max-w-[35%]"
             />
           </div>
         </div>
