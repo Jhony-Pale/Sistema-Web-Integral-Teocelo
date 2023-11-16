@@ -12,10 +12,10 @@ function Footer() {
   return (
     <div className="flex flex-col pt-10">
       <div className="bg-[#6D1610] grid grid-cols-3 place-items-center p-10 max-h-[400px]">
-        <div className="flex flex-col items-center w-full">
-          <span className="text-white text-3xl font-extrabold font-serif">
+        <div className="w-full">
+          <p className="text-white text-3xl text-center font-extrabold font-serif">
             UBICACIÓN:
-          </span>
+          </p>
           <GoogleMap />
         </div>
         <div className="grid grid-rows-2 shrink-0 gap-8 px-2 lg:px-0 lg:ml-20">

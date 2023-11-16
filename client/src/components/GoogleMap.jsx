@@ -1,7 +1,4 @@
-import Map from "google-map-react";
-import {FaMapMarkerAlt} from "react-icons/fa"
-
-const AnyReactComponent = ({ text }) => <div><FaMapMarkerAlt size="3em" color="orange" /></div>;
+import GoogleMapReact from "google-map-react";
 
 function GoogleMap() {
   const defaultProps = {
@@ -9,17 +6,17 @@ function GoogleMap() {
       lat: 19.38564,
       lng: -96.97317,
     },
-    zoom: 18,
+    zoom: 19,
   };
   return (
-    <div style={{ height: "220px", width: "100%" }}>
-      <Map
-        bootstrapURLKeys={{ key: "AIzaSyAKfla2N-rgl5NZodA8BfBzIwpHkGUMqAY" }}
+    <div className="h-[220px] w-full">
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: "" }}
         defaultCenter={defaultProps.center}
+        yesIWantToUseGoogleMapApiInternals
         defaultZoom={defaultProps.zoom}
       >
-        <AnyReactComponent lat={19.38564} lng={-96.97317} text="" />
-      </Map>
+      </GoogleMapReact>
     </div>
   );
 }
