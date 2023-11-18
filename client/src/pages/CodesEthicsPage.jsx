@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useExtaData } from "../context/ExtraDataContext";
 import PDFViewer from "../components/PDFViewer";
 import Footer from "../components/Footer";
 import CodigoEtica from "../assets/PDFs/Codigo de Etica_0001.pdf";
 
 function CodesEthicsPage() {
-  const { isMobile } = useContext(LoginRegisterContext);
+  const { isMobile } = useExtaData();
   const scalePDF = isMobile ? 0.5 : 1;
   return (
     <div>

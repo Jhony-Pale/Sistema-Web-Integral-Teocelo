@@ -1,12 +1,21 @@
-import { useContext, useEffect } from "react";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useEffect } from "react";
+import { useExtaData } from "../context/ExtraDataContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Collage from "../assets/Photos/Collage.png";
 import LoginComponent from "../components/LoginComponent";
 import RegisterComponent from "../components/RegisterComponent";
 import LoginRegisterMV from "../components/LoginRegisterMV";
 
 function LoginRegisterPage() {
-  const { isLogin, isMobile } = useContext(LoginRegisterContext);
+  const { isLogin, isMobile } = useExtaData();
+
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
 
   useEffect(() => {
     try {

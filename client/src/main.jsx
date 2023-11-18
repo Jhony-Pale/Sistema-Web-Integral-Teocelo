@@ -3,14 +3,17 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { ThemeProvider } from "@material-tailwind/react";
-import { LoginRegisterContextProvider } from "./context/LoginRegisterContext";
+import { ExtraDataContextProvider } from "./context/ExtraDataContext";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
-      <LoginRegisterContextProvider>
-        <App />
-      </LoginRegisterContextProvider>
+      <ExtraDataContextProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </ExtraDataContextProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

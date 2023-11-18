@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useState } from "react";
+import { useExtaData } from "../context/ExtraDataContext";
 import Footer from "../components/Footer";
 import CabildoAlcalde from "../assets/Photos/CabildoAlcalde.jpg";
 import CabildoRegidora from "../assets/Photos/CabildoRegidora.jpg";
 import CabildoSindica from "../assets/Photos/CabildoSindica.png";
 
 function HCabildo() {
-  const { isMobile } = useContext(LoginRegisterContext);
+  const { isMobile } = useExtaData();
 
   const [images, setImages] = useState([
     {

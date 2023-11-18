@@ -1,14 +1,29 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
-import { useContext } from "react";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useExtaData } from "../context/ExtraDataContext";
+import { useAuth } from "../context/AuthContext";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
+import { useEffect } from "react";
 
 function RegisterPage() {
-  const { register } = useForm();
-  const { changeIsLogin } = useContext(LoginRegisterContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { changeIsLogin } = useExtaData();
+  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
+
+  const onSubmit = handleSubmit(async (values) => {
+    signup(values);
+  });
 
   return (
     <div>
@@ -32,36 +47,53 @@ function RegisterPage() {
             <h1 className="font-playfair text-red-800 text-6xl mb-20 text-center">
               ¡Registrate!
             </h1>
-            <form className="text-center">
+            {registerErrors.map((error, i) => (
+              <div className="bg-red-500 p-2 text-white my-2" key={i}>
+                {error}
+              </div>
+            ))}
+            <form onSubmit={onSubmit} className="text-center">
               <input
                 type="text"
                 placeholder="Nombre"
-                {...register("firstnameRegister", { required: true })}
+                {...register("firstname", { required: true })}
                 className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
               />
+              {errors.firstname && (
+                <p className="text-red-500">Firstname is required</p>
+              )}
               <input
                 type="text"
                 placeholder="Apellidos"
-                {...register("lastnameRegister", { required: true })}
+                {...register("lastname", { required: true })}
                 className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
               />
+              {errors.lastname && (
+                <p className="text-red-500">lastname is required</p>
+              )}
               <input
                 type="text"
                 placeholder="Correo electrónico"
-                {...register("emailRegister", { required: true })}
+                {...register("email", { required: true })}
                 className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
               />
+              {errors.email && (
+                <p className="text-red-500">email is required</p>
+              )}
               <div className="relative">
                 <input
                   type="password"
                   placeholder="Contraseña"
-                  {...register("passwordRegister", { required: true })}
+                  {...register("password", { required: true })}
                   className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                   <FaEye size="1.5em" />
                 </div>
               </div>
+              {errors.password && (
+                <p className="text-red-500">password is required</p>
+              )}
 
               <button
                 type="submit"

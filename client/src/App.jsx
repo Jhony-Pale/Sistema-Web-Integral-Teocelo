@@ -17,6 +17,7 @@ import PMDTeoceloPage from "./pages/PMDTeoceloPage";
 import PAETeoceloPage from "./pages/PAETeoceloPage";
 import FISMEvaluationPage from "./pages/FISMEvaluationPage";
 import FORTAMUNEvaluationPage from "./pages/FORTAMUNEvaluationPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
           <Route path="/pae-teocelo" element={<PAETeoceloPage />} />
           <Route path="/fism-evaluation" element={<FISMEvaluationPage />} />
           <Route path="/fortamun-evaluation" element={<FORTAMUNEvaluationPage />} />
+          <Route element={<ProtectedRoute />}>
+
+          </Route>
         </Route>
         <Route path="/loginregister" element={<LoginRegisterPage/>} />
         <Route path="*" element={<h1>Not found.</h1>} />

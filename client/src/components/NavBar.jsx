@@ -8,12 +8,12 @@ import {
   ThemeProvider,
 } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaCircleXmark, FaXmark } from "react-icons/fa6";
 import { BiMenu } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useExtaData } from "../context/ExtraDataContext";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
@@ -21,10 +21,12 @@ import IconoQuejas from "../assets/Icons/IconoQuejas.png";
 import IconoX from "../assets/Icons/IconoX.png";
 import NavBarOptions from "./NavBarOptions";
 import NavBarOptionsMobileVersion from "./NavBarOptionsMobileVersion";
+import { useAuth } from "../context/AuthContext";
 
 function NavBar() {
   const { register } = useForm();
-  const { changeIsLogin, isMobile } = useContext(LoginRegisterContext);
+  const { changeIsLogin, isMobile } = useExtaData();
+  const { isAuthenticated, logout } = useAuth();
 
   const [openDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => setOpenDialog(!openDialog);
@@ -33,6 +35,11 @@ function NavBar() {
 
   const showDrawer = () => setOpenDrawer(true);
   const closeDrawer = () => setOpenDrawer(false);
+
+  const handleLogout = () => {
+    logout();
+    handleOpenDialog();
+  };
 
   const themeDrawer = {
     drawer: {
@@ -220,10 +227,12 @@ function NavBar() {
                             "/circumstantial-act",
                           "Convenio DECLARANET": "/declaranet-convention",
                           "Avisos de privacidad": "/privacy-notices",
-                          "Plan Municipal de Desarrollo 2022 - 2025": "/pmd-teocelo",
+                          "Plan Municipal de Desarrollo 2022 - 2025":
+                            "/pmd-teocelo",
                           "Programa Anual de Evaluación 2023": "/pae-teocelo",
                           "Evaluación de desempeño FISM": "/fism-evaluation",
-                          "Evaluación de desempeño FORTAMUN": "/fortamun-evaluation",
+                          "Evaluación de desempeño FORTAMUN":
+                            "/fortamun-evaluation",
                         },
                       }}
                     />
@@ -299,10 +308,12 @@ function NavBar() {
                         "/circumstantial-act",
                       "Convenio DECLARANET": "/declaranet-convention",
                       "Avisos de privacidad": "/privacy-notices",
-                      "Plan Municipal de Desarrollo 2022 - 2025": "/pmd-teocelo",
+                      "Plan Municipal de Desarrollo 2022 - 2025":
+                        "/pmd-teocelo",
                       "Programa Anual de Evaluación 2023": "/pae-teocelo",
                       "Evaluación de desempeño FISM": "/fism-evaluation",
-                      "Evaluación de desempeño FORTAMUN": "/fortamun-evaluation",
+                      "Evaluación de desempeño FORTAMUN":
+                        "/fortamun-evaluation",
                     },
                   }}
                 />
@@ -450,37 +461,52 @@ function NavBar() {
                     </span>
                   </Link>
                 </div>
-                <div className="flex-col basis-1/4">
-                  <div className="flex justify-center">
-                    <Link
-                      to="/loginregister"
-                      onClick={() => changeIsLogin(true)}
-                    >
-                      <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
-                        Iniciar sesión
-                      </button>
-                    </Link>
-                  </div>
-                  <div>
-                    <div className="flex items-center">
-                      <hr className="flex-1 border-t border-[#494848] border" />
-                      <span className="px-4 text-center font-montserrat font-extrabold text-[#494848]">
-                        O
-                      </span>
-                      <hr className="flex-1 border-t border-[#494848] border" />
+                {isAuthenticated && (
+                  <div className="flex-col basis-1/4">
+                    <div className="flex justify-center">
+                      <Link
+                        to="/"
+                        onClick={handleLogout}
+                        className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5"
+                      >
+                        Cerrar sesión
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex justify-center">
-                    <Link
-                      to="/loginregister"
-                      onClick={() => changeIsLogin(false)}
-                    >
-                      <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
-                        Registrarme
-                      </button>
-                    </Link>
+                )}
+                {!isAuthenticated && (
+                  <div className="flex-col basis-1/4">
+                    <div className="flex justify-center">
+                      <Link
+                        to="/loginregister"
+                        onClick={() => changeIsLogin(true)}
+                      >
+                        <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
+                          Iniciar sesión
+                        </button>
+                      </Link>
+                    </div>
+                    <div>
+                      <div className="flex items-center">
+                        <hr className="flex-1 border-t border-[#494848] border" />
+                        <span className="px-4 text-center font-montserrat font-extrabold text-[#494848]">
+                          O
+                        </span>
+                        <hr className="flex-1 border-t border-[#494848] border" />
+                      </div>
+                    </div>
+                    <div className="flex justify-center">
+                      <Link
+                        to="/loginregister"
+                        onClick={() => changeIsLogin(false)}
+                      >
+                        <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
+                          Registrarme
+                        </button>
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </DialogBody>
             <DialogFooter>

@@ -1,12 +1,12 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Alert } from "@material-tailwind/react";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useExtaData } from "../context/ExtraDataContext";
 import { LuSearch } from "react-icons/lu";
 import { FiAlertCircle } from "react-icons/fi";
 import Footer from "../components/Footer";
 
 function MunicipalDirectoryPage() {
-  const { isMobile } = useContext(LoginRegisterContext);
+  const { isMobile } = useExtaData();
   const personal = [
     {
       area: "Presidencia",

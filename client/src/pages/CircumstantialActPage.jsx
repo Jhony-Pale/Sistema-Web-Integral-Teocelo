@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useExtaData } from "../context/ExtraDataContext";
 import Footer from "../components/Footer";
 import PDFViewer from "../components/PDFViewer";
 import VersionPublicaPDF from "../assets/PDFs/VERSION PUBLICA.pdf";
 
 function CircumstantialActPage() {
-  const { isMobile } = useContext(LoginRegisterContext);
+  const { isMobile } = useExtaData();
   const scalePDF = isMobile ? 0.5 : 1;
   return (
     <div>

@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { LoginRegisterContext } from "../context/LoginRegisterContext";
+import { useExtaData } from "../context/ExtraDataContext";
 import Footer from "../components/Footer";
 import PDFViewer from "../components/PDFViewer";
 import EvaluationPDF from "../assets/PDFs/Evaluación de Desempeño FORTAMUN VF _TRANSPARENCIA.pdf";
 
 function FORTAMUNEvaluationPage() {
-  const { isMobile } = useContext(LoginRegisterContext);
+  const { isMobile } = useExtaData();
   const scalePDF = isMobile ? 0.5 : 1;
   return (
     <div>
