@@ -1,11 +1,13 @@
+import { Alert } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import { GoEyeClosed, GoAlertFill } from "react-icons/go";
 import { useExtaData } from "../context/ExtraDataContext";
 import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
-import { useEffect } from "react";
 
 function RegisterPage() {
   const {
@@ -14,16 +16,14 @@ function RegisterPage() {
     formState: { errors },
   } = useForm();
   const { changeIsLogin } = useExtaData();
-  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated) navigate("/");
-  }, [isAuthenticated]);
+  const { signup, errors: registerErrors } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = handleSubmit(async (values) => {
     signup(values);
   });
+
+  const showInputPassword = () => setShowPassword(!showPassword);
 
   return (
     <div>
@@ -43,52 +43,78 @@ function RegisterPage() {
           </Link>
         </div>
         <div className="flex h-[calc(100vh-190px)] items-center justify-center mx-5">
-          <div>
-            <h1 className="font-playfair text-red-800 text-6xl mb-20 text-center">
+          <div className="w-full lg:w-[80%]">
+            <h1
+              className={`font-playfair text-red-800 text-6xl text-center ${
+                registerErrors.length > 0 ? "mb-10" : "mb-20"
+              }`}
+            >
               ¡Registrate!
             </h1>
             {registerErrors.map((error, i) => (
-              <div className="bg-red-500 p-2 text-white my-2" key={i}>
+              <Alert
+                icon={<GoAlertFill size="1.5em" color="red" />}
+                className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
+                key={i}
+              >
                 {error}
-              </div>
+              </Alert>
             ))}
             <form onSubmit={onSubmit} className="text-center">
-              <input
-                type="text"
-                placeholder="Nombre"
-                {...register("firstname", { required: true })}
-                className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
-              />
-              {errors.firstname && (
-                <p className="text-red-500">Firstname is required</p>
-              )}
-              <input
-                type="text"
-                placeholder="Apellidos"
-                {...register("lastname", { required: true })}
-                className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
-              />
-              {errors.lastname && (
-                <p className="text-red-500">lastname is required</p>
-              )}
-              <input
-                type="text"
-                placeholder="Correo electrónico"
-                {...register("email", { required: true })}
-                className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
-              />
-              {errors.email && (
-                <p className="text-red-500">email is required</p>
-              )}
+              <div className={errors.firstname ? "mb-4" : "mb-8"}>
+                <input
+                  type="text"
+                  placeholder="Nombre"
+                  {...register("firstname", { required: true })}
+                  className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
+                />
+                {errors.firstname && (
+                  <p className="text-red-500">Firstname is required</p>
+                )}
+              </div>
+              <div className={errors.lastname ? "mb-4" : "mb-8"}>
+                <input
+                  type="text"
+                  placeholder="Apellidos"
+                  {...register("lastname", { required: true })}
+                  className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
+                />
+                {errors.lastname && (
+                  <p className="text-red-500">lastname is required</p>
+                )}
+              </div>
+              <div className={errors.email ? "mb-4" : "mb-8"}>
+                <input
+                  type="text"
+                  placeholder="Correo electrónico"
+                  {...register("email", { required: true })}
+                  className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
+                />
+                {errors.email && (
+                  <p className="text-red-500">email is required</p>
+                )}
+              </div>
               <div className="relative">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Contraseña"
                   {...register("password", { required: true })}
                   className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                  <FaEye size="1.5em" />
+                  {showPassword ? (
+                    <GoEyeClosed
+                      size="1.5em"
+                      onClick={showInputPassword}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <FaEye
+                      size="1.5em"
+                      onClick={showInputPassword}
+                      className="cursor-pointer"
+                    />
+                  )}
                 </div>
               </div>
               {errors.password && (

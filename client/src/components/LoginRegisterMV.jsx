@@ -8,21 +8,54 @@ import {
   TabsBody,
   TabsHeader,
   Typography,
+  Alert,
 } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
+import { GoEyeClosed, GoAlertFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
+import { useAuth } from "../context/AuthContext";
+import { useExtaData } from "../context/ExtraDataContext";
 
 function LoginRegisterMV() {
-  const { register } = useForm();
-  const [type, setType] = useState("login");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const {
+    register: registerR,
+    handleSubmit: handleSubmitR,
+    formState: { errors: errorsR },
+  } = useForm();
+  const { signin, signup, errors: signInOutErrors, setErrors } = useAuth();
+  const { isLogin } = useExtaData();
+  const [type, setType] = useState(isLogin ? "login" : "register");
+  const [showPasswordL, setShowPasswordL] = useState(false);
+  const [showPasswordR, setShowPasswordR] = useState(false);
+
+  const onSubmitLogin = handleSubmit((data) => {
+    signin(data);
+  });
+
+  const onSubmitRegister = handleSubmitR(async (values) => {
+    signup(values);
+  });
+
+  useEffect(() => {
+    if(signInOutErrors.length > 0)
+      setErrors([])
+  }, [type])
+
+  const showInputPasswordL = () => setShowPasswordL(!showPasswordL);
+  const showInputPasswordR = () => setShowPasswordR(!showPasswordR);
 
   return (
-    <div>
-      <Link to="/" className="absolute">
+    <div className="flex flex-col h-screen">
+      <Link to="/" className="">
         <img
           src={LogoHorizontal}
           alt="Imagen horizontal"
@@ -34,7 +67,7 @@ function LoginRegisterMV() {
           className="float-right mx-5 my-5 h-24"
         />
       </Link>
-      <div className="flex items-center justify-center h-screen">
+      <div className="shrink flex items-center justify-center h-full">
         <Card className="w-full max-w-[24rem]">
           <CardHeader
             floated={false}
@@ -77,69 +110,134 @@ function LoginRegisterMV() {
                   },
                 }}
               >
+                {signInOutErrors.map((error, i) => (
+                  <Alert
+                  icon={<GoAlertFill size="1.5em" color="red" />}
+                  className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
+                  key={i}
+                >
+                  {error}
+                </Alert>
+                ))}
                 <TabPanel value="login" className="p-0">
-                  <form className="text-center">
-                    <input
-                      type="text"
-                      placeholder="Correo electrónico"
-                      {...register("emailLogin", { required: true })}
-                      className="w-full text-black px-4 py-2 my-10 rounded-md border-2 border-black"
-                    />
-                    <div className="relative">
+                  <form className="text-center" onSubmit={onSubmitLogin}>
+                    <div
+                      className={`${signInOutErrors.length > 0 ? "" : "mt-10"}  ${
+                        errors.email ? "mb-5" : "mb-10"
+                      }`}
+                    >
                       <input
-                        type="password"
-                        placeholder="Contraseña"
-                        {...register("passwordLogin", { required: true })}
-                        className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
+                        type="email"
+                        placeholder="Correo electrónico"
+                        {...register("email", { required: true })}
+                        className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                        <FaEye size="1.5em" />
-                      </div>
+                      {errors.email && (
+                        <p className="text-red-500">Email is required</p>
+                      )}
                     </div>
-
+                    <div className={errors.password ? "mb-5" : "mb-10"}>
+                      <div className="relative">
+                        <input
+                          type={showPasswordL ? "text" : "password"}
+                          placeholder="Contraseña"
+                          {...register("password", { required: true })}
+                          className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                          {showPasswordL ? (
+                            <GoEyeClosed
+                              size="1.5em"
+                              onClick={showInputPasswordL}
+                              className="cursor-pointer"
+                            />
+                          ) : (
+                            <FaEye
+                              size="1.5em"
+                              onClick={showInputPasswordL}
+                              className="cursor-pointer"
+                            />
+                          )}
+                        </div>
+                      </div>
+                      {errors.password && (
+                        <p className="text-red-500">Password is required</p>
+                      )}
+                    </div>
                     <button
                       type="submit"
-                      className="bg-[#6D1610] font-extrabold text-lg w-[50%] mt-10 text-white px-4 py-2 rounded-md"
+                      className="bg-[#6D1610] font-extrabold text-lg w-[50%] text-white px-4 py-2 rounded-md"
                     >
                       Iniciar sesión
                     </button>
                   </form>
                 </TabPanel>
-                <TabPanel value="register" className="p-0 mt-10">
-                  <form className="text-center">
-                    <input
-                      type="text"
-                      placeholder="Nombre"
-                      {...register("firstnameRegister", { required: true })}
-                      className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Apellidos"
-                      {...register("lastnameRegister", { required: true })}
-                      className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Correo electrónico"
-                      {...register("emailRegister", { required: true })}
-                      className="w-full text-black px-4 py-2 mb-8 rounded-md border-2 border-black"
-                    />
-                    <div className="relative">
+                <TabPanel value="register" className={`p-0 ${signInOutErrors.length > 0 ? "" : "mt-10"}`}>
+                  <form className="text-center" onSubmit={onSubmitRegister}>
+                    <div className={errorsR.firstname ? "mb-4" : "mb-8"}>
                       <input
-                        type="password"
-                        placeholder="Contraseña"
-                        {...register("passwordRegister", { required: true })}
-                        className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
+                        type="text"
+                        placeholder="Nombre"
+                        {...registerR("firstname", { required: true })}
+                        className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                        <FaEye size="1.5em" />
-                      </div>
+                      {errorsR.firstname && (
+                        <p className="text-red-500">Firstname is required</p>
+                      )}
                     </div>
-
+                    <div className={errorsR.lastname ? "mb-4" : "mb-8"}>
+                      <input
+                        type="text"
+                        placeholder="Apellidos"
+                        {...registerR("lastname", { required: true })}
+                        className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
+                      />
+                      {errorsR.lastname && (
+                        <p className="text-red-500">lastname is required</p>
+                      )}
+                    </div>
+                    <div className={errorsR.email ? "mb-4" : "mb-8"}>
+                      <input
+                        type="text"
+                        placeholder="Correo electrónico"
+                        {...registerR("email", { required: true })}
+                        className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
+                      />
+                      {errorsR.email && (
+                        <p className="text-red-500">email is required</p>
+                      )}
+                    </div>
+                    <div className={errorsR.password ? "mb-5" : "mb-10"}>
+                      <div className="relative">
+                        <input
+                          type={showPasswordR ? "text" : "password"}
+                          placeholder="Contraseña"
+                          {...registerR("password", { required: true })}
+                          className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                          {showPasswordR ? (
+                            <GoEyeClosed
+                              size="1.5em"
+                              onClick={showInputPasswordR}
+                              className="cursor-pointer"
+                            />
+                          ) : (
+                            <FaEye
+                              size="1.5em"
+                              onClick={showInputPasswordR}
+                              className="cursor-pointer"
+                            />
+                          )}
+                        </div>
+                      </div>
+                      {errorsR.password && (
+                        <p className="text-red-500">password is required</p>
+                      )}
+                    </div>
                     <button
                       type="submit"
-                      className="bg-[#6D1610] font-extrabold text-lg w-[50%] mt-10 text-white px-4 py-2 rounded-md"
+                      className="bg-[#6D1610] font-extrabold text-lg w-[50%] text-white px-4 py-2 rounded-md"
                     >
                       Crear cuenta
                     </button>

@@ -5,7 +5,7 @@ export const ExtraDataContext = createContext();
 export const useExtaData = () => {
   const context = useContext(ExtraDataContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useExtraData must be used within an AuthProvider");
   }
   return context;
 };
