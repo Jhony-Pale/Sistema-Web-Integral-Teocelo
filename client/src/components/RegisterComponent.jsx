@@ -1,11 +1,11 @@
-import { Alert } from "@material-tailwind/react";
+import { Alert, Collapse } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { GoEyeClosed, GoAlertFill } from "react-icons/go";
 import { useExtaData } from "../context/ExtraDataContext";
 import { useAuth } from "../context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 
@@ -18,12 +18,25 @@ function RegisterPage() {
   const { changeIsLogin } = useExtaData();
   const { signup, errors: registerErrors } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [collapseErrors, setCollapseErrors] = useState(false);
 
   const onSubmit = handleSubmit(async (values) => {
     signup(values);
   });
 
   const showInputPassword = () => setShowPassword(!showPassword);
+
+  useEffect(() => {
+    if (registerErrors.length > 0) {
+      setCollapseErrors(true);
+
+      const timer = setTimeout(() => {
+        setCollapseErrors(false);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [registerErrors]);
 
   return (
     <div>
@@ -44,22 +57,22 @@ function RegisterPage() {
         </div>
         <div className="flex h-[calc(100vh-190px)] items-center justify-center mx-5">
           <div className="w-full lg:w-[80%]">
-            <h1
-              className={`font-playfair text-red-800 text-6xl text-center ${
-                registerErrors.length > 0 ? "mb-10" : "mb-20"
-              }`}
-            >
+            <h1 className="font-playfair text-red-800 text-6xl text-center mb-10">
               ¡Registrate!
             </h1>
-            {registerErrors.map((error, i) => (
-              <Alert
-                icon={<GoAlertFill size="1.5em" color="red" />}
-                className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
-                key={i}
-              >
-                {error}
-              </Alert>
-            ))}
+            <Collapse open={collapseErrors}>
+              <div className="mb-5">
+                {registerErrors.map((error, i) => (
+                  <Alert
+                    icon={<GoAlertFill size="1.5em" color="red" />}
+                    className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
+                    key={i}
+                  >
+                    {error}
+                  </Alert>
+                ))}
+              </div>
+            </Collapse>
             <form onSubmit={onSubmit} className="text-center">
               <div className={errors.firstname ? "mb-4" : "mb-8"}>
                 <input

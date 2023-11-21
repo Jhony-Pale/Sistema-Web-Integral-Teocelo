@@ -9,6 +9,7 @@ import {
   TabsHeader,
   Typography,
   Alert,
+  Collapse,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -36,6 +37,7 @@ function LoginRegisterMV() {
   const [type, setType] = useState(isLogin ? "login" : "register");
   const [showPasswordL, setShowPasswordL] = useState(false);
   const [showPasswordR, setShowPasswordR] = useState(false);
+  const [collapseErrors, setCollapseErrors] = useState(false);
 
   const onSubmitLogin = handleSubmit((data) => {
     signin(data);
@@ -46,9 +48,20 @@ function LoginRegisterMV() {
   });
 
   useEffect(() => {
-    if(signInOutErrors.length > 0)
-      setErrors([])
-  }, [type])
+    if (signInOutErrors.length > 0) setErrors([]);
+  }, [type]);
+
+  useEffect(() => {
+    if (signInOutErrors.length > 0) {
+      setCollapseErrors(true);
+
+      const timer = setTimeout(() => {
+        setCollapseErrors(false);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [signInOutErrors]);
 
   const showInputPasswordL = () => setShowPasswordL(!showPasswordL);
   const showInputPasswordR = () => setShowPasswordR(!showPasswordR);
@@ -110,22 +123,22 @@ function LoginRegisterMV() {
                   },
                 }}
               >
-                {signInOutErrors.map((error, i) => (
-                  <Alert
-                  icon={<GoAlertFill size="1.5em" color="red" />}
-                  className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
-                  key={i}
-                >
-                  {error}
-                </Alert>
-                ))}
+                <Collapse open={collapseErrors} className="my-5">
+                  <div>
+                    {signInOutErrors.map((error, i) => (
+                      <Alert
+                        icon={<GoAlertFill size="1.5em" color="red" />}
+                        className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
+                        key={i}
+                      >
+                        {error}
+                      </Alert>
+                    ))}
+                  </div>
+                </Collapse>
                 <TabPanel value="login" className="p-0">
                   <form className="text-center" onSubmit={onSubmitLogin}>
-                    <div
-                      className={`${signInOutErrors.length > 0 ? "" : "mt-10"}  ${
-                        errors.email ? "mb-5" : "mb-10"
-                      }`}
-                    >
+                    <div className={`${errors.email ? "mb-5" : "mb-10"}`}>
                       <input
                         type="email"
                         placeholder="Correo electrónico"
@@ -172,7 +185,7 @@ function LoginRegisterMV() {
                     </button>
                   </form>
                 </TabPanel>
-                <TabPanel value="register" className={`p-0 ${signInOutErrors.length > 0 ? "" : "mt-10"}`}>
+                <TabPanel value="register" className="p-0">
                   <form className="text-center" onSubmit={onSubmitRegister}>
                     <div className={errorsR.firstname ? "mb-4" : "mb-8"}>
                       <input
