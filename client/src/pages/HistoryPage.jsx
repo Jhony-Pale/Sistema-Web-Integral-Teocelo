@@ -19,13 +19,17 @@ function HistoryPage() {
   });
   const [images, setImages] = useState(smallImages);
 
+  const [isLoading, setIsLoading] = useState(false)
   const handleThumbnailClick = (imageId) => {
+    if(isLoading) return
+
     const clickedImage = images.find((image) => image.id === imageId);
     const indexImage = images.findIndex((image) => image.id === imageId);
     const updateImages = [...images];
     updateImages[indexImage] = selectedImage;
 
     document.getElementById(imageId).classList.add("animate-moveupdisappear");
+    setIsLoading(true)
 
     const timer = setTimeout(() => {
       document
@@ -33,6 +37,7 @@ function HistoryPage() {
         .classList.remove("animate-moveupdisappear");
 
       setImages(updateImages);
+      setIsLoading(false)
       setSelectedImage(clickedImage);
     }, 1000);
 

@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import CabildoAlcalde from "../assets/Photos/CabildoAlcalde.jpg";
 import CabildoRegidora from "../assets/Photos/CabildoRegidora.jpg";
 import CabildoSindica from "../assets/Photos/CabildoSindica.png";
+import CabildoMobile from "../components/CabildoMobile";
+import CabildoPC from "../components/CabildoPC";
 
 function HCabildo() {
   const { isMobile } = useExtaData();
@@ -125,66 +127,7 @@ function HCabildo() {
         <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
           <span>H. Cabildo</span>
         </div>
-        {isMobile && showCommissions ? (
-          <div className="mx-10 bg-[#EFEFEF] shadow-lg shadow-gray-400 mb-10 animate-rightleft">
-            <h1 className="text-center text-2xl lg:text-3xl text-[#F9B03C] font-extrabold mt-5">
-              Comisiones
-            </h1>
-            <div className="grid grid-cols-2 m-5 gap-y-2 lg:gap-y-5 pb-5 lg:pb-0">
-              {selectedImage.commissions.map((comission, index) => (
-                <div className="flex items-center gap-2" key={index}>
-                  <div className="min-h-[1em] min-w-[1em] rounded-full bg-[#F9B03C]"></div>
-                  <span className="font-bold text-base">{comission}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
-        <div className="w-full grid grid-cols-2 mt-5">
-          <div className="flex justify-center col-span-2">
-            <img
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              className="px-10 py-5 shadow-lg shadow-gray-400 bg-white w-2/5 lg:w-[38%] mb-10 max-h-[25rem]"
-              onClick={() => handleThumbnailClick(selectedImage.id)}
-              id={selectedImage.id}
-            />
-            {showCommissions && !isMobile ? (
-              <div className="basis-1/2 ml-10 bg-[#EFEFEF] shadow-lg shadow-gray-400 mb-10 animate-rightleft">
-                <h1 className="text-center text-3xl text-[#F9B03C] font-extrabold mt-5">
-                  Comisiones
-                </h1>
-                <div
-                  className={`grid grid-cols-2 m-5 ${
-                    selectedImage.id === 3 ? "gap-y-1" : "gap-y-5"
-                  }`}
-                >
-                  {selectedImage.commissions.map((comission, index) => (
-                    <div className="flex items-center gap-2" key={index}>
-                      <div className="min-h-[1em] min-w-[1em] rounded-full bg-[#F9B03C]"></div>
-                      <span className="font-bold text-xl">{comission}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
-          {images.map((image) => (
-            <div className="flex justify-center" key={image.id}>
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="px-10 py-5 shadow-lg shadow-gray-400 bg-white w-4/5 lg:w-[78%] max-h-[26rem]"
-                onClick={() => handleThumbnailClick(image.id)}
-                id={image.id}
-              />
-            </div>
-          ))}
-        </div>
+        {isMobile ? <CabildoMobile /> : <CabildoPC />}
       </div>
       <Footer />
     </div>

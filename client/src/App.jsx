@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
 import HistoryPage from "./pages/HistoryPage";
@@ -19,12 +19,15 @@ import FISMEvaluationPage from "./pages/FISMEvaluationPage";
 import FORTAMUNEvaluationPage from "./pages/FORTAMUNEvaluationPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Test from "./pages/Test";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<NavBar/>}>
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route element={<NavBar />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/coat-of-arms" element={<CoatArmsPage />} />
@@ -33,23 +36,30 @@ function App() {
           <Route path="/h-cabildo" element={<HCabildo />} />
           <Route path="/codes-ethics" element={<CodesEthicsPage />} />
           <Route path="/codes-conduct" element={<CodesConductPage />} />
-          <Route path="/municipal-directory" element={<MunicipalDirectoryPage />} />
-          <Route path="/circumstantial-act" element={<CircumstantialActPage />} />
+          <Route
+            path="/municipal-directory"
+            element={<MunicipalDirectoryPage />}
+          />
+          <Route
+            path="/circumstantial-act"
+            element={<CircumstantialActPage />}
+          />
           <Route path="/declaranet-convention" element={<DECLARANETPage />} />
           <Route path="/privacy-notices" element={<PrivacyNoticesPage />} />
           <Route path="/pmd-teocelo" element={<PMDTeoceloPage />} />
           <Route path="/pae-teocelo" element={<PAETeoceloPage />} />
           <Route path="/fism-evaluation" element={<FISMEvaluationPage />} />
-          <Route path="/fortamun-evaluation" element={<FORTAMUNEvaluationPage />} />
+          <Route
+            path="/fortamun-evaluation"
+            element={<FORTAMUNEvaluationPage />}
+          />
           <Route path="/prueba" element={<Test />} />
-          <Route element={<ProtectedRoute />}>
-
-          </Route>
+          <Route element={<ProtectedRoute />}></Route>
         </Route>
-        <Route path="/loginregister" element={<LoginRegisterPage/>} />
+        <Route path="/loginregister" element={<LoginRegisterPage />} />
         <Route path="*" element={<h1>Not found.</h1>} />
       </Routes>
-    </BrowserRouter>
+    </AnimatePresence>
   );
 }
 

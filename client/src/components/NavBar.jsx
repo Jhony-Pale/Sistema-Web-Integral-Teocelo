@@ -22,6 +22,7 @@ import IconoX from "../assets/Icons/IconoX.png";
 import NavBarOptions from "./NavBarOptions";
 import NavBarOptionsMobileVersion from "./NavBarOptionsMobileVersion";
 import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
 
 function NavBar() {
   const { register } = useForm();
@@ -84,7 +85,7 @@ function NavBar() {
   };
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <ThemeProvider value={themeDrawer}>
         <div className="flex bg-[#6D1610] font-montserrat text-xs text-white w-full h-8 items-center justify-center">
           <p>GOBIERNO DE TEOCELO 2022 - 2025</p>
@@ -379,7 +380,7 @@ function NavBar() {
                       <img
                         src={IconoConstancias}
                         alt="Icono de gotas de agua"
-                        className="py-1 lg:py-3 mt-1 lg:mt-0"
+                        className="py-1 lg:py-2 mt-1 lg:mt-0"
                       />
                     </div>
                     <span className="font-extrabold text-2xl">Solicitar</span>
@@ -431,7 +432,7 @@ function NavBar() {
                       <img
                         src={IconoQuejas}
                         alt="Icono de gotas de agua"
-                        className="py-1 lg:py-3 mt-1 lg:mt-0"
+                        className="py-1 lg:py-2 mt-1 lg:mt-0"
                       />
                     </div>
                     <span className="font-extrabold text-2xl">Reportar</span>
@@ -521,7 +522,15 @@ function NavBar() {
           </Dialog>
         </>
       </ThemeProvider>
-      <Outlet />
+
+      <motion.div
+        initial={{ x: -window.innerWidth }}
+        animate={{ x: 0 }}
+        exit={{ x: window.innerWidth }}
+        transition={{duration: 0.5}}
+      >
+        <Outlet />
+      </motion.div>
     </div>
   );
 }
