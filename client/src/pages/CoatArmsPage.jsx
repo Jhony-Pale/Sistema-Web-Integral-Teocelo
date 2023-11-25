@@ -18,7 +18,7 @@ function CoatArmsPage() {
           </div>
         </div>
       </div>
-      <div className="px-40 lg:px-72 pt-10 text-justify tracking-wide font-normal text-xl leading-loose">
+      <div className="px-40 lg:px-72 pt-10 text-justify tracking-wide font-normal text-xl leading-loose font-montserrat">
         <h1 className="text-center font-extrabold text-2xl mb-5 mx-5">
           En sesión de Cabildo del 23 de septiembre de 1991 se aprobó el Escudo
           de Armas para Teocelo.

@@ -9,7 +9,7 @@ function HistoricalEventsPage() {
           <span>Cronología de acontecimientos históricos</span>
         </div>
       </div>
-      <div className="bg-[#efeeee] drop-shadow-lg px-40 lg:px-72 pt-10 pb-10 text-justify tracking-wide font-normal text-xl leading-loose grid grid-flow-row">
+      <div className="bg-[#efeeee] drop-shadow-lg px-40 lg:px-72 pt-10 pb-10 text-justify tracking-wide font-normal text-xl font-montserrat leading-loose grid grid-flow-row">
         <div className="flex flex-col lg:flex-row items-center text-justify">
           <h1 className="basis-1/4 font-extrabold text-center text-xl lg:text-3xl mr-5">
             Siglo XVI

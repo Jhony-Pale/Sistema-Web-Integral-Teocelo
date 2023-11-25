@@ -22,10 +22,10 @@ function Footer() {
           <div className="flex items-center justify-start gap-5">
             <BiSolidPhone size="2em" style={{ color: "#ffffff" }} />
             <span className="text-white font-serif font-bold text-sm lg:text-base">
-              Palacio Municipal: (228)8210007 <br />
+              Palacio Municipal: (228)8210007 Ext. 117 <br />
               DIF Municipal: (228)2016930 <br />
-              Protección Civil: (228)8210872 <br />
-              Policía Municipal: 8210328 <br />
+              Protección Civil: (228)8210007 Ext. 103 <br />
+              Policía Municipal: (228)8210007 Ext. 102<br />
             </span>
           </div>
           <div className="flex items-center justify-start gap-5">

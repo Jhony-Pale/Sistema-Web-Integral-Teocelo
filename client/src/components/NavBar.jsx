@@ -19,6 +19,7 @@ import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
 import IconoQuejas from "../assets/Icons/IconoQuejas.png";
 import IconoX from "../assets/Icons/IconoX.png";
+import BtnMeGustaria from "../assets/Extras/BtnMeGustaria.png";
 import NavBarOptions from "./NavBarOptions";
 import NavBarOptionsMobileVersion from "./NavBarOptionsMobileVersion";
 import { useAuth } from "../context/AuthContext";
@@ -85,7 +86,7 @@ function NavBar() {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div>
       <ThemeProvider value={themeDrawer}>
         <div className="flex bg-[#6D1610] font-montserrat text-xs text-white w-full h-8 items-center justify-center">
           <p>GOBIERNO DE TEOCELO 2022 - 2025</p>
@@ -107,9 +108,7 @@ function NavBar() {
               className="my-5 h-20"
             />
           </div>
-          {isMobile ? (
-            <></>
-          ) : (
+          {!isMobile && (
             <div className="flex items-center justify-end">
               <form method="get" className="mr-5">
                 <div className="relative ml-14">
@@ -127,12 +126,13 @@ function NavBar() {
                   </div>
                 </div>
               </form>
-              <button
+
+              <motion.img
+                whileTap={{ scale: 0.95 }}
+                src={BtnMeGustaria}
                 onClick={handleOpenDialog}
-                className="bg-[#6d1610] text-white rounded-3xl font-playfair text-lg py-2 px-10 mr-5"
-              >
-                Me gustaría...
-              </button>
+                className="w-1/2 md:w-[38%] lg:w-1/5 mr-5 mt-3"
+              />
             </div>
           )}
         </div>
@@ -172,12 +172,12 @@ function NavBar() {
                       </div>
                     </div>
                   </form>
-                  <button
+                  <motion.img
+                    whileTap={{ scale: 0.95 }}
+                    src={BtnMeGustaria}
                     onClick={handleOpenDialog}
-                    className="bg-[#6d1610] text-white rounded-3xl font-playfair text-lg py-2 px-10 mt-5"
-                  >
-                    Me gustaría...
-                  </button>
+                    className="w-[70%] mr-5 mt-3 justify-self-center"
+                  />
                 </div>
                 <div className="mb-8 pr-4 mt-10">
                   <List>
@@ -369,7 +369,7 @@ function NavBar() {
               </div>
             </DialogHeader>
             <DialogBody>
-              <div className="flex flex-col lg:flex-row gap-8">
+              <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-8`}>
                 <div
                   className={`${
                     isMobile ? "grid grid-cols-2" : "flex-col basis-1/3"
@@ -523,14 +523,16 @@ function NavBar() {
         </>
       </ThemeProvider>
 
-      <motion.div
-        initial={{ x: -window.innerWidth }}
-        animate={{ x: 0 }}
-        exit={{ x: window.innerWidth }}
-        transition={{duration: 0.5}}
-      >
-        <Outlet />
-      </motion.div>
+      <div className="overflow-hidden">
+        <motion.div
+          initial={{ x: -window.innerWidth }}
+          animate={{ x: 0 }}
+          exit={{ x: window.innerWidth }}
+          transition={{ duration: 0.5 }}
+        >
+          <Outlet />
+        </motion.div>
+      </div>
     </div>
   );
 }

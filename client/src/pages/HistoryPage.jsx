@@ -82,7 +82,7 @@ function HistoryPage() {
           </div>
         </div>
       </div>
-      <div className="px-40 lg:px-72 pt-10 text-justify tracking-wide font-normal text-xl leading-loose">
+      <div className="px-40 lg:px-72 pt-10 text-justify tracking-wide font-normal text-xl leading-loose font-montserrat">
         <article>
           <p>
             Teocelo es un antiguo pueblo de origen prehispánico cuya fecha

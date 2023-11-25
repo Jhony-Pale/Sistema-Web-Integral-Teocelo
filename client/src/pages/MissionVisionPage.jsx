@@ -14,7 +14,7 @@ function MissionVisionPage() {
         <div className="w-full grid grid-flow-row lg:grid-cols-2 gap-5 bg-[#EFEEEE] p-5 shadow-inner drop-shadow-md">
           <div className="flex flex-col">
             <h1 className="font-extrabold text-[#6D1610] text-4xl">Misión</h1>
-            <div className="font-montserrat font-bold text-2xl grow flex items-center">
+            <div className="font-montserrat font-medium text-2xl grow flex items-center">
               <p>
                 Administrar con eficacia y eficiencia los recursos captados y
                 transferidos al municipio, garantizando transparencia e
@@ -40,7 +40,7 @@ function MissionVisionPage() {
           />
           <div className="flex flex-col">
             <h1 className="font-extrabold text-[#6D1610] text-4xl">Visión</h1>
-            <div className="font-montserrat font-bold text-2xl grow flex items-center">
+            <div className="font-montserrat font-medium text-2xl grow flex items-center">
               <p>
                 Construir mediante un gobierno honesto y con la participación
                 ciudadana, un municipio seguro, próspero y autosuficiente con
@@ -56,12 +56,12 @@ function MissionVisionPage() {
           <h1 className="font-extrabold text-2xl lg:text-4xl text-[#6D1610] text-center">
             Valores de la administración
           </h1>
-          <p className="text-xl lg:text-2xl font-bold mt-10 text-justify">
+          <p className="text-2xl lg:text-3xl font-medium font-montserrat mt-10 text-justify">
             Se pretende un bienestar integral trabajando en coordinación
             gobierno y sociedad estableciendo valores y principios que
             fortalezcan la relación y nos ayude a mejorar a nuestro municipio.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-5 md:gap-y-10 lg:gap-y-16 text-lg lg:text-3xl font-extrabold underline mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-5 md:gap-y-10 lg:gap-y-16 text-xl lg:text-4xl font-extrabold font-montserrat underline mt-16">
             <div className="flex flex-row items-center justify-start">
               <img
                 src={IconoPalomita}

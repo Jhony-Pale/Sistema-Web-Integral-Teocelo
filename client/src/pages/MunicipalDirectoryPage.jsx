@@ -4,6 +4,7 @@ import { useExtaData } from "../context/ExtraDataContext";
 import { LuSearch } from "react-icons/lu";
 import { FiAlertCircle } from "react-icons/fi";
 import Footer from "../components/Footer";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 function MunicipalDirectoryPage() {
   const { isMobile } = useExtaData();
@@ -17,10 +18,7 @@ function MunicipalDirectoryPage() {
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "presidencia.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 117", "(228)8210328 Ext. 117"],
     },
     {
       area: "Sindicatura",
@@ -31,10 +29,7 @@ function MunicipalDirectoryPage() {
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "sindicatura.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 125", "(228)8210328 Ext. 125"],
     },
     {
       area: "Regiduría",
@@ -45,191 +40,88 @@ function MunicipalDirectoryPage() {
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "regiduria.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 124", "(228)8210328 Ext. 124"],
     },
     {
       area: "Secretaría",
       name: "L.A.E. José Ramón Vega Andrade",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "secretaria.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 126", "(228)8210328 Ext. 126"],
     },
     {
       area: "Archivo Municipal",
-      name: "C. Ada Alicia tlaxcalteco Andrade",
+      name: "C. Ada Alicia Tlaxcalteco Andrade",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Correo No Disponible",
-      },
+      contacts: ["(228)8210007 Ext. 118", "(228)8210328 Ext. 118"],
     },
     {
       area: "Órgano De Control Interno",
       name: "L.A.E. Jaqueline Fuentes Valdivia",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "contraloria.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "Investigación",
-      name: "L.A. diana izbeth cabrera reyes",
-      ubication: {
-        place: "Edificio del H. Ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "contraloria.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "Sustanción",
-      name: "Pendiente",
-      ubication: {
-        place: "Edificio del H. Ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "contraloria.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 111", "(228)8210328 Ext. 111"],
     },
     {
       area: "Tesorería",
       name: "L.C.P. José Pablo Rosado Molina",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Baja",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "tesoreria.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "Ingresos",
-      name: "L.A. Carmela Rosario Molina Sánchez",
-      ubication: {
-        place: "Edificio del H. Ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "tesoreria.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "Egresos",
-      name: "Ing. Jonathan Velázquez Hernández",
-      ubication: {
-        place: "Edificio del H. Ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "tesoreria.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "Contabilidad",
-      name: "L.C.P. José ManuelHhuerta Landa",
-      ubication: {
-        place: "Edificio del H. Ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "tesoreria.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "Nómina Y Adquisiciones",
-      name: "L.A.E. José Antonio Estrada Domínguez",
-      ubication: {
-        place: "Edificio del H. Ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "tesoreria.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 105", "(228)8210328 Ext. 105"],
     },
     {
       area: "Catastro",
       name: "C.P. José Bernardino Valdivia López",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Correo no disponible",
-      },
+      contacts: ["(228)8210007 Ext. 113", "(228)8210328 Ext. 113"],
     },
     {
       area: "Unidad Jurídica",
       name: "Lic. Rommel Caín Chacan Pale",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Baja",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "juridico.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 109", "(228)8210328 Ext. 109"],
     },
     {
       area: "Coordinación de Programas Sociales",
       name: "Pendiente",
       ubication: {
-        place: "Pendiente",
-        street: "Calle Pendiente",
-        neighborhood: "Col. Centro",
+        place: "Instalaciones Del DIF Municipal",
+        street: "Calle San Pedro S/N",
+        neighborhood: "Barrio De San Pedro",
         cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
       },
     },
     {
@@ -237,13 +129,10 @@ function MunicipalDirectoryPage() {
       name: "L.S.C.A. Carlos Arturo Valdivia Arcos",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "informatica.teocelo@veracruz.gob.mx",
       },
     },
     {
@@ -251,83 +140,56 @@ function MunicipalDirectoryPage() {
       name: "L.R.I. José Julián Morales Andrade",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Baja",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "transparencia.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 112", "(228)8210328 Ext. 112"],
     },
     {
       area: "Registro Civil",
       name: "T.S.U. Zayra Vanessa García Bustos",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Baja",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Correo no disponible",
-      },
+      contacts: ["(228)8210007 Ext. 104", "(228)8210328 Ext. 104"],
     },
     {
       area: "Oficialía Mayor",
       name: "C. Gustavo Andrade López",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "oficialmayor2225@gmail.com",
-      },
+      contacts: ["(228)8210007 Ext. 108", "(228)8210328 Ext. 108"],
     },
     {
       area: "Oficialía De Partes",
       name: "Pendiente",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Correo no disponible",
-      },
-    },
-    {
-      area: "Servicios Generales",
-      name: "C. Isidro Velis García",
-      ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Correo no disponible",
-      },
+      contacts: ["(228)8210007 Ext. 101", "(228)8210328 Ext. 101"],
     },
     {
       area: "Rastro Municipal",
       name: "C. Clemente Cosme Caricio",
       ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
+        street: "Calle San Pedro S/N",
+        neighborhood: "Barrio De San Pedro",
         cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Correo no disponible",
       },
     },
     {
@@ -335,69 +197,46 @@ function MunicipalDirectoryPage() {
       name: "Ing. Jesús Rafael Sánchez Sánchez",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "obras.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 128", "(228)8210328 Ext. 128"],
     },
     {
-      area: "Ramo 033",
-      name: "C. Sergio Gonzáles Pérez",
-      ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
-    },
-    {
-      area: "DIMJUVE",
+      area: "Fomento Deportivo Y DIMJUVE",
       name: "L.E. José Alberto Reyes Izaguirre",
       ubication: {
-        place: "Palacio municipal",
+        place: "Palacio Municipal",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "teocelojuventud@gmail.com",
-      },
+      contacts: ["(228)8210007 Ext. 120", "(228)8210328 Ext. 120"],
     },
     {
       area: "Dirección De Desarrollo Económico",
       name: "L.S. José De Jesús Mora Hernández",
       ubication: {
         place: "Palacio Municipal",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
+      contacts: ["(228)8210007 Ext. 129", "(228)8210328 Ext. 129"],
     },
     {
       area: "Comercio",
       name: "C. José Luis Tapia Olmos",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
       },
     },
     {
@@ -405,196 +244,104 @@ function MunicipalDirectoryPage() {
       name: "Biol. Eduardo Méndez Sánchez",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
+      contacts: ["(228)8210007 Ext. 119", "(228)8210328 Ext. 119"],
     },
     {
       area: "Dirección De Educación, Cultura Y Deporte",
-      name: "Biol. Eduardo Méndez Sánchez",
+      name: "L.H. Octaviano Alarcón Sánchez",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
-    },
-    {
-      area: "Fomento Deportivo",
-      name: "Pendiente",
-      ubication: {
-        place: "Edificio del H. Ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
+      contacts: ["(228)8210007 Ext. 114", "(228)8210328 Ext. 114"],
     },
     {
       area: "Dirección De Agua Potable Y Saneamiento",
       name: "C. Francisco Antonio Sánchez Retureta",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
+      contacts: ["(228)8210007 Ext. 116", "(228)8210328 Ext. 116"],
     },
     {
       area: "Turismo",
       name: "L.A.E.T Daniel Andrés Morales Pérez",
       ubication: {
         place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
       },
     },
     {
       area: "DIF Municipal",
       name: "L.E.P. Zayra Larios Alducin",
       ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
+        place: "Instalaciones Del DIF Municipal",
+        street: "Calle San Pedro",
+        neighborhood: "Barrio De San Pedro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "dif.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "DIF - Procuraduría",
-      name: "Pendiente",
-      ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "dif.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "DIF - Jurídico",
-      name: "Pendiente",
-      ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "dif.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "DIF - Psicología",
-      name: "Pendiente",
-      ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "dif.teocelo@veracruz.gob.mx",
-      },
-    },
-    {
-      area: "Trabajo Social",
-      name: "L.T.S. Caridad Vázquez Morales",
-      ubication: {
-        place: "Pendiente",
-        street: "Calle Juan Díaz Covarrubias S/N",
-        neighborhood: "Col. Centro",
-        cp: "C.P. 91615",
-      },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
+      contacts: ["(228)2016930"],
     },
     {
       area: "Dirección De Protección Civil",
       name: "C. Gabriel Galván Anell",
       ubication: {
-        place: "Edificio del H. ayuntamiento",
+        place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Baja",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
+      contacts: ["(228)8210007 Ext. 103", "(228)8210328 Ext. 103"],
     },
     {
       area: "Dirección De Seguridad Pública",
       name: "C. Taurino Enrique Landa Luna",
       ubication: {
-        place: "Edificio del H. ayuntamiento",
+        place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Baja",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "Pendiente",
-      },
+      contacts: ["(228)8210007 Ext. 102", "(228)8210328 Ext. 102"],
     },
     {
       area: "Instituto Municipal De La Mujer",
       name: "Lic. Alejandra Pelayo Trujillo",
       ubication: {
-        place: "Edificio del H. ayuntamiento",
-        street: "Calle Juan Díaz Covarrubias S/N",
+        street: "Calle Independencia Oriente #54",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "immujer.teocelo@veracruz.gob.mx",
-      },
+      contacts: ["(228)8210007 Ext. 117", "(228)8210328 Ext. 117"],
     },
     {
       area: "Dirección De Comunicación Social",
       name: "Lic. Daniel Alexis Mendoza Valdivia",
       ubication: {
-        place: "Edificio del H. ayuntamiento",
+        place: "Edificio del H. Ayuntamiento",
+        floor: "Planta Alta",
         street: "Calle Juan Díaz Covarrubias S/N",
         neighborhood: "Col. Centro",
         cp: "C.P. 91615",
       },
-      contacts: {
-        phone: "2288210328",
-        email: "comunicacion.social.teo@gmail.com",
-      },
+      contacts: ["(228)8210007 Ext. 127", "(228)8210328 Ext. 127"],
     },
   ];
 
@@ -613,7 +360,8 @@ function MunicipalDirectoryPage() {
     if (inputValueFixed != "") {
       const refreshPersonal = personal.filter(
         (person) =>
-          person.area === inputValueFixed || person.name === inputValueFixed
+          person.area.toUpperCase().includes(inputValueFixed.toUpperCase()) ||
+          person.name.toUpperCase().includes(inputValueFixed.toUpperCase())
       );
 
       return setShowPersonal(refreshPersonal);
@@ -649,58 +397,83 @@ function MunicipalDirectoryPage() {
             </div>
           </div>
           <div
-            className={`grid ${
-              isMobile ? "grid-cols-1 md:grid-cols-2" : "grid-cols-3"
-            } place-items-center gap-x-5 gap-y-10 font-montserrat mt-10`}
+            className={`flex flex-wrap gap-5 justify-center font-montserrat mt-10`}
           >
-            {showPersonal.length > 0 ? (
+            {showPersonal.length > 0 && (
               <>
-                {showPersonal.map((person, index) => (
-                  <div
-                    className="shadow-lg shadow-gray-500 w-[90%] border-t-8 border-[#6D1610]"
-                    key={index}
-                  >
-                    <div className="flex items-center justify-center text-center py-2 text-2xl font-extrabold text-[#6D1610]">
-                      <h1>{person.area}</h1>
-                    </div>
-                    <div className="bg-[#EFEFEF] mx-3 mb-5">
-                      <h1 className="bg-[#6D1610] text-lg text-center text-white py-2">
-                        {person.name}
-                      </h1>
-                      <div className="flex flex-col gap-5 p-2 break-all">
-                        <div className="flex items-center gap-3">
-                          <p>Ubicación:</p>
-                          <p className="flex flex-col">
-                            <span>{person.ubication.place}</span>
-                            <span>{person.ubication.street}</span>
-                            <span>{person.ubication.neighborhood}</span>
-                            <span>{person.ubication.cp}</span>
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-5">
-                          <p>Contacto:</p>
-                          <p className="flex flex-col">
-                            <span>{person.contacts.phone}</span>
-                            <span>{person.contacts.email}</span>
-                          </p>
+                <AnimatePresence mode="popLayout">
+                  {showPersonal.map((person, index) => (
+                    <motion.div
+                      layout
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ type: "spring" }}
+                      className={`shadow-lg shadow-gray-500 w-[90%] border-t-8 border-[#6D1610] ${isMobile ? "basis-[48%]" : "basis-[30%]"}`}
+                      key={index}
+                    >
+                      <div className="flex items-center justify-center text-center py-2 text-2xl font-extrabold text-[#6D1610]">
+                        <h1>{person.area}</h1>
+                      </div>
+                      <div className="bg-[#EFEFEF] mx-3 mb-5">
+                        <h1 className="bg-[#6D1610] text-lg text-center text-white py-2">
+                          {person.name}
+                        </h1>
+                        <div className="flex flex-col gap-5 p-2 break-all">
+                          <div className="flex items-center gap-3">
+                            <p>Ubicación:</p>
+                            <p className="flex flex-col">
+                              {person.ubication.place && (
+                                <span>{person.ubication.place}</span>
+                              )}
+                              {person.ubication.floor && (
+                                <span>{person.ubication.floor}</span>
+                              )}
+                              {person.ubication.street && (
+                                <span>{person.ubication.street}</span>
+                              )}
+                              {person.ubication.neighborhood && (
+                                <span>{person.ubication.neighborhood}</span>
+                              )}
+                              {person.ubication.cp && (
+                                <span>{person.ubication.cp}</span>
+                              )}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-5">
+                            <p>Contacto:</p>
+                            <p className="flex flex-col">
+                              {person.contacts ? (
+                                <>
+                                  {person.contacts.map((contact, index) => (
+                                    <span key={index}>{contact}</span>
+                                  ))}
+                                </>
+                              ) : (
+                                <>
+                                  <span>No Disponible</span>
+                                </>
+                              )}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </>
-            ) : null}
+            )}
           </div>
-          {showPersonal.length === 0 ? (
-            <div className="">
-              <Alert
-                className="bg-[#6D1610]"
-                icon={<FiAlertCircle size="1.5em" />}
-              >
-                No se encontró ningún resultado.
-              </Alert>
-            </div>
-          ) : null}
+            {showPersonal.length === 0 && (
+              <div className="pb-6">
+                <Alert
+                  className="bg-[#6D1610]"
+                  icon={<FiAlertCircle size="1.5em" />}
+                >
+                  No se encontró ningún resultado.
+                </Alert>
+              </div>
+            )}
         </div>
       </div>
       <Footer />

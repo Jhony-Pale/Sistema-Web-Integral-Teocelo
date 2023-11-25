@@ -3,7 +3,7 @@ import IconoAlumbrado from "../assets/Icons/IconoAlumbrado.png";
 import IconoLimpia from "../assets/Icons/IconoLimpia.png";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
 import IconoQuejas from "../assets/Icons/IconoQuejas.png";
-import IconoTurismo from "../assets/Icons/IconoTurismo.png";
+import IconoOficialia from "../assets/Icons/IconoOficialia.png";
 
 function ServicesOptions() {
   return (
@@ -67,12 +67,12 @@ function ServicesOptions() {
         <div className="w-1/3 lg:w-1/4 flex flex-col items-center">
           <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[8em] lg:max-w-[8em]">
             <img
-              src={IconoTurismo}
+              src={IconoOficialia}
               alt="Icono de gotas de agua"
               className="py-5"
             />
           </div>
-          <div className="font-extrabold">Guía Turística</div>
+          <div className="font-extrabold">Oficialia de Partes</div>
         </div>
         <div className="mt-16 w-full">
           <button className="bg-[#6d1610] text-white rounded-3xl font-playfair text-xl lg:text-2xl font-extrabold p-2 w-1/2">Preguntas frecuentes</button>
