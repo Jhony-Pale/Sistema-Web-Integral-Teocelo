@@ -4,7 +4,7 @@ function GoogleMap() {
   const defaultProps = {
     center: {
       lat: 19.38564,
-      lng: -96.97317,
+      lng: -96.97316,
     },
     zoom: 19,
   };

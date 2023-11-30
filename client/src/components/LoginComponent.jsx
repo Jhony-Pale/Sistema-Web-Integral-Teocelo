@@ -8,6 +8,8 @@ import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
+import { AnimatePresence, motion } from "framer-motion";
+import AlertMessage from "./AlertMessage";
 
 function LoginComponent() {
   const {
@@ -63,13 +65,8 @@ function LoginComponent() {
             <Collapse open={collapseErrors}>
               <div>
                 {signinErrors.map((error, i) => (
-                  <Alert
-                    icon={<GoAlertFill size="1.5em" color="red" />}
-                    className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
-                    key={i}
-                  >
-                    {error}
-                  </Alert>
+                  <AlertMessage key={i} message={error} />
+                  
                 ))}
               </div>
             </Collapse>

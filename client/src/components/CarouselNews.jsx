@@ -2,7 +2,7 @@ import SeparadorIzquierdo from "../assets/Extras/SeparadorIzquierdo.png";
 import SeparadorDerecho from "../assets/Extras/SeparadorDerecho.png";
 import ComponentNew from "./ComponentNew";
 import { Carousel } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useExtaData } from "../context/ExtraDataContext";
 
 function CarouselImages() {
@@ -66,7 +66,23 @@ function CarouselImages() {
   ]);
   const { isMobile } = useExtaData();
 
-  const organizedNews = news.reduce((acc, curr, index) => {
+  const sliceArray = () => {
+    if(news.length > 5){
+
+      const _news = news.slice(0, 5)
+      _news.push({position: "More"})
+      return _news
+    }
+    else{
+      const _news = news
+      _news.push({position: "More"})
+      return _news
+    }
+  }
+  const newsSliced = sliceArray()
+
+
+  const organizedNews = newsSliced.reduce((acc, curr, index) => {
     const groupIndex = Math.floor(index / (isMobile ? 2 : 3));
 
     if (!acc[groupIndex]) {
@@ -98,12 +114,10 @@ function CarouselImages() {
         {organizedNews.map((group, groupIndex) => (
           <div
             key={groupIndex}
-            className={`flex h-full ${
-              group.length === 1 ? (isMobile ? "w-1/2" : "w-1/3") : "w-full"
-            } px-4 mb-5`}
+            className={`flex h-full w-full px-4 mb-5`}
           >
-            {group.map((new_, newIndex) => (
-              <div key={newIndex} className="m-10 bg-white rounded-2xl">
+            {group.map((new_, index) => (
+              <div key={index} className={`m-10 bg-white rounded-2xl ${group.length === 1 ? (isMobile ? "basis-1/2" : "basis-1/3") : "basis-full"}`}>
                 <ComponentNew newComponent={new_} />
               </div>
             ))}

@@ -19,6 +19,10 @@ import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
 import IconoQuejas from "../assets/Icons/IconoQuejas.png";
 import IconoX from "../assets/Icons/IconoX.png";
+import IconoAgregarP from "../assets/Icons/IconoAgregarP.png";
+import IconoBorrarP from "../assets/Icons/IconoBorrarP.png";
+import IconoEditarP from "../assets/Icons/IconoEditarP.png";
+import IconoComunSocial from "../assets/Icons/IconoComunSocial.png";
 import BtnMeGustaria from "../assets/Extras/BtnMeGustaria.png";
 import NavBarOptions from "./NavBarOptions";
 import NavBarOptionsMobileVersion from "./NavBarOptionsMobileVersion";
@@ -28,7 +32,7 @@ import { motion } from "framer-motion";
 function NavBar() {
   const { register } = useForm();
   const { changeIsLogin, isMobile } = useExtaData();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
 
   const [openDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => setOpenDialog(!openDialog);
@@ -131,7 +135,7 @@ function NavBar() {
                 whileTap={{ scale: 0.95 }}
                 src={BtnMeGustaria}
                 onClick={handleOpenDialog}
-                className="w-1/2 md:w-[38%] lg:w-1/5 mr-5 mt-3"
+                className="w-1/2 md:w-[38%] lg:w-1/5 mr-5 mt-3 cursor-pointer"
               />
             </div>
           )}
@@ -369,146 +373,205 @@ function NavBar() {
               </div>
             </DialogHeader>
             <DialogBody>
-              <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-8`}>
-                <div
-                  className={`${
-                    isMobile ? "grid grid-cols-2" : "flex-col basis-1/3"
-                  } text-black`}
-                >
-                  <div className="flex items-center gap-3 mb-8 col-span-2 h-[3em] w-[3em] lg:h-[5em] lg:w-[5em]">
-                    <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] min-h-[3em] min-w-[3em]">
-                      <img
-                        src={IconoConstancias}
-                        alt="Icono de gotas de agua"
-                        className="py-1 lg:py-2 mt-1 lg:mt-0"
-                      />
+              {isAuthenticated && user.rol === "employee" ? (
+                <div className={`grid ${isMobile? "grid-cols-2" : "grid-cols-3"} mb-10`}>
+                  <div className="col-span-2 flex flex-wrap items-center">
+                    <Link to="/add-post" className="basis-1/2 flex items-center gap-2">
+                      <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[7em] lg:max-w-[7em]">
+                        <img
+                          src={IconoAgregarP}
+                          alt="Icono de agregar publicación"
+                          className="py-3 lg:py-4"
+                        />
+                      </div>
+                      <p className="font-extrabold text-xl lg:text-2xl text-black">
+                        Añadir una nueva publicación
+                      </p>
+                    </Link>
+                    <div className="basis-1/2 flex items-center gap-2">
+                      <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[7em] lg:max-w-[7em]">
+                        <img
+                          src={IconoEditarP}
+                          alt="Icono de editar publicación"
+                          className="py-3 lg:py-4"
+                        />
+                      </div>
+                      <p className="font-extrabold text-xl lg:text-2xl text-black">
+                        Editar una publicación
+                      </p>
                     </div>
-                    <span className="font-extrabold text-2xl">Solicitar</span>
-                  </div>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Conexión de agua o drenaje
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Instalación de una lámpara
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Constancia ganadera
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Constancia agrícola
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Guía de traslado de bambú
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Préstamo de unidad deportiva
-                    </span>
-                  </Link>
-                </div>
-                <div
-                  className={`${
-                    isMobile ? "grid grid-cols-2" : "flex-col basis-1/3"
-                  } text-black`}
-                >
-                  <div className="flex items-center gap-3 mb-8 col-span-2 h-[3em] w-[3em] lg:h-[5em] lg:w-[5em]">
-                    <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] min-h-[3em] min-w-[3em]">
-                      <img
-                        src={IconoQuejas}
-                        alt="Icono de gotas de agua"
-                        className="py-1 lg:py-2 mt-1 lg:mt-0"
-                      />
+                    <div className="basis-1/2 flex items-center gap-2 mt-10">
+                      <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[7em] lg:max-w-[7em]">
+                        <img
+                          src={IconoBorrarP}
+                          alt="Icono de borrar publicación"
+                          className="py-3 lg:py-4"
+                        />
+                      </div>
+                      <p className="font-extrabold text-xl lg:text-2xl text-black">
+                        Eliminar una publicación
+                      </p>
                     </div>
-                    <span className="font-extrabold text-2xl">Reportar</span>
                   </div>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Tubería de agua o drenaje dañada
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Luminaria descompuesta
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Servicio de limpia pública
-                    </span>
-                  </Link>
-                  <Link className="flex items-center gap-2 mb-5">
-                    <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
-                    <span className="font-bold text-xl">
-                      Algún servidor público
-                    </span>
-                  </Link>
-                </div>
-                {isAuthenticated && (
-                  <div className="flex-col basis-1/4">
-                    <div className="flex justify-center">
-                      <Link
-                        to="/"
-                        onClick={handleLogout}
-                        className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5"
-                      >
+                  <div className={`flex flex-col items-center ${isMobile ? "col-span-2" : ""}`}>
+                    <img
+                      src={IconoComunSocial}
+                      alt="Icono de comunicación social"
+                      className={isMobile ? "w-1/2 mt-5" : "w-2/3"}
+                    />
+                    <Link
+                      to="/"
+                      onClick={handleLogout}
+                      className={`bg-white border-[#6d1610] border-2 p-1 rounded-full ${isMobile ? "w-1/2" : "w-2/3"}`}
+                    >
+                      <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5 w-full">
                         Cerrar sesión
-                      </Link>
-                    </div>
+                      </button>
+                    </Link>
                   </div>
-                )}
-                {!isAuthenticated && (
-                  <div className="flex-col basis-1/4">
-                    <div className="flex justify-center">
-                      <Link
-                        to="/loginregister"
-                        onClick={() => changeIsLogin(true)}
-                      >
-                        <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
-                          Iniciar sesión
-                        </button>
-                      </Link>
+                </div>
+              ) : (
+                <div
+                  className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-8`}
+                >
+                  <div
+                    className={`${
+                      isMobile ? "grid grid-cols-2" : "flex-col basis-1/3"
+                    } text-black`}
+                  >
+                    <div className="flex items-center gap-3 mb-8 col-span-2 h-[3em] w-[3em] lg:h-[5em] lg:w-[5em]">
+                      <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] min-h-[5em] min-w-[5em]">
+                        <img
+                          src={IconoConstancias}
+                          alt="Icono de gotas de agua"
+                          className="py-1 lg:py-3 mt-1 lg:mt-0"
+                        />
+                      </div>
+                      <span className="font-extrabold text-2xl">Solicitar</span>
                     </div>
-                    <div>
-                      <div className="flex items-center">
-                        <hr className="flex-1 border-t border-[#494848] border" />
-                        <span className="px-4 text-center font-montserrat font-extrabold text-[#494848]">
-                          O
-                        </span>
-                        <hr className="flex-1 border-t border-[#494848] border" />
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Conexión de agua o drenaje
+                      </span>
+                    </Link>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Instalación de una lámpara
+                      </span>
+                    </Link>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Constancia ganadera
+                      </span>
+                    </Link>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Constancia agrícola
+                      </span>
+                    </Link>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Guía de traslado de bambú
+                      </span>
+                    </Link>
+                  </div>
+                  <div
+                    className={`${
+                      isMobile ? "grid grid-cols-2" : "flex-col basis-1/3"
+                    } text-black`}
+                  >
+                    <div className="flex items-center gap-3 mb-8 col-span-2 h-[3em] w-[3em] lg:h-[5em] lg:w-[5em]">
+                      <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] min-h-[5em] min-w-[5em]">
+                        <img
+                          src={IconoQuejas}
+                          alt="Icono de gotas de agua"
+                          className="py-1 lg:py-3 mt-1 lg:mt-0"
+                        />
+                      </div>
+                      <span className="font-extrabold text-2xl">Reportar</span>
+                    </div>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Tubería de agua o drenaje dañada
+                      </span>
+                    </Link>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Luminaria descompuesta
+                      </span>
+                    </Link>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Servicio de limpia pública
+                      </span>
+                    </Link>
+                    <Link className="flex items-center gap-2 mb-5">
+                      <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
+                      <span className="font-bold text-xl">
+                        Algún servidor público
+                      </span>
+                    </Link>
+                  </div>
+                  {isAuthenticated && (
+                    <div className="flex-col basis-1/4">
+                      <div className="flex justify-center">
+                        <Link
+                          to="/"
+                          onClick={handleLogout}
+                          className="bg-white border-[#6d1610] border-2 p-1 rounded-full"
+                        >
+                          <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5">
+                            Cerrar sesión
+                          </button>
+                        </Link>
                       </div>
                     </div>
-                    <div className="flex justify-center">
-                      <Link
-                        to="/loginregister"
-                        onClick={() => changeIsLogin(false)}
-                      >
-                        <button className="bg-[#6d1610] text-white rounded-xl font-montserrat text-2xl lg:text-3xl py-1 px-5">
-                          Registrarme
-                        </button>
-                      </Link>
+                  )}
+                  {!isAuthenticated && (
+                    <div className="flex-col basis-1/4">
+                      <div className="flex justify-center">
+                        <Link
+                          to="/loginregister"
+                          onClick={() => changeIsLogin(true)}
+                          className="bg-white border-[#6d1610] border-2 p-1 rounded-full"
+                        >
+                          <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5">
+                            Iniciar sesión
+                          </button>
+                        </Link>
+                      </div>
+                      <div>
+                        <div className="flex items-center">
+                          <hr className="flex-1 border-t border-[#494848] border" />
+                          <span className="px-4 text-center font-montserrat font-extrabold text-[#494848]">
+                            O
+                          </span>
+                          <hr className="flex-1 border-t border-[#494848] border" />
+                        </div>
+                      </div>
+                      <div className="flex justify-center">
+                        <Link
+                          to="/loginregister"
+                          onClick={() => changeIsLogin(false)}
+                          className="bg-white border-[#6d1610] border-2 p-1 rounded-full"
+                        >
+                          <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5">
+                            Registrarme
+                          </button>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              )}
             </DialogBody>
             <DialogFooter>
               <div className="absolute">

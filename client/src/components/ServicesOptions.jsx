@@ -10,7 +10,7 @@ function ServicesOptions() {
     <div>
       <div>
         <h1 className="font-extrabold text-center text-2xl lg:text-4xl pt-5 pb-28">
-          SERVICIOS
+          SITIOS DE INTERES
         </h1>
       </div>
       <div className="flex flex-wrap justify-center gap-5 text-center w-full">

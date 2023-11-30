@@ -5,16 +5,17 @@ import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 
 export const register = async (req, res) => {
-  const { firstname, lastname, email, password } = req.body;
+  const { firstname, lastname, rol, email, password } = req.body;
 
   try {
     const userFound = await User.findOne({ email });
-    if (userFound) return res.status(400).json(["the email is already in use"]);
+    if (userFound) return res.status(400).json(["El correo electrónico ya fue registrado anteriormente."]);
 
     const passwordHash = await bcrypt.hash(password, 10);
     const newUser = new User({
       firstname,
       lastname,
+      rol,
       email,
       password: passwordHash,
     });
@@ -28,6 +29,7 @@ export const register = async (req, res) => {
       id: userSaved._id,
       firstname: userSaved.firstname,
       lastname: userSaved.lastname,
+      rol: userSaved.rol,
       email: userSaved.email,
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
@@ -47,7 +49,7 @@ export const login = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, userFound.password);
 
-    if (!isMatch) return res.status(400).json(["Incorrect password"]);
+    if (!isMatch) return res.status(400).json(["¡Usuario o contraseña incorrectos!"]);
 
     const token = await createAccessToken({ id: userFound._id });
 
@@ -56,6 +58,7 @@ export const login = async (req, res) => {
       id: userFound._id,
       firstname: userFound.firstname,
       lastname: userFound.lastname,
+      rol: userFound.rol,
       email: userFound.email,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
@@ -79,6 +82,7 @@ export const profile = async (req, res) => {
     id: userFound._id,
     firstname: userFound.firstname,
     lastame: userFound.lastname,
+    rol: userFound.rol,
     email: userFound.email,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
@@ -100,6 +104,7 @@ export const verifyToken = async (req, res) => {
       id: userFound._id,
       firstname: userFound.firstname,
       lastname: userFound.lastname,
+      rol: userFound.rol,
       email: userFound.email,
     });
   });
