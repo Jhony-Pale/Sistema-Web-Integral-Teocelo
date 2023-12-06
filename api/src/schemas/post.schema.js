@@ -14,6 +14,9 @@ export const createPostSchema = z.object({
   body: z.string({
     required_error: "El cuerpo de la publicación es requerido.",
   }),
+  image: z.unknown({
+    required_error: "Una imagen es requerida.",
+  }),
 });
 
 export const updatePostSchema = z.object({

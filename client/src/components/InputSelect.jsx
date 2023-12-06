@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { useForm } from "react-hook-form";
 
-function InputSelect({ options }) {
+function InputSelect({ options, register }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const selectRef = useRef(null);
-  const { register } = useForm();
 
   const handleToggle = () => {
     setIsOpen(!isOpen);

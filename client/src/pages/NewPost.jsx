@@ -1,21 +1,26 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import InputSelect from "../components/InputSelect";
 import Footer from "../components/Footer";
 import UploadImage from "../components/UploadImage";
-import { Link } from "react-router-dom";
-import { useExtaData } from "../context/ExtraDataContext";
 import { motion } from "framer-motion";
+import { usePosts } from "../context/PostContext";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
 function NewPost() {
-  const { register } = useForm();
-  const { isMobile } = useExtaData();
+  const { register, handleSubmit, setValue, control } = useForm();
+  const { createPost } = usePosts();
 
-  const handleFileChange = (file) => {
-    // Aquí puedes manejar el archivo seleccionado
-    console.log("Archivo seleccionado:", file);
-  };
+  const onSubmit = handleSubmit((data) => {
+    const formData = new FormData()
+
+    formData.append("image", data.image)
+    formData.append("title", data.title)
+    formData.append("type", data.type)
+    formData.append("body", data.body)
+    
+    createPost(formData);
+  });
 
   return (
     <div>
@@ -23,7 +28,10 @@ function NewPost() {
         <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
           <p>Nueva publicación</p>
         </div>
-        <form className="m-10 grid grid-cols-2 gap-10 font-montserrat">
+        <form
+          onSubmit={onSubmit}
+          className="m-10 grid grid-cols-2 gap-10 font-montserrat"
+        >
           <div className="flex flex-col items-center gap-5">
             <div className="w-1/2">
               <p className="font-bold text-xl">Título del contenido:</p>
@@ -36,7 +44,7 @@ function NewPost() {
             </div>
             <div className="w-1/2">
               <p className="font-bold text-xl">Tipo de contenido:</p>
-              <InputSelect options={options} />
+              <InputSelect options={options} register={register} />
             </div>
             <div className="w-1/2">
               <p className="font-bold text-xl">Título del contenido:</p>
@@ -51,19 +59,31 @@ function NewPost() {
           <div className="flex flex-col items-center gap-5">
             <p className="font-bold text-xl">Cargar imagen:</p>
             <div className="w-1/2 flex items-center h-[22rem]">
-              <UploadImage onChange={handleFileChange} />
+            <Controller
+              name="image"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { ref, ...field } }) => (
+                <UploadImage {...field} />
+                
+              )}
+            />
+              {/* <UploadImage onChange={handleFileChange} /> */}
             </div>
           </div>
           <div className="col-span-2 flex justify-center">
             <motion.div className="w-72 flex" whileTap={{ scale: 0.95 }}>
-              <Link
+              <div
                 to="#"
                 className="bg-white border-[#6d1610] border-2 p-1 rounded-full w-full"
               >
-                <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-3xl py-1 px-5 w-full">
+                <button
+                  className="bg-[#6d1610] text-white rounded-full font-montserrat text-3xl py-1 px-5 w-full"
+                  type="submit"
+                >
                   Publicar
                 </button>
-              </Link>
+              </div>
             </motion.div>
           </div>
         </form>

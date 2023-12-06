@@ -54,13 +54,13 @@ function App() {
             path="/fortamun-evaluation"
             element={<FORTAMUNEvaluationPage />}
           />
-          <Route path="/prueba" element={<Test />} />
-          <Route element={<ProtectedRoute />}>
-            <Route element={<ProtectedRolRoute rolRoute = "employee" />}>
+          {/* <Route path="/prueba" element={<Test />} /> */}
 
-            <Route path="/add-post" element={<NewPost />} />
+            <Route element={<ProtectedRoute />}>
+              <Route element={<ProtectedRolRoute rolRoute="employee" />}>
+                <Route path="/add-post" element={<NewPost />} />
+              </Route>
             </Route>
-          </Route>
         </Route>
         <Route path="/loginregister" element={<LoginRegisterPage />} />
         <Route path="*" element={<h1>Not found.</h1>} />

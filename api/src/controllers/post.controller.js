@@ -1,7 +1,8 @@
 import Post from "../models/post.model.js";
 
 export const createPost = async (req, res) => {
-  const { title, type, body, image } = req.body;
+  const { title, type, body } = req.body;
+  const image = req.file.filename
   try {
     const postFound = await Post.findOne({ title });
     if (postFound)
