@@ -1,14 +1,17 @@
 import Post from "../models/post.model.js";
+import { deletefile } from "../libs/deletefile.js";
 
 export const createPost = async (req, res) => {
   const { title, type, body } = req.body;
-  const image = req.file.filename
+  const image = req.file.filename;
   try {
     const postFound = await Post.findOne({ title });
-    if (postFound)
+    if (postFound) {
+      deletefile(req.file);
       return res
         .status(400)
         .json(["Ya existe una publicación con ese título."]);
+    }
 
     const newPost = new Post({
       title,
@@ -29,6 +32,7 @@ export const createPost = async (req, res) => {
       updatedAt: postSaved.updatedAt,
     });
   } catch (error) {
+    deleteImage(req.file);
     res.status(500).json({ message: error.message });
   }
 };

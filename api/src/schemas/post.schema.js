@@ -11,9 +11,13 @@ export const createPostSchema = z.object({
   type: z.string({
     required_error: "Se requiere seleccionar un tipo.",
   }),
-  body: z.string({
-    required_error: "El cuerpo de la publicación es requerido.",
-  }),
+  body: z
+    .string({
+      required_error: "El cuerpo de la publicación es requerido.",
+    })
+    .min(10, {
+      message: "El cuerpo debe tener al menos 10 caracteres.",
+    }),
   image: z.unknown({
     required_error: "Una imagen es requerida.",
   }),

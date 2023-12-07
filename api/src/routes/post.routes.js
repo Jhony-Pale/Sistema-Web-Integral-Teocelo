@@ -8,6 +8,7 @@ import {
 } from "../controllers/post.controller.js";
 import { createPostSchema, updatePostSchema } from "../schemas/post.schema.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
+import { validateRol } from "../middlewares/rol.middleware.js";
 import { authRequired } from "../middlewares/validateToken.js";
 import multer from "multer";
 import path from "path";
@@ -33,6 +34,7 @@ router.get("/posts/:id", authRequired, getPost);
 router.post(
   "/posts",
   authRequired,
+  validateRol("employee"),
   upload.single("image"),
   validateSchema(createPostSchema),
   createPost

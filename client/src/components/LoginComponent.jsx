@@ -1,14 +1,13 @@
-import { Alert, Collapse } from "@material-tailwind/react";
+import { Collapse } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
-import { GoEyeClosed, GoAlertFill } from "react-icons/go";
+import { GoEyeClosed } from "react-icons/go";
 import { useExtaData } from "../context/ExtraDataContext";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
-import { AnimatePresence, motion } from "framer-motion";
 import AlertMessage from "./AlertMessage";
 
 function LoginComponent() {

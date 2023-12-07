@@ -22,6 +22,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { AnimatePresence } from "framer-motion";
 import NewPost from "./pages/NewPost";
 import ProtectedRolRoute from "./components/ProtectedRolRoute";
+import PostsPage from "./pages/PostsPage";
 
 function App() {
   const location = useLocation();
@@ -61,6 +62,8 @@ function App() {
                 <Route path="/add-post" element={<NewPost />} />
               </Route>
             </Route>
+
+            <Route path="/posts" element={<PostsPage />} />
         </Route>
         <Route path="/loginregister" element={<LoginRegisterPage />} />
         <Route path="*" element={<h1>Not found.</h1>} />

@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { createPostRequest } from "../api/post"
+import { createContext, useContext, useEffect, useState } from "react";
+import { createPostRequest } from "../api/post";
 
 const PostContext = createContext();
 
@@ -15,17 +15,33 @@ export const usePosts = () => {
 
 export function PostProvider({ children }) {
   const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState([]);
+  const [errors, setErrors] = useState([]);
 
-const createPost = async (post) => {
-    const res = await createPostRequest(post)
-    console.log(res)
-}
+  const createPost = async (post) => {
+    try {
+      const res = await createPostRequest(post);
+      return res.data
+    } catch (error) {
+      setErrors(error.response.data);
+    }
+  };
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   return (
     <PostContext.Provider
       value={{
         posts,
-        createPost
+        errors,
+        createPost,
       }}
     >
       {children}
