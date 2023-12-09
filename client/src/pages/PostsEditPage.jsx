@@ -7,11 +7,10 @@ import { FiAlertCircle } from "react-icons/fi";
 import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../context/ExtraDataContext";
 import ComponentPostEdit from "../components/ComponentPostEdit";
-import ComponentNew from "../components/ComponentNew";
 
 const options = ["Todo", "Noticias", "Comunicados", "Convocatorias"];
 
-function PostsPage() {
+function PostsEditPage() {
   const { getPosts, posts } = usePosts();
   const { isMobile } = useExtaData();
   const [filterPosts, setFilterPosts] = useState([]);
@@ -65,14 +64,14 @@ function PostsPage() {
                         key={i}
                         className={`${
                           isMobile ? "basis-[40%]" : "basis-[30%]"
-                        } h-full`}
+                        } h-[35rem]`}
                         layout
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                         transition={{ type: "spring" }}
                       >
-                        <ComponentNew newComponent={post} />
+                        <ComponentPostEdit newComponent={post} />
                       </motion.div>
                     ))}
                   </>
@@ -96,4 +95,4 @@ function PostsPage() {
   );
 }
 
-export default PostsPage;
+export default PostsEditPage;

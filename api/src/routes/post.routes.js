@@ -29,12 +29,12 @@ const upload = multer({
   storage: storage,
 });
 
-router.get("/posts", authRequired, getPosts);
-router.get("/posts/:id", authRequired, getPost);
+router.get("/posts", getPosts);
+router.get("/posts/:title", getPost);
 router.post(
   "/posts",
   authRequired,
-  validateRol("employee"),
+  validateRol("employee.sc"),
   upload.single("image"),
   validateSchema(createPostSchema),
   createPost
@@ -42,6 +42,8 @@ router.post(
 router.put(
   "/posts/:id",
   authRequired,
+  validateRol("employee.sc"),
+  upload.single("image"),
   validateSchema(updatePostSchema),
   updatePost
 );

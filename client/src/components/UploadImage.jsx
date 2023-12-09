@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import IconoSubirImagen from "../assets/Icons/IconoSubirImagen.png";
 
-function UploadImage({ onChange }) {
+function UploadImage({ onChange, defaultImage }) {
   const fileInputRef = useRef(null);
   const [previewImage, setPreviewImage] = useState(null);
 
@@ -33,7 +33,7 @@ function UploadImage({ onChange }) {
         {previewImage ? (
           <img src={previewImage} alt="File Preview" />
         ) : (
-          <img src={IconoSubirImagen} alt="File Input" />
+          <img src={defaultImage ?? IconoSubirImagen} alt="File Input" />
         )}
       </motion.button>
       <input

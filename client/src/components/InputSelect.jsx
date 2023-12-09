@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-function InputSelect({ options, register }) {
+function InputSelect({ options, register, onOptionChange, defaultValue }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(defaultValue ?? options[0]);
   const selectRef = useRef(null);
 
   const handleToggle = () => {
@@ -14,6 +14,7 @@ function InputSelect({ options, register }) {
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
+    if(onOptionChange) onOptionChange(option);
   };
   const handleClickOutside = (event) => {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -34,7 +35,7 @@ function InputSelect({ options, register }) {
         <input
           className="border border-black w-full text-start py-1 px-3 cursor-pointer block"
           value={selectedOption}
-          {...register("type", { required: true })}
+          {...register? {...register("type", { required: true })} : ""}
           readOnly
         />
         <MdKeyboardArrowDown
@@ -42,7 +43,7 @@ function InputSelect({ options, register }) {
           size="1.5em"
         />
       </div>
-      <div className="w-full relative">
+      <div className="w-full relative z-50">
         <AnimatePresence>
           {isOpen && (
             <motion.ul

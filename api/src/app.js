@@ -4,8 +4,14 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import postRoutes from "./routes/post.routes.js";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = dirname(__filename);
 
 app.use(
   cors({
@@ -16,6 +22,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/public', express.static(join(__dirname, 'public')));
 
 app.use("/api", authRoutes);
 app.use("/api", postRoutes);

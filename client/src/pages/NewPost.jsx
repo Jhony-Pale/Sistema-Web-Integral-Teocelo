@@ -8,6 +8,7 @@ import AlertMessage from "../components/AlertMessage";
 import { useEffect, useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { useExtaData } from "../context/ExtraDataContext";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
@@ -21,6 +22,7 @@ function NewPost() {
   const { createPost, errors: createPostErrors } = usePosts();
   const [collapseErrors, setCollapseErrors] = useState(false);
   const navigate = useNavigate();
+  const { isMobile } = useExtaData();
 
   const onSubmit = handleSubmit(async (data) => {
     const formData = new FormData();
@@ -66,7 +68,9 @@ function NewPost() {
 
         <form
           onSubmit={onSubmit}
-          className="mx-10 grid grid-cols-2 gap-10 font-montserrat"
+          className={`grid ${
+            isMobile ? "grid-cols-1" : "grid-cols-2 mx-10"
+          } gap-10 font-montserrat`}
         >
           <div className="flex flex-col items-center gap-5">
             <div className="w-1/2">
@@ -129,7 +133,9 @@ function NewPost() {
               />
             </div>
           </div>
-          <div className="col-span-2 flex justify-center">
+          <div
+            className={`${isMobile ? "" : "col-span-2"} flex justify-center`}
+          >
             <motion.div className="w-72 flex" whileTap={{ scale: 0.95 }}>
               <div
                 to="#"

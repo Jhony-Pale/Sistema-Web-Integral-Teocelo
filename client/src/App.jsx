@@ -23,6 +23,9 @@ import { AnimatePresence } from "framer-motion";
 import NewPost from "./pages/NewPost";
 import ProtectedRolRoute from "./components/ProtectedRolRoute";
 import PostsPage from "./pages/PostsPage";
+import PostPage from "./pages/PostPage";
+import PostsEditPage from "./pages/PostsEditPage";
+import EditPost from "./pages/EditPost";
 
 function App() {
   const location = useLocation();
@@ -57,13 +60,16 @@ function App() {
           />
           {/* <Route path="/prueba" element={<Test />} /> */}
 
-            <Route element={<ProtectedRoute />}>
-              <Route element={<ProtectedRolRoute rolRoute="employee" />}>
-                <Route path="/add-post" element={<NewPost />} />
-              </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route element={<ProtectedRolRoute rolRoute="employee.sc" />}>
+              <Route path="/add-post" element={<NewPost />} />
+              <Route path="/posts/edit" element={<PostsEditPage />} />
+              <Route path="/posts/edit/:title" element={<EditPost />} />
             </Route>
+          </Route>
 
-            <Route path="/posts" element={<PostsPage />} />
+          <Route path="/posts" element={<PostsPage />} />
+          <Route path="/posts/:title" element={<PostPage />} />
         </Route>
         <Route path="/loginregister" element={<LoginRegisterPage />} />
         <Route path="*" element={<h1>Not found.</h1>} />
