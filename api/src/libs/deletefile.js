@@ -4,5 +4,9 @@ import { promisify } from "util"
 const unlinkAsync = promisify(fs.unlink)
 
 export const deletefile = async (file) => {
-  await unlinkAsync(file.path)
+  try{
+    await unlinkAsync(file.path)
+  }catch(error){
+    return false
+  }
 };

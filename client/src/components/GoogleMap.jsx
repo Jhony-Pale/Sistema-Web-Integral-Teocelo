@@ -3,7 +3,7 @@ import GoogleMapReact from "google-map-react";
 function GoogleMap() {
   const defaultProps = {
     center: {
-      lat: 19.38564,
+      lat: 19.38565,
       lng: -96.97316,
     },
     zoom: 19,

@@ -9,7 +9,7 @@ import {
 import { useExtaData } from "../context/ExtraDataContext";
 import { Link } from "react-router-dom";
 
-function ComponentPostEdit({ newComponent }) {
+function ComponentPostDelete({ newComponent, handleDelete }) {
   const { imageUrl } = useExtaData();
   const urlImage = imageUrl + newComponent.image;
 
@@ -21,6 +21,10 @@ function ComponentPostEdit({ newComponent }) {
     );
     return formattedDate;
   };
+
+  const handleClickDelete = (post) =>{
+    handleDelete(post)
+  }
 
   return (
     <div className="w-full h-full">
@@ -59,9 +63,9 @@ function ComponentPostEdit({ newComponent }) {
               >
                 Leer más
               </Link>
-              <Link to={"/posts/edit/" + newComponent.title} className="bg-[#6d1610] text-white rounded-2xl py-1 px-5 font-montserrat w-full lg:w-2/3 justify-self-end text-center">
-                Editar
-              </Link>
+              <button onClick={() => handleClickDelete(newComponent)} className="bg-[#6d1610] text-white rounded-2xl py-1 px-5 font-montserrat w-full lg:w-2/3 justify-self-end text-center">
+                Eliminar
+              </button>
             </div>
           </div>
         </CardFooter>
@@ -70,4 +74,4 @@ function ComponentPostEdit({ newComponent }) {
   );
 }
 
-export default ComponentPostEdit;
+export default ComponentPostDelete;

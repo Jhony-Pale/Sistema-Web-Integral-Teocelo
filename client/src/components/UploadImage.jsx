@@ -23,7 +23,7 @@ function UploadImage({ onChange, defaultImage }) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full flex justify-center">
       <motion.button
         whileTap={{ scale: 0.95 }}
         className="bg-[#EFEEEE] font-bold p-5 rounded-md shadow-md"

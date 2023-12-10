@@ -1,7 +1,7 @@
 import Post from "../models/post.model.js";
 import { deletefile } from "../libs/deletefile.js";
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
 export const createPost = async (req, res) => {
   const { title, type, body } = req.body;
@@ -62,8 +62,9 @@ export const updatePost = async (req, res) => {
       updates.image = image;
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = path.dirname(__filename);
-      const file = { path: path.join(__dirname, '../public/images/' + changedImage.image) };
-      console.log(file.path)
+      const file = {
+        path: path.join(__dirname, "../public/images/" + changedImage.image),
+      };
       deletefile(file);
     }
 
@@ -86,8 +87,18 @@ export const updatePost = async (req, res) => {
 
 export const deletePost = async (req, res) => {
   try {
-    const postFound = await Post.findOneAndDelete(req.params.id);
+    const post = await Post.findById(req.params.id);
+    const postFound = await Post.findByIdAndDelete(req.params.id);
     if (!postFound) return res.status(400).json(["Publicación no encontrada."]);
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const file = {
+      path: path.join(__dirname, "../public/images/" + post.image),
+    };
+    const result = deletefile(file);
+    if(!result) console.log("No se puedo eliminar la imagen")
+    
     return res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ message: error.message });

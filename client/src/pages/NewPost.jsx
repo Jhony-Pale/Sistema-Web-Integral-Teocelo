@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useExtaData } from "../context/ExtraDataContext";
+import DialogMessage from "../components/DialogMessage";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
@@ -18,25 +19,40 @@ function NewPost() {
     handleSubmit,
     control,
     formState: { errors },
+    setValue,
   } = useForm();
   const { createPost, errors: createPostErrors } = usePosts();
   const [collapseErrors, setCollapseErrors] = useState(false);
   const navigate = useNavigate();
   const { isMobile } = useExtaData();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen((prev) => !prev);
 
   const onSubmit = handleSubmit(async (data) => {
     const formData = new FormData();
 
     formData.append("image", data.image);
-    formData.append("title", data.title);
+    if (data.title.endsWith("."))
+      formData.append("title", data.title.slice(0, -1));
+    else formData.append("title", data.title);
     formData.append("type", data.type);
     formData.append("body", data.body);
 
     try {
       const responseData = await createPost(formData);
-      navigate("/posts");
+      if (responseData) handleOpen()
     } catch (error) {}
   });
+
+  const onOptionChange = (opc) => {
+    setValue("type", opc);
+  };
+
+  const handleAction = (opc) => {
+    handleOpen()
+    navigate("/posts");
+  }
 
   useEffect(() => {
     if (createPostErrors.length > 0) {
@@ -90,7 +106,11 @@ function NewPost() {
             <div className="w-1/2">
               <p className="font-bold text-xl">Tipo de contenido:</p>
               <div className={errors.type ? "-mb-5" : "mb-1"}>
-                <InputSelect options={options} register={register} />
+                <InputSelect
+                  options={options}
+                  register={register}
+                  onOptionChange={onOptionChange}
+                />
                 {errors.type && (
                   <p className="text-red-500">
                     Se requiere seleccionar un tipo
@@ -137,10 +157,7 @@ function NewPost() {
             className={`${isMobile ? "" : "col-span-2"} flex justify-center`}
           >
             <motion.div className="w-72 flex" whileTap={{ scale: 0.95 }}>
-              <div
-                to="#"
-                className="bg-white border-[#6d1610] border-2 p-1 rounded-full w-full"
-              >
+              <div className="bg-white border-[#6d1610] border-2 p-1 rounded-full w-full">
                 <button
                   className="bg-[#6d1610] text-white rounded-full font-montserrat text-3xl py-1 px-5 w-full"
                   type="submit"
@@ -152,6 +169,16 @@ function NewPost() {
           </div>
         </form>
       </div>
+
+      <DialogMessage
+        handleOpen={handleOpen}
+        open={open}
+        handleAction={handleAction}
+        buttonCancel={false}
+        title="Aviso"
+        message="¡Publicación agregada exitosamente!"
+      />
+
       <Footer />
     </div>
   );

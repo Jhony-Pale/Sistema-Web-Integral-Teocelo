@@ -4,6 +4,7 @@ import {
   getPostsRequest,
   getPostRequest,
   updatePostRequest,
+  deletePostRequest,
 } from "../api/post";
 
 const PostContext = createContext();
@@ -53,7 +54,16 @@ export function PostProvider({ children }) {
   const updatePost = async (id, post) => {
     try {
       const res = await updatePostRequest(id, post);
-      return res.data
+      return res.data;
+    } catch (error) {
+      setErrors(error.response.data);
+    }
+  };
+
+  const deletePost = async (id) => {
+    try {
+      const res = await deletePostRequest(id);
+      return res.status
     } catch (error) {
       setErrors(error.response.data);
     }
@@ -78,6 +88,7 @@ export function PostProvider({ children }) {
         getPosts,
         getPost,
         updatePost,
+        deletePost,
       }}
     >
       {children}

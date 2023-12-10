@@ -26,6 +26,7 @@ import PostsPage from "./pages/PostsPage";
 import PostPage from "./pages/PostPage";
 import PostsEditPage from "./pages/PostsEditPage";
 import EditPost from "./pages/EditPost";
+import DeletePost from "./pages/DeletePost";
 
 function App() {
   const location = useLocation();
@@ -65,6 +66,7 @@ function App() {
               <Route path="/add-post" element={<NewPost />} />
               <Route path="/posts/edit" element={<PostsEditPage />} />
               <Route path="/posts/edit/:title" element={<EditPost />} />
+              <Route path="/posts/delete" element={<DeletePost />} />
             </Route>
           </Route>
 

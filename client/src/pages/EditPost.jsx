@@ -9,6 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import UploadImage from "../components/UploadImage";
 import { Collapse } from "@material-tailwind/react";
+import DialogMessage from "../components/DialogMessage";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
@@ -27,6 +28,9 @@ function EditPost() {
   const navigate = useNavigate();
   const [imageRequired, setImageRequired] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen((prev) => !prev);
 
   useEffect(() => {
     async function asssingValues() {
@@ -51,7 +55,7 @@ function EditPost() {
 
     try {
       const responseData = await updatePost(post._id, formData);
-      if (!updatePostErrors) navigate("/posts/edit");
+      if (responseData) handleOpen()
     } catch (error) {}
   });
 
@@ -63,6 +67,11 @@ function EditPost() {
   const onOptionChange = (op) => {
     setValue("type", op);
   };
+
+  const handleAction = (opc) => {
+    handleOpen()
+    navigate("/posts/edit");
+  }
 
   useEffect(() => {
     if (updatePostErrors.length > 0) {
@@ -201,6 +210,14 @@ function EditPost() {
           )}
         </>
       )}
+      <DialogMessage
+        handleOpen={handleOpen}
+        open={open}
+        handleAction={handleAction}
+        buttonCancel={false}
+        title="Aviso"
+        message="¡Publicación editada exitosamente!"
+      />
       <Footer />
     </div>
   );

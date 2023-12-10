@@ -47,6 +47,6 @@ router.put(
   validateSchema(updatePostSchema),
   updatePost
 );
-router.delete("/posts/:id", authRequired, deletePost);
+router.delete("/posts/:id", authRequired, validateRol("employee.sc"), deletePost);
 
 export default router;

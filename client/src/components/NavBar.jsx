@@ -412,7 +412,10 @@ function NavBar() {
                             Editar una publicación
                           </p>
                         </Link>
-                        <div className="basis-1/2 flex items-center gap-2 mt-10">
+                        <Link
+                          to="/posts/delete"
+                          className="basis-1/2 flex items-center gap-2 mt-10"
+                        >
                           <div className="rounded-full bg-[#6D1610] max-h-[5em] max-w-[5em] lg:max-h-[7em] lg:max-w-[7em]">
                             <img
                               src={IconoBorrarP}
@@ -423,7 +426,7 @@ function NavBar() {
                           <p className="font-extrabold text-xl lg:text-2xl text-black">
                             Eliminar una publicación
                           </p>
-                        </div>
+                        </Link>
                       </div>
                       <div
                         className={`flex flex-col items-center ${

@@ -53,7 +53,7 @@ function CarouselImages() {
           className="tranform scale-[0.4] lg:scale-100 ml-[-50px] lg:ml-0"
         />
       </div>
-      {newsCom.length === 0 ? (
+      {posts.length === 0 ? (
         <div>No hay publicaciones.</div>
       ) : (
         <Carousel autoplay={false} loop={true} className="z-0">
