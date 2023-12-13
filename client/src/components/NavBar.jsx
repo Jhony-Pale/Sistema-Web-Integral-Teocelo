@@ -27,6 +27,7 @@ import { motion } from "framer-motion";
 import SCOptions from "./SCOptions";
 import CitizenOptions from "./CitizenOptions";
 import DefaultOptions from "./DefaultOptions";
+import SLOptions from "./SLOptions";
 
 function NavBar() {
   const { register } = useForm();
@@ -377,6 +378,14 @@ function NavBar() {
                   {user.rol === "employee.sc" && (
                     <>
                       <SCOptions
+                        handleLogout={handleLogout}
+                        userName={user.firstname + " " + user.lastname}
+                      />
+                    </>
+                  )}
+                  {user.rol === "employee.sl" && (
+                    <>
+                      <SLOptions
                         handleLogout={handleLogout}
                         userName={user.firstname + " " + user.lastname}
                       />

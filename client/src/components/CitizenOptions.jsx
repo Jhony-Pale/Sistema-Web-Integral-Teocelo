@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useExtaData } from "../context/ExtraDataContext";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
 import IconoQuejas from "../assets/Icons/IconoQuejas.png";
-import "./IconUserLogin.css";
+import "../styles/IconUserLogin.css";
 
 function CitizenOptions({ handleLogout, userName }) {
   const { isMobile } = useExtaData();

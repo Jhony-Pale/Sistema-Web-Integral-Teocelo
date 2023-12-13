@@ -27,6 +27,8 @@ import PostPage from "./pages/PostPage";
 import PostsEditPage from "./pages/PostsEditPage";
 import EditPost from "./pages/EditPost";
 import DeletePost from "./pages/DeletePost";
+import SLRequestsPage from "./pages/SLRequestsPage";
+import SLReportsPage from "./pages/SLReportsPage";
 
 function App() {
   const location = useLocation();
@@ -67,6 +69,10 @@ function App() {
               <Route path="/posts/edit" element={<PostsEditPage />} />
               <Route path="/posts/edit/:title" element={<EditPost />} />
               <Route path="/posts/delete" element={<DeletePost />} />
+            </Route>
+            <Route element={<ProtectedRolRoute rolRoute="employee.sl" />}>
+              <Route path="/sl-requests" element={<SLRequestsPage />} />
+              <Route path="/sl-reports" element={<SLReportsPage />} />
             </Route>
           </Route>
 

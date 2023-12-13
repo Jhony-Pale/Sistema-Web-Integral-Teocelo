@@ -8,9 +8,11 @@ export const createPostSchema = z.object({
     .min(6, {
       message: "El título debe tener al menos 6 caracteres.",
     }),
-  type: z.string({
-    required_error: "Se requiere seleccionar un tipo.",
-  }),
+  type: z
+    .literal("Noticia")
+    .or(z.literal("Comunicado"))
+    .or(z.literal("Convocatoria"))
+    .default("Noticia"),
   body: z
     .string({
       required_error: "El cuerpo de la publicación es requerido.",
