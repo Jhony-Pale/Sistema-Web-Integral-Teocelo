@@ -56,7 +56,7 @@ function CarouselImages() {
       {posts.length === 0 ? (
         <div>No hay publicaciones.</div>
       ) : (
-        <Carousel autoplay={false} loop={true} className="z-0">
+        <Carousel autoplay={true} loop={true} className="z-0">
           {organizedNews.map((group, groupIndex) => (
             <div key={groupIndex} className={`flex h-full w-full px-4 mb-5`}>
               {group.map((new_, index) => (

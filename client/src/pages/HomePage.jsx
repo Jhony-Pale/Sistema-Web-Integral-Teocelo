@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import CarouselImages from "../components/CarouselImages";
 import CarouselNews from "../components/CarouselNews";
-import Directors from "../components/Directors";
 import Footer from "../components/Footer";
 import NumbersReports from "../components/NumbersReports";
 import ServicesAnnouncement from "../components/ServicesAnnouncement";
@@ -19,7 +18,6 @@ function HomePage() {
       <CarouselImages />
       <CarouselNews />
       <ServicesAnnouncement />
-      <Directors />
       <NumbersReports />
       <Footer />
     </div>

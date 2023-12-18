@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { useExtaData } from "../context/ExtraDataContext";
 import { Link } from "react-router-dom";
+import IconoVerMas from "../assets/Icons/IconoVerMas.png";
 
 function ComponentNew({ newComponent }) {
   const { imageUrl, isMobile } = useExtaData();
@@ -25,15 +26,15 @@ function ComponentNew({ newComponent }) {
   return (
     <div className="w-full h-full bg-white rounded-2xl">
       {newComponent.position ? (
-        <Card className="h-full">
-          <CardBody className="">
+        <Card className="max-h-[30rem] min-h-[30rem]">
+          <CardBody className="flex justify-center items-center">
             <Typography
               variant="h5"
               color="blue-gray"
               className="mb-2 font-montserrat text-[#494848] text-base lg:text-xl"
             >
               <Link to="/posts">
-              Ver más
+                <img src={IconoVerMas} alt="Icono para ver más publicaciones" className="h-[25rem]" />
               </Link>
             </Typography>
           </CardBody>

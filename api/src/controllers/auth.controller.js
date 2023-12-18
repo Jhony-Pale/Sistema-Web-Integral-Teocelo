@@ -1,15 +1,19 @@
-import User from "../models/user.model.js";
-import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt.js";
-import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
+import Lamp from "../models/lamp.model.js"
 
 export const register = async (req, res) => {
   const { firstname, lastname, rol, email, password } = req.body;
 
   try {
     const userFound = await User.findOne({ email });
-    if (userFound) return res.status(400).json(["El correo electrónico ya fue registrado anteriormente."]);
+    if (userFound)
+      return res
+        .status(400)
+        .json(["El correo electrónico ya fue registrado anteriormente."]);
 
     const passwordHash = await bcrypt.hash(password, 10);
     const newUser = new User({
@@ -49,7 +53,8 @@ export const login = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, userFound.password);
 
-    if (!isMatch) return res.status(400).json(["¡Usuario o contraseña incorrectos!"]);
+    if (!isMatch)
+      return res.status(400).json(["¡Usuario o contraseña incorrectos!"]);
 
     const token = await createAccessToken({ id: userFound._id });
 
@@ -74,19 +79,18 @@ export const logout = (req, res) => {
 };
 
 export const profile = async (req, res) => {
-  const userFound = await User.findById(req.user.id);
+  try {
+    const lamps = await Lamp.find().where("user", req.user.id);
+    /* const waters = await Lamp.find().where("user", req.user.id);
+    const ambients = await Lamp.find().where("user", req.user.id); */
 
-  if (!userFound) return res.status(400).json(["User not found"]);
+    /* const allRequests = [...lamps, ...waters, ...ambients];
+    const sortedRequests = allRequests.sort((a, b) => b.createdAt - a.createdAt); */
 
-  return res.json({
-    id: userFound._id,
-    firstname: userFound.firstname,
-    lastame: userFound.lastname,
-    rol: userFound.rol,
-    email: userFound.email,
-    createdAt: userFound.createdAt,
-    updatedAt: userFound.updatedAt,
-  });
+    return res.json();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const verifyToken = async (req, res) => {

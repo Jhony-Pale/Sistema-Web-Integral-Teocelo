@@ -6,7 +6,7 @@ import ReportHomeForm from "./ReportHomeForm";
 
 function NumbersReports() {
   return (
-    <div className="grid grid-cols-2 px-4">
+    <div className="grid grid-cols-2 px-4 mt-16">
       <div>
         <div className="font-extrabold text-center text-4xl pt-5 pb-20">
           NUMEROS DE EMERGENCIA

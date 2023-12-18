@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import postRoutes from "./routes/post.routes.js";
+import lampRoutes from "./routes/lamp.routes.js";
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -26,5 +27,6 @@ app.use('/public', express.static(join(__dirname, 'public')));
 
 app.use("/api", authRoutes);
 app.use("/api", postRoutes);
+app.use("/api", lampRoutes);
 
 export default app;
