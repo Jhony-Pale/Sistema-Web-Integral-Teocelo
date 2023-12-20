@@ -1,5 +1,4 @@
 import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
 import CabildoMobile from "../components/CabildoMobile";
 import CabildoPC from "../components/CabildoPC";
 
@@ -14,7 +13,6 @@ function HCabildo() {
         </div>
         {isMobile ? <CabildoMobile /> : <CabildoPC />}
       </div>
-      <Footer />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
 import PDFViewer from "../components/PDFViewer";
 import EvaluationPDF from "../assets/PDFs/Evaluación de Desempeño FORTAMUN VF _TRANSPARENCIA.pdf";
 
@@ -16,7 +15,6 @@ function FORTAMUNEvaluationPage() {
           <PDFViewer document={EvaluationPDF} scale={scalePDF} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

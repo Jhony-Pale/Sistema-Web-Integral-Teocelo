@@ -1,5 +1,4 @@
 import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
 import PDFViewer from "../components/PDFViewer";
 import PAETeoceloPDF from "../assets/PDFs/PAE-2023-Teocelo.pdf";
 
@@ -16,7 +15,6 @@ function PAETeoceloPage() {
           <PDFViewer document={PAETeoceloPDF} scale={scalePDF} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

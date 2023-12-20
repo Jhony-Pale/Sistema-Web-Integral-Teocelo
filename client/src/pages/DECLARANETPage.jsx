@@ -1,5 +1,4 @@
 import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
 import PDFViewer from "../components/PDFViewer";
 import ConvenioPDF from "../assets/PDFs/CONVENIO-DECLARANET.pdf";
 
@@ -28,7 +27,6 @@ function DECLARANETPage() {
           <PDFViewer document={ConvenioPDF} scale={scalePDF} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

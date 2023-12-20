@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { usePosts } from "../context/PostContext";
+import { usePosts } from "../../context/PostContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
-import AlertMessage from "../components/AlertMessage";
-import InputSelect from "../components/InputSelect";
+import { useExtaData } from "../../context/ExtraDataContext";
+import AlertMessage from "../../components/AlertMessage";
+import InputSelect from "../../components/InputSelect";
 import { Controller, useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import UploadImage from "../components/UploadImage";
+import UploadImage from "../../components/UploadImage";
 import { Collapse } from "@material-tailwind/react";
-import DialogMessage from "../components/DialogMessage";
+import DialogMessage from "../../components/DialogMessage";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
@@ -55,7 +54,7 @@ function EditPost() {
 
     try {
       const responseData = await updatePost(post._id, formData);
-      if (responseData) handleOpen()
+      if (responseData) handleOpen();
     } catch (error) {}
   });
 
@@ -69,9 +68,9 @@ function EditPost() {
   };
 
   const handleAction = (opc) => {
-    handleOpen()
+    handleOpen();
     navigate("/posts/edit");
-  }
+  };
 
   useEffect(() => {
     if (updatePostErrors.length > 0) {
@@ -218,7 +217,6 @@ function EditPost() {
         title="Aviso"
         message="¡Publicación editada exitosamente!"
       />
-      <Footer />
     </div>
   );
 }

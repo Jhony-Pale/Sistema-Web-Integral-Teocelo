@@ -1,6 +1,5 @@
 import { useExtaData } from "../context/ExtraDataContext";
 import PDFViewer from "../components/PDFViewer";
-import Footer from "../components/Footer";
 import CodigoEtica from "../assets/PDFs/Codigo de Etica_0001.pdf";
 
 function CodesEthicsPage() {
@@ -16,7 +15,6 @@ function CodesEthicsPage() {
           <PDFViewer document={CodigoEtica} scale={scalePDF} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

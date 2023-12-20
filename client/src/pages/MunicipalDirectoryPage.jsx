@@ -3,8 +3,7 @@ import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../context/ExtraDataContext";
 import { LuSearch } from "react-icons/lu";
 import { FiAlertCircle } from "react-icons/fi";
-import Footer from "../components/Footer";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function MunicipalDirectoryPage() {
   const { isMobile } = useExtaData();
@@ -476,7 +475,6 @@ function MunicipalDirectoryPage() {
             )}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

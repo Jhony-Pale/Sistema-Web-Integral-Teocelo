@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { usePosts } from "../context/PostContext";
 import { AnimatePresence, motion } from "framer-motion";
-import Footer from "../components/Footer";
 import InputSelect from "../components/InputSelect";
 import { FiAlertCircle } from "react-icons/fi";
 import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../context/ExtraDataContext";
-import ComponentPostEdit from "../components/ComponentPostEdit";
 import ComponentNew from "../components/ComponentNew";
 
 const options = ["Todo", "Noticias", "Comunicados", "Convocatorias"];
@@ -91,7 +89,6 @@ function PostsPage() {
           </AnimatePresence>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -1,10 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import ReactDOM from "react-dom";
 
-function InputSelect({ options, register, onOptionChange, defaultValue, style }) {
+function InputSelect({
+  options,
+  register,
+  registerName,
+  onOptionChange,
+  defaultValue,
+  style,
+  object,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(defaultValue ?? options[0]);
+  const [selectedOption, setSelectedOption] = useState(
+    defaultValue ?? options[0]
+  );
   const selectRef = useRef(null);
 
   const handleToggle = () => {
@@ -14,7 +25,7 @@ function InputSelect({ options, register, onOptionChange, defaultValue, style })
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
-    if(onOptionChange) onOptionChange(option);
+    if (onOptionChange) onOptionChange(option, object || null);
   };
   const handleClickOutside = (event) => {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -33,16 +44,21 @@ function InputSelect({ options, register, onOptionChange, defaultValue, style })
     <div ref={selectRef} className="w-full">
       <div className="relative font-montserrat shadow" onClick={handleToggle}>
         <input
-          className={`border border-black w-full text-start py-1 px-3 cursor-pointer block ${style ? style : null}`}
+          className={`border border-black w-full text-start py-1 px-3 cursor-pointer block ${
+            style ? style : null
+          }`}
           value={selectedOption}
-          {...register? {...register("type", { required: true })} : ""}
+          {...(register
+            ? { ...register(registerName ?? "type", { required: true }) }
+            : "")}
           readOnly
         />
         <MdKeyboardArrowDown
-          className="absolute inset-y-[20%] right-0 mr-1"
+          className="absolute inset-y-[20%] right-0 mr-1 cursor-pointer"
           size="1.5em"
         />
       </div>
+
       <div className="w-full relative z-50">
         <AnimatePresence>
           {isOpen && (

@@ -1,5 +1,4 @@
 import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
 import PDFViewer from "../components/PDFViewer";
 import PMDTeoceloPDF from "../assets/PDFs/PMD-Teocelo-2022-2025.pdf";
 
@@ -16,7 +15,6 @@ function PMDTeoceloPage() {
           <PDFViewer document={PMDTeoceloPDF} scale={scalePDF} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

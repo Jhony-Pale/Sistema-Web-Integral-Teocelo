@@ -7,6 +7,7 @@ import { ExtraDataContextProvider } from "./context/ExtraDataContext";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { PostProvider } from "./context/PostContext.jsx";
+import { LampProvider } from "./context/LampContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -14,9 +15,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ExtraDataContextProvider>
         <AuthProvider>
           <PostProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
+            <LampProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </LampProvider>
           </PostProvider>
         </AuthProvider>
       </ExtraDataContextProvider>

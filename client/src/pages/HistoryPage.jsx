@@ -3,7 +3,6 @@ import HistoriaTAC from "../assets/Photos/HistoriaTAC.jpg";
 import HistoriaTAI from "../assets/Photos/HistoriaTAI.jpg";
 import HistoriaTAP from "../assets/Photos/HistoriaTAP.jpg";
 import { useEffect, useState } from "react";
-import Footer from "../components/Footer";
 
 function HistoryPage() {
   const smallImages = [
@@ -174,7 +173,6 @@ function HistoryPage() {
           </div>
         </article>
       </div>
-      <Footer />
     </div>
   );
 }

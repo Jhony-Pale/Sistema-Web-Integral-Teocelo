@@ -1,5 +1,4 @@
 import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.svg";
-import Footer from "../components/Footer";
 
 function CoatArmsPage() {
   return (
@@ -67,7 +66,6 @@ function CoatArmsPage() {
           </div>
         </article>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -32,7 +32,7 @@ function CitizenOptions({ handleLogout, userName }) {
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Conexión de agua o drenaje</p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/lamp-request">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Instalación de una lámpara</p>
         </Link>
@@ -71,7 +71,7 @@ function CitizenOptions({ handleLogout, userName }) {
             Tubería de agua o drenaje dañada
           </p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/lamp-report">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Luminaria descompuesta</p>
         </Link>

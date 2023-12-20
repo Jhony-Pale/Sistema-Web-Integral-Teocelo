@@ -17,18 +17,19 @@ import PMDTeoceloPage from "./pages/PMDTeoceloPage";
 import PAETeoceloPage from "./pages/PAETeoceloPage";
 import FISMEvaluationPage from "./pages/FISMEvaluationPage";
 import FORTAMUNEvaluationPage from "./pages/FORTAMUNEvaluationPage";
-import Test from "./pages/Test";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AnimatePresence } from "framer-motion";
-import NewPost from "./pages/NewPost";
+import NewPost from "./pages/employee.sc/NewPost";
 import ProtectedRolRoute from "./components/ProtectedRolRoute";
 import PostsPage from "./pages/PostsPage";
 import PostPage from "./pages/PostPage";
-import PostsEditPage from "./pages/PostsEditPage";
-import EditPost from "./pages/EditPost";
-import DeletePost from "./pages/DeletePost";
-import SLRequestsPage from "./pages/SLRequestsPage";
-import SLReportsPage from "./pages/SLReportsPage";
+import PostsEditPage from "./pages/employee.sc/PostsEditPage";
+import EditPost from "./pages/employee.sc/EditPost";
+import DeletePost from "./pages/employee.sc/DeletePost";
+import SLRequestsPage from "./pages/employee.sl/SLRequestsPage";
+import SLReportsPage from "./pages/employee.sl/SLReportsPage";
+import LampFormsPage from "./pages/citizen/LampFormsPage";
+import PerfilePage from "./pages/citizen/PerfilePage";
 
 function App() {
   const location = useLocation();
@@ -61,7 +62,6 @@ function App() {
             path="/fortamun-evaluation"
             element={<FORTAMUNEvaluationPage />}
           />
-          {/* <Route path="/prueba" element={<Test />} /> */}
 
           <Route element={<ProtectedRoute />}>
             <Route element={<ProtectedRolRoute rolRoute="employee.sc" />}>
@@ -73,6 +73,11 @@ function App() {
             <Route element={<ProtectedRolRoute rolRoute="employee.sl" />}>
               <Route path="/sl-requests" element={<SLRequestsPage />} />
               <Route path="/sl-reports" element={<SLReportsPage />} />
+            </Route>
+            <Route element={<ProtectedRolRoute rolRoute="citizen" />}>
+              <Route path="/lamp-request" element={<LampFormsPage type="request" />} />
+              <Route path="/lamp-report" element={<LampFormsPage type="report" />} />
+              <Route path="/perfile" element={<PerfilePage />} />
             </Route>
           </Route>
 

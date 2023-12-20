@@ -12,12 +12,10 @@ import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaCircleXmark, FaXmark } from "react-icons/fa6";
 import { BiMenu } from "react-icons/bi";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useExtaData } from "../context/ExtraDataContext";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
-import IconoConstancias from "../assets/Icons/IconoConstancias.png";
-import IconoQuejas from "../assets/Icons/IconoQuejas.png";
 import IconoX from "../assets/Icons/IconoX.png";
 import BtnMeGustaria from "../assets/Extras/BtnMeGustaria.png";
 import NavBarOptions from "./NavBarOptions";
@@ -28,6 +26,7 @@ import SCOptions from "./SCOptions";
 import CitizenOptions from "./CitizenOptions";
 import DefaultOptions from "./DefaultOptions";
 import SLOptions from "./SLOptions";
+import Footer from "./Footer";
 
 function NavBar() {
   const { register } = useForm();
@@ -425,6 +424,7 @@ function NavBar() {
           transition={{ duration: 0.5 }}
         >
           <Outlet />
+          <Footer />
         </motion.div>
       </div>
     </div>

@@ -1,4 +1,3 @@
-import Footer from "../components/Footer";
 import PalacioNueva from "../assets/Photos/PalacioNueva.jpg";
 import IconoPalomita from "../assets/Icons/IconoPalomita.png";
 
@@ -161,7 +160,6 @@ function MissionVisionPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

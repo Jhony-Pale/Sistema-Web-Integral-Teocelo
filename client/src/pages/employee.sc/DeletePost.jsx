@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { usePosts } from "../context/PostContext";
+import { usePosts } from "../../context/PostContext";
 import { AnimatePresence, motion } from "framer-motion";
-import Footer from "../components/Footer";
-import InputSelect from "../components/InputSelect";
+import InputSelect from "../../components/InputSelect";
 import { FiAlertCircle } from "react-icons/fi";
 import { Alert } from "@material-tailwind/react";
-import { useExtaData } from "../context/ExtraDataContext";
-import ComponentPostDelete from "../components/ComponentPostDelete";
-import DialogMessage from "../components/DialogMessage";
+import { useExtaData } from "../../context/ExtraDataContext";
+import ComponentPostDelete from "../../components/ComponentPostDelete";
+import DialogMessage from "../../components/DialogMessage";
 
 const options = ["Todo", "Noticias", "Comunicados", "Convocatorias"];
 
@@ -140,7 +139,6 @@ function DeletePost() {
         message="¡Publicación eliminada exitosamente!"
       />
 
-      <Footer />
     </div>
   );
 }

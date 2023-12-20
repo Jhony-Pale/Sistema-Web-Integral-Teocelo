@@ -1,4 +1,5 @@
 import Lamp from "../models/lamp.model.js";
+import User from "../models/user.model.js"
 
 export const createLampRequests = async (req, res) => {
   const { street, number, colony, town, commentsCitizen } = req.body;
@@ -99,7 +100,9 @@ export const updateLamp = async (req, res) => {
 
 export const getLampReports = async (req, res) => {
   try {
-    const lamps = await Lamp.find().where("type", "report").sort({ createdAt: "desc" });
+    const lamps = await Lamp.find()
+      .where("type", "report")
+      .sort({ createdAt: "desc" });
     res.json(lamps);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -108,7 +111,13 @@ export const getLampReports = async (req, res) => {
 
 export const getLampRequests = async (req, res) => {
   try {
-    const lamps = await Lamp.find().where("type", "request").sort({ createdAt: "desc" });
+    const lamps = await Lamp.find()
+      .where("type", "request")
+      .sort({ createdAt: "desc" })
+      .populate({
+        path: "user",
+        select: "firstname lastname",
+      });
     res.json(lamps);
   } catch (error) {
     res.status(500).json({ message: error.message });

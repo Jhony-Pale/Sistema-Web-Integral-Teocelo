@@ -1,15 +1,14 @@
 import { Controller, useForm } from "react-hook-form";
-import InputSelect from "../components/InputSelect";
-import Footer from "../components/Footer";
-import UploadImage from "../components/UploadImage";
+import InputSelect from "../../components/InputSelect";
+import UploadImage from "../../components/UploadImage";
 import { motion } from "framer-motion";
-import { usePosts } from "../context/PostContext";
-import AlertMessage from "../components/AlertMessage";
+import { usePosts } from "../../context/PostContext";
+import AlertMessage from "../../components/AlertMessage";
 import { useEffect, useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
-import { useExtaData } from "../context/ExtraDataContext";
-import DialogMessage from "../components/DialogMessage";
+import { useExtaData } from "../../context/ExtraDataContext";
+import DialogMessage from "../../components/DialogMessage";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
@@ -179,7 +178,6 @@ function NewPost() {
         message="¡Publicación agregada exitosamente!"
       />
 
-      <Footer />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
 import PDFViewer from "../components/PDFViewer";
 import VersionPublicaPDF from "../assets/PDFs/VERSION PUBLICA.pdf";
 
@@ -31,7 +30,6 @@ function CircumstantialActPage() {
             <PDFViewer document={VersionPublicaPDF} scale={scalePDF} />
           </div>
       </div>
-      <Footer />
     </div>
   );
 }

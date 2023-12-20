@@ -1,4 +1,3 @@
-import Footer from "../components/Footer";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png"
 
 function HistoricalEventsPage() {
@@ -467,7 +466,6 @@ function HistoricalEventsPage() {
         <img src={LogoHorizontal} alt="Logo de Teocelo - Horizontal" className="w-1/2 lg:w-1/4" />
         <p className="font-serif font-bold text-3xl lg:text-6xl text-[#6D1610] mt-3">MUNICIPIO CON HISTORIA</p>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useExtaData } from "../context/ExtraDataContext";
 import PDFViewer from "../components/PDFViewer";
-import Footer from "../components/Footer";
 import CodigoConducta from "../assets/PDFs/Codigo de Conducta_0001.pdf";
 
 function CodesConductPage() {
@@ -16,7 +15,6 @@ function CodesConductPage() {
           <PDFViewer document={CodigoConducta} scale={scalePDF} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

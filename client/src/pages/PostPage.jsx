@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { usePosts } from "../context/PostContext";
 import { useParams } from "react-router-dom";
 import { useExtaData } from "../context/ExtraDataContext";
-import Footer from "../components/Footer";
 
 function PostPage() {
   const { getPost, post } = usePosts();
@@ -43,7 +42,6 @@ function PostPage() {
       ) : (
         <div>No se encontro la publicación.</div>
       )}
-      <Footer />
     </div>
   );
 }
