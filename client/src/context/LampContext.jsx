@@ -20,7 +20,8 @@ export const useLamps = () => {
 };
 
 export function LampProvider({ children }) {
-  const [lamps, setLamps] = useState([]);
+  const [lampsRequest, setLampsRequest] = useState([]);
+  const [lampsReport, setLampsReport] = useState([]);
   const [errors, setErrors] = useState([]);
 
   const createLampRequest = async (post) => {
@@ -44,7 +45,7 @@ export function LampProvider({ children }) {
   const getLampReports = async () => {
     try {
       const res = await getLampReportsRequest();
-      setLamps(res.data);
+      setLampsReport(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +54,7 @@ export function LampProvider({ children }) {
   const getLampRequests = async () => {
     try {
       const res = await getLampRequestsRequest();
-      setLamps(res.data);
+      setLampsRequest(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +79,8 @@ export function LampProvider({ children }) {
   }, [errors]);
 
   return <LampContext.Provider value={{
-    lamps,
+    lampsReport,
+    lampsRequest,
     errors,
     createLampReport,
     createLampRequest,

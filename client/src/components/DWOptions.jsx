@@ -1,11 +1,11 @@
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useExtaData } from "../context/ExtraDataContext";
 import IconoReportes from "../assets/Icons/IconoReportes.png";
 import IconoSolicitudes from "../assets/Icons/IconoSolicitudes.png";
 import "../styles/IconUserLogin.css";
-import { useExtaData } from "../context/ExtraDataContext";
 
-function SLOptions({ handleLogout, userName }) {
+function DWOptions({ handleLogout, userName }) {
   const { isMobile } = useExtaData();
   const handleLogoutClick = () => {
     handleLogout();
@@ -15,7 +15,7 @@ function SLOptions({ handleLogout, userName }) {
     <div className={`grid ${isMobile ? "grid-cols-2" : "grid-cols-3"} mb-10`}>
       <div className="col-span-2 flex flex-wrap items-start gap-y-5">
         <Link
-          to="/sl-requests"
+          to="/dw-requests"
           className="lg:basis-1/2 flex items-center gap-2"
         >
           <div className="relative">
@@ -30,7 +30,7 @@ function SLOptions({ handleLogout, userName }) {
             Solicitudes
           </p>
         </Link>
-        <Link to="/sl-reports" className="lg:basis-1/2 flex items-center gap-2">
+        <Link to="/dw-reports" className="lg:basis-1/2 flex items-center gap-2">
           <div className="relative">
             <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
             <img
@@ -74,4 +74,4 @@ function SLOptions({ handleLogout, userName }) {
   );
 }
 
-export default SLOptions;
+export default DWOptions;

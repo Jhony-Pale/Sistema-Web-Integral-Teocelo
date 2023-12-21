@@ -28,7 +28,7 @@ function CitizenOptions({ handleLogout, userName }) {
           </div>
           <p className="font-extrabold text-xl lg:text-2xl">Solicitar</p>
         </div>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/water-request">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Conexión de agua o drenaje</p>
         </Link>
@@ -65,7 +65,7 @@ function CitizenOptions({ handleLogout, userName }) {
           </div>
           <p className="font-extrabold text-xl lg:text-2xl">Reportar</p>
         </div>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/water-report">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">
             Tubería de agua o drenaje dañada

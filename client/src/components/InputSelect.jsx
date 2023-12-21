@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import ReactDOM from "react-dom";
 
 function InputSelect({
   options,
@@ -10,6 +9,7 @@ function InputSelect({
   onOptionChange,
   defaultValue,
   style,
+  styleArrow,
   object,
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,10 @@ function InputSelect({
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
-    if (onOptionChange) onOptionChange(option, object || null);
+    if (onOptionChange) {
+      if(object) onOptionChange(option, object);
+      else onOptionChange(option);
+    }
   };
   const handleClickOutside = (event) => {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -54,7 +57,7 @@ function InputSelect({
           readOnly
         />
         <MdKeyboardArrowDown
-          className="absolute inset-y-[20%] right-0 mr-1 cursor-pointer"
+          className={`absolute ${styleArrow ?? "inset-y-[20%]" } right-0 mr-1 cursor-pointer`}
           size="1.5em"
         />
       </div>

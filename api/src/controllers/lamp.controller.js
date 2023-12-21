@@ -102,7 +102,11 @@ export const getLampReports = async (req, res) => {
   try {
     const lamps = await Lamp.find()
       .where("type", "report")
-      .sort({ createdAt: "desc" });
+      .sort({ createdAt: "desc" })
+      .populate({
+        path: "user",
+        select: "firstname lastname",
+      });
     res.json(lamps);
   } catch (error) {
     res.status(500).json({ message: error.message });

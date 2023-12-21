@@ -30,6 +30,9 @@ import SLRequestsPage from "./pages/employee.sl/SLRequestsPage";
 import SLReportsPage from "./pages/employee.sl/SLReportsPage";
 import LampFormsPage from "./pages/citizen/LampFormsPage";
 import PerfilePage from "./pages/citizen/PerfilePage";
+import WaterFormsPage from "./pages/citizen/WaterFormsPage";
+import DWRequestsPage from "./pages/employee.dw/DWRequestsPage";
+import DWReportsPage from "./pages/employee.dw/DWReportsPage";
 
 function App() {
   const location = useLocation();
@@ -74,9 +77,15 @@ function App() {
               <Route path="/sl-requests" element={<SLRequestsPage />} />
               <Route path="/sl-reports" element={<SLReportsPage />} />
             </Route>
+            <Route element={<ProtectedRolRoute rolRoute="employee.dw" />}>
+              <Route path="/dw-requests" element={<DWRequestsPage />} />
+              <Route path="/dw-reports" element={<DWReportsPage />} />
+            </Route>
             <Route element={<ProtectedRolRoute rolRoute="citizen" />}>
               <Route path="/lamp-request" element={<LampFormsPage type="request" />} />
               <Route path="/lamp-report" element={<LampFormsPage type="report" />} />
+              <Route path="/water-request" element={<WaterFormsPage type="request" />} />
+              <Route path="/water-report" element={<WaterFormsPage type="report" />} />
               <Route path="/perfile" element={<PerfilePage />} />
             </Route>
           </Route>

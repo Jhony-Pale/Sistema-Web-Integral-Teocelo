@@ -62,7 +62,7 @@ function PostsEditPage() {
                       <motion.div
                         key={i}
                         className={`${
-                          isMobile ? "basis-[40%]" : "basis-[30%]"
+                          isMobile ? "w-[40%]" : "w-[30%]"
                         } h-[35rem]`}
                         layout
                         initial={{ scale: 0.8, opacity: 0 }}

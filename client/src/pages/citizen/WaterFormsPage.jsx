@@ -2,18 +2,23 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { motion } from "framer-motion";
 import { useExtaData } from "../../context/ExtraDataContext";
-import { useLamps } from "../../context/LampContext";
 import { useNavigate } from "react-router-dom";
 import { Collapse } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
+import { useWater } from "../../context/WaterContext";
 import InputSelect from "../../components/InputSelect";
 
-const options = ["LED", "Antigua", "Cucharón"];
+const options = ["Drenaje", "Agua Potable"];
 
-function LampFormsPage({ type }) {
+function WaterFormsPage({ type }) {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { isMobile } = useExtaData();
-  const { createLampRequest, createLampReport, errors: createLampErrors } = useLamps();
+  const {
+    createWaterRequest,
+    createWaterReport,
+    errors: createWaterErrors,
+  } = useWater();
   const [collapseErrors, setCollapseErrors] = useState(false);
   const {
     register,
@@ -21,24 +26,23 @@ function LampFormsPage({ type }) {
     setValue,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
     if (type === "request") {
-      const res = await createLampRequest(data);
+      const res = await createWaterRequest(data);
       if (res) navigate("/perfile");
     } else {
-      const res = await createLampReport(data);
+      const res = await createWaterReport(data);
       if (res) navigate("/perfile");
     }
   });
 
   const onOptionChange = (op) => {
-    setValue("typeLamp", op);
+    setValue("typeConecton", op);
   };
 
   useEffect(() => {
-    if (createLampErrors.length > 0) {
+    if (createWaterErrors.length > 0) {
       setCollapseErrors(true);
 
       const timer = setTimeout(() => {
@@ -47,21 +51,21 @@ function LampFormsPage({ type }) {
 
       return () => clearTimeout(timer);
     }
-  }, [createLampErrors]);
+  }, [createWaterErrors]);
 
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
       <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
         <span>
           {type === "request"
-            ? "Solicitud para la instalación de una lámpara"
-            : "Reportar luminaria descompuesta"}
+            ? "Solicitud para conexión de agua o drenaje"
+            : "Reportar tubería de agua o drenaje dañada"}
         </span>
       </div>
       <div className="m-10">
         <Collapse open={collapseErrors}>
           <div>
-            {createLampErrors.map((error, i) => (
+            {createWaterErrors.map((error, i) => (
               <AlertMessage key={i} message={error} />
             ))}
           </div>
@@ -107,7 +111,7 @@ function LampFormsPage({ type }) {
             <input
               type="text"
               placeholder="Teléfono"
-              value={user.phonenumber ?? "2255114422"}
+              value={user.phonenumber ?? "0000000000"}
               className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
               disabled
             />
@@ -191,37 +195,63 @@ function LampFormsPage({ type }) {
             )}
           </div>
         </div>
-        <div className="flex flex-wrap gap-10">
-          <div className="grow w-min">
-            <p className="px-4 text-center font-montserrat font-bold text-black text-xl lg:text-3xl">
-              {type === "request" ? "Comentarios adicionales" : "Referencia"}
-            </p>
-            <div className="flex justify-center w-full">
-              <textarea
-                {...register("commentsCitizen", { required: false })}
-                className="text-black px-4 py-2 rounded-md border border-black resize-none shadow w-full lg:w-2/3"
-                placeholder={
-                  type === "request"
-                    ? "Referencia, motivo de la solicitud, etc."
-                    : "Información que ayude a ubicar más rápido la lámpara reportada."
-                }
-                rows={8}
-              ></textarea>
+        <div className="flex flex-wrap justify-around gap-10">
+          {type === "request" ? (
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5 bg-[#EFEFEF] rounded-xl font-montserrat px-10 py-5">
+                <h1 className="font-bold text-lg lg:text-2xl">
+                  Por favor, llene el siguiente formulario para completar su
+                  solicitud:
+                </h1>
+                <motion.div
+                  className="w-72 flex self-center justify-center"
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <a
+                    href="https://www.figma.com/file/tzRour6btc5Duf65ETFYVB/Proyecto?type=design&node-id=651-1557&mode=design&t=O9vWPrBWWhbqSVUT-0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button
+                      className="bg-[#6d1610] text-white rounded-full text-xl lg:text-3xl py-1 px-5 w-full"
+                      type="button"
+                    >
+                      Formulario
+                    </button>
+                  </a>
+                </motion.div>
+              </div>
+              <p>
+                Es necesario que tenga a la mano una copia de INE y una copia
+                del recibo del impuesto predial del año en curso.
+              </p>
             </div>
-          </div>
-          {type === "report" && (
-            <div className={isMobile ? "grow" : ""}>
-              <label className="font-montserrat font-bold text-lg lg:text-2xl text-black">
-                Tipo de lámpara
-              </label>
-              <InputSelect
-                options={options}
-                register={register}
-                registerName="typeLamp"
-                onOptionChange={onOptionChange}
-              />
+          ) : (
+            <div className="grow w-min">
+              <p className="px-4 text-center font-montserrat font-bold text-black text-xl lg:text-3xl">
+                Comentarios adicionales
+              </p>
+              <div className="flex justify-center w-full">
+                <textarea
+                  {...register("commentsCitizen", { required: false })}
+                  className="text-black px-4 py-2 rounded-md border border-black resize-none shadow w-full lg:w-2/3"
+                  placeholder="Tipo de daño, magnitud del problema, referencias para encontrar la tubería, etc. "
+                  rows={8}
+                ></textarea>
+              </div>
             </div>
           )}
+          <div className={isMobile ? "grow" : ""}>
+            <label className="font-montserrat font-bold text-lg lg:text-2xl text-black">
+              Conexión
+            </label>
+            <InputSelect
+              options={options}
+              register={register}
+              registerName="typeConection"
+              onOptionChange={onOptionChange}
+            />
+          </div>
         </div>
 
         <motion.div
@@ -242,4 +272,4 @@ function LampFormsPage({ type }) {
   );
 }
 
-export default LampFormsPage;
+export default WaterFormsPage;

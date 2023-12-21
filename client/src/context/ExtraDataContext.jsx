@@ -13,6 +13,7 @@ export const useExtaData = () => {
 export function ExtraDataContextProvider(props) {
   const [isLogin, setIsLogin, ] = useState(true);
   const imageUrl = "http://localhost:4000/public/images/"
+  const documentUrl = "http://localhost:4000/public/documents/"
 
   function changeIsLogin(value) {
     setIsLogin(value);
@@ -40,6 +41,7 @@ export function ExtraDataContextProvider(props) {
         isLogin,
         isMobile,
         imageUrl,
+        documentUrl,
         changeIsLogin,
       }}
     >

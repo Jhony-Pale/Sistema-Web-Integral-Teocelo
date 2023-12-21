@@ -27,10 +27,11 @@ import CitizenOptions from "./CitizenOptions";
 import DefaultOptions from "./DefaultOptions";
 import SLOptions from "./SLOptions";
 import Footer from "./Footer";
+import DWOptions from "./DWOptions";
 
 function NavBar() {
   const { register } = useForm();
-  const { changeIsLogin, isMobile } = useExtaData();
+  const { isMobile } = useExtaData();
   const { isAuthenticated, user, logout } = useAuth();
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -385,6 +386,14 @@ function NavBar() {
                   {user.rol === "employee.sl" && (
                     <>
                       <SLOptions
+                        handleLogout={handleLogout}
+                        userName={user.firstname + " " + user.lastname}
+                      />
+                    </>
+                  )}
+                  {user.rol === "employee.dw" && (
+                    <>
+                      <DWOptions
                         handleLogout={handleLogout}
                         userName={user.firstname + " " + user.lastname}
                       />

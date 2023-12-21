@@ -8,6 +8,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { PostProvider } from "./context/PostContext.jsx";
 import { LampProvider } from "./context/LampContext.jsx";
+import { WaterProvider } from "./context/WaterContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,9 +17,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <AuthProvider>
           <PostProvider>
             <LampProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
+              <WaterProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </WaterProvider>
             </LampProvider>
           </PostProvider>
         </AuthProvider>

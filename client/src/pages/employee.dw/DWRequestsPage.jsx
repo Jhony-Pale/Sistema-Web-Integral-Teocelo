@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuSearch } from "react-icons/lu";
-import "../../styles/ThTable.css";
-import InputSelect from "../../components/InputSelect";
-import { useLamps } from "../../context/LampContext";
+import { useWater } from "../../context/WaterContext";
 import { AnimatePresence, motion } from "framer-motion";
-import IconoX from "../../assets/Icons/IconoX.png";
 import {
   Dialog,
   DialogBody,
@@ -12,20 +9,47 @@ import {
   DialogHeader,
 } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
+import { useExtaData } from "../../context/ExtraDataContext";
+import IconoX from "../../assets/Icons/IconoX.png";
+import InputSelect from "../../components/InputSelect";
+import "../../styles/ThTable.css";
 
 const options = ["Entregada", "En revisión", "Aceptada", "Rechazada"];
 
-function SLRequestsPage() {
+function DWRequestsPage() {
   const { handleSubmit, setValue } = useForm();
   const [inputValue, setInputValue] = useState("");
   const [inputComments, setInputComments] = useState(true);
-  const [lampUpdateStatus, setLampUpdateStatus] = useState(null);
-  const [lampUpdateAll, setLampUpdateAll] = useState(null);
-  const { getLampRequests, lampsRequest: lamps, updateLamp } = useLamps();
-  const [filterLamps, setFilterLamps] = useState([]);
+  const [waterUpdateStatus, setWaterUpdateStatus] = useState(null);
+  const [waterUpdateAll, setWaterUpdateAll] = useState(null);
+  const [waterUpdateFile, setWaterUpdateFile] = useState(null);
+  const { getWaterRequests, waterRequest: water, updateWater } = useWater();
+  const [filterWater, setFilterWater] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingUpdate, setLoadingUpdate] = useState(true);
   const [open, setOpen] = useState(false);
+  const { documentUrl } = useExtaData();
+  const fileInputRef = useRef(null);
+
+  const handleButtonFile = (req) => {
+    setWaterUpdateFile(req);
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    onSubmitFile(file);
+  };
+
+  const onSubmitFile = async (file) => {
+    const formData = new FormData();
+
+    formData.append("document", file);
+    try {
+      const res = await updateWater(waterUpdateFile, formData);
+      setLoadingUpdate(true);
+    } catch (error) {}
+  };
 
   const handleOpen = () => setOpen((prev) => !prev);
 
@@ -46,18 +70,18 @@ function SLRequestsPage() {
   const handleSearchPerson = () => {
     const inputValueFixed = inputValue.trimStart();
     if (inputValueFixed != "") {
-      const requestsFilter = lamps.filter((lamp) =>
+      const requestsFilter = water.filter((req) =>
         (
-          lamp.user.firstname.toUpperCase() +
+          req.user.firstname.toUpperCase() +
           " " +
-          lamp.user.lastname.toUpperCase()
+          req.user.lastname.toUpperCase()
         ).includes(inputValueFixed.toUpperCase())
       );
 
-      return setFilterLamps(requestsFilter);
+      return setFilterWater(requestsFilter);
     }
 
-    setFilterLamps(lamps);
+    setFilterWater(water);
   };
 
   const handleChangeTextarea = (event) => {
@@ -76,7 +100,7 @@ function SLRequestsPage() {
     }
 
     if (!inputComments) setValue("commentsEmployee", "Ninguno.");
-    setLampUpdateAll(aux);
+    setWaterUpdateAll(aux);
   };
 
   const onOptionChange = (opc, object) => {
@@ -91,17 +115,17 @@ function SLRequestsPage() {
       handleOpen();
       return;
     } else {
-      setLampUpdateStatus(object);
+      setWaterUpdateStatus(object);
     }
   };
 
-  const updateStatusLamp = handleSubmit(async (data) => {
-    async function upLampRequest() {
-      if (lampUpdateStatus) await updateLamp(lampUpdateStatus, data);
-      else await updateLamp(lampUpdateAll, data);
+  const updateStatusWater = handleSubmit(async (data) => {
+    async function upWaterRequest() {
+      if (waterUpdateStatus) await updateWater(waterUpdateStatus, data);
+      else await updateWater(waterUpdateAll, data);
       setLoadingUpdate(true);
     }
-    upLampRequest();
+    upWaterRequest();
   });
 
   const hanldeClickComments = (op) => {
@@ -109,23 +133,23 @@ function SLRequestsPage() {
   };
 
   useEffect(() => {
-    if (lampUpdateStatus !== null) {
-      updateStatusLamp();
+    if (waterUpdateStatus !== null) {
+      updateStatusWater();
     }
-  }, [lampUpdateStatus]);
+  }, [waterUpdateStatus]);
 
   useEffect(() => {
-    if (lampUpdateAll !== null) {
-      updateStatusLamp();
+    if (waterUpdateAll !== null) {
+      updateStatusWater();
     }
-  }, [lampUpdateAll]);
+  }, [waterUpdateAll]);
 
   useEffect(() => {
     const fetchData = async () => {
-      await getLampRequests();
-      setFilterLamps(lamps);
-      setLampUpdateAll(null);
-      setLampUpdateStatus(null);
+      await getWaterRequests();
+      setFilterWater(water);
+      setWaterUpdateAll(null);
+      setWaterUpdateStatus(null);
       setAux(null);
       setLoading(false);
       setLoadingUpdate(false);
@@ -197,7 +221,7 @@ function SLRequestsPage() {
                     <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -left-[0.60rem] bottom-[0.65rem]"></div>
                   </th>
                   <th className="relative overflow-hidden">
-                    <p className="p-3 break-words">Ubicación de la lámpara</p>
+                    <p className="p-3 break-words">Ubicación</p>
                     <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
                     <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -left-2 top-0"></div>
                     <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -left-[0.45rem] top-1"></div>
@@ -208,7 +232,7 @@ function SLRequestsPage() {
                     <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -right-[0.60rem] bottom-[0.65rem]"></div>
                   </th>
                   <th className="relative overflow-hidden">
-                    <p className="p-3 break-words">Comentarios adicionales</p>
+                    <p className="p-3 break-words">Conexión</p>
                     <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
                     <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -right-2 top-0"></div>
                     <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -right-[0.45rem] top-1"></div>
@@ -229,6 +253,17 @@ function SLRequestsPage() {
                     <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -right-[0.45rem] bottom-1"></div>
                     <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -right-[0.60rem] bottom-[0.65rem]"></div>
                   </th>
+                  <th className="relative overflow-hidden">
+                    <p className="p-3 break-words">Solicitud elaborada</p>
+                    <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
+                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -right-2 top-0"></div>
+                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -right-[0.45rem] top-1"></div>
+                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -right-[0.60rem] top-[0.65rem]"></div>
+
+                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -left-2 bottom-0"></div>
+                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -left-[0.45rem] bottom-1"></div>
+                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -left-[0.60rem] bottom-[0.65rem]"></div>
+                  </th>
                 </tr>
               </thead>
               {loading && loadingUpdate ? (
@@ -240,7 +275,7 @@ function SLRequestsPage() {
               ) : (
                 <tbody>
                   <AnimatePresence mode="popLayout">
-                    {filterLamps.map((request, i) => (
+                    {filterWater.map((request, i) => (
                       <motion.tr
                         key={i}
                         layout
@@ -271,32 +306,65 @@ function SLRequestsPage() {
                               " " +
                               request.town
                             }
-                            className="border-[2px] rounded-md border-black p-2 w-full truncate"
+                            className={`border-[2px] rounded-md border-black p-2 w-full truncate ${request.document ? "h-[80px] lg:h-[104px]" : "h-[56px]"}`}
                             readOnly
                           />
                         </th>
-                        <th>
-                          <input
-                            type="text"
-                            defaultValue={request.commentsCitizen}
-                            className="border-[2px] rounded-md border-black p-2 w-full truncate"
-                            readOnly
-                          />
+                        <th className="border-[2px] rounded-md border-black p-2 w-full truncate">
+                          {request.typeConection}
                         </th>
                         <th className="static">
                           <InputSelect
                             options={options}
-                            style={`rounded-md border-[2px] ${
+                            style={`rounded-md border-[2px] font-sans ${
                               request.status === "Aceptada"
                                 ? "bg-[#54CC60]"
                                 : request.status === "Rechazada"
                                 ? "bg-[#DB4545]"
                                 : "bg-[#FFFFFF]"
-                            } h-9 lg:h-12`}
+                            } ${request.document ? "h-[80px] lg:h-[104px]" : "h-[56px]"}`}
                             onOptionChange={onOptionChange}
                             object={request._id}
+                            styleArrow={request.document ? "inset-y-[35%]" : "inset-y-[26%]"}
                             defaultValue={request.status}
                           />
+                        </th>
+                        <th className="flex flex-col gap-3 border-[2px] rounded-md border-black p-2">
+                          {request.document && (
+                            <motion.div
+                              className="w-full flex self-center justify-center"
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <a
+                                href={documentUrl + request.document}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-[#6d1610] text-white rounded-full text-sm lg:text-xl py-1 px-5 w-full"
+                              >
+                                  Visualizar
+                              </a>
+                            </motion.div>
+                          )}
+                            <input
+                              name="document"
+                              type="file"
+                              accept="application/pdf"
+                              className="hidden"
+                              ref={fileInputRef}
+                              onChange={handleFileChange}
+                            />
+                            <motion.div
+                              className="w-full flex self-center"
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <button
+                                className="bg-[#6d1610] text-white rounded-full font-montserrat text-sm lg:text-xl py-1 px-5 w-full"
+                                type="button"
+                                onClick={() => handleButtonFile(request._id)}
+                              >
+                                Cargar
+                              </button>
+                            </motion.div>
                         </th>
                       </motion.tr>
                     ))}
@@ -428,4 +496,4 @@ function SLRequestsPage() {
   );
 }
 
-export default SLRequestsPage;
+export default DWRequestsPage;

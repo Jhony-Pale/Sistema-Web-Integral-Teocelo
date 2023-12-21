@@ -17,8 +17,11 @@ const router = Router();
 
 const storage = multer.diskStorage({
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
   },
   destination: (req, file, cb) => {
     cb(null, "src/public/images");
@@ -47,6 +50,11 @@ router.put(
   validateSchema(updatePostSchema),
   updatePost
 );
-router.delete("/posts/:id", authRequired, validateRol("employee.sc"), deletePost);
+router.delete(
+  "/posts/:id",
+  authRequired,
+  validateRol("employee.sc"),
+  deletePost
+);
 
 export default router;
