@@ -33,6 +33,8 @@ import PerfilePage from "./pages/citizen/PerfilePage";
 import WaterFormsPage from "./pages/citizen/WaterFormsPage";
 import DWRequestsPage from "./pages/employee.dw/DWRequestsPage";
 import DWReportsPage from "./pages/employee.dw/DWReportsPage";
+import NatureFormsPage from "./pages/citizen/NatureFormsPage";
+import ESRequestsPage from "./pages/employee.es/ESRequestsPage";
 
 function App() {
   const location = useLocation();
@@ -81,11 +83,40 @@ function App() {
               <Route path="/dw-requests" element={<DWRequestsPage />} />
               <Route path="/dw-reports" element={<DWReportsPage />} />
             </Route>
+            <Route element={<ProtectedRolRoute rolRoute="employee.es" />}>
+              <Route path="/es-cattle" element={<ESRequestsPage type="cattle" />} />
+              <Route path="/es-agricultural" element={<ESRequestsPage type="agricultural" />} />
+              <Route path="/es-bamboo" element={<ESRequestsPage type="bamboo" />} />
+            </Route>
             <Route element={<ProtectedRolRoute rolRoute="citizen" />}>
-              <Route path="/lamp-request" element={<LampFormsPage type="request" />} />
-              <Route path="/lamp-report" element={<LampFormsPage type="report" />} />
-              <Route path="/water-request" element={<WaterFormsPage type="request" />} />
-              <Route path="/water-report" element={<WaterFormsPage type="report" />} />
+              <Route
+                path="/lamp-request"
+                element={<LampFormsPage type="request" />}
+              />
+              <Route
+                path="/lamp-report"
+                element={<LampFormsPage type="report" />}
+              />
+              <Route
+                path="/water-request"
+                element={<WaterFormsPage type="request" />}
+              />
+              <Route
+                path="/water-report"
+                element={<WaterFormsPage type="report" />}
+              />
+              <Route
+                path="/nature-cattle"
+                element={<NatureFormsPage type="cattle" />}
+              />
+              <Route
+                path="/nature-agricultural"
+                element={<NatureFormsPage type="agricultural" />}
+              />
+              <Route
+                path="/nature-bamboo"
+                element={<NatureFormsPage type="bamboo" />}
+              />
               <Route path="/perfile" element={<PerfilePage />} />
             </Route>
           </Route>

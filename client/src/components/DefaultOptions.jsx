@@ -23,27 +23,27 @@ function DefaultOptions() {
           </div>
           <p className="font-extrabold text-xl lg:text-2xl">Solicitar</p>
         </div>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/water-request">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">
             Conexión de agua o drenaje
           </p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/lamp-request">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">
             Instalación de una lámpara
           </p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/nature-cattle">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Constancia ganadera</p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/nature-agricultural">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Constancia agrícola</p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/nature-bamboo">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">
             Guía de traslado de bambú
@@ -66,13 +66,13 @@ function DefaultOptions() {
           </div>
           <p className="font-extrabold text-xl lg:text-2xl">Reportar</p>
         </div>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/water-report">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">
             Tubería de agua o drenaje dañada
           </p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/lamp-report">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Luminaria descompuesta</p>
         </Link>

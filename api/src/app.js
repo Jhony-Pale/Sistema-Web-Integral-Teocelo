@@ -1,5 +1,7 @@
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { validateRol } from "./middlewares/rol.middleware.js";
+import { authRequired } from "./middlewares/validateToken.js";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -8,8 +10,7 @@ import authRoutes from "./routes/auth.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import lampRoutes from "./routes/lamp.routes.js";
 import waterRoutes from "./routes/water.routes.js";
-import { validateRol } from "./middlewares/rol.middleware.js";
-import { authRequired } from "./middlewares/validateToken.js";
+import natureRoutes from "./routes/nature.routes.js";
 
 const app = express();
 
@@ -38,5 +39,6 @@ app.use("/api", authRoutes);
 app.use("/api", postRoutes);
 app.use("/api", lampRoutes);
 app.use("/api", waterRoutes);
+app.use("/api", natureRoutes);
 
 export default app;

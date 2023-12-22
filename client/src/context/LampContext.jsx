@@ -50,7 +50,7 @@ export function LampProvider({ children }) {
       console.log(error);
     }
   };
-  
+
   const getLampRequests = async () => {
     try {
       const res = await getLampRequestsRequest();
@@ -78,14 +78,20 @@ export function LampProvider({ children }) {
     }
   }, [errors]);
 
-  return <LampContext.Provider value={{
-    lampsReport,
-    lampsRequest,
-    errors,
-    createLampReport,
-    createLampRequest,
-    getLampReports,
-    getLampRequests,
-    updateLamp
-  }}>{children}</LampContext.Provider>;
+  return (
+    <LampContext.Provider
+      value={{
+        lampsReport,
+        lampsRequest,
+        errors,
+        createLampReport,
+        createLampRequest,
+        getLampReports,
+        getLampRequests,
+        updateLamp,
+      }}
+    >
+      {children}
+    </LampContext.Provider>
+  );
 }

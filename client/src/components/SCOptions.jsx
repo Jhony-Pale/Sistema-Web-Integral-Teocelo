@@ -70,7 +70,7 @@ function SCOptions({ handleLogout, userName }) {
               <FaCheck size={isMobile ? "1.5em" : "2em"} color="white" />
             </div>
           </div>
-          <p className="font-extrabold text-black text-xl">{userName}</p>
+          <p className="font-extrabold text-black text-xl text-center">{userName}</p>
         </div>
         <Link
           to="/"

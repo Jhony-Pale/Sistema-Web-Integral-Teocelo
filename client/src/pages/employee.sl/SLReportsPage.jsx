@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { LuSearch } from "react-icons/lu";
-import "../../styles/ThTable.css";
 import InputSelect from "../../components/InputSelect";
 import { useLamps } from "../../context/LampContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "react-hook-form";
+import "../../styles/ThTable.css";
 
 const options = ["Recibido", "Por atender", "Atendido"];
 
@@ -78,7 +78,7 @@ function SLReportsPage() {
     };
     fetchData();
   }, [loading, loadingUpdate]);
-  
+
   return (
     <div>
       <div className="bg-white pt-6 pb-8 mt-5">
@@ -228,7 +228,7 @@ function SLReportsPage() {
                               " " +
                               report.town
                             }
-                            className="read-only border-[2px] rounded-md border-black p-2 w-full truncate"
+                            className="border-[2px] rounded-md border-black p-2 w-full truncate"
                             readOnly
                           />
                         </th>
@@ -240,12 +240,8 @@ function SLReportsPage() {
                             readOnly
                           />
                         </th>
-                        <th>
-                          <input
-                            type="text"
-                            value={report.typeLamp}
-                            className="read-only border-[2px] rounded-md border-black p-2 w-full truncate"
-                          />
+                        <th className="border-[2px] rounded-md border-black p-2">
+                          {report.typeLamp}
                         </th>
                         <th className="static">
                           <InputSelect
@@ -270,7 +266,7 @@ function SLReportsPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SLReportsPage
+export default SLReportsPage;

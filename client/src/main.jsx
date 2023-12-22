@@ -9,6 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import { PostProvider } from "./context/PostContext.jsx";
 import { LampProvider } from "./context/LampContext.jsx";
 import { WaterProvider } from "./context/WaterContext.jsx";
+import { NatureProvider } from "./context/NatureContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -18,9 +19,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <PostProvider>
             <LampProvider>
               <WaterProvider>
-                <BrowserRouter>
-                  <App />
-                </BrowserRouter>
+                <NatureProvider>
+                  <BrowserRouter>
+                    <App />
+                  </BrowserRouter>
+                </NatureProvider>
               </WaterProvider>
             </LampProvider>
           </PostProvider>
