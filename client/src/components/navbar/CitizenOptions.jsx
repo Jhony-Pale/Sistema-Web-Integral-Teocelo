@@ -1,10 +1,15 @@
+import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useExtaData } from "../context/ExtraDataContext";
-import IconoConstancias from "../assets/Icons/IconoConstancias.png";
-import IconoQuejas from "../assets/Icons/IconoQuejas.png";
+import { useExtaData } from "../../context/ExtraDataContext";
+import IconoConstancias from "../../assets/Icons/IconoConstancias.png";
+import IconoQuejas from "../../assets/Icons/IconoQuejas.png";
+import "../../styles/IconUserLogin.css";
 
-function DefaultOptions() {
-  const { changeIsLogin, isMobile } = useExtaData();
+function CitizenOptions({ handleLogout, userName }) {
+  const { isMobile } = useExtaData();
+  const handleLogoutClick = () => {
+    handleLogout();
+  };
   return (
     <div className={`grid ${isMobile ? "grid-cols-1" : "grid-cols-3"} mb-10`}>
       <div
@@ -39,7 +44,10 @@ function DefaultOptions() {
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Constancia ganadera</p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5" to="/nature-agricultural">
+        <Link
+          className="flex items-center gap-2 mb-5"
+          to="/nature-agricultural"
+        >
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Constancia agrícola</p>
         </Link>
@@ -76,46 +84,35 @@ function DefaultOptions() {
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Luminaria descompuesta</p>
         </Link>
-        <Link className="flex items-center gap-2 mb-5">
+        <Link className="flex items-center gap-2 mb-5" to="/complaints">
           <div className="min-h-[1.5em] min-w-[1.5em] rounded-full bg-[#F9B03C]"></div>
           <p className="font-bold text-lg lg:text-xl">Servidor público</p>
         </Link>
       </div>
-      <div className="flex flex-col items-center gap-2 lg:gap-5">
-        <div className="flex justify-center">
-          <Link
-            to="/loginregister"
-            onClick={() => changeIsLogin(true)}
-            className="bg-white border-[#6d1610] border-2 p-1 rounded-full"
-          >
-            <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5">
-              Iniciar sesión
-            </button>
-          </Link>
-        </div>
-        <div className="w-full px-8">
-          <div className="flex items-center">
-            <hr className="flex-1 border-t border-[#494848] border" />
-            <span className="px-4 text-center font-montserrat font-extrabold text-[#494848]">
-              O
-            </span>
-            <hr className="flex-1 border-t border-[#494848] border" />
+      <div className={`flex flex-col items-center gap-5`}>
+        <div className="flex flex-col items-center">
+          <div className="relative w-[100px] h-[100px] lg:w-[140px] lg:h-[140px]">
+            <div className="user-icon"></div>
+            <div className="user-icon-mark">
+              <FaCheck size={isMobile ? "1.5em" : "2em"} color="white" />
+            </div>
           </div>
+          <p className="font-extrabold text-black text-xl text-center">{userName}</p>
         </div>
-        <div className="flex justify-center">
-          <Link
-            to="/loginregister"
-            onClick={() => changeIsLogin(false)}
-            className="bg-white border-[#6d1610] border-2 p-1 rounded-full"
-          >
-            <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5">
-              Registrarme
-            </button>
-          </Link>
-        </div>
+        <Link
+          to="/"
+          onClick={handleLogoutClick}
+          className={`bg-white border-[#6d1610] border-2 p-1 rounded-full ${
+            isMobile ? "w-1/2" : "w-2/3"
+          }`}
+        >
+          <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5 w-full">
+            Cerrar sesión
+          </button>
+        </Link>
       </div>
     </div>
   );
 }
 
-export default DefaultOptions;
+export default CitizenOptions;

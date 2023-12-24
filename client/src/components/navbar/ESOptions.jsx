@@ -1,11 +1,12 @@
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import IconoReportes from "../assets/Icons/IconoReportes.png";
-import IconoSolicitudes from "../assets/Icons/IconoSolicitudes.png";
-import "../styles/IconUserLogin.css";
-import { useExtaData } from "../context/ExtraDataContext";
+import { useExtaData } from "../../context/ExtraDataContext";
+import IconoAgricola from "../../assets/Icons/IconoAgricola.png";
+import IconoGanadera from "../../assets/Icons/IconoGanadera.png";
+import IconoBambu from "../../assets/Icons/IconoBambu.png";
+import "../../styles/IconUserLogin.css";
 
-function SLOptions({ handleLogout, userName }) {
+function ESOptions({ handleLogout, userName }) {
   const { isMobile } = useExtaData();
   const handleLogoutClick = () => {
     handleLogout();
@@ -14,33 +15,46 @@ function SLOptions({ handleLogout, userName }) {
   return (
     <div className={`grid ${isMobile ? "grid-cols-2" : "grid-cols-3"} mb-10`}>
       <div className="col-span-2 flex flex-wrap items-start gap-y-5">
+        <Link to="/es-cattle" className="lg:basis-1/2 flex items-center gap-2">
+          <div className="relative">
+            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[6em] min-w-[6em]"></div>
+            <img
+              src={IconoGanadera}
+              alt="Icono de ganadería"
+              className="absolute top-[15%] p-[0.5rem] ml-1"
+            />
+          </div>
+          <p className="font-extrabold text-xl lg:text-2xl text-black">
+            Constancias de acreditación ganadera
+          </p>
+        </Link>
         <Link
-          to="/sl-requests"
+          to="/es-agricultural"
           className="lg:basis-1/2 flex items-center gap-2"
         >
           <div className="relative">
-            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
+            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[6em] min-w-[6em]"></div>
             <img
-              src={IconoSolicitudes}
-              alt="Icono de solicitudes"
-              className="absolute top-[15%] p-[0.15rem] ml-1"
+              src={IconoAgricola}
+              alt="Icono de agricultura"
+              className="absolute top-[15%] p-[0.2rem] mt-1"
             />
           </div>
           <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Solicitudes
+            Constancias agrícolas
           </p>
         </Link>
-        <Link to="/sl-reports" className="lg:basis-1/2 flex items-center gap-2">
+        <Link to="/es-bamboo" className="lg:basis-1/2 flex items-center gap-2">
           <div className="relative">
-            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
+            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[6em] min-w-[6em]"></div>
             <img
-              src={IconoReportes}
-              alt="Icono de reportes"
-              className="absolute top-[15%] p-[0.15rem]"
+              src={IconoBambu}
+              alt="Icono de bambú"
+              className="absolute top-[15%]"
             />
           </div>
           <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Reportes
+            Guías de traslado de bambú
           </p>
         </Link>
       </div>
@@ -56,7 +70,9 @@ function SLOptions({ handleLogout, userName }) {
               <FaCheck size={isMobile ? "1.5em" : "2em"} color="white" />
             </div>
           </div>
-          <p className="font-extrabold text-black text-xl text-center">{userName}</p>
+          <p className="font-extrabold text-black text-xl text-center">
+            {userName}
+          </p>
         </div>
         <Link
           to="/"
@@ -74,4 +90,4 @@ function SLOptions({ handleLogout, userName }) {
   );
 }
 
-export default SLOptions;
+export default ESOptions;

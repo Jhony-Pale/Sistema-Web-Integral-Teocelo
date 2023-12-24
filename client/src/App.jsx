@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import HistoryPage from "./pages/HistoryPage";
 import LoginRegisterPage from "./pages/LoginRegisterPage";
 import CoatArmsPage from "./pages/CoatArmsPage";
@@ -35,6 +35,7 @@ import DWRequestsPage from "./pages/employee.dw/DWRequestsPage";
 import DWReportsPage from "./pages/employee.dw/DWReportsPage";
 import NatureFormsPage from "./pages/citizen/NatureFormsPage";
 import ESRequestsPage from "./pages/employee.es/ESRequestsPage";
+import ComplaintFormPage from "./pages/citizen/ComplaintFormPage";
 
 function App() {
   const location = useLocation();
@@ -116,6 +117,10 @@ function App() {
               <Route
                 path="/nature-bamboo"
                 element={<NatureFormsPage type="bamboo" />}
+              />
+              <Route
+                path="/complaints"
+                element={<ComplaintFormPage />}
               />
               <Route path="/perfile" element={<PerfilePage />} />
             </Route>

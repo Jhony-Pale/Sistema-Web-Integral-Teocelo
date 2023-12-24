@@ -7,6 +7,7 @@ import { Collapse } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useWater } from "../../context/WaterContext";
 import InputSelect from "../../components/InputSelect";
+import AlertMessage from "../../components/AlertMessage"
 
 const options = ["Drenaje", "Agua Potable"];
 

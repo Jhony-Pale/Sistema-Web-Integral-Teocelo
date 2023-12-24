@@ -11,6 +11,7 @@ import postRoutes from "./routes/post.routes.js";
 import lampRoutes from "./routes/lamp.routes.js";
 import waterRoutes from "./routes/water.routes.js";
 import natureRoutes from "./routes/nature.routes.js";
+import complaintRoutes from "./routes/complaint.routes.js";
 
 const app = express();
 
@@ -40,5 +41,6 @@ app.use("/api", postRoutes);
 app.use("/api", lampRoutes);
 app.use("/api", waterRoutes);
 app.use("/api", natureRoutes);
+app.use("/api", complaintRoutes);
 
 export default app;

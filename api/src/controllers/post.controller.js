@@ -25,7 +25,6 @@ export const createPost = async (req, res) => {
     const postSaved = await newPost.save();
 
     res.json({
-      id: postSaved._id,
       title: postSaved.title,
       type: postSaved.type,
       body: postSaved.body,
