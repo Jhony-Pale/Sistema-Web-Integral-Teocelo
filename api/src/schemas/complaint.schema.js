@@ -1,9 +1,26 @@
 import { z } from "zod";
-
+const dateSchema = z.coerce.date();
 export const createComplaintSchema = z.object({
-  date: z.date({
+  date: z.coerce.date({
     required_error: "La fecha es requerida.",
+    invalid_type_error: "No es una fecha.",
   }),
+  firstname: z.string({
+    required_error: "El nombre es requerido.",
+  }),
+  lastnameP: z.string({
+    required_error: "El apellido paterno es requerido.",
+  }),
+  lastnameM: z.string({
+    required_error: "El apellido materno es requerido.",
+  }),
+  phonenumber: z
+    .string({
+      required_error: "El número de teléfono es requerido.",
+    })
+    .length(10, {
+      message: "El número de teléfono debe tener 10 dígitos.",
+    }),
   email: z
     .string({
       required_error: "El correo es requerido.",
@@ -21,12 +38,6 @@ export const createComplaintSchema = z.object({
   pcode: z
     .string({
       required_error: "El código postal es requerido.",
-    })
-    .min(6, {
-      message: "El código postal debe tener un mínimo y máximo de 6 digitos.",
-    })
-    .max(6, {
-      message: "El código postal debe tener un mínimo y máximo de 6 digitos.",
     }),
   street: z
     .string({

@@ -2,8 +2,13 @@ import Complaint from "../models/complaint.model.js";
 import { deletefile } from "../libs/deletefile.js";
 
 export const createComplaint = async (req, res) => {
+    console.log("funcion controller")
   const {
     date,
+    firstname,
+    lastnameP,
+    lastnameM,
+    phonenumber,
     email,
     colony,
     pcode,
@@ -19,6 +24,10 @@ export const createComplaint = async (req, res) => {
   try {
     const newComplaint = new Complaint({
       user: req.user.id,
+      firstname,
+      lastnameP,
+      lastnameM,
+      phonenumber,
       date,
       email,
       colony,
@@ -38,6 +47,10 @@ export const createComplaint = async (req, res) => {
     res.json({
       user: complaintSaved.user,
       date: complaintSaved.date,
+      firstname: complaintSaved.firstname,
+      lastnameP: complaintSaved.lastnameP,
+      lastnameM: complaintSaved.lastnameM,
+      phonenumber: complaintSaved.phonenumber,
       email: complaintSaved.email,
       colony: complaintSaved.colony,
       pcode: complaintSaved.pcode,

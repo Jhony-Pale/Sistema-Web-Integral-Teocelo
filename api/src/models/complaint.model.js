@@ -11,6 +11,26 @@ const complaintSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    firstname: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    lastnameP: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    lastnameM: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    phonenumber: {
+      type: String,
+      trim: true,
+      required: true,
+    },
     email: {
       type: String,
       trim: true,

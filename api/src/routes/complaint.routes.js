@@ -38,7 +38,7 @@ router.get(
 router.post(
   "/complaints",
   authRequired,
-  validateRol("employee.cs"),
+  validateRol("citizen"),
   upload.single("image"),
   validateSchema(createComplaintSchema),
   createComplaint

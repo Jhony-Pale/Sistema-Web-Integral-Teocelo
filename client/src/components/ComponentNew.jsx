@@ -26,15 +26,15 @@ function ComponentNew({ newComponent }) {
   return (
     <div className="w-full h-full bg-white rounded-2xl">
       {newComponent.position ? (
-        <Card className="max-h-[30rem] min-h-[30rem]">
-          <CardBody className="flex justify-center items-center">
+        <Card className="max-h-[30rem] min-h-[30rem] flex justify-center items-center">
+          <CardBody>
             <Typography
               variant="h5"
               color="blue-gray"
-              className="mb-2 font-montserrat text-[#494848] text-base lg:text-xl"
+              className="mb-2 font-montserrat text-[#494848] text-base lg:text-xl flex items-center"
             >
               <Link to="/posts">
-                <img src={IconoVerMas} alt="Icono para ver más publicaciones" className="h-[25rem]" />
+                <img src={IconoVerMas} alt="Icono para ver más publicaciones" className="h-full" />
               </Link>
             </Typography>
           </CardBody>
@@ -58,7 +58,7 @@ function ComponentNew({ newComponent }) {
             >
               {newComponent.title}
             </Typography>
-            <p className="font-montserrat text-[#A3A3A2] line-clamp-3 lg:line-clamp-5">
+            <p className={`font-montserrat text-[#A3A3A2] line-clamp-3 lg:line-clamp-5 ${newComponent.body.includes(" ") ? "break-words" : "break-all"}`}>
               {newComponent.body}
             </p>
           </CardBody>
