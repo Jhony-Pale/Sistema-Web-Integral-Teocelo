@@ -1,8 +1,8 @@
 import Complaint from "../models/complaint.model.js";
 import { deletefile } from "../libs/deletefile.js";
+import getNextSequence from "../libs/counters.js";
 
 export const createComplaint = async (req, res) => {
-    console.log("funcion controller")
   const {
     date,
     firstname,
@@ -22,8 +22,14 @@ export const createComplaint = async (req, res) => {
   } = req.body;
   const image = req.file.filename;
   try {
+
+    const folio = await getNextSequence("folioCounter");
+
+    const paddedCounter = folio.toString().padStart(4, '0');
+
     const newComplaint = new Complaint({
       user: req.user.id,
+      folio: `C-${paddedCounter}`,
       firstname,
       lastnameP,
       lastnameM,
@@ -46,6 +52,7 @@ export const createComplaint = async (req, res) => {
 
     res.json({
       user: complaintSaved.user,
+      folio: complaintSaved.folio,
       date: complaintSaved.date,
       firstname: complaintSaved.firstname,
       lastnameP: complaintSaved.lastnameP,
@@ -79,3 +86,4 @@ export const getComplaints = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+

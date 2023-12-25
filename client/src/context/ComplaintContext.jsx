@@ -23,6 +23,7 @@ export function ComplaintProvider({ children }) {
       return res.data;
     } catch (error) {
       setErrors(error.response.data);
+      console.log(error.response.data)
     }
   };
 

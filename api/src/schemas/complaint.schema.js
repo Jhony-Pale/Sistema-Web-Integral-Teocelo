@@ -1,5 +1,5 @@
 import { z } from "zod";
-const dateSchema = z.coerce.date();
+
 export const createComplaintSchema = z.object({
   date: z.coerce.date({
     required_error: "La fecha es requerida.",

@@ -7,6 +7,11 @@ const complaintSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    folio:{
+      type: String,
+      required: true,
+      unique: true
+    },
     date: {
       type: Date,
       required: true,

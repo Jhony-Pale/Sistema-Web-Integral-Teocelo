@@ -36,6 +36,7 @@ import DWReportsPage from "./pages/employee.dw/DWReportsPage";
 import NatureFormsPage from "./pages/citizen/NatureFormsPage";
 import ESRequestsPage from "./pages/employee.es/ESRequestsPage";
 import ComplaintFormPage from "./pages/citizen/ComplaintFormPage";
+import CSComplaintsPage from "./pages/employee.cs/CSComplaintsPage";
 
 function App() {
   const location = useLocation();
@@ -88,6 +89,9 @@ function App() {
               <Route path="/es-cattle" element={<ESRequestsPage type="cattle" />} />
               <Route path="/es-agricultural" element={<ESRequestsPage type="agricultural" />} />
               <Route path="/es-bamboo" element={<ESRequestsPage type="bamboo" />} />
+            </Route>
+            <Route element={<ProtectedRolRoute rolRoute="employee.cs" />}>
+              <Route path="/cs-complaints" element={<CSComplaintsPage />} />
             </Route>
             <Route element={<ProtectedRolRoute rolRoute="citizen" />}>
               <Route
