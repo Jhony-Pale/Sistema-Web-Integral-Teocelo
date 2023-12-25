@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import UploadImage from "../../components/UploadImage";
 import { Collapse } from "@material-tailwind/react";
 import DialogMessage from "../../components/DialogMessage";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
@@ -92,9 +93,7 @@ function EditPost() {
         <>
           {post ? (
             <div className="bg-white pt-6 pb-8 mt-5">
-              <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-                <p>Editar publicación</p>
-              </div>
+              <HeaderTittle title={"Editar publicación"} />
               <div className="m-10">
                 <Collapse open={collapseErrors}>
                   <div>

@@ -1,12 +1,11 @@
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png"
+import HeaderTittle from "../components/HeaderTittle";
 
 function HistoricalEventsPage() {
   return (
     <div>
       <div className="bg-[#efeeee] pt-6 pb-8 mt-5 shadow-lg shadow[#c0c0c0]">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-          <span>Cronología de acontecimientos históricos</span>
-        </div>
+        <HeaderTittle title={"Cronología de acontecimientos históricos"} />
       </div>
       <div className="bg-[#efeeee] drop-shadow-lg px-40 lg:px-72 pt-10 pb-10 text-justify tracking-wide font-normal text-xl font-montserrat leading-loose grid grid-flow-row">
         <div className="flex flex-col lg:flex-row items-center text-justify">

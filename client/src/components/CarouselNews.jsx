@@ -1,5 +1,3 @@
-import SeparadorIzquierdo from "../assets/Extras/SeparadorIzquierdo.png";
-import SeparadorDerecho from "../assets/Extras/SeparadorDerecho.png";
 import ComponentNew from "./ComponentNew";
 import { Carousel } from "@material-tailwind/react";
 import { useExtaData } from "../context/ExtraDataContext";
@@ -38,25 +36,19 @@ function CarouselImages() {
 
   return (
     <div className="bg-[#efeeee]">
-      <div className="flex items-center justify-center pt-8">
-        <img
-          src={SeparadorIzquierdo}
-          alt="Separador izquierdo"
-          className="tranform scale-[0.4] lg:scale-100 mr-[-50px] lg:mr-0"
-        />
-        <p className="font-extrabold text-center text-2xl lg:text-3xl lg:mx-5">
-          NOTICIAS Y COMUNICADOS
-        </p>
-        <img
-          src={SeparadorDerecho}
-          alt="Separador derecho"
-          className="tranform scale-[0.4] lg:scale-100 ml-[-50px] lg:ml-0"
-        />
+      <div className="w-full px-8 pt-10">
+        <div className="flex items-center">
+          <hr className="flex-1 border-t border-[#494848] border" />
+          <span className="px-4 text-center font-montserrat font-extrabold text-black text-2xl lg:text-3xl">
+            NOTICIAS Y COMUNICADOS
+          </span>
+          <hr className="flex-1 border-t border-[#494848] border" />
+        </div>
       </div>
       {posts.length === 0 ? (
         <div>No hay publicaciones.</div>
       ) : (
-        <Carousel autoplay={false} loop={true} className="z-0">
+        <Carousel autoplay={true} loop={true} className="z-0">
           {organizedNews.map((group, groupIndex) => (
             <div key={groupIndex} className={`flex h-full w-full px-4 mb-5`}>
               {group.map((new_, index) => (

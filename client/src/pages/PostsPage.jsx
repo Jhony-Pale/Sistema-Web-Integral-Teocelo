@@ -6,6 +6,7 @@ import { FiAlertCircle } from "react-icons/fi";
 import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../context/ExtraDataContext";
 import ComponentNew from "../components/ComponentNew";
+import HeaderTittle from "../components/HeaderTittle";
 
 const options = ["Todo", "Noticias", "Comunicados", "Convocatorias"];
 
@@ -33,61 +34,55 @@ function PostsPage() {
   };
 
   return (
-    <div>
-      <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-          <span>Publicaciones</span>
+    <div className="bg-white pt-6 pb-8 mt-5">
+      <HeaderTittle title={"Publicaciones"} />
+      <div className="flex justify-center items-center m-10">
+        {!isMobile && (
+          <>
+            <div className="basis-[30%]"></div>
+            <div className="basis-[30%]"></div>
+          </>
+        )}
+        <div className={`${isMobile ? "" : "basis-[30%]"} flex gap-5`}>
+          <p className="font-montserrat font-bold text-xl">Mostrar:</p>
+          <InputSelect options={options} onOptionChange={onOptionChange} />
         </div>
-        <div className="flex justify-center items-center m-10">
-          {!isMobile && (
+      </div>
+      <div className="flex flex-wrap justify-center items-center gap-5 m-10">
+        <AnimatePresence mode="popLayout">
+          {loading ? (
+            <>Loading...</>
+          ) : (
             <>
-              <div className="basis-[30%]"></div>
-              <div className="basis-[30%]"></div>
+              {filterPosts.length > 0 ? (
+                <>
+                  {filterPosts.map((post, i) => (
+                    <motion.div
+                      key={i}
+                      className={`${isMobile ? "w-[40%]" : "w-[30%]"} h-full`}
+                      layout
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ type: "spring" }}
+                    >
+                      <ComponentNew newComponent={post} />
+                    </motion.div>
+                  ))}
+                </>
+              ) : (
+                <div className="pb-6 w-full">
+                  <Alert
+                    className="bg-[#6D1610]"
+                    icon={<FiAlertCircle size="1.5em" />}
+                  >
+                    No se encontró ningún resultado.
+                  </Alert>
+                </div>
+              )}
             </>
           )}
-          <div className={`${isMobile ? "" : "basis-[30%]"} flex gap-5`}>
-            <p className="font-montserrat font-bold text-xl">Mostrar:</p>
-            <InputSelect options={options} onOptionChange={onOptionChange} />
-          </div>
-        </div>
-        <div className="flex flex-wrap justify-center items-center gap-5 m-10">
-          <AnimatePresence mode="popLayout">
-            {loading ? (
-              <>Loading...</>
-            ) : (
-              <>
-                {filterPosts.length > 0 ? (
-                  <>
-                    {filterPosts.map((post, i) => (
-                      <motion.div
-                        key={i}
-                        className={`${
-                          isMobile ? "w-[40%]" : "w-[30%]"
-                        } h-full`}
-                        layout
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0, opacity: 0 }}
-                        transition={{ type: "spring" }}
-                      >
-                        <ComponentNew newComponent={post} />
-                      </motion.div>
-                    ))}
-                  </>
-                ) : (
-                  <div className="pb-6 w-full">
-                    <Alert
-                      className="bg-[#6D1610]"
-                      icon={<FiAlertCircle size="1.5em" />}
-                    >
-                      No se encontró ningún resultado.
-                    </Alert>
-                  </div>
-                )}
-              </>
-            )}
-          </AnimatePresence>
-        </div>
+        </AnimatePresence>
       </div>
     </div>
   );

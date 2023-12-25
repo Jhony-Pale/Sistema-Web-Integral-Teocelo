@@ -1,12 +1,11 @@
 import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.svg";
+import HeaderTittle from "../components/HeaderTittle";
 
 function CoatArmsPage() {
   return (
     <div>
       <div className="bg-[#efeeee] pt-6 pb-8 mt-5 shadow-lg shadow[#c0c0c0]">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-          <span>Escudo de armas - Teocelo, Veracruz</span>
-        </div>
+        <HeaderTittle title={"Escudo de armas - Teocelo, Veracruz"} />
         <div className="w-full">
           <div className="flex items-center justify-center mt-5">
             <img

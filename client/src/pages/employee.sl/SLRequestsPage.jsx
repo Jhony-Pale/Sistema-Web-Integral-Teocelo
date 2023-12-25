@@ -12,6 +12,7 @@ import {
   DialogHeader,
 } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Entregada", "En revisión", "Aceptada", "Rechazada"];
 
@@ -136,9 +137,7 @@ function SLRequestsPage() {
   return (
     <div>
       <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-          <p>Solicitudes</p>
-        </div>
+        <HeaderTittle title={"Solicitudes"} />
         <div className="flex flex-row-reverse mt-5 mr-5">
           <div className="relative ml-14 w-[23rem]">
             <input

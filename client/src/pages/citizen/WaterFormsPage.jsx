@@ -7,7 +7,8 @@ import { Collapse } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useWater } from "../../context/WaterContext";
 import InputSelect from "../../components/InputSelect";
-import AlertMessage from "../../components/AlertMessage"
+import AlertMessage from "../../components/AlertMessage";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Drenaje", "Agua Potable"];
 
@@ -56,13 +57,13 @@ function WaterFormsPage({ type }) {
 
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
-      <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-        <span>
-          {type === "request"
+      <HeaderTittle
+        title={
+          type === "request"
             ? "Solicitud para conexión de agua o drenaje"
-            : "Reportar tubería de agua o drenaje dañada"}
-        </span>
-      </div>
+            : "Reportar tubería de agua o drenaje dañada"
+        }
+      />
       <div className="m-10">
         <Collapse open={collapseErrors}>
           <div>

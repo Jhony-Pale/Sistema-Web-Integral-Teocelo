@@ -4,6 +4,7 @@ import { useExtaData } from "../context/ExtraDataContext";
 import { LuSearch } from "react-icons/lu";
 import { FiAlertCircle } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
+import HeaderTittle from "../components/HeaderTittle";
 
 function MunicipalDirectoryPage() {
   const { isMobile } = useExtaData();
@@ -344,6 +345,29 @@ function MunicipalDirectoryPage() {
     },
   ];
 
+  const sortByArea = (data) => {
+    const priorityAreas = ["Presidencia", "Sindicatura", "Regiduría"];
+  
+    return [...data].sort((a, b) => {
+      const indexA = priorityAreas.indexOf(a.area);
+      const indexB = priorityAreas.indexOf(b.area);
+  
+      if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+      }
+  
+      if (indexA !== -1) {
+        return -1;
+      }
+  
+      if (indexB !== -1) {
+        return 1;
+      }
+  
+      return a.area.localeCompare(b.area);
+    });
+  };
+
   const [showPersonal, setShowPersonal] = useState(personal);
 
   const [inputValue, setInputValue] = useState("");
@@ -370,110 +394,108 @@ function MunicipalDirectoryPage() {
   };
 
   return (
-    <div>
-      <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-          <span>Directorio Municipal</span>
-        </div>
-        <div className="mx-10">
-          <div className="flex flex-row-reverse mt-5 mr-5">
-            <div className="relative ml-14 w-[23rem]">
-              <input
-                type="text"
-                placeholder="¿A qué área o persona estás buscando?"
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={handleKeyPress}
-                name="searchValue"
-                className="w-full text-black pr-10 pl-2 py-2 rounded-lg border-[3px] border-[#6D1610] bg-white block placeholder-black font-montserrat"
+    <div className="bg-white pt-6 pb-8 mt-5">
+      <HeaderTittle title={"Directorio Municipal"} />
+      <div className="mx-10">
+        <div className="flex flex-row-reverse mt-5 mr-5">
+          <div className="relative ml-14 w-[23rem]">
+            <input
+              type="text"
+              placeholder="¿A qué área o persona estás buscando?"
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyPress}
+              name="searchValue"
+              className="w-full text-black pr-10 pl-2 py-2 rounded-lg border-[3px] border-[#6D1610] bg-white block placeholder-black font-montserrat"
+            />
+            <div className="absolute inset-y-0 right-0 px-[0.40rem] m-[0.5rem] flex items-center text-sm leading-5 bg-[#6D1610] rounded-md cursor-pointer">
+              <LuSearch
+                size="1.5em"
+                style={{ color: "#ffffff" }}
+                onClick={handleSearchPersonal}
               />
-              <div className="absolute inset-y-0 right-0 px-[0.40rem] m-[0.5rem] flex items-center text-sm leading-5 bg-[#6D1610] rounded-md cursor-pointer">
-                <LuSearch
-                  size="1.5em"
-                  style={{ color: "#ffffff" }}
-                  onClick={handleSearchPersonal}
-                />
-              </div>
             </div>
           </div>
-          <div
-            className={`flex flex-wrap gap-5 justify-center font-montserrat mt-10`}
-          >
-            {showPersonal.length > 0 && (
-              <>
-                <AnimatePresence mode="popLayout">
-                  {showPersonal.map((person, index) => (
-                    <motion.div
-                      layout
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                      transition={{ type: "spring" }}
-                      className={`shadow-lg shadow-gray-500 w-[90%] border-t-8 border-[#6D1610] ${isMobile ? "basis-[48%]" : "basis-[30%]"}`}
-                      key={index}
-                    >
-                      <div className="flex items-center justify-center text-center py-2 text-2xl font-extrabold text-[#6D1610]">
-                        <h1>{person.area}</h1>
-                      </div>
-                      <div className="bg-[#EFEFEF] mx-3 mb-5">
-                        <h1 className="bg-[#6D1610] text-lg text-center text-white py-2">
-                          {person.name}
-                        </h1>
-                        <div className="flex flex-col gap-5 p-2 break-all">
-                          <div className="flex items-center gap-3">
-                            <p>Ubicación:</p>
-                            <p className="flex flex-col">
-                              {person.ubication.place && (
-                                <span>{person.ubication.place}</span>
-                              )}
-                              {person.ubication.floor && (
-                                <span>{person.ubication.floor}</span>
-                              )}
-                              {person.ubication.street && (
-                                <span>{person.ubication.street}</span>
-                              )}
-                              {person.ubication.neighborhood && (
-                                <span>{person.ubication.neighborhood}</span>
-                              )}
-                              {person.ubication.cp && (
-                                <span>{person.ubication.cp}</span>
-                              )}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-5">
-                            <p>Contacto:</p>
-                            <p className="flex flex-col">
-                              {person.contacts ? (
-                                <>
-                                  {person.contacts.map((contact, index) => (
-                                    <span key={index}>{contact}</span>
-                                  ))}
-                                </>
-                              ) : (
-                                <>
-                                  <span>No Disponible</span>
-                                </>
-                              )}
-                            </p>
-                          </div>
+        </div>
+        <div
+          className={`flex flex-wrap gap-5 justify-center font-montserrat mt-10`}
+        >
+          {showPersonal.length > 0 && (
+            <>
+              <AnimatePresence mode="popLayout">
+                {sortByArea(showPersonal).map((person, index) => (
+                  <motion.div
+                    layout
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ type: "spring" }}
+                    className={`shadow-lg shadow-gray-500 w-[90%] border-t-8 border-[#6D1610] ${
+                      isMobile ? "basis-[48%]" : "basis-[30%]"
+                    }`}
+                    key={index}
+                  >
+                    <div className="flex items-center justify-center text-center py-2 text-2xl font-extrabold text-[#6D1610]">
+                      <h1>{person.area}</h1>
+                    </div>
+                    <div className="bg-[#EFEFEF] mx-3 mb-5">
+                      <h1 className="bg-[#6D1610] text-lg text-center text-white py-2">
+                        {person.name}
+                      </h1>
+                      <div className="flex flex-col gap-5 p-2 break-all">
+                        <div className="flex items-center gap-3">
+                          <p>Ubicación:</p>
+                          <p className="flex flex-col">
+                            {person.ubication.place && (
+                              <span>{person.ubication.place}</span>
+                            )}
+                            {person.ubication.floor && (
+                              <span>{person.ubication.floor}</span>
+                            )}
+                            {person.ubication.street && (
+                              <span>{person.ubication.street}</span>
+                            )}
+                            {person.ubication.neighborhood && (
+                              <span>{person.ubication.neighborhood}</span>
+                            )}
+                            {person.ubication.cp && (
+                              <span>{person.ubication.cp}</span>
+                            )}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-5">
+                          <p>Contacto:</p>
+                          <p className="flex flex-col">
+                            {person.contacts ? (
+                              <>
+                                {person.contacts.map((contact, index) => (
+                                  <span key={index}>{contact}</span>
+                                ))}
+                              </>
+                            ) : (
+                              <>
+                                <span>No Disponible</span>
+                              </>
+                            )}
+                          </p>
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </>
-            )}
-          </div>
-            {showPersonal.length === 0 && (
-              <div className="pb-6">
-                <Alert
-                  className="bg-[#6D1610]"
-                  icon={<FiAlertCircle size="1.5em" />}
-                >
-                  No se encontró ningún resultado.
-                </Alert>
-              </div>
-            )}
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </>
+          )}
         </div>
+        {showPersonal.length === 0 && (
+          <div className="pb-6">
+            <Alert
+              className="bg-[#6D1610]"
+              icon={<FiAlertCircle size="1.5em" />}
+            >
+              No se encontró ningún resultado.
+            </Alert>
+          </div>
+        )}
       </div>
     </div>
   );

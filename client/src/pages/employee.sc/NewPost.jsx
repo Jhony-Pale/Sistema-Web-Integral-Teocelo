@@ -9,6 +9,7 @@ import { Collapse } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useExtaData } from "../../context/ExtraDataContext";
 import DialogMessage from "../../components/DialogMessage";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Noticia", "Comunicado", "Convocatoria"];
 
@@ -68,9 +69,7 @@ function NewPost() {
   return (
     <div>
       <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-          <p>Nueva publicación</p>
-        </div>
+        <HeaderTittle title={"Nueva publicación"} />
         <div className="m-10">
           <Collapse open={collapseErrors}>
             <div>

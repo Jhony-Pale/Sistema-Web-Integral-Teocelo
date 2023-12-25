@@ -1,13 +1,12 @@
 import PalacioNueva from "../assets/Photos/PalacioNueva.jpg";
 import IconoPalomita from "../assets/Icons/IconoPalomita.png";
+import HeaderTittle from "../components/HeaderTittle";
 
 function MissionVisionPage() {
   return (
     <div>
       <div className="pt-6 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-          <span>H. Ayuntamiento de Teocelo</span>
-        </div>
+        <HeaderTittle title={"H. Ayuntamiento de Teocelo"} />
       </div>
       <div className="px-24 lg:px-40 pt-10 text-justify tracking-wide mb-5 flex flex-col">
         <div className="w-full grid grid-flow-row lg:grid-cols-2 gap-5 bg-[#EFEEEE] p-5 shadow-inner drop-shadow-md">

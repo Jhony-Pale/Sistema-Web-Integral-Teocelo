@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import IconoX from "../../assets/Icons/IconoX.png";
 import InputSelect from "../../components/InputSelect";
 import { useNature } from "../../context/NatureContext";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Entregada", "En revisión", "Aceptada", "Rechazada"];
 
@@ -159,13 +160,15 @@ function ESRequestsPage({ type }) {
   return (
     <div>
       <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-          <p>
-            {type === "cattle" && "Constancias de acreditación ganadera"}
-            {type === "agricultural" && "Constancias agrícolas "}
-            {type === "bamboo" && "Guías de traslado de bambú "}
-          </p>
-        </div>
+        <HeaderTittle
+          title={
+            type === "cattle"
+              ? "Constancias de acreditación ganadera"
+              : type === "agricultural"
+              ? "Constancias agrícolas"
+              : "Guías de traslado de bambú"
+          }
+        />
         <div className="flex flex-row-reverse mt-5 mr-5">
           <div className="relative ml-14 w-[23rem]">
             <input

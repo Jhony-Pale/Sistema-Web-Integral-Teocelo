@@ -10,6 +10,7 @@ import { IoCheckmark } from "react-icons/io5";
 import UploadImage from "../../components/UploadImage";
 import AlertMessage from "../../components/AlertMessage";
 import "../../styles/InputNumber.css";
+import HeaderTittle from "../../components/HeaderTittle";
 
 function ComplaintFormPage() {
   const { user } = useAuth();
@@ -109,9 +110,7 @@ function ComplaintFormPage() {
 
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
-      <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-        <p>Quejas y/o denuncias contra servidores públicos</p>
-      </div>
+      <HeaderTittle title={"Quejas y/o denuncias contra servidores públicos"} />
       <div className="m-10">
         <Collapse open={collapseErrors}>
           <div>

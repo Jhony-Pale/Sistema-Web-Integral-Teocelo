@@ -7,6 +7,7 @@ import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../../context/ExtraDataContext";
 import ComponentPostDelete from "../../components/ComponentPostDelete";
 import DialogMessage from "../../components/DialogMessage";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Todo", "Noticias", "Comunicados", "Convocatorias"];
 
@@ -62,9 +63,7 @@ function DeletePost() {
   return (
     <div>
       <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-          <span>Publicaciones</span>
-        </div>
+        <HeaderTittle title={"Publicaciones"}/>
         <div className="flex justify-center items-center m-10">
           {!isMobile && (
             <>

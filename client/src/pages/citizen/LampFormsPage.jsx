@@ -7,13 +7,18 @@ import { useNavigate } from "react-router-dom";
 import { Collapse } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import InputSelect from "../../components/InputSelect";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["LED", "Antigua", "Cucharón"];
 
 function LampFormsPage({ type }) {
   const { user } = useAuth();
   const { isMobile } = useExtaData();
-  const { createLampRequest, createLampReport, errors: createLampErrors } = useLamps();
+  const {
+    createLampRequest,
+    createLampReport,
+    errors: createLampErrors,
+  } = useLamps();
   const [collapseErrors, setCollapseErrors] = useState(false);
   const {
     register,
@@ -51,13 +56,13 @@ function LampFormsPage({ type }) {
 
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
-      <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-        <span>
-          {type === "request"
+      <HeaderTittle
+        title={
+          type === "request"
             ? "Solicitud para la instalación de una lámpara"
-            : "Reportar luminaria descompuesta"}
-        </span>
-      </div>
+            : "Reportar luminaria descompuesta"
+        }
+      />
       <div className="m-10">
         <Collapse open={collapseErrors}>
           <div>

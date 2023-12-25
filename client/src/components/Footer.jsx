@@ -1,16 +1,19 @@
-import MapaTeocelo from "../assets/Extras/MapaTeocelo.png";
+import { BiCopyright, BiSolidPhone } from "react-icons/bi";
+import { RiMapPin2Fill } from "react-icons/ri";
 import LogoVerticalBlanco from "../assets/Logos/LogoVerticalBlanco.png";
 import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.svg";
 import IconoFacebook from "../assets/Icons/IconoFacebook.png";
 import IconoTwitter from "../assets/Icons/IconoTwitter.png";
 import IconoInstagram from "../assets/Icons/IconoInstagram.png";
 import GoogleMap from "../components/GoogleMap"
-import { BiCopyright, BiSolidPhone } from "react-icons/bi";
-import { RiMapPin2Fill } from "react-icons/ri";
+import Footer1 from "../assets/Extras/Footer1.png"
+import Footer2 from "../assets/Extras/Footer2.png"
 
 function Footer() {
   return (
-    <div className="flex flex-col pt-10">
+    <div className="flex flex-col pt-10 relative">
+      <img src={Footer1} alt="Elemento del footer - 1" className="absolute top-10 left-0 lg:w-80 w-52" />
+      <img src={Footer2} alt="Elemento del footer - 2" className="absolute bottom-5 right-0 lg:w-80 w-52" />
       <div className="bg-[#6D1610] grid grid-cols-3 place-items-center p-10 max-h-[400px]">
         <div className="w-full">
           <p className="text-white text-3xl text-center font-extrabold font-serif">

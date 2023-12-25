@@ -13,6 +13,7 @@ import { useExtaData } from "../../context/ExtraDataContext";
 import IconoX from "../../assets/Icons/IconoX.png";
 import InputSelect from "../../components/InputSelect";
 import "../../styles/ThTable.css";
+import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Entregada", "En revisión", "Aceptada", "Rechazada"];
 
@@ -160,9 +161,7 @@ function DWRequestsPage() {
   return (
     <div>
       <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-          <p>Solicitudes</p>
-        </div>
+        <HeaderTittle title={"Solicitudes"} />
         <div className="flex flex-row-reverse mt-5 mr-5">
           <div className="relative ml-14 w-[23rem]">
             <input
@@ -306,7 +305,11 @@ function DWRequestsPage() {
                               " " +
                               request.town
                             }
-                            className={`border-[2px] rounded-md border-black p-2 w-full truncate ${request.document ? "h-[80px] lg:h-[104px]" : "h-[56px]"}`}
+                            className={`border-[2px] rounded-md border-black p-2 w-full truncate ${
+                              request.document
+                                ? "h-[80px] lg:h-[104px]"
+                                : "h-[56px]"
+                            }`}
                             readOnly
                           />
                         </th>
@@ -322,10 +325,18 @@ function DWRequestsPage() {
                                 : request.status === "Rechazada"
                                 ? "bg-[#DB4545]"
                                 : "bg-[#FFFFFF]"
-                            } ${request.document ? "h-[80px] lg:h-[104px]" : "h-[56px]"}`}
+                            } ${
+                              request.document
+                                ? "h-[80px] lg:h-[104px]"
+                                : "h-[56px]"
+                            }`}
                             onOptionChange={onOptionChange}
                             object={request._id}
-                            styleArrow={request.document ? "inset-y-[35%]" : "inset-y-[26%]"}
+                            styleArrow={
+                              request.document
+                                ? "inset-y-[35%]"
+                                : "inset-y-[26%]"
+                            }
                             defaultValue={request.status}
                           />
                         </th>
@@ -341,30 +352,30 @@ function DWRequestsPage() {
                                 rel="noopener noreferrer"
                                 className="bg-[#6d1610] text-white rounded-full text-sm lg:text-xl py-1 px-5 w-full"
                               >
-                                  Visualizar
+                                Visualizar
                               </a>
                             </motion.div>
                           )}
-                            <input
-                              name="document"
-                              type="file"
-                              accept="application/pdf"
-                              className="hidden"
-                              ref={fileInputRef}
-                              onChange={handleFileChange}
-                            />
-                            <motion.div
-                              className="w-full flex self-center"
-                              whileTap={{ scale: 0.95 }}
+                          <input
+                            name="document"
+                            type="file"
+                            accept="application/pdf"
+                            className="hidden"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                          />
+                          <motion.div
+                            className="w-full flex self-center"
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <button
+                              className="bg-[#6d1610] text-white rounded-full font-montserrat text-sm lg:text-xl py-1 px-5 w-full"
+                              type="button"
+                              onClick={() => handleButtonFile(request._id)}
                             >
-                              <button
-                                className="bg-[#6d1610] text-white rounded-full font-montserrat text-sm lg:text-xl py-1 px-5 w-full"
-                                type="button"
-                                onClick={() => handleButtonFile(request._id)}
-                              >
-                                Cargar
-                              </button>
-                            </motion.div>
+                              Cargar
+                            </button>
+                          </motion.div>
                         </th>
                       </motion.tr>
                     ))}

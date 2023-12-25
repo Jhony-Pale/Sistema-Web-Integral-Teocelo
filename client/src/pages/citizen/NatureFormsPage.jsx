@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Collapse } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useNature } from "../../context/NatureContext";
+import HeaderTittle from "../../components/HeaderTittle";
 
 function NatureFormsPage({ type }) {
   const { user } = useAuth();
@@ -39,15 +40,15 @@ function NatureFormsPage({ type }) {
 
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
-      <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-        <span>
-          {type === "cattle"
+      <HeaderTittle
+        title={
+          type === "cattle"
             ? "Solicitud para constancia de acreditación ganadera"
             : type === "agricultural"
             ? "Solicitud para constancia agrícola "
-            : "Solicitud para guía de traslado de bambú"}
-        </span>
-      </div>
+            : "Solicitud para guía de traslado de bambú"
+        }
+      />
       <div className="m-10">
         <Collapse open={collapseErrors}>
           <div>

@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuSearch } from "react-icons/lu";
-import InputSelect from "../../components/InputSelect";
 import { AnimatePresence, motion } from "framer-motion";
-import { useForm } from "react-hook-form";
+import { useComplaint } from "../../context/ComplaintContext";
 import "../../styles/ThTable.css";
-import { useWater } from "../../context/WaterContext";
-
-const options = ["Recibido", "Por atender", "Atendido"];
+import HeaderTittle from "../../components/HeaderTittle";
+import { useReactToPrint } from "react-to-print";
+import PrintComponent from "../../components/PrintComponent";
 
 function CSComplaintsPage() {
-  const { handleSubmit, setValue } = useForm();
   const [inputValue, setInputValue] = useState("");
-  const [waterUpdateStatus, setWaterUpdateStatus] = useState(null);
-  const { getWaterReports, waterReport: water, updateWater } = useWater();
-  const [filterWater, setFilterWater] = useState([]);
+  const { getComplaints, complaints } = useComplaint();
+  const [filterComplaint, setFilterComplaint] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadingUpdate, setLoadingUpdate] = useState(true);
 
   const formatDate = (dateString) => {
     const options = { day: "2-digit", month: "2-digit", year: "numeric" };
@@ -34,57 +30,47 @@ function CSComplaintsPage() {
   const handleSearchPerson = () => {
     const inputValueFixed = inputValue.trimStart();
     if (inputValueFixed != "") {
-      const reportsFilter = water.filter((report) =>
-        (
-          report.user.firstname.toUpperCase() +
-          " " +
-          report.user.lastname.toUpperCase()
-        ).includes(inputValueFixed.toUpperCase())
+      const complaintsFilter = complaints.filter((data) =>
+        `${data.firstname.toUpperCase()} ${data.lastnameP.toUpperCase()} ${data.lastnameM.toUpperCase()}`.includes(
+          inputValueFixed.toUpperCase()
+        )
       );
 
-      return setFilterWater(reportsFilter);
+      return setFilterComplaint(complaintsFilter);
     }
 
-    setFilterWater(water);
+    setFilterComplaint(complaints);
   };
-
-  const onOptionChange = (opc, object) => {
-    setValue("status", opc);
-
-    setWaterUpdateStatus(object);
-  };
-
-  const updateStatusWater = handleSubmit(async (data) => {
-    async function upWaterRequest() {
-      await updateWater(waterUpdateStatus, data);
-      setLoadingUpdate(true);
-    }
-    upWaterRequest();
-  });
-
-  useEffect(() => {
-    if (waterUpdateStatus !== null) {
-      updateStatusWater();
-    }
-  }, [waterUpdateStatus]);
 
   useEffect(() => {
     const fetchData = async () => {
-      await getWaterReports();
-      setFilterWater(water);
-      setWaterUpdateStatus(null);
+      await getComplaints();
+      setFilterComplaint(complaints);
       setLoading(false);
-      setLoadingUpdate(false);
     };
     fetchData();
-  }, [loading, loadingUpdate]);
+  }, [loading]);
+
+  const printComponentRefs = useRef();
+  const [dataSelected, setDataSelected] = useState(null);
+
+  const handlePrint = (data) => setDataSelected(data);
+
+  const print = useReactToPrint({
+    content: () => printComponentRefs.current,
+  });
+
+  useEffect(() => {
+    if (dataSelected) {
+      print();
+      setDataSelected(null);
+    }
+  }, [dataSelected]);
 
   return (
     <div>
       <div className="bg-white pt-6 pb-8 mt-5">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center text-center">
-          <p>Reportes</p>
-        </div>
+        <HeaderTittle title={"Quejas o denuncias contra servidores públicos"} />
         <div className="flex flex-row-reverse mt-5 mr-5">
           <div className="relative ml-14 w-[23rem]">
             <input
@@ -110,7 +96,7 @@ function CSComplaintsPage() {
               <thead className="bg-white sticky top-0 z-20 h-10 lg:h-16 font-extrabold text-xl lg:text-2xl">
                 <tr>
                   <th className="relative overflow-hidden">
-                    <p className="p-3 break-words">Fecha</p>
+                    <p className="p-3 break-words">Folio</p>
                     <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
                     <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -right-2 top-0"></div>
                     <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -right-[0.45rem] top-1"></div>
@@ -119,32 +105,32 @@ function CSComplaintsPage() {
                     <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -left-2 bottom-0"></div>
                     <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -left-[0.45rem] bottom-1"></div>
                     <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -left-[0.60rem] bottom-[0.65rem]"></div>
+                  </th>
+                  <th className="relative overflow-hidden">
+                    <p className="p-3 break-words">Fecha</p>
+                    <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
+                    <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -left-2 top-0"></div>
+                    <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -left-[0.45rem] top-1"></div>
+                    <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -left-[0.60rem] top-[0.65rem]"></div>
+
+                    <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -right-2 bottom-0"></div>
+                    <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -right-[0.45rem] bottom-1"></div>
+                    <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -right-[0.60rem] bottom-[0.65rem]"></div>
                   </th>
                   <th className="relative overflow-hidden">
                     <p className="p-3 break-words">Nombre</p>
                     <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
-                    <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -left-2 top-0"></div>
-                    <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -left-[0.45rem] top-1"></div>
-                    <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -left-[0.60rem] top-[0.65rem]"></div>
+                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -right-2 top-0"></div>
+                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -right-[0.45rem] top-1"></div>
+                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -right-[0.60rem] top-[0.65rem]"></div>
 
-                    <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -right-2 bottom-0"></div>
-                    <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -right-[0.45rem] bottom-1"></div>
-                    <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -right-[0.60rem] bottom-[0.65rem]"></div>
+                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -left-2 bottom-0"></div>
+                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -left-[0.45rem] bottom-1"></div>
+                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -left-[0.60rem] bottom-[0.65rem]"></div>
                   </th>
                   <th className="relative overflow-hidden">
                     <p className="p-3 break-words">Número telefónico</p>
                     <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
-                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -right-2 top-0"></div>
-                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -right-[0.45rem] top-1"></div>
-                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -right-[0.60rem] top-[0.65rem]"></div>
-
-                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -left-2 bottom-0"></div>
-                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -left-[0.45rem] bottom-1"></div>
-                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -left-[0.60rem] bottom-[0.65rem]"></div>
-                  </th>
-                  <th className="relative overflow-hidden">
-                    <p className="p-3 break-words">Ubicación</p>
-                    <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
                     <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -left-2 top-0"></div>
                     <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -left-[0.45rem] top-1"></div>
                     <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -left-[0.60rem] top-[0.65rem]"></div>
@@ -154,7 +140,7 @@ function CSComplaintsPage() {
                     <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -right-[0.60rem] bottom-[0.65rem]"></div>
                   </th>
                   <th className="relative overflow-hidden">
-                    <p className="p-3 break-words">Conexión</p>
+                    <p className="p-3 break-words">Documento generado</p>
                     <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
                     <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -right-2 top-0"></div>
                     <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -right-[0.45rem] top-1"></div>
@@ -163,32 +149,10 @@ function CSComplaintsPage() {
                     <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -left-2 bottom-0"></div>
                     <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -left-[0.45rem] bottom-1"></div>
                     <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -left-[0.60rem] bottom-[0.65rem]"></div>
-                  </th>
-                  <th className="relative overflow-hidden">
-                    <p className="p-3 break-words">Comentarios adicionales</p>
-                    <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
-                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -right-2 top-0"></div>
-                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -right-[0.45rem] top-1"></div>
-                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -right-[0.60rem] top-[0.65rem]"></div>
-
-                    <div className="absolute border-t-[5px] w-5 border-[#f9b03c] rotate-45 -left-2 bottom-0"></div>
-                    <div className="absolute border-t-[5px] w-8 border-[#f9b03c] rotate-45 -left-[0.45rem] bottom-1"></div>
-                    <div className="absolute border-t-[5px] w-12 border-[#f9b03c] rotate-45 -left-[0.60rem] bottom-[0.65rem]"></div>
-                  </th>
-                  <th className="relative overflow-hidden">
-                    <p className="p-3 break-words">Estatus del reporte</p>
-                    <div className="border-[4px] border-[#6D1610] absolute inset-y-0 inset-x-0"></div>
-                    <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -left-2 top-0"></div>
-                    <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -left-[0.45rem] top-1"></div>
-                    <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -left-[0.60rem] top-[0.65rem]"></div>
-
-                    <div className="absolute border-t-[4px] w-5 border-[#f9b03c] -rotate-45 -right-2 bottom-0"></div>
-                    <div className="absolute border-t-[4px] w-8 border-[#f9b03c] -rotate-45 -right-[0.45rem] bottom-1"></div>
-                    <div className="absolute border-t-[4px] w-12 border-[#f9b03c] -rotate-45 -right-[0.60rem] bottom-[0.65rem]"></div>
                   </th>
                 </tr>
               </thead>
-              {loading && loadingUpdate ? (
+              {loading ? (
                 <tbody>
                   <tr>
                     <td colSpan="6">Loading...</td>
@@ -197,7 +161,7 @@ function CSComplaintsPage() {
               ) : (
                 <tbody>
                   <AnimatePresence mode="popLayout">
-                    {filterWater.map((report, i) => (
+                    {filterComplaint.map((data, i) => (
                       <motion.tr
                         key={i}
                         layout
@@ -208,53 +172,32 @@ function CSComplaintsPage() {
                         transition={{ type: "spring", delay: i * 0.2 }}
                       >
                         <th className="border-[2px] rounded-md border-black p-2">
-                          {formatDate(report.createdAt)}
+                          {data.folio}
                         </th>
                         <th className="border-[2px] rounded-md border-black p-2">
-                          {report.user.firstname + " " + report.user.lastname}
+                          {formatDate(data.createdAt)}
                         </th>
                         <th className="border-[2px] rounded-md border-black p-2">
-                          {report.phonenumber ?? "0000000000"}
-                        </th>
-                        <th>
-                          <input
-                            type="text"
-                            defaultValue={
-                              report.street +
-                              " " +
-                              report.number +
-                              " " +
-                              report.colony +
-                              " " +
-                              report.town
-                            }
-                            className="border-[2px] rounded-md border-black p-2 w-full truncate"
-                            readOnly
-                          />
+                          {`${data.firstname} ${data.lastnameP} ${data.lastnameM}`}
                         </th>
                         <th className="border-[2px] rounded-md border-black p-2">
-                          {report.typeConection}
+                          {data.phonenumber ?? "0000000000"}
                         </th>
-                        <th>
-                          <input
-                            type="text"
-                            defaultValue={report.commentsCitizen}
-                            className="border-[2px] rounded-md border-black p-2 w-full truncate"
-                            readOnly
-                          />
-                        </th>
-                        <th className="static">
-                          <InputSelect
-                            options={options}
-                            style={`rounded-md border-[2px] ${
-                              report.status === "Atendido"
-                                ? "bg-[#54CC60]"
-                                : "bg-[#FFFFFF]"
-                            } h-9 lg:h-12`}
-                            onOptionChange={onOptionChange}
-                            object={report._id}
-                            defaultValue={report.status}
-                          />
+                        <th className="border-[2px] rounded-md border-black p-2 flex justify-center">
+                          <motion.div
+                            className="w-full flex"
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <div className="bg-white border-[#6d1610] border-2 p-1 rounded-full w-full">
+                              <button
+                                className="bg-[#6d1610] text-white rounded-full font-montserrat text-base lg:text-3xl py-1 px-1 lg:px-5 w-full"
+                                type="button"
+                                onClick={() => handlePrint(data)}
+                              >
+                                Descargar
+                              </button>
+                            </div>
+                          </motion.div>
                         </th>
                       </motion.tr>
                     ))}
@@ -264,6 +207,11 @@ function CSComplaintsPage() {
             </table>
           </div>
         </div>
+      </div>
+      <div className="hidden">
+        {dataSelected && (
+          <PrintComponent data={dataSelected} ref={printComponentRefs} />
+        )}
       </div>
     </div>
   );

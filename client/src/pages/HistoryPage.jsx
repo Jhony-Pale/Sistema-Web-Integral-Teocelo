@@ -3,6 +3,7 @@ import HistoriaTAC from "../assets/Photos/HistoriaTAC.jpg";
 import HistoriaTAI from "../assets/Photos/HistoriaTAI.jpg";
 import HistoriaTAP from "../assets/Photos/HistoriaTAP.jpg";
 import { useEffect, useState } from "react";
+import HeaderTittle from "../components/HeaderTittle";
 
 function HistoryPage() {
   const smallImages = [
@@ -18,9 +19,9 @@ function HistoryPage() {
   });
   const [images, setImages] = useState(smallImages);
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const handleThumbnailClick = (imageId) => {
-    if(isLoading) return
+    if (isLoading) return;
 
     const clickedImage = images.find((image) => image.id === imageId);
     const indexImage = images.findIndex((image) => image.id === imageId);
@@ -28,7 +29,7 @@ function HistoryPage() {
     updateImages[indexImage] = selectedImage;
 
     document.getElementById(imageId).classList.add("animate-moveupdisappear");
-    setIsLoading(true)
+    setIsLoading(true);
 
     const timer = setTimeout(() => {
       document
@@ -36,7 +37,7 @@ function HistoryPage() {
         .classList.remove("animate-moveupdisappear");
 
       setImages(updateImages);
-      setIsLoading(false)
+      setIsLoading(false);
       setSelectedImage(clickedImage);
     }, 1000);
 
@@ -55,9 +56,7 @@ function HistoryPage() {
   return (
     <div>
       <div className="bg-[#efeeee] pt-6 pb-8 mt-5 shadow-lg">
-        <div className="w-full h-14 bg-[#6D1610] text-white font-extrabold text-2xl lg:text-4xl flex items-center justify-center">
-          <span>Historia de Teocelo, Veracruz, México</span>
-        </div>
+        <HeaderTittle title={"Historia de Teocelo, Veracruz, México"} />
         <div className="w-full">
           <div className="flex items-center justify-center mt-5">
             <img
