@@ -19,7 +19,7 @@ export const register = async (req, res) => {
     const newUser = new User({
       firstname,
       lastname,
-      rol,
+      rol: rol ?? "citizen",
       email,
       password: passwordHash,
     });
