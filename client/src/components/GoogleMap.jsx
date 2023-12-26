@@ -1,10 +1,10 @@
-import GoogleMapReact from "google-map-react";
+/* import GoogleMapReact from "google-map-react";
 
 function GoogleMap() {
   const defaultProps = {
     center: {
-      lat: 19.38565,
-      lng: -96.97316,
+      lat: 19.385151,
+      lng: -96.973306,
     },
     zoom: 19,
   };
@@ -13,8 +13,8 @@ function GoogleMap() {
       <GoogleMapReact
         bootstrapURLKeys={{ key: "" }}
         defaultCenter={defaultProps.center}
-        yesIWantToUseGoogleMapApiInternals
         defaultZoom={defaultProps.zoom}
+        yesIWantToUseGoogleMapApiInternals
       >
       </GoogleMapReact>
     </div>
@@ -22,3 +22,4 @@ function GoogleMap() {
 }
 
 export default GoogleMap;
+ */

@@ -129,7 +129,7 @@ function ComplaintFormPage() {
               type="date"
               onChange={handleChange}
               defaultValue={formatDate(new Date())}
-              className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+              className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.date ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
               ref={dateInputRef}
               {...register("date", { required: true })}
             />
@@ -146,7 +146,7 @@ function ComplaintFormPage() {
               <input
                 type="text"
                 defaultValue={user.firstname}
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.firstname ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("firstname", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -165,7 +165,7 @@ function ComplaintFormPage() {
               <input
                 type="text"
                 defaultValue={apellidoPaterno ?? ""}
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.lastnameP ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("lastnameP", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -182,7 +182,7 @@ function ComplaintFormPage() {
               <input
                 type="text"
                 defaultValue={apellidoMaterno ?? ""}
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.lastnameM ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("lastnameM", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -198,7 +198,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.phonenumber ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("phonenumber", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -214,7 +214,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="email"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.email1 ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("email1", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -232,7 +232,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="email"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.email2 ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("email2", {
                   required: true,
                   validate: validateEmails,
@@ -254,7 +254,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.colony ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("colony", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -270,7 +270,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="number"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.pcode ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("pcode", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -286,7 +286,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.street ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("street", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -301,8 +301,8 @@ function ComplaintFormPage() {
             <label className="font-bold text-xl">Núm. Ext:</label>
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
-                type="number"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                type="text"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.outnumber ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("outnumber", { required: true })}
               />
               <p className="text-center py-2 lg:py-1 text-[#6D1610] font-bold text-lg lg:text-sm">
@@ -317,8 +317,8 @@ function ComplaintFormPage() {
             <label className="font-bold text-xl">Núm. Int:</label>
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
-                type="number"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                type="text"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.innumber ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("innumber", { required: true })}
               />
               <p className="text-center py-2 lg:py-1 text-[#6D1610] font-bold text-lg lg:text-sm">
@@ -336,7 +336,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.staffname ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("staffname", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -354,7 +354,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.staffcharge ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("staffcharge", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -372,7 +372,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 border-black"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.staffarea ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                 {...register("staffarea", { required: true })}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
@@ -392,7 +392,7 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black">
               <textarea
                 rows="10"
-                className="w-full text-black font-medium text-base lg:text-xl px-4 py-2 border-b-2 border-black resize-none"
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 border-b-2 ${errors.commentsCitizen ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"} resize-none`}
                 {...register("commentsCitizen", { required: true })}
               ></textarea>
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">

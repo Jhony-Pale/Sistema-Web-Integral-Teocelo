@@ -135,7 +135,11 @@ function LampFormsPage({ type }) {
               type="text"
               placeholder="Calle"
               {...register("street", { required: true })}
-              className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
+              className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${
+                errors.street
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-black placeholder-blue-gray-200"
+              }`}
             />
             {errors.street && (
               <p className="text-red-500 absolute -bottom-6">
@@ -152,9 +156,9 @@ function LampFormsPage({ type }) {
               placeholder="Número"
               {...register("number", { required: true })}
               className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${
-                errors.number && isMobile
+                errors.number
                   ? "border-red-500 placeholder-red-500"
-                  : "border-black placeholder-blue-gray-"
+                  : "border-black placeholder-blue-gray-200"
               }`}
             />
             {errors.number && !isMobile && (
@@ -171,7 +175,7 @@ function LampFormsPage({ type }) {
               type="text"
               placeholder="Colonia"
               {...register("colony", { required: true })}
-              className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
+              className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${errors.colony ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
             />
             {errors.colony && (
               <p className="text-red-500 absolute -bottom-6">
@@ -187,7 +191,7 @@ function LampFormsPage({ type }) {
               type="text"
               placeholder="Localidad"
               {...register("town", { required: true })}
-              className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
+              className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${errors.town ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
             />
             {errors.town && (
               <p className="text-red-500 absolute -bottom-6">

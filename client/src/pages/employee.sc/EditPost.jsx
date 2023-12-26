@@ -118,7 +118,7 @@ function EditPost() {
                         type="text"
                         placeholder="Ingresa un título llamativo..."
                         {...register("title", { required: true })}
-                        className="shadow border border-black py-1 px-3 w-full"
+                        className={`shadow border py-1 px-3 w-full ${errors.title ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                       />
                       {errors.title && (
                         <p className="text-red-500">El título es requerido</p>
@@ -148,7 +148,7 @@ function EditPost() {
                     <div className={errors.body ? "-mb-5" : "mb-1"}>
                       <textarea
                         {...register("body", { required: true })}
-                        className="w-full text-black px-4 py-2 rounded-md border border-black resize-none shadow"
+                        className={`w-full text-black px-4 py-2 rounded-md border resize-none shadow ${errors.body ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
                         placeholder="..."
                         rows={8}
                       ></textarea>

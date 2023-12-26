@@ -30,6 +30,7 @@ export const createWaterRequestsSchema = z.object({
   typeConection: z
     .literal("Drenaje")
     .or(z.literal("Agua Potable"))
+    .or(z.literal("Ambas"))
     .default("Drenaje"),
   type: z.string().default("request"),
   status: z.string().default("Entregada"),
@@ -65,6 +66,7 @@ export const createWaterReportsSchema = z.object({
   typeConection: z
     .literal("Drenaje")
     .or(z.literal("Agua Potable"))
+    .or(z.literal("Ambas"))
     .default("Drenaje"),
   type: z.string().default("report"),
   status: z.string().default("Recibido"),

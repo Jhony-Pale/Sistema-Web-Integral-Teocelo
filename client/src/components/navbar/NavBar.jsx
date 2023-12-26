@@ -276,6 +276,7 @@ function NavBar() {
                     },
                   }}
                 />
+                <div className="border-r-2 border-[#6D1610] h-[90%]"></div>
                 <NavBarOptions
                   options={{
                     title: "TEOCELO",
@@ -286,6 +287,7 @@ function NavBar() {
                     },
                   }}
                 />
+                <div className="border-r-2 border-[#6D1610] h-[90%]"></div>
                 <NavBarOptions
                   options={{
                     title: "GOBIERNO MUNICIPAL",
@@ -299,6 +301,7 @@ function NavBar() {
                     },
                   }}
                 />
+                <div className="border-r-2 border-[#6D1610] h-[90%]"></div>
                 <NavBarOptions
                   options={{
                     title: "DIRECTORIO",
@@ -307,6 +310,7 @@ function NavBar() {
                     },
                   }}
                 />
+                <div className="border-r-2 border-[#6D1610] h-[90%]"></div>
                 <NavBarOptions
                   options={{
                     title: "TRANSPARENCIA",
@@ -324,6 +328,7 @@ function NavBar() {
                     },
                   }}
                 />
+                <div className="border-r-2 border-[#6D1610] h-[90%]"></div>
                 <NavBarOptions
                   options={{
                     title: "TURISMO",
@@ -334,9 +339,10 @@ function NavBar() {
                     },
                   }}
                 />
+                <div className="border-r-2 border-[#6D1610] h-[90%]"></div>
                 <NavBarOptions
                   options={{
-                    title: "TRÁMITES Y SERVICIOS",
+                    title: "MEJORA REGULATORIA",
                     others: {
                       INICIO: "#",
                     },
@@ -377,7 +383,7 @@ function NavBar() {
             <DialogBody>
               {isAuthenticated ? (
                 <>
-                  {user.rol === "employee.sc" && (
+                  {user.rol === "employee.sc" && ( /* Comunicación social */
                     <>
                       <SCOptions
                         handleLogout={handleLogout}
@@ -385,7 +391,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.sl" && (
+                  {user.rol === "employee.sl" && ( /* Alumbrado público */
                     <>
                       <SLOptions
                         handleLogout={handleLogout}
@@ -393,7 +399,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.dw" && (
+                  {user.rol === "employee.dw" && ( /* Agua potable */
                     <>
                       <DWOptions
                         handleLogout={handleLogout}
@@ -401,7 +407,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.es" && (
+                  {user.rol === "employee.es" && ( /* Medio ambiente */
                     <>
                       <ESOptions
                         handleLogout={handleLogout}
@@ -409,7 +415,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.cs" && (
+                  {user.rol === "employee.cs" && ( /* Contraloría */
                     <>
                       <CSOptions
                         handleLogout={handleLogout}

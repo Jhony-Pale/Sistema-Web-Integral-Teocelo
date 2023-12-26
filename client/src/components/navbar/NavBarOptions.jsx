@@ -15,12 +15,8 @@ function NavBarOptions({ options }) {
       {Object.keys(options.others).length > 1 ? (
         <div>
           <div>
-            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 bg-transparent px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50">
+            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 bg-transparent px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-[#6D1610] hover:text-white">
               {options.title}
-              <ChevronDownIcon
-                className="-mr-1 h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
             </Menu.Button>
           </div>
           <Transition

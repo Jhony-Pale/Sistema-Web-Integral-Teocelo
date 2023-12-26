@@ -10,7 +10,7 @@ import InputSelect from "../../components/InputSelect";
 import AlertMessage from "../../components/AlertMessage";
 import HeaderTittle from "../../components/HeaderTittle";
 
-const options = ["Drenaje", "Agua Potable"];
+const options = ["Drenaje", "Agua Potable", "Ambas"];
 
 function WaterFormsPage({ type }) {
   const navigate = useNavigate();

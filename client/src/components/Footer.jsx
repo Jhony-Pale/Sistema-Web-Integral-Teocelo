@@ -3,9 +3,7 @@ import { RiMapPin2Fill } from "react-icons/ri";
 import LogoVerticalBlanco from "../assets/Logos/LogoVerticalBlanco.png";
 import EscudoVerticalP from "../assets/Logos/EscudoVerticalP.svg";
 import IconoFacebook from "../assets/Icons/IconoFacebook.png";
-import IconoTwitter from "../assets/Icons/IconoTwitter.png";
 import IconoInstagram from "../assets/Icons/IconoInstagram.png";
-import GoogleMap from "../components/GoogleMap"
 import Footer1 from "../assets/Extras/Footer1.png"
 import Footer2 from "../assets/Extras/Footer2.png"
 
@@ -19,25 +17,23 @@ function Footer() {
           <p className="text-white text-3xl text-center font-extrabold font-serif">
             UBICACIÓN:
           </p>
-          <GoogleMap />
+          <iframe style={{width: "100%", height: "220px"}} frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" src="https://maps.google.com/maps?width=721&amp;height=220&amp;hl=en&amp;q=Covarrubias%20s/n,%20Centro,%2091615%20Teocelo,%20Ver.%20Xalapa+(Ayuntamiento%20de%20Teocelo)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> <a href='http://maps-generator.com/es'></a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=ca0c11d06024c73ce7c58bbd91af13cc8a5b9f32'></script>
         </div>
-        <div className="grid grid-rows-2 shrink-0 gap-8 px-2 lg:px-0 lg:ml-20">
-          <div className="flex items-center justify-start gap-5">
-            <BiSolidPhone size="2em" style={{ color: "#ffffff" }} />
-            <span className="text-white font-serif font-bold text-sm lg:text-base">
-              Palacio Municipal: (228)8210007 Ext. 117 <br />
-              DIF Municipal: (228)2016930 <br />
-              Protección Civil: (228)8210007 Ext. 103 <br />
-              Policía Municipal: (228)8210007 Ext. 102<br />
-            </span>
-          </div>
+        <div className="grid grid-rows-2 shrink-0 gap-8 px-2 lg:px-0 lg:ml-20 font-montserrat">
           <div className="flex items-center justify-start gap-5">
             <RiMapPin2Fill size="2em" style={{ color: "#ffffff" }} />
-            <span className="text-white font-serif font-bold">
+            <span className="text-white font-bold lg:text-xl">
               Juan Díaz Covarrubias S/N <br />
               Col. Centro <br />
               91615 <br />
               Teocelo, Veracruz, México <br />
+            </span>
+          </div>
+          <div className="flex items-center justify-start gap-5">
+            <BiSolidPhone size="2em" style={{ color: "#ffffff" }} />
+            <span className="text-white font-bold text-sm lg:text-xl">
+              (228)8210007 Ext. 117 <br />
+              (228)8210328 Ext. 117
             </span>
           </div>
         </div>
@@ -46,32 +42,27 @@ function Footer() {
             <img
               src={LogoVerticalBlanco}
               alt="Logo vertical blanco"
-              className="w-[40%] lg:max-w-[20%]"
+              className="w-[40%] lg:max-w-[35%]"
             />
             <img
               src={EscudoVerticalP}
               alt="Logo vertical"
-              className="w-[40%] lg:max-w-[20%]"
+              className="w-[40%] lg:max-w-[25%]"
             />
           </div>
           <div className="text-white font-montserrat text-lg lg:text-3xl font-extrabold text-center">
             H. Ayuntamiento de Teocelo
           </div>
-          <div className="grid grid-cols-3 place-items-center">
+          <div className="flex justify-center gap-10">
             <img
               src={IconoFacebook}
               alt="Icono de Facebook"
-              className="w-[80%] lg:max-w-[35%]"
+              className="w-[30%] lg:w-[15%]"
             />
             <img
               src={IconoInstagram}
               alt="Icono de Instagram"
-              className="w-[80%] lg:max-w-[35%]"
-            />
-            <img
-              src={IconoTwitter}
-              alt="Icono de Twitter"
-              className="w-[80%] lg:max-w-[35%]"
+              className="w-[30%] lg:w-[15%]"
             />
           </div>
         </div>
