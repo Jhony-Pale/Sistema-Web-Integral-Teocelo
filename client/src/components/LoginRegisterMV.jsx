@@ -146,7 +146,7 @@ function LoginRegisterMV() {
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errors.email && (
-                        <p className="text-red-500">Email is required</p>
+                        <p className="text-red-500">Se requiere el correo</p>
                       )}
                     </div>
                     <div className={errors.password ? "mb-5" : "mb-10"}>
@@ -174,7 +174,7 @@ function LoginRegisterMV() {
                         </div>
                       </div>
                       {errors.password && (
-                        <p className="text-red-500">Password is required</p>
+                        <p className="text-red-500">Se requiere la contraseña</p>
                       )}
                     </div>
                     <button
@@ -195,7 +195,7 @@ function LoginRegisterMV() {
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errorsR.firstname && (
-                        <p className="text-red-500">Firstname is required</p>
+                        <p className="text-red-500">Se requiere el nombre</p>
                       )}
                     </div>
                     <div className={errorsR.lastname ? "mb-4" : "mb-8"}>
@@ -206,7 +206,18 @@ function LoginRegisterMV() {
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errorsR.lastname && (
-                        <p className="text-red-500">lastname is required</p>
+                        <p className="text-red-500">Se requiren los apellidos</p>
+                      )}
+                    </div>
+                    <div className={errorsR.phonenumber ? "mb-4" : "mb-8"}>
+                      <input
+                        type="text"
+                        placeholder="Apellidos"
+                        {...registerR("phonenumber", { required: true })}
+                        className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
+                      />
+                      {errorsR.phonenumber && (
+                        <p className="text-red-500">Se require el número de teléfono</p>
                       )}
                     </div>
                     <div className={errorsR.email ? "mb-4" : "mb-8"}>
@@ -217,7 +228,7 @@ function LoginRegisterMV() {
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errorsR.email && (
-                        <p className="text-red-500">email is required</p>
+                        <p className="text-red-500">Se requiere el correo</p>
                       )}
                     </div>
                     <div className={errorsR.password ? "mb-5" : "mb-10"}>
@@ -245,7 +256,7 @@ function LoginRegisterMV() {
                         </div>
                       </div>
                       {errorsR.password && (
-                        <p className="text-red-500">password is required</p>
+                        <p className="text-red-500">Se requiere la contraseña</p>
                       )}
                     </div>
                     <button

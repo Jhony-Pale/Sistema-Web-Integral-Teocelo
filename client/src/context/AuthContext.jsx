@@ -3,6 +3,10 @@ import {
   registerRequest,
   loginRequest,
   verifyTokenRequest,
+  updateRequest,
+  getUserRequest,
+  getHistoryRequest,
+  getFileRequest
 } from "../api/auth";
 import Cookies from "js-cookie";
 
@@ -39,6 +43,44 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
     } catch (error) {
       setErrors(error.response.data);
+    }
+  };
+
+  const updateUser = async (data) => {
+    try {
+      const res = await updateRequest(data);
+      setUser(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(error.response.data);
+      setErrors(error.response.data);
+    }
+  };
+
+  const getUser = async () => {
+    try {
+      const res = await getUserRequest();
+      return res.data;
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
+  const getHistory = async () => {
+    try {
+      const res = await getHistoryRequest();
+      return res.data;
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
+  const getFile = async (name) => {
+    try {
+      const res = await getFileRequest(name);
+      return res;
+    } catch (error) {
+      console.log(error.response.data);
     }
   };
 
@@ -93,6 +135,10 @@ export const AuthProvider = ({ children }) => {
         signup,
         signin,
         logout,
+        updateUser,
+        getUser,
+        getHistory,
+        getFile,
         loading,
         user,
         isAuthenticated,

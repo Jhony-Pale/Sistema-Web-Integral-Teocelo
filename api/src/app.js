@@ -1,6 +1,7 @@
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { validateRol } from "./middlewares/rol.middleware.js";
+import { validateDocument } from "./middlewares/document.middleware.js";
 import { authRequired } from "./middlewares/validateToken.js";
 import express from "express";
 import morgan from "morgan";
@@ -30,9 +31,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/public/images", express.static(join(__dirname, "public/images")));
 app.use(
-  "/public/documents",
+  "/public/documentos",
   authRequired,
-  validateRol(["employee.dw"]),
+  validateRol(["employee.dw", "citizen"]),
+  validateDocument(),
   express.static(join(__dirname, "public/documents"))
 );
 

@@ -82,7 +82,7 @@ function RegisterPage() {
                   className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                 />
                 {errors.firstname && (
-                  <p className="text-red-500">Firstname is required</p>
+                  <p className="text-red-500">Se requiere el nombre</p>
                 )}
               </div>
               <div className={errors.lastname ? "mb-4" : "mb-8"}>
@@ -93,7 +93,18 @@ function RegisterPage() {
                   className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                 />
                 {errors.lastname && (
-                  <p className="text-red-500">lastname is required</p>
+                  <p className="text-red-500">Se requieren los apellidos</p>
+                )}
+              </div>
+              <div className={errors.phonenumber ? "mb-4" : "mb-8"}>
+                <input
+                  type="text"
+                  placeholder="Número de teléfono"
+                  {...register("phonenumber", { required: true })}
+                  className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
+                />
+                {errors.phonenumber && (
+                  <p className="text-red-500">Se requiere el número de teléfono</p>
                 )}
               </div>
               <div className={errors.email ? "mb-4" : "mb-8"}>
@@ -104,7 +115,7 @@ function RegisterPage() {
                   className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                 />
                 {errors.email && (
-                  <p className="text-red-500">email is required</p>
+                  <p className="text-red-500">Se requiere el correco electrónico</p>
                 )}
               </div>
               <div className="relative">
@@ -131,7 +142,7 @@ function RegisterPage() {
                 </div>
               </div>
               {errors.password && (
-                <p className="text-red-500">password is required</p>
+                <p className="text-red-500">Se requiere la contraseña</p>
               )}
 
               <button

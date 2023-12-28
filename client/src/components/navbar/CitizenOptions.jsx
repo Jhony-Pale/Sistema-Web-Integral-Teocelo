@@ -110,6 +110,16 @@ function CitizenOptions({ handleLogout, userName }) {
             Cerrar sesión
           </button>
         </Link>
+        <Link
+          to="/perfile"
+          className={`bg-white border-[#6d1610] border-2 p-1 rounded-full ${
+            isMobile ? "w-1/2" : "w-2/3"
+          }`}
+        >
+          <button className="bg-[#6d1610] text-white rounded-full font-montserrat text-2xl lg:text-3xl py-1 px-5 w-full">
+            Perfil
+          </button>
+        </Link>
       </div>
     </div>
   );

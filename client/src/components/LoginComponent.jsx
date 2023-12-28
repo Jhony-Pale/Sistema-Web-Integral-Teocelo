@@ -78,7 +78,7 @@ function LoginComponent() {
                   className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                 />
                 {errors.email && (
-                  <p className="text-red-500">Email is required</p>
+                  <p className="text-red-500">Se requiere el correo electrónico</p>
                 )}
               </div>
               <div className={errors.password ? "mb-5" : "mb-10"}>
@@ -106,7 +106,7 @@ function LoginComponent() {
                   </div>
                 </div>
                 {errors.password && (
-                  <p className="text-red-500">Password is required</p>
+                  <p className="text-red-500">Se requiere la contraseña</p>
                 )}
               </div>
               <button

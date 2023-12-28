@@ -17,7 +17,7 @@ function Footer() {
           <p className="text-white text-3xl text-center font-extrabold font-serif">
             UBICACIÓN:
           </p>
-          <iframe style={{width: "100%", height: "220px"}} frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" src="https://maps.google.com/maps?width=721&amp;height=220&amp;hl=en&amp;q=Covarrubias%20s/n,%20Centro,%2091615%20Teocelo,%20Ver.%20Xalapa+(Ayuntamiento%20de%20Teocelo)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> <a href='http://maps-generator.com/es'></a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=ca0c11d06024c73ce7c58bbd91af13cc8a5b9f32'></script>
+          <iframe style={{width: "100%", height: "220px", margin: "0", frameborder: "0"}} scrolling="no"  id="gmap_canvas" src="https://maps.google.com/maps?width=721&amp;height=220&amp;hl=en&amp;q=Covarrubias%20s/n,%20Centro,%2091615%20Teocelo,%20Ver.%20Xalapa+(Ayuntamiento%20de%20Teocelo)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> <a href='http://maps-generator.com/es'></a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=ca0c11d06024c73ce7c58bbd91af13cc8a5b9f32'></script>
         </div>
         <div className="grid grid-rows-2 shrink-0 gap-8 px-2 lg:px-0 lg:ml-20 font-montserrat">
           <div className="flex items-center justify-start gap-5">
