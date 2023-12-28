@@ -247,17 +247,15 @@ function NavBar() {
                       options={{
                         title: "TURISMO",
                         others: {
-                          "Opción 1": "#",
-                          "Opción 2": "#",
-                          "Opción 3": "#",
+                          TURISMO: "/tourism",
                         },
                       }}
                     />
                     <NavBarOptionsMobileVersion
                       options={{
-                        title: "TRÁMITES Y SERVICIOS",
+                        title: "MEJORA REGULATORIA",
                         others: {
-                          INICIO: "#",
+                          INICIO: "/procedures-and-services",
                         },
                       }}
                     />
@@ -333,9 +331,7 @@ function NavBar() {
                   options={{
                     title: "TURISMO",
                     others: {
-                      "Opción 1": "#",
-                      "Opción 2": "#",
-                      "Opción 3": "#",
+                      TURISMO: "/tourism",
                     },
                   }}
                 />
@@ -344,7 +340,7 @@ function NavBar() {
                   options={{
                     title: "MEJORA REGULATORIA",
                     others: {
-                      INICIO: "#",
+                      INICIO: "/procedures-and-services",
                     },
                   }}
                 />
@@ -383,7 +379,7 @@ function NavBar() {
             <DialogBody>
               {isAuthenticated ? (
                 <>
-                  {user.rol === "employee.sc" && ( /* Comunicación social */
+                  {user.rol === "employee.sc" /* Comunicación social */ && (
                     <>
                       <SCOptions
                         handleLogout={handleLogout}
@@ -391,7 +387,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.sl" && ( /* Alumbrado público */
+                  {user.rol === "employee.sl" /* Alumbrado público */ && (
                     <>
                       <SLOptions
                         handleLogout={handleLogout}
@@ -399,7 +395,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.dw" && ( /* Agua potable */
+                  {user.rol === "employee.dw" /* Agua potable */ && (
                     <>
                       <DWOptions
                         handleLogout={handleLogout}
@@ -407,7 +403,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.es" && ( /* Medio ambiente */
+                  {user.rol === "employee.es" /* Medio ambiente */ && (
                     <>
                       <ESOptions
                         handleLogout={handleLogout}
@@ -415,7 +411,7 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.cs" && ( /* Contraloría */
+                  {user.rol === "employee.cs" /* Contraloría */ && (
                     <>
                       <CSOptions
                         handleLogout={handleLogout}

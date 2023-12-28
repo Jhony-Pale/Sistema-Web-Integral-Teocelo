@@ -37,6 +37,8 @@ import NatureFormsPage from "./pages/citizen/NatureFormsPage";
 import ESRequestsPage from "./pages/employee.es/ESRequestsPage";
 import ComplaintFormPage from "./pages/citizen/ComplaintFormPage";
 import CSComplaintsPage from "./pages/employee.cs/CSComplaintsPage";
+import TourismPage from "./pages/TourismPage";
+import PServicesPage from "./pages/PServicesPage";
 
 function App() {
   const location = useLocation();
@@ -69,6 +71,8 @@ function App() {
             path="/fortamun-evaluation"
             element={<FORTAMUNEvaluationPage />}
           />
+          <Route path="/tourism" element={<TourismPage />} />
+          <Route path="/procedures-and-services" element={<PServicesPage />} />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<ProtectedRolRoute rolRoute="employee.sc" />}>
