@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useExtaData } from "../../context/ExtraDataContext";
 import { useLamps } from "../../context/LampContext";
 import { useNavigate } from "react-router-dom";
-import { Collapse } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import InputSelect from "../../components/InputSelect";
 import HeaderTittle from "../../components/HeaderTittle";
+import AlertMessage from "../../components/AlertMessage";
 
 const options = ["LED", "Antigua", "Cucharón"];
 
@@ -19,7 +19,6 @@ function LampFormsPage({ type }) {
     createLampReport,
     errors: createLampErrors,
   } = useLamps();
-  const [collapseErrors, setCollapseErrors] = useState(false);
   const {
     register,
     handleSubmit,
@@ -42,18 +41,6 @@ function LampFormsPage({ type }) {
     setValue("typeLamp", op);
   };
 
-  useEffect(() => {
-    if (createLampErrors.length > 0) {
-      setCollapseErrors(true);
-
-      const timer = setTimeout(() => {
-        setCollapseErrors(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [createLampErrors]);
-
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
       <HeaderTittle
@@ -63,14 +50,20 @@ function LampFormsPage({ type }) {
             : "Reportar luminaria descompuesta"
         }
       />
-      <div className="m-10">
-        <Collapse open={collapseErrors}>
-          <div>
-            {createLampErrors.map((error, i) => (
+      <div className="m-10 overflow-hidden">
+        <AnimatePresence mode="sync">
+          {createLampErrors.map((error, i) => (
+            <motion.div
+              key={i}
+              initial={{ height: 0, y: -10, opacity: 0 }}
+              animate={{ height: 48, y: 0, opacity: 1 }}
+              exit={{ height: 0, y: -10, opacity: 0 }}
+              transition={{ type: "spring", delay: i * 0.2 }}
+            >
               <AlertMessage key={i} message={error} />
-            ))}
-          </div>
-        </Collapse>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       <form onSubmit={onSubmit} className="mx-24 my-10 flex flex-col gap-10">
         <div className="flex items-center">
@@ -134,7 +127,23 @@ function LampFormsPage({ type }) {
             <input
               type="text"
               placeholder="Calle"
-              {...register("street", { required: true })}
+              {...register("street", {
+                required: "Se requiere la calle",
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Solo se permiten letras",
+                },
+                maxLength: {
+                  value: 25,
+                  message: "No debe exceder los 25 caracteres",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+              maxLength={25}
+              minLength={6}
               className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${
                 errors.street
                   ? "border-red-500 placeholder-red-500"
@@ -143,7 +152,7 @@ function LampFormsPage({ type }) {
             />
             {errors.street && (
               <p className="text-red-500 absolute -bottom-6">
-                La calle es requerida.
+                {errors.street.message}
               </p>
             )}
           </div>
@@ -154,7 +163,18 @@ function LampFormsPage({ type }) {
             <input
               type="text"
               placeholder="Número"
-              {...register("number", { required: true })}
+              {...register("number", {
+                required: "Se requiere el número",
+                pattern: {
+                  value: /^[a-zA-Z0-9]+$/,
+                  message: "Solo se permiten letras y números",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "No debe exceder los 10 caracteres",
+                },
+              })}
+              maxLength={10}
               className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${
                 errors.number
                   ? "border-red-500 placeholder-red-500"
@@ -163,7 +183,7 @@ function LampFormsPage({ type }) {
             />
             {errors.number && !isMobile && (
               <p className="text-red-500 absolute -bottom-6">
-                El número es requerido.
+                {errors.number.message}
               </p>
             )}
           </div>
@@ -174,12 +194,32 @@ function LampFormsPage({ type }) {
             <input
               type="text"
               placeholder="Colonia"
-              {...register("colony", { required: true })}
-              className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${errors.colony ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
+              {...register("colony", {
+                required: "Se requiere la colonia",
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Solo se permiten letras",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "No debe exceder los 20 caracteres",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+              maxLength={20}
+              minLength={6}
+              className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${
+                errors.colony
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-black placeholder-blue-gray-200"
+              }`}
             />
             {errors.colony && (
               <p className="text-red-500 absolute -bottom-6">
-                La colonia es requerida.
+                {errors.colony.message}
               </p>
             )}
           </div>
@@ -190,8 +230,28 @@ function LampFormsPage({ type }) {
             <input
               type="text"
               placeholder="Localidad"
-              {...register("town", { required: true })}
-              className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${errors.town ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
+              {...register("town", {
+                required: "Se requiere la localidad",
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Solo se permiten letras",
+                },
+                maxLength: {
+                  value: 15,
+                  message: "No debe exceder los 15 caracteres",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+              maxLength={15}
+              minLength={6}
+              className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${
+                errors.town
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-black placeholder-blue-gray-200"
+              }`}
             />
             {errors.town && (
               <p className="text-red-500 absolute -bottom-6">
@@ -204,10 +264,26 @@ function LampFormsPage({ type }) {
           <div className="grow w-min">
             <p className="px-4 text-center font-montserrat font-bold text-black text-xl lg:text-3xl">
               {type === "request" ? "Comentarios adicionales" : "Referencia"}
+              {errors.commentsCitizen && (
+                <p className="text-red-500 text-lg font-normal">
+                  {errors.commentsCitizen.message}
+                </p>
+              )}
             </p>
             <div className="flex justify-center w-full">
               <textarea
-                {...register("commentsCitizen", { required: false })}
+                {...register("commentsCitizen", {
+                  required: false,
+                  pattern: {
+                    value: /^[a-zA-Z0-9\s.,]+$/,
+                    message: "Solo se permiten letras, números, comas y puntos",
+                  },
+                  maxLength: {
+                    value: 500,
+                    message: "No debe exceder los 500 caracteres",
+                  },
+                })}
+                maxLength={500}
                 className="text-black px-4 py-2 rounded-md border border-black resize-none shadow w-full lg:w-2/3"
                 placeholder={
                   type === "request"
@@ -217,6 +293,8 @@ function LampFormsPage({ type }) {
                 rows={8}
               ></textarea>
             </div>
+              
+              
           </div>
           {type === "report" && (
             <div className={isMobile ? "grow" : ""}>

@@ -18,7 +18,7 @@ import HeaderTittle from "../../components/HeaderTittle";
 const options = ["Entregada", "En revisión", "Aceptada", "Rechazada"];
 
 function ESRequestsPage({ type }) {
-  const { handleSubmit, setValue } = useForm();
+  const { handleSubmit, setValue, getValues } = useForm();
   const [inputValue, setInputValue] = useState("");
   const [inputComments, setInputComments] = useState(true);
   const [natureUpdateStatus, setNatureUpdateStatus] = useState(null);
@@ -78,6 +78,13 @@ function ESRequestsPage({ type }) {
 
   const handleChangeTextarea = (event) => {
     const newValue = event.target.value;
+    const regex = /^[a-zA-Z0-9\s.,]+$/;
+
+    if (!regex.test(newValue) && newValue !== "") {
+      event.target.value = getValues("commentsEmployee")
+      return
+    }
+
     setValue("commentsEmployee", newValue);
   };
 
@@ -402,6 +409,7 @@ function ESRequestsPage({ type }) {
             rows={8}
             onChange={handleChangeTextarea}
             disabled={!inputComments}
+            maxLength={500}
           ></textarea>
         </DialogBody>
         <DialogFooter>

@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useExtaData } from "../../context/ExtraDataContext";
 import { useNavigate } from "react-router-dom";
 import { Collapse } from "@material-tailwind/react";
@@ -23,20 +23,19 @@ function ComplaintFormPage() {
     formState: { errors },
   } = useForm();
   const { createComplaint, errors: createComplaintErrors } = useComplaint();
-  const [collapseErrors, setCollapseErrors] = useState(false);
   const [apellidoPaterno, apellidoMaterno] = user.lastname.split(" ");
   const navigate = useNavigate();
   const [isChecked, setChecked] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(null);
 
   const handleChangeCheckBox = () => {
-    setChecked(prev => !prev);
+    setChecked((prev) => !prev);
   };
 
   useEffect(() => {
-    if(isChecked) setTermsAccepted(false)
-    else setTermsAccepted(true)
-  } , [isChecked])
+    if (isChecked) setTermsAccepted(false);
+    else setTermsAccepted(true);
+  }, [isChecked]);
 
   const [date, setDate] = useState("");
   const dateInputRef = useRef(null);
@@ -46,7 +45,7 @@ function ComplaintFormPage() {
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    if(!isChecked) return setTermsAccepted(true)
+    if (!isChecked) return setTermsAccepted(true);
 
     const formData = new FormData();
 
@@ -73,24 +72,11 @@ function ComplaintFormPage() {
     } catch (error) {}
   });
 
-  useEffect(() => {
-    if (createComplaintErrors.length > 0) {
-      setCollapseErrors(true);
-
-      const timer = setTimeout(() => {
-        setCollapseErrors(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [createComplaintErrors]);
-
   const formatDate = (date) => {
     const year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
 
-    // Agrega un cero delante del mes/día si es necesario
     if (month < 10) {
       month = `0${month}`;
     }
@@ -111,14 +97,20 @@ function ComplaintFormPage() {
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
       <HeaderTittle title={"Quejas y/o denuncias contra servidores públicos"} />
-      <div className="m-10">
-        <Collapse open={collapseErrors}>
-          <div>
-            {createComplaintErrors.map((error, i) => (
+      <div className="m-10 overflow-hidden">
+        <AnimatePresence mode="sync">
+          {createComplaintErrors.map((error, i) => (
+            <motion.div
+              key={i}
+              initial={{ height: 0, y: -10, opacity: 0 }}
+              animate={{ height: 48, y: 0, opacity: 1 }}
+              exit={{ height: 0, y: -10, opacity: 0 }}
+              transition={{ type: "spring", delay: i * 0.2 }}
+            >
               <AlertMessage key={i} message={error} />
-            ))}
-          </div>
-        </Collapse>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
       <form onSubmit={onSubmit} className="font-montserrat mx-16">
@@ -129,7 +121,11 @@ function ComplaintFormPage() {
               type="date"
               onChange={handleChange}
               defaultValue={formatDate(new Date())}
-              className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.date ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
+              className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                errors.date
+                  ? "border-red-500 placeholder-red-500"
+                  : "border-black placeholder-blue-gray-200"
+              }`}
               ref={dateInputRef}
               {...register("date", { required: true })}
             />
@@ -146,15 +142,30 @@ function ComplaintFormPage() {
               <input
                 type="text"
                 defaultValue={user.firstname}
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.firstname ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("firstname", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.firstname
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("firstname", {
+                  required: "Se requiere el nombre",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 25,
+                    message: "No debe exceder los 25 caracteres",
+                  },
+                })}
+                maxLength={25}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su(s) nombre(s)
               </p>
             </div>
             {errors.firstname && (
-              <p className="text-red-500">Se requiere el nombre</p>
+              <p className="text-red-500">{errors.firstname.message}</p>
             )}
           </div>
           <div className="w-[45%] lg:w-[30%]">
@@ -165,15 +176,30 @@ function ComplaintFormPage() {
               <input
                 type="text"
                 defaultValue={apellidoPaterno ?? ""}
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.lastnameP ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("lastnameP", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.lastnameP
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("lastnameP", {
+                  required: "Se requiere el apellido paterno",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "No debe exceder los 15 caracteres",
+                  },
+                })}
+                maxLength={15}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su apellido paterno
               </p>
             </div>
             {errors.lastnameP && (
-              <p className="text-red-500">Se requiere el apellido paterno</p>
+              <p className="text-red-500">{errors.lastnameP.message}</p>
             )}
           </div>
           <div className="w-[45%] lg:w-[30%]">
@@ -182,15 +208,30 @@ function ComplaintFormPage() {
               <input
                 type="text"
                 defaultValue={apellidoMaterno ?? ""}
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.lastnameM ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("lastnameM", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.lastnameM
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("lastnameM", {
+                  required: "Se requiere el apellido materno",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "No debe exceder los 15 caracteres",
+                  },
+                })}
+                maxLength={15}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su apellido materno
               </p>
             </div>
             {errors.lastnameM && (
-              <p className="text-red-500">Se requiere el apellido materno</p>
+              <p className="text-red-500">{errors.lastnameM.message}</p>
             )}
           </div>
           <div className="w-[45%] lg:w-[30%]">
@@ -198,15 +239,35 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.phonenumber ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("phonenumber", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.phonenumber
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("phonenumber", {
+                  required: "Se requiere el número de teléfono",
+                  pattern: {
+                    value: /^[0-9]+$/,
+                    message: "Solo se permiten números",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "Debe tener 10 dígitos",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "Debe tener 10 dígitos",
+                  },
+                })}
+                maxLength={10}
+                minLength={10}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su número de télefono a 10 dígitos
               </p>
             </div>
             {errors.phonenumber && (
-              <p className="text-red-500">Se requiere el número de teléfono</p>
+              <p className="text-red-500">{errors.phonenumber.message}</p>
             )}
           </div>
           <div className="w-[45%] lg:w-[30%]">
@@ -214,15 +275,26 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="email"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.email1 ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("email1", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.email1
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("email1", {
+                  required: "Se requiere el correo electrónico",
+                  maxLength: {
+                    value: 50,
+                    message: "No debe exceder los 50 caracteres",
+                  },
+                })}
+                maxLength={50}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su correo electrónico
               </p>
             </div>
             {errors.email1 && (
-              <p className="text-red-500">Se requiere el correo electrónico</p>
+              <p className="text-red-500">{errors.email1.message}</p>
             )}
           </div>
           <div className="w-[45%] lg:w-[30%]">
@@ -232,21 +304,27 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="email"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.email2 ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.email2
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
                 {...register("email2", {
-                  required: true,
+                  required: "Se requiere que confirme el correo electrónico",
                   validate: validateEmails,
+                  maxLength: {
+                    value: 50,
+                    message: "No debe exceder los 50 caracteres",
+                  },
                 })}
+                maxLength={50}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Confirme su correo electrónico
               </p>
             </div>
             {errors.email2 && (
-              <p className="text-red-500">
-                {errors.email2.message ||
-                  "Se requiere que confirme el correo electrónico"}
-              </p>
+              <p className="text-red-500">{errors.email2.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[20%]">
@@ -254,15 +332,35 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.colony ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("colony", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.colony
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("colony", {
+                  required: "Se requiere la colonia",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "No debe exceder los 20 caracteres",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Debe tener al menos 6 caracteres",
+                  },
+                })}
+                maxLength={20}
+                minLength={6}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su colonia
               </p>
             </div>
             {errors.colony && (
-              <p className="text-red-500">Se requiere la colonia</p>
+              <p className="text-red-500">{errors.colony.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[15%]">
@@ -270,15 +368,30 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="number"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.pcode ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("pcode", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.pcode
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("pcode", {
+                  required: "Se requiere el código postal",
+                  pattern: {
+                    value: /^[0-9]+$/,
+                    message: "Solo se permiten letras y números",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "No debe exceder los 10 caracteres",
+                  },
+                })}
+                maxLength={10}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su código postal
               </p>
             </div>
             {errors.pcode && (
-              <p className="text-red-500">Se requiere el código postal</p>
+              <p className="text-red-500">{errors.pcode.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[35%]">
@@ -286,15 +399,35 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.street ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("street", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.street
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("street", {
+                  required: "Se requiere la calle",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 25,
+                    message: "No debe exceder los 25 caracteres",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Debe tener al menos 6 caracteres",
+                  },
+                })}
+                minLength={6}
+                maxLength={25}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba el nombre de su calle
               </p>
             </div>
             {errors.street && (
-              <p className="text-red-500">Se requiere la calle</p>
+              <p className="text-red-500">{errors.street.message}</p>
             )}
           </div>
           <div className="w-[45%] lg:w-[10%]">
@@ -302,15 +435,30 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.outnumber ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("outnumber", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.outnumber
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("outnumber", {
+                  required: "Se requiere el núm. ext.",
+                  pattern: {
+                    value: /^[a-zA-Z0-9]+$/,
+                    message: "Solo se permiten letras y números",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "No debe exceder los 10 caracteres",
+                  },
+                })}
+                maxLength={10}
               />
               <p className="text-center py-2 lg:py-1 text-[#6D1610] font-bold text-lg lg:text-sm">
                 Núm. exterior de su domicilio
               </p>
             </div>
             {errors.outnumber && (
-              <p className="text-red-500">Se requiere el núm. ext.</p>
+              <p className="text-red-500">{errors.outnumber.message}</p>
             )}
           </div>
           <div className="w-[45%] lg:w-[10%]">
@@ -318,15 +466,30 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.innumber ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("innumber", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.innumber
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("innumber", {
+                  required: "Se requiere el núm. int.",
+                  pattern: {
+                    value: /^[a-zA-Z0-9]+$/,
+                    message: "Solo se permiten letras y números",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "No debe exceder los 10 caracteres",
+                  },
+                })}
+                maxLength={10}
               />
               <p className="text-center py-2 lg:py-1 text-[#6D1610] font-bold text-lg lg:text-sm">
                 Núm. interior de su domicilio
               </p>
             </div>
             {errors.innumber && (
-              <p className="text-red-500">Se requiere el núm. int.</p>
+              <p className="text-red-500">{errors.innumber.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[30%]">
@@ -336,17 +499,35 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.staffname ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("staffname", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.staffname
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("staffname", {
+                  required: "Se requiere el nombre del servidor público",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: "No debe exceder los 50 caracteres",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Debe tener al menos 6 caracteres",
+                  },
+                })}
+                minLength={6}
+                maxLength={50}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba el nombre del servidor público
               </p>
             </div>
             {errors.staffname && (
-              <p className="text-red-500">
-                Se requiere el nombre del servidor público.
-              </p>
+              <p className="text-red-500">{errors.staffname.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[30%]">
@@ -354,17 +535,35 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.staffcharge ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("staffcharge", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.staffcharge
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("staffcharge", {
+                  required: "Se requiere el cargo del servidor público",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 25,
+                    message: "No debe exceder los 25 caracteres",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Debe tener al menos 6 caracteres",
+                  },
+                })}
+                minLength={6}
+                maxLength={25}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba el cargo del servidor público
               </p>
             </div>
             {errors.staffcharge && (
-              <p className="text-red-500">
-                Se requiere el cargo del servidor público.
-              </p>
+              <p className="text-red-500">{errors.staffcharge.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[30%]">
@@ -372,17 +571,30 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
                 type="text"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${errors.staffarea ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
-                {...register("staffarea", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
+                  errors.staffarea
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                }`}
+                {...register("staffarea", {
+                  required: "Se requiere el área del servidor público",
+                  pattern: {
+                    value: /^[a-zA-Z0-9\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "No debe exceder los 20 caracteres",
+                  },
+                })}
+                maxLength={20}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba el nombre de área del servidor público
               </p>
             </div>
             {errors.staffarea && (
-              <p className="text-red-500">
-                Se requiere el área del servidor público.
-              </p>
+              <p className="text-red-500">{errors.staffarea.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[60%]">
@@ -392,8 +604,23 @@ function ComplaintFormPage() {
             <div className="bg-[#F1F1F1] border-2 border-black">
               <textarea
                 rows="10"
-                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 border-b-2 ${errors.commentsCitizen ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"} resize-none`}
-                {...register("commentsCitizen", { required: true })}
+                className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 border-b-2 ${
+                  errors.commentsCitizen
+                    ? "border-red-500 placeholder-red-500"
+                    : "border-black placeholder-blue-gray-200"
+                } resize-none`}
+                {...register("commentsCitizen", {
+                  required: "Se requiere la explicación.",
+                  pattern: {
+                    value: /^[a-zA-Z0-9\s.,]+$/,
+                    message: "Solo se permiten letras, números, comas y puntos",
+                  },
+                  maxLength: {
+                    value: 800,
+                    message: "No debe exceder los 800 caracteres",
+                  },
+                })}
+                maxLength={800}
               ></textarea>
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba de manera clara y concreta los hechos que provoquen su
@@ -401,7 +628,7 @@ function ComplaintFormPage() {
               </p>
             </div>
             {errors.commentsCitizen && (
-              <p className="text-red-500">Se requiere la explicación.</p>
+              <p className="text-red-500">{errors.commentsCitizen.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[30%]">

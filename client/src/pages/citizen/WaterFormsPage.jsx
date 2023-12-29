@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useExtaData } from "../../context/ExtraDataContext";
 import { useNavigate } from "react-router-dom";
-import { Collapse } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
 import { useWater } from "../../context/WaterContext";
 import InputSelect from "../../components/InputSelect";
 import AlertMessage from "../../components/AlertMessage";
@@ -21,7 +19,6 @@ function WaterFormsPage({ type }) {
     createWaterReport,
     errors: createWaterErrors,
   } = useWater();
-  const [collapseErrors, setCollapseErrors] = useState(false);
   const {
     register,
     handleSubmit,
@@ -43,18 +40,6 @@ function WaterFormsPage({ type }) {
     setValue("typeConecton", op);
   };
 
-  useEffect(() => {
-    if (createWaterErrors.length > 0) {
-      setCollapseErrors(true);
-
-      const timer = setTimeout(() => {
-        setCollapseErrors(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [createWaterErrors]);
-
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
       <HeaderTittle
@@ -64,14 +49,20 @@ function WaterFormsPage({ type }) {
             : "Reportar tubería de agua o drenaje dañada"
         }
       />
-      <div className="m-10">
-        <Collapse open={collapseErrors}>
-          <div>
-            {createWaterErrors.map((error, i) => (
+      <div className="m-10 overflow-hidden">
+        <AnimatePresence mode="sync">
+          {createWaterErrors.map((error, i) => (
+            <motion.div
+              key={i}
+              initial={{ height: 0, y: -10, opacity: 0 }}
+              animate={{ height: 48, y: 0, opacity: 1 }}
+              exit={{ height: 0, y: -10, opacity: 0 }}
+              transition={{ type: "spring", delay: i * 0.2 }}
+            >
               <AlertMessage key={i} message={error} />
-            ))}
-          </div>
-        </Collapse>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       <form onSubmit={onSubmit} className="mx-24 my-10 flex flex-col gap-10">
         <div className="flex items-center">
@@ -135,12 +126,28 @@ function WaterFormsPage({ type }) {
             <input
               type="text"
               placeholder="Calle"
-              {...register("street", { required: true })}
+              {...register("street", {
+                required: "Se requiere la calle",
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Solo se permiten letras",
+                },
+                maxLength: {
+                  value: 25,
+                  message: "No debe exceder los 25 caracteres",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+              minLength={6}
+              maxLength={25}
               className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
             />
             {errors.street && (
               <p className="text-red-500 absolute -bottom-6">
-                La calle es requerida.
+                {errors.street.message}
               </p>
             )}
           </div>
@@ -151,7 +158,18 @@ function WaterFormsPage({ type }) {
             <input
               type="text"
               placeholder="Número"
-              {...register("number", { required: true })}
+              {...register("number", {
+                required: "Se requiere el número",
+                pattern: {
+                  value: /^[a-zA-Z0-9]+$/,
+                  message: "Solo se permiten letras y números",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "No debe exceder los 10 digitos",
+                },
+              })}
+              maxLength={10}
               className={`w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 ${
                 errors.number && isMobile
                   ? "border-red-500 placeholder-red-500"
@@ -160,7 +178,7 @@ function WaterFormsPage({ type }) {
             />
             {errors.number && !isMobile && (
               <p className="text-red-500 absolute -bottom-6">
-                El número es requerido.
+                {errors.number.message}
               </p>
             )}
           </div>
@@ -171,12 +189,28 @@ function WaterFormsPage({ type }) {
             <input
               type="text"
               placeholder="Colonia"
-              {...register("colony", { required: true })}
+              {...register("colony", {
+                required: "Se requiere la colonia",
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Solo se permiten letras",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "No debe exceder los 20 caracteres",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+              maxLength={20}
+              minLength={6}
               className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
             />
             {errors.colony && (
               <p className="text-red-500 absolute -bottom-6">
-                La colonia es requerida.
+                {errors.colony.message}
               </p>
             )}
           </div>
@@ -187,12 +221,28 @@ function WaterFormsPage({ type }) {
             <input
               type="text"
               placeholder="Localidad"
-              {...register("town", { required: true })}
+              {...register("town", {
+                required: "Se requiere la localidad",
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Solo se permiten letras",
+                },
+                maxLength: {
+                  value: 15,
+                  message: "No debe exceder los 15 caracteres",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Debe tener al menos 6 caracteres",
+                },
+              })}
+              maxLength={15}
+              minLength={6}
               className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
             />
             {errors.town && (
               <p className="text-red-500 absolute -bottom-6">
-                La localidad es requerida.
+                {errors.town.message}
               </p>
             )}
           </div>
@@ -233,13 +283,27 @@ function WaterFormsPage({ type }) {
               <p className="px-4 text-center font-montserrat font-bold text-black text-xl lg:text-3xl">
                 Comentarios adicionales
               </p>
-              <div className="flex justify-center w-full">
+              <div className="flex flex-col items-center w-full">
                 <textarea
-                  {...register("commentsCitizen", { required: false })}
+                  {...register("commentsCitizen", {
+                    required: false,
+                    pattern: {
+                      value: /^[a-zA-Z0-9\s.,]+$/,
+                      message: "Solo se permiten letras, números, comas y puntos",
+                    },
+                    maxLength: {
+                      value: 500,
+                      message: "No debe exceder los 500 caracteres",
+                    },
+                  })}
+                  maxLength={500}
                   className="text-black px-4 py-2 rounded-md border border-black resize-none shadow w-full lg:w-2/3"
                   placeholder="Tipo de daño, magnitud del problema, referencias para encontrar la tubería, etc. "
                   rows={8}
                 ></textarea>
+                {errors.commentsCitizen && (
+              <p className="text-red-500">{errors.commentsCitizen.message}</p>
+            )}
               </div>
             </div>
           )}

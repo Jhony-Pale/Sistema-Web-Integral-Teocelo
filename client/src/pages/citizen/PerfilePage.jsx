@@ -4,7 +4,6 @@ import { useAuth } from "../../context/AuthContext";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useReactToPrint } from "react-to-print";
-import { useExtaData } from "../../context/ExtraDataContext";
 import AlertMessage from "../../components/AlertMessage";
 import PrintComponent from "../../components/PrintComponent";
 import HeaderTittle from "../../components/HeaderTittle";
@@ -22,7 +21,6 @@ function PerfilePage() {
     updateUser,
     errors: updateErrors,
   } = useAuth();
-  const { documentUrl } = useExtaData();
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingHistory, setLoadingHistory] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -45,7 +43,7 @@ function PerfilePage() {
   }, [dataSelected]);
 
   const handleWater = async (documentName) => {
-    try{
+    try {
       const res = await getFile(documentName);
       const url = URL.createObjectURL(res.data);
       const a = document.createElement("a");
@@ -55,7 +53,7 @@ function PerfilePage() {
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-    } catch(error){}
+    } catch (error) {}
   };
 
   const onSubmit = handleSubmit(async (data) => {
@@ -158,7 +156,18 @@ function PerfilePage() {
                   errors.firstname ? "border-red-500" : "border-black"
                 } py-2 pl-4 pr-12 w-full rounded-md`}
                 defaultValue={userData.firstname}
-                {...register("firstname", { required: true })}
+                {...register("firstname", {
+                  required: "Se requiere el nombre",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 25,
+                    message: "No debe exceder los 25 caracteres",
+                  },
+                })}
+                maxLength={25}
               />
               <FaRegEdit
                 className="absolute right-2 bottom-2 cursor-pointer"
@@ -168,7 +177,7 @@ function PerfilePage() {
             </div>
             {errors.firstname && (
               <p className="text-red-500 absolute">
-                Se requiere el campo nombre(s)
+                {errors.firstname.message}
               </p>
             )}
           </div>
@@ -181,7 +190,18 @@ function PerfilePage() {
                   errors.lastname ? "border-red-500" : "border-black"
                 } py-2 pl-4 pr-12 w-full rounded-md`}
                 defaultValue={userData.lastname}
-                {...register("lastname", { required: true })}
+                {...register("lastname", {
+                  required: "Se requieren los apellidos",
+                  pattern: {
+                    value: /^[a-zA-Z\s]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 25,
+                    message: "No debe exceder los 25 caracteres",
+                  },
+                })}
+                maxLength={25}
               />
               <FaRegEdit
                 className="absolute right-2 bottom-2 cursor-pointer"
@@ -190,9 +210,7 @@ function PerfilePage() {
               />
             </div>
             {errors.lastname && (
-              <p className="text-red-500 absolute">
-                Se requieren los apellidos
-              </p>
+              <p className="text-red-500 absolute">{errors.lastname.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[30%] relative">
@@ -204,7 +222,23 @@ function PerfilePage() {
                   errors.phonenumber ? "border-red-500" : "border-black"
                 } py-2 pl-4 pr-12 w-full rounded-md`}
                 defaultValue={userData.phonenumber ?? ""}
-                {...register("phonenumber", { required: true })}
+                {...register("phonenumber", {
+                  required: "Se requiere el número de teléfono",
+                  pattern: {
+                    value: /^[0-9]+$/,
+                    message: "Solo se permiten letras",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "Debe tener 10 dígitos",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "Debe tener 10 dígitos",
+                  },
+                })}
+                maxLength={10}
+                minLength={10}
               />
               <FaRegEdit
                 className="absolute right-2 bottom-2 cursor-pointer"
@@ -214,7 +248,7 @@ function PerfilePage() {
             </div>
             {errors.phonenumber && (
               <p className="text-red-500 absolute">
-                Se requiere el número de teléfono
+                {errors.phonenumber.message}
               </p>
             )}
           </div>
@@ -227,7 +261,14 @@ function PerfilePage() {
                   errors.email ? "border-red-500" : "border-black"
                 } py-2 pl-4 pr-12 w-full rounded-md`}
                 defaultValue={userData.email}
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: "Se requiere el correo electrónico",
+                  maxLength: {
+                    value: 50,
+                    message: "No debe exceder los 50 caracteres",
+                  },
+                })}
+                maxLength={50}
               />
               <FaRegEdit
                 className="absolute right-2 bottom-2 cursor-pointer"
@@ -236,9 +277,7 @@ function PerfilePage() {
               />
             </div>
             {errors.email && (
-              <p className="text-red-500 absolute">
-                Se requiere el número de teléfono
-              </p>
+              <p className="text-red-500 absolute">{errors.email.message}</p>
             )}
           </div>
           <div className="w-full lg:w-[30%]">

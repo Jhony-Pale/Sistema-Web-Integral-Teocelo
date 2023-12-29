@@ -8,18 +8,18 @@ import {
   TabsBody,
   TabsHeader,
   Typography,
-  Alert,
-  Collapse,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
-import { GoEyeClosed, GoAlertFill } from "react-icons/go";
+import { GoEyeClosed } from "react-icons/go";
 import { Link } from "react-router-dom";
-import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
-import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import { useAuth } from "../context/AuthContext";
 import { useExtaData } from "../context/ExtraDataContext";
+import { AnimatePresence, motion } from "framer-motion";
+import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
+import EscudoVertical from "../assets/Logos/EscudoVertical.png";
+import AlertMessage from "./AlertMessage";
 
 function LoginRegisterMV() {
   const {
@@ -37,7 +37,6 @@ function LoginRegisterMV() {
   const [type, setType] = useState(isLogin ? "login" : "register");
   const [showPasswordL, setShowPasswordL] = useState(false);
   const [showPasswordR, setShowPasswordR] = useState(false);
-  const [collapseErrors, setCollapseErrors] = useState(false);
 
   const onSubmitLogin = handleSubmit((data) => {
     signin(data);
@@ -50,18 +49,6 @@ function LoginRegisterMV() {
   useEffect(() => {
     if (signInOutErrors.length > 0) setErrors([]);
   }, [type]);
-
-  useEffect(() => {
-    if (signInOutErrors.length > 0) {
-      setCollapseErrors(true);
-
-      const timer = setTimeout(() => {
-        setCollapseErrors(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [signInOutErrors]);
 
   const showInputPasswordL = () => setShowPasswordL(!showPasswordL);
   const showInputPasswordR = () => setShowPasswordR(!showPasswordR);
@@ -123,30 +110,39 @@ function LoginRegisterMV() {
                   },
                 }}
               >
-                <Collapse open={collapseErrors} className="my-5">
-                  <div>
+                <div className="my-5 overflow-hidden">
+                  <AnimatePresence mode="sync">
                     {signInOutErrors.map((error, i) => (
-                      <Alert
-                        icon={<GoAlertFill size="1.5em" color="red" />}
-                        className="rounded-none border-l-4 border-[#c92e2e] bg-[#c92e2e]/10 font-medium text-[#c92e2e] mb-2"
+                      <motion.div
                         key={i}
+                        initial={{ height: 0, y: -10, opacity: 0 }}
+                        animate={{ height: 48, y: 0, opacity: 1 }}
+                        exit={{ height: 0, y: -10, opacity: 0 }}
+                        transition={{ type: "spring", delay: i * 0.2 }}
                       >
-                        {error}
-                      </Alert>
+                        <AlertMessage key={i} message={error} />
+                      </motion.div>
                     ))}
-                  </div>
-                </Collapse>
+                  </AnimatePresence>
+                </div>
                 <TabPanel value="login" className="p-0">
                   <form className="text-center" onSubmit={onSubmitLogin}>
                     <div className={`${errors.email ? "mb-5" : "mb-10"}`}>
                       <input
                         type="email"
                         placeholder="Correo electrónico"
-                        {...register("email", { required: true })}
+                        maxLength={50}
+                        {...register("email", {
+                          required: "Se requiere el correo electrónico",
+                          maxLength: {
+                            value: 50,
+                            message: "No debe exceder los 50 caracteres",
+                          },
+                        })}
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errors.email && (
-                        <p className="text-red-500">Se requiere el correo</p>
+                        <p className="text-red-500">{errors.email.message}</p>
                       )}
                     </div>
                     <div className={errors.password ? "mb-5" : "mb-10"}>
@@ -154,7 +150,23 @@ function LoginRegisterMV() {
                         <input
                           type={showPasswordL ? "text" : "password"}
                           placeholder="Contraseña"
-                          {...register("password", { required: true })}
+                          maxLength={25}
+                          {...register("password", {
+                            required: "Se requiere la contraseña",
+                            pattern: {
+                              value: /^[a-zA-Z0-9_\-\s@\$!%*?&]+$/,
+                              message:
+                                "Solo se permiten letras, números, espacios y los caracteres (-, _, @, $, !, %, *, ? y &)",
+                            },
+                            maxLength: {
+                              value: 25,
+                              message: "No debe exceder los 25 caracteres",
+                            },
+                            minLength: {
+                              value: 6,
+                              message: "Debe tener al menos 6 caracteres",
+                            },
+                          })}
                           className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
                         />
                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -174,7 +186,9 @@ function LoginRegisterMV() {
                         </div>
                       </div>
                       {errors.password && (
-                        <p className="text-red-500">Se requiere la contraseña</p>
+                        <p className="text-red-500">
+                          {errors.password.message}
+                        </p>
                       )}
                     </div>
                     <button
@@ -191,44 +205,95 @@ function LoginRegisterMV() {
                       <input
                         type="text"
                         placeholder="Nombre"
-                        {...registerR("firstname", { required: true })}
+                        maxLength={25}
+                        {...registerR("firstname", {
+                          required: "Se requiere el nombre",
+                          pattern: {
+                            value: /^[a-zA-Z\s]+$/,
+                            message: "Solo se permiten letras",
+                          },
+                          maxLength: {
+                            value: 25,
+                            message: "No debe exceder los 25 caracteres",
+                          },
+                        })}
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errorsR.firstname && (
-                        <p className="text-red-500">Se requiere el nombre</p>
+                        <p className="text-red-500">
+                          {errorsR.firstname.message}
+                        </p>
                       )}
                     </div>
                     <div className={errorsR.lastname ? "mb-4" : "mb-8"}>
                       <input
                         type="text"
                         placeholder="Apellidos"
-                        {...registerR("lastname", { required: true })}
+                        maxLength={25}
+                        {...registerR("lastname", {
+                          required: "Se requieren los apellidos",
+                          pattern: {
+                            value: /^[a-zA-Z\s]+$/,
+                            message: "Solo se permiten letras",
+                          },
+                          maxLength: {
+                            value: 25,
+                            message: "No debe exceder los 25 caracteres",
+                          },
+                        })}
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errorsR.lastname && (
-                        <p className="text-red-500">Se requiren los apellidos</p>
+                        <p className="text-red-500">
+                          {errorsR.lastname.message}
+                        </p>
                       )}
                     </div>
                     <div className={errorsR.phonenumber ? "mb-4" : "mb-8"}>
                       <input
                         type="text"
-                        placeholder="Apellidos"
-                        {...registerR("phonenumber", { required: true })}
+                        placeholder="Número de teléfono"
+                        maxLength={10}
+                        minLength={10}
+                        {...registerR("phonenumber", {
+                          required: "Se requiere el número de teléfono",
+                          pattern: {
+                            value: /^[0-9]+$/,
+                            message: "Solo se permiten letras",
+                          },
+                          maxLength: {
+                            value: 10,
+                            message: "Debe tener 10 dígitos",
+                          },
+                          minLength: {
+                            value: 10,
+                            message: "Debe tener 10 dígitos",
+                          },
+                        })}
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errorsR.phonenumber && (
-                        <p className="text-red-500">Se require el número de teléfono</p>
+                        <p className="text-red-500">
+                          {errorsR.phonenumber.message}
+                        </p>
                       )}
                     </div>
                     <div className={errorsR.email ? "mb-4" : "mb-8"}>
                       <input
                         type="text"
                         placeholder="Correo electrónico"
-                        {...registerR("email", { required: true })}
+                        maxLength={50}
+                        {...registerR("email", {
+                          required: "Se requiere el correo",
+                          maxLength: {
+                            value: 50,
+                            message: "No debe exceder los 50 caracteres",
+                          },
+                        })}
                         className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                       />
                       {errorsR.email && (
-                        <p className="text-red-500">Se requiere el correo</p>
+                        <p className="text-red-500">{errorsR.email.message}</p>
                       )}
                     </div>
                     <div className={errorsR.password ? "mb-5" : "mb-10"}>
@@ -236,7 +301,23 @@ function LoginRegisterMV() {
                         <input
                           type={showPasswordR ? "text" : "password"}
                           placeholder="Contraseña"
-                          {...registerR("password", { required: true })}
+                          maxLength={25}
+                          {...registerR("password", {
+                            required: "Se requiere la contraseña",
+                            pattern: {
+                              value: /^[a-zA-Z0-9_\-\s@\$!%*?&]+$/,
+                              message:
+                                "Solo se permiten letras, números, espacios y los caracteres (-, _, @, $, !, %, *, ? y &)",
+                            },
+                            maxLength: {
+                              value: 25,
+                              message: "No debe exceder los 25 caracteres",
+                            },
+                            minLength: {
+                              value: 6,
+                              message: "Debe tener al menos 6 caracteres",
+                            },
+                          })}
                           className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
                         />
                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -256,7 +337,9 @@ function LoginRegisterMV() {
                         </div>
                       </div>
                       {errorsR.password && (
-                        <p className="text-red-500">Se requiere la contraseña</p>
+                        <p className="text-red-500">
+                          {errorsR.password.message}
+                        </p>
                       )}
                     </div>
                     <button

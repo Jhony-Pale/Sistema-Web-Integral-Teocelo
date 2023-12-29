@@ -1,5 +1,4 @@
 import HeaderTittle from "../components/HeaderTittle";
-import { useExtaData } from "../context/ExtraDataContext";
 
 const titles = [
   "Secretaría del H. Ayuntamiento",
@@ -25,7 +24,6 @@ const titles = [
 ];
 
 function PServicesPage() {
-    const {isMobile} = useExtaData()
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
       <HeaderTittle title={"Cédulas de trámites y servicios"} />

@@ -1,11 +1,11 @@
-import { Collapse } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { GoEyeClosed } from "react-icons/go";
 import { useExtaData } from "../context/ExtraDataContext";
 import { useAuth } from "../context/AuthContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
 import EscudoVertical from "../assets/Logos/EscudoVertical.png";
 import AlertMessage from "./AlertMessage";
@@ -19,25 +19,12 @@ function LoginComponent() {
   const { signin, errors: signinErrors } = useAuth();
   const { changeIsLogin } = useExtaData();
   const [showPassword, setShowPassword] = useState(false);
-  const [collapseErrors, setCollapseErrors] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
     signin(data);
   });
 
   const showInputPassword = () => setShowPassword(!showPassword);
-
-  useEffect(() => {
-    if (signinErrors.length > 0) {
-      setCollapseErrors(true);
-
-      const timer = setTimeout(() => {
-        setCollapseErrors(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [signinErrors]);
 
   return (
     <div>
@@ -61,24 +48,38 @@ function LoginComponent() {
             <h1 className="font-playfair text-red-800 text-6xl text-center mb-10">
               ¡Bienvenido!
             </h1>
-            <Collapse open={collapseErrors}>
-              <div>
+            <div className="overflow-hidden">
+              <AnimatePresence mode="sync">
                 {signinErrors.map((error, i) => (
-                  <AlertMessage key={i} message={error} />
-                  
+                  <motion.div
+                    key={i}
+                    initial={{ height: 0, y: -10, opacity: 0 }}
+                    animate={{ height: 48, y: 0, opacity: 1 }}
+                    exit={{ height: 0, y: -10, opacity: 0 }}
+                    transition={{ type: "spring", delay: i * 0.2 }}
+                  >
+                    <AlertMessage key={i} message={error} />
+                  </motion.div>
                 ))}
-              </div>
-            </Collapse>
+              </AnimatePresence>
+            </div>
             <form className="text-center min-w-[405px]" onSubmit={onSubmit}>
               <div className={errors.email ? "my-5" : "my-10"}>
                 <input
                   type="text"
+                  maxLength={50}
                   placeholder="Correo electrónico"
-                  {...register("email", { required: true })}
+                  {...register("email", {
+                    required: "Se requiere el correo electrónico",
+                    maxLength: {
+                      value: 50,
+                      message: "No debe exceder los 50 caracteres",
+                    },
+                  })}
                   className="w-full text-black px-4 py-2 rounded-md border-2 border-black"
                 />
                 {errors.email && (
-                  <p className="text-red-500">Se requiere el correo electrónico</p>
+                  <p className="text-red-500">{errors.email.message}</p>
                 )}
               </div>
               <div className={errors.password ? "mb-5" : "mb-10"}>
@@ -86,7 +87,23 @@ function LoginComponent() {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Contraseña"
-                    {...register("password", { required: true })}
+                    maxLength={25}
+                    {...register("password", {
+                      required: "Se requiere la contraseña",
+                      pattern: {
+                        value: /^[a-zA-Z0-9_\-\s@\$!%*?&]+$/,
+                        message:
+                          "Solo se permiten letras, números, espacios y los caracteres (-, _, @, $, !, %, *, ? y &)",
+                      },
+                      maxLength: {
+                        value: 25,
+                        message: "No debe exceder los 25 caracteres",
+                      },
+                      minLength: {
+                        value: 6,
+                        message: "Debe tener al menos 6 caracteres",
+                      },
+                    })}
                     className="w-full text-black pl-4 pr-10 py-2 rounded-md border-2 border-black block"
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -106,7 +123,7 @@ function LoginComponent() {
                   </div>
                 </div>
                 {errors.password && (
-                  <p className="text-red-500">Se requiere la contraseña</p>
+                  <p className="text-red-500">{errors.password.message}</p>
                 )}
               </div>
               <button

@@ -7,13 +7,23 @@ export const createNatureSchema = z.object({
     .or(z.literal("bamboo"))
     .or(z.literal("error"))
     .default("error"),
-  commentsCitizen: z.string().default(""),
+  commentsCitizen: z
+    .string()
+    .max(500, {
+      message: "Los comentarios deben tener un máximo de 500 caracteres.",
+    })
+    .default(""),
   commentsEmployee: z.string().default(""),
   status: z.string().default("Entregada"),
 });
 
 export const updateNatureSchema = z.object({
-  commentsEmployee: z.string().default("Ninguno."),
+  commentsEmployee: z
+    .string()
+    .max(500, {
+      message: "Los comentarios deben tener un máximo de 500 caracteres.",
+    })
+    .default("Ninguno."),
   status: z
     .literal("Entregada")
     .or(z.literal("En revisión"))

@@ -34,7 +34,12 @@ function ServicesOptions() {
           </div>
           <div className="font-extrabold">Tablas de posiciones</div>
         </div>
-        <div className="w-1/3 flex flex-col items-center">
+        <a
+          href="https://www.gob.mx/ActaNacimiento/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-1/3 flex flex-col items-center"
+        >
           <div className="relative">
             <div className="rounded-full bg-[#6D1610] h-[5em] w-[5em] lg:h-[8em] lg:w-[8em]"></div>
             <img
@@ -44,7 +49,7 @@ function ServicesOptions() {
             />
           </div>
           <div className="font-extrabold">Acta de nacimiento en línea</div>
-        </div>
+        </a>
         <div className="w-1/3 flex flex-col items-center">
           <div className="relative">
             <div className="rounded-full bg-[#6D1610] h-[5em] w-[5em] lg:h-[8em] lg:w-[8em]"></div>

@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Collapse } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNature } from "../../context/NatureContext";
 import HeaderTittle from "../../components/HeaderTittle";
+import AlertMessage from "../../components/AlertMessage";
 
 function NatureFormsPage({ type }) {
   const { user } = useAuth();
   const { createNature, errors: createNatureErrors } = useNature();
-  const [collapseErrors, setCollapseErrors] = useState(false);
   const {
     register,
     handleSubmit,
@@ -26,18 +25,6 @@ function NatureFormsPage({ type }) {
 
   useEffect(() => setValue("typeRequest", type), []);
 
-  useEffect(() => {
-    if (createNatureErrors.length > 0) {
-      setCollapseErrors(true);
-
-      const timer = setTimeout(() => {
-        setCollapseErrors(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [createNatureErrors]);
-
   return (
     <div className="bg-white pt-6 pb-8 mt-5">
       <HeaderTittle
@@ -49,14 +36,20 @@ function NatureFormsPage({ type }) {
             : "Solicitud para guía de traslado de bambú"
         }
       />
-      <div className="m-10">
-        <Collapse open={collapseErrors}>
-          <div>
-            {createNatureErrors.map((error, i) => (
+      <div className="m-10 overflow-hidden">
+        <AnimatePresence mode="sync">
+          {createNatureErrors.map((error, i) => (
+            <motion.div
+              key={i}
+              initial={{ height: 0, y: -10, opacity: 0 }}
+              animate={{ height: 48, y: 0, opacity: 1 }}
+              exit={{ height: 0, y: -10, opacity: 0 }}
+              transition={{ type: "spring", delay: i * 0.2 }}
+            >
               <AlertMessage key={i} message={error} />
-            ))}
-          </div>
-        </Collapse>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       <form onSubmit={onSubmit} className="mx-24 my-10 flex flex-col gap-10">
         <div className="flex items-center">
@@ -147,13 +140,26 @@ function NatureFormsPage({ type }) {
           <hr className="flex-1 border-t border-black border" />
         </div>
         <div className="w-full">
-          <div className="flex justify-center w-full">
+          <div className="flex flex-col items-center w-full">
             <textarea
-              {...register("commentsCitizen", { required: false })}
+              {...register("commentsCitizen", {
+                required: false,
+                pattern: {
+                  value: /^[a-zA-Z0-9\s.,]+$/,
+                  message: "Solo se permiten letras, números, comas y puntos",
+                },
+                maxLength: {
+                  value: 800,
+                  message: "No debe exceder los 800 caracteres",
+                },
+              })}
               className="text-black px-4 py-2 rounded-md border border-black resize-none shadow w-full lg:w-2/3"
               placeholder="Opcional..."
               rows={8}
             ></textarea>
+            {errors.commentsCitizen && (
+              <p className="text-red-500">{errors.commentsCitizen.message}</p>
+            )}
           </div>
         </div>
 

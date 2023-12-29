@@ -5,9 +5,8 @@ import { useExtaData } from "../../context/ExtraDataContext";
 import AlertMessage from "../../components/AlertMessage";
 import InputSelect from "../../components/InputSelect";
 import { Controller, useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import UploadImage from "../../components/UploadImage";
-import { Collapse } from "@material-tailwind/react";
 import DialogMessage from "../../components/DialogMessage";
 import HeaderTittle from "../../components/HeaderTittle";
 
@@ -24,7 +23,6 @@ function EditPost() {
     formState: { errors },
     setValue,
   } = useForm();
-  const [collapseErrors, setCollapseErrors] = useState(false);
   const navigate = useNavigate();
   const [imageRequired, setImageRequired] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -73,18 +71,6 @@ function EditPost() {
     navigate("/posts/edit");
   };
 
-  useEffect(() => {
-    if (updatePostErrors.length > 0) {
-      setCollapseErrors(true);
-
-      const timer = setTimeout(() => {
-        setCollapseErrors(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [updatePostErrors]);
-
   return (
     <div>
       {loading ? (
@@ -94,14 +80,20 @@ function EditPost() {
           {post ? (
             <div className="bg-white pt-6 pb-8 mt-5">
               <HeaderTittle title={"Editar publicación"} />
-              <div className="m-10">
-                <Collapse open={collapseErrors}>
-                  <div>
-                    {updatePostErrors.map((error, i) => (
+              <div className="m-10 overflow-hidden">
+                <AnimatePresence mode="sync">
+                  {updatePostErrors.map((error, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ height: 0, y: -10, opacity: 0 }}
+                      animate={{ height: 48, y: 0, opacity: 1 }}
+                      exit={{ height: 0, y: -10, opacity: 0 }}
+                      transition={{ type: "spring", delay: i * 0.2 }}
+                    >
                       <AlertMessage key={i} message={error} />
-                    ))}
-                  </div>
-                </Collapse>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
 
               <form
@@ -117,11 +109,32 @@ function EditPost() {
                       <input
                         type="text"
                         placeholder="Ingresa un título llamativo..."
-                        {...register("title", { required: true })}
-                        className={`shadow border py-1 px-3 w-full ${errors.title ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
+                        {...register("title", {
+                          required: "Se requiere un título",
+                          pattern: {
+                            value: /^[a-zA-Z0-9\s.,¿?-_!¡"]+$/,
+                            message:
+                              'Solo se permiten letras, números, espacios y los signos (¿ ? _ - ! ¡ , . ")',
+                          },
+                          maxLength: {
+                            value: 40,
+                            message: "No debe exceder los 40 caracteres",
+                          },
+                          minLength: {
+                            value: 6,
+                            message: "Debe tener al menos 6 caracteres",
+                          },
+                        })}
+                        maxLength={40}
+                        minLength={6}
+                        className={`shadow border py-1 px-3 w-full ${
+                          errors.title
+                            ? "border-red-500 placeholder-red-500"
+                            : "border-black placeholder-blue-gray-200"
+                        }`}
                       />
                       {errors.title && (
-                        <p className="text-red-500">El título es requerido</p>
+                        <p className="text-red-500">{errors.title.message}</p>
                       )}
                     </div>
                   </div>
@@ -147,15 +160,25 @@ function EditPost() {
                     </p>
                     <div className={errors.body ? "-mb-5" : "mb-1"}>
                       <textarea
-                        {...register("body", { required: true })}
-                        className={`w-full text-black px-4 py-2 rounded-md border resize-none shadow ${errors.body ? "border-red-500 placeholder-red-500" : "border-black placeholder-blue-gray-200"}`}
+                        {...register("body", {
+                          required:
+                            "Se requiere la información de la publicación",
+                          pattern: {
+                            value: /^[a-zA-Z0-9\s.,;¿?_!¡\-%"#]+$/,
+                            message:
+                              'Solo se permiten letras, números, espacios y los signos (¿ ? _ - ! ¡ , . % " # $)',
+                          },
+                        })}
+                        className={`w-full text-black px-4 py-2 rounded-md border resize-none shadow ${
+                          errors.body
+                            ? "border-red-500 placeholder-red-500"
+                            : "border-black placeholder-blue-gray-200"
+                        }`}
                         placeholder="..."
                         rows={8}
                       ></textarea>
                       {errors.body && (
-                        <p className="text-red-500">
-                          Se requiere la información de la publicación
-                        </p>
+                        <p className="text-red-500">{errors.body.message}</p>
                       )}
                     </div>
                   </div>
