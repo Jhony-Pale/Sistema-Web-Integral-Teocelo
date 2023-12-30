@@ -39,6 +39,7 @@ import ComplaintFormPage from "./pages/citizen/ComplaintFormPage";
 import CSComplaintsPage from "./pages/employee.cs/CSComplaintsPage";
 import TourismPage from "./pages/TourismPage";
 import PServicesPage from "./pages/PServicesPage";
+import GarbageRoutesPage from "./pages/GarbageRoutesPage";
 
 function App() {
   const location = useLocation();
@@ -73,6 +74,7 @@ function App() {
           />
           <Route path="/tourism" element={<TourismPage />} />
           <Route path="/procedures-and-services" element={<PServicesPage />} />
+          <Route path="/garbage-collection-routes" element={<GarbageRoutesPage />} />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<ProtectedRolRoute rolRoute="employee.sc" />}>
