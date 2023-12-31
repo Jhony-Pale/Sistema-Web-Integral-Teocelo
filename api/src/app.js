@@ -13,6 +13,7 @@ import lampRoutes from "./routes/lamp.routes.js";
 import waterRoutes from "./routes/water.routes.js";
 import natureRoutes from "./routes/nature.routes.js";
 import complaintRoutes from "./routes/complaint.routes.js";
+import emailRoutes from "./routes/email.routes.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
+
 app.use("/public/images", express.static(join(__dirname, "public/images")));
 app.use(
   "/public/documentos",
@@ -44,5 +46,6 @@ app.use("/api", lampRoutes);
 app.use("/api", waterRoutes);
 app.use("/api", natureRoutes);
 app.use("/api", complaintRoutes);
+app.use("/api", emailRoutes);
 
 export default app;

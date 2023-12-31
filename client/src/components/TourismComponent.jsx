@@ -1,15 +1,18 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useExtaData } from "../context/ExtraDataContext";
 import Footer1 from "../assets/Extras/Footer1.png";
 import Footer2 from "../assets/Extras/Footer2.png";
-import { useExtaData } from "../context/ExtraDataContext";
+
 
 function TourismComponent({ data }) {
   const { isMobile } = useExtaData();
 
   return (
     <article
-      className={`w-full shadow-inner font-montserrat text-black p-5 border-t-2 border-b-2 border-gray-200 relative flex ${isMobile ? "flex-col" : "justify-around"}`}
+      className={`w-full shadow-inner font-montserrat text-black p-5 border-t-2 border-b-2 border-gray-200 relative flex ${
+        isMobile ? "flex-col" : "justify-around"
+      }`}
     >
       <Carousel
         navigation={({ setActiveIndex, activeIndex, length }) => (
@@ -47,7 +50,13 @@ function TourismComponent({ data }) {
             <FiChevronRight color="#000000" size="2em" />
           </IconButton>
         )}
-        className={`z-0 ${isMobile ? "w-full mb-10" : "w-[30%]"} ${data.imageSide === "right" && !isMobile ? "order-last" : data.imageSide === "left" && !isMobile ? "order-first" : ""}`}
+        className={`z-0 ${isMobile ? "w-full mb-10" : "w-[30%]"} ${
+          data.imageSide === "right" && !isMobile
+            ? "order-last"
+            : data.imageSide === "left" && !isMobile
+            ? "order-first"
+            : ""
+        }`}
         autoplay={true}
         loop={true}
       >

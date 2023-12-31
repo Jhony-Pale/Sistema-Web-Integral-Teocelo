@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import ArrowRoutes from "../components/ArrowRoutes";
 import HeaderTittle from "../components/HeaderTittle";
 
@@ -83,7 +84,7 @@ function GarbageRoutesPage() {
       <HeaderTittle title={"Rutas de recolección de basura"} />
       <div className="mx-[10%] my-16 flex flex-col gap-14">
         {["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"].map((day, i) => (
-          <div className="flex gap-5 justify-center items-center">
+          <div className="flex gap-5 justify-center items-center" key={i}>
             <ArrowRoutes day={day} />
             <div className="bg-[#EFEFEF] drop-shadow-md shadow shadow-gray-400 flex flex-wrap gap-5 p-5 text-base lg:text-xl font-bold font-sans">
               {(day === "Lunes"
@@ -95,13 +96,18 @@ function GarbageRoutesPage() {
                 : day === "Jueves"
                 ? thursday
                 : friday
-              ).map((value, i) => (
+              ).map((value, z) => (
                 <div
                   className="flex items-center gap-3 sm:w-full md:w-[45%] lg:max-w-[30%]"
-                  key={i}
+                  key={z}
                 >
                   <div className="w-5 h-5 min-w-[20px] bg-[#F9B03C] rounded-full"></div>
-                  <p>{value}</p>
+                  <motion.p
+                    initial={{ scale: 0.5, opacity: 0, filter: blur(10) }}
+                    animate={{ scale: 1, opacity: 1, filter: blur(0), transition: { delay: 0.1 * z } }}
+                  >
+                    {value}
+                  </motion.p>
                 </div>
               ))}
             </div>

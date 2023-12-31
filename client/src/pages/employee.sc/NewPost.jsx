@@ -1,12 +1,11 @@
 import { Controller, useForm } from "react-hook-form";
-import InputSelect from "../../components/InputSelect";
-import UploadImage from "../../components/UploadImage";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePosts } from "../../context/PostContext";
-import AlertMessage from "../../components/AlertMessage";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useExtaData } from "../../context/ExtraDataContext";
+import InputSelect from "../../components/InputSelect";
+import UploadImage from "../../components/UploadImage";
+import AlertMessage from "../../components/AlertMessage";
 import DialogMessage from "../../components/DialogMessage";
 import HeaderTittle from "../../components/HeaderTittle";
 
