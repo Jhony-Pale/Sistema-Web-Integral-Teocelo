@@ -26,7 +26,7 @@ export const emailData = z.object({
     .min(6, {
       message: "El asunto debe de tener al menos 6 caracteres.",
     })
-    .max(25, { message: "El asunto debe tener un máximo 25 caracteres." }),
+    .max(40, { message: "El asunto debe tener un máximo 40 caracteres." }),
   message: z
     .string({
       required_error: "El mensaje es requerido.",

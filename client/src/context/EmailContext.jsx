@@ -21,8 +21,12 @@ export function EmailProvider({ children }) {
         const res = await sendEmailRequest(data);
         return res;
       } catch (error) {
-        setErrors(error.response.data);
-        return error.response
+        console.log(error.response.data)
+        if(typeof error.response.data === "object" && error.response.data){
+          const array = Object.values(error.response.data)
+          setErrors(array);
+        }
+        else setErrors(error.response.data);
       }
     };
   

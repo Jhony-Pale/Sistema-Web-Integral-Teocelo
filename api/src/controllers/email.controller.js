@@ -1,27 +1,29 @@
-import { Resend } from "resend";
+import { transporter } from "../libs/mailer.js";
 import dotenv from "dotenv";
+
 dotenv.config();
 
-const resend = new Resend(process.env.EMAIL_API_KEY);
-const email_to = process.env.EMAIL_DESTINATION;
+const email_from =
+  process.env.EMAIL_SERVER_EMAIL || "maddison53@ethereal.email";
+const email_to = process.env.EMAIL_DESTINATION || "maddison53@ethereal.email";
 
 export const sendEmail = async (req, res) => {
   const { email, fullname, subject, message } = req.body;
-  console.log(email, fullname, subject, message)
+
   try {
-    const {data, error } = await resend.emails.send({
-      from: `"${fullname}" <${email}>`,
+    const info = await transporter.sendMail({
+      from: `"Server" <${email_from}>`,
       to: [`${email_to}`],
       subject: subject,
-      html: `<strong>${message}</strong>`,
+      html: `
+      <strong>
+      Correo: ${email} <br /> 
+      Nombre: ${fullname} <br />
+      </strong> <br /> 
+      <p>${message}</p>`,
     });
 
-    console.log("data->", data);
-    console.log("error->", error);
-
-    if(error) return res.status(error.statusCode).json(error)
-
-    res.status(200).json(data);
+    res.status(200).json(info);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
