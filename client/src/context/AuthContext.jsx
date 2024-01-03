@@ -139,11 +139,11 @@ export const AuthProvider = ({ children }) => {
         getUser,
         getHistory,
         getFile,
+        setErrors,
         loading,
         user,
         isAuthenticated,
         errors,
-        setErrors,
       }}
     >
       {children}

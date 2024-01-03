@@ -1,13 +1,13 @@
-import Announcement from "./Announcement"
-import ServicesOptions from "./ServicesOptions"
+import Announcement from "./Announcement";
+import ServicesOptions from "./ServicesOptions";
 
 function ServicesAnnouncement() {
   return (
     <div className="grid grid-cols-2 px-4">
-        <ServicesOptions />
-        <Announcement />
+      <ServicesOptions />
+      <Announcement />
     </div>
-  )
+  );
 }
 
-export default ServicesAnnouncement
+export default ServicesAnnouncement;

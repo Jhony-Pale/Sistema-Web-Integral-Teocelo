@@ -13,7 +13,8 @@ const options = ["Drenaje", "Agua Potable", "Ambas"];
 function WaterFormsPage({ type }) {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { isMobile } = useExtaData();
+  const { isMobile, expLettersNumbers, expTextGeneral, expJustLetters } =
+    useExtaData();
   const {
     createWaterRequest,
     createWaterReport,
@@ -129,7 +130,7 @@ function WaterFormsPage({ type }) {
               {...register("street", {
                 required: "Se requiere la calle",
                 pattern: {
-                  value: /^[a-zA-Z\s]+$/,
+                  value: expJustLetters,
                   message: "Solo se permiten letras",
                 },
                 maxLength: {
@@ -161,7 +162,7 @@ function WaterFormsPage({ type }) {
               {...register("number", {
                 required: "Se requiere el número",
                 pattern: {
-                  value: /^[a-zA-Z0-9]+$/,
+                  value: expLettersNumbers,
                   message: "Solo se permiten letras y números",
                 },
                 maxLength: {
@@ -192,7 +193,7 @@ function WaterFormsPage({ type }) {
               {...register("colony", {
                 required: "Se requiere la colonia",
                 pattern: {
-                  value: /^[a-zA-Z\s]+$/,
+                  value: expJustLetters,
                   message: "Solo se permiten letras",
                 },
                 maxLength: {
@@ -224,7 +225,7 @@ function WaterFormsPage({ type }) {
               {...register("town", {
                 required: "Se requiere la localidad",
                 pattern: {
-                  value: /^[a-zA-Z\s]+$/,
+                  value: expJustLetters,
                   message: "Solo se permiten letras",
                 },
                 maxLength: {
@@ -288,8 +289,9 @@ function WaterFormsPage({ type }) {
                   {...register("commentsCitizen", {
                     required: false,
                     pattern: {
-                      value: /^[a-zA-Z0-9\s.,]+$/,
-                      message: "Solo se permiten letras, números, comas y puntos",
+                      value: expTextGeneral,
+                      message:
+                        "Solo se permiten letras, números, comas y puntos",
                     },
                     maxLength: {
                       value: 500,
@@ -302,8 +304,10 @@ function WaterFormsPage({ type }) {
                   rows={8}
                 ></textarea>
                 {errors.commentsCitizen && (
-              <p className="text-red-500">{errors.commentsCitizen.message}</p>
-            )}
+                  <p className="text-red-500">
+                    {errors.commentsCitizen.message}
+                  </p>
+                )}
               </div>
             </div>
           )}

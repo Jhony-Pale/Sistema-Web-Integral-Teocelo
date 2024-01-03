@@ -7,6 +7,7 @@ import { useReactToPrint } from "react-to-print";
 import AlertMessage from "../../components/AlertMessage";
 import PrintComponent from "../../components/PrintComponent";
 import HeaderTittle from "../../components/HeaderTittle";
+import { useExtaData } from "../../context/ExtraDataContext";
 
 function PerfilePage() {
   const {
@@ -21,6 +22,12 @@ function PerfilePage() {
     updateUser,
     errors: updateErrors,
   } = useAuth();
+  const {
+    expLettersNumbers,
+    expTextGeneral,
+    expJustLetters,
+    expJustNumbers
+  } = useExtaData();
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingHistory, setLoadingHistory] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -159,7 +166,7 @@ function PerfilePage() {
                 {...register("firstname", {
                   required: "Se requiere el nombre",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -193,7 +200,7 @@ function PerfilePage() {
                 {...register("lastname", {
                   required: "Se requieren los apellidos",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -225,7 +232,7 @@ function PerfilePage() {
                 {...register("phonenumber", {
                   required: "Se requiere el número de teléfono",
                   pattern: {
-                    value: /^[0-9]+$/,
+                    value: expJustNumbers,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -256,7 +263,7 @@ function PerfilePage() {
             <label className="font-bold text-xl">Correo electrónico</label>
             <div className="relative">
               <input
-                type="text"
+                type="email"
                 className={`border ${
                   errors.email ? "border-red-500" : "border-black"
                 } py-2 pl-4 pr-12 w-full rounded-md`}
@@ -304,7 +311,7 @@ function PerfilePage() {
           <table className="w-full table-fixed min-w-[1400px]">
             <thead className="bg-[#6D1610] text-center text-xl text-white h-16 font-bold">
               <tr>
-                <th>Solicitud o reporte</th>
+                <th>Trámite o servicio</th>
                 <th>Fecha</th>
                 <th>Estatus</th>
                 <th>Comentarios</th>

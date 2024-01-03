@@ -13,7 +13,12 @@ const options = ["LED", "Antigua", "Cucharón"];
 
 function LampFormsPage({ type }) {
   const { user } = useAuth();
-  const { isMobile } = useExtaData();
+  const {
+    isMobile,
+    expLettersNumbers,
+    expTextGeneral,
+    expJustLetters,
+  } = useExtaData();
   const {
     createLampRequest,
     createLampReport,
@@ -130,7 +135,7 @@ function LampFormsPage({ type }) {
               {...register("street", {
                 required: "Se requiere la calle",
                 pattern: {
-                  value: /^[a-zA-Z\s]+$/,
+                  value: expJustLetters,
                   message: "Solo se permiten letras",
                 },
                 maxLength: {
@@ -166,7 +171,7 @@ function LampFormsPage({ type }) {
               {...register("number", {
                 required: "Se requiere el número",
                 pattern: {
-                  value: /^[a-zA-Z0-9]+$/,
+                  value: expLettersNumbers,
                   message: "Solo se permiten letras y números",
                 },
                 maxLength: {
@@ -197,7 +202,7 @@ function LampFormsPage({ type }) {
               {...register("colony", {
                 required: "Se requiere la colonia",
                 pattern: {
-                  value: /^[a-zA-Z\s]+$/,
+                  value: expJustLetters,
                   message: "Solo se permiten letras",
                 },
                 maxLength: {
@@ -233,7 +238,7 @@ function LampFormsPage({ type }) {
               {...register("town", {
                 required: "Se requiere la localidad",
                 pattern: {
-                  value: /^[a-zA-Z\s]+$/,
+                  value: expJustLetters,
                   message: "Solo se permiten letras",
                 },
                 maxLength: {
@@ -275,7 +280,7 @@ function LampFormsPage({ type }) {
                 {...register("commentsCitizen", {
                   required: false,
                   pattern: {
-                    value: /^[a-zA-Z0-9\s.,]+$/,
+                    value: expTextGeneral,
                     message: "Solo se permiten letras, números, comas y puntos",
                   },
                   maxLength: {
@@ -293,8 +298,6 @@ function LampFormsPage({ type }) {
                 rows={8}
               ></textarea>
             </div>
-              
-              
           </div>
           {type === "report" && (
             <div className={isMobile ? "grow" : ""}>

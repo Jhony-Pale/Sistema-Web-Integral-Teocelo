@@ -3,7 +3,6 @@ import { useAuth } from "../../context/AuthContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { useExtaData } from "../../context/ExtraDataContext";
 import { useNavigate } from "react-router-dom";
-import { Collapse } from "@material-tailwind/react";
 import { useEffect, useRef, useState } from "react";
 import { useComplaint } from "../../context/ComplaintContext";
 import { IoCheckmark } from "react-icons/io5";
@@ -14,7 +13,13 @@ import HeaderTittle from "../../components/HeaderTittle";
 
 function ComplaintFormPage() {
   const { user } = useAuth();
-  const { isMobile } = useExtaData();
+  const {
+    isMobile,
+    expLettersNumbers,
+    expTextGeneral,
+    expJustLetters,
+    expJustNumbers,
+  } = useExtaData();
   const {
     register,
     handleSubmit,
@@ -150,7 +155,7 @@ function ComplaintFormPage() {
                 {...register("firstname", {
                   required: "Se requiere el nombre",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: /^[a-zA-Z\sáéíóúÁÉÍÓÚ]+$/,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -184,7 +189,7 @@ function ComplaintFormPage() {
                 {...register("lastnameP", {
                   required: "Se requiere el apellido paterno",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -216,7 +221,7 @@ function ComplaintFormPage() {
                 {...register("lastnameM", {
                   required: "Se requiere el apellido materno",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -247,7 +252,7 @@ function ComplaintFormPage() {
                 {...register("phonenumber", {
                   required: "Se requiere el número de teléfono",
                   pattern: {
-                    value: /^[0-9]+$/,
+                    value: expJustNumbers,
                     message: "Solo se permiten números",
                   },
                   maxLength: {
@@ -340,7 +345,7 @@ function ComplaintFormPage() {
                 {...register("colony", {
                   required: "Se requiere la colonia",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -367,7 +372,7 @@ function ComplaintFormPage() {
             <label className="font-bold text-xl">Código postal:</label>
             <div className="bg-[#F1F1F1] border-2 border-black rounded-md">
               <input
-                type="number"
+                type="text"
                 className={`w-full text-black font-medium text-base lg:text-xl px-4 py-2 rounded-md border-b-2 ${
                   errors.pcode
                     ? "border-red-500 placeholder-red-500"
@@ -376,15 +381,20 @@ function ComplaintFormPage() {
                 {...register("pcode", {
                   required: "Se requiere el código postal",
                   pattern: {
-                    value: /^[0-9]+$/,
-                    message: "Solo se permiten letras y números",
+                    value: expJustNumbers,
+                    message: "Solo se permiten números",
                   },
                   maxLength: {
-                    value: 10,
-                    message: "No debe exceder los 10 caracteres",
+                    value: 5,
+                    message: "Debe tener 5 dígitos",
+                  },
+                  minLength: {
+                    value: 5,
+                    message: "Debe tener 5 dígitos",
                   },
                 })}
-                maxLength={10}
+                maxLength={5}
+                minLength={5}
               />
               <p className="text-center py-2 mx-4 text-[#6D1610] font-bold text-lg">
                 Escriba su código postal
@@ -407,7 +417,7 @@ function ComplaintFormPage() {
                 {...register("street", {
                   required: "Se requiere la calle",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -443,7 +453,7 @@ function ComplaintFormPage() {
                 {...register("outnumber", {
                   required: "Se requiere el núm. ext.",
                   pattern: {
-                    value: /^[a-zA-Z0-9]+$/,
+                    value: expLettersNumbers,
                     message: "Solo se permiten letras y números",
                   },
                   maxLength: {
@@ -474,7 +484,7 @@ function ComplaintFormPage() {
                 {...register("innumber", {
                   required: "Se requiere el núm. int.",
                   pattern: {
-                    value: /^[a-zA-Z0-9]+$/,
+                    value: expLettersNumbers,
                     message: "Solo se permiten letras y números",
                   },
                   maxLength: {
@@ -507,7 +517,7 @@ function ComplaintFormPage() {
                 {...register("staffname", {
                   required: "Se requiere el nombre del servidor público",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -543,7 +553,7 @@ function ComplaintFormPage() {
                 {...register("staffcharge", {
                   required: "Se requiere el cargo del servidor público",
                   pattern: {
-                    value: /^[a-zA-Z\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -579,7 +589,7 @@ function ComplaintFormPage() {
                 {...register("staffarea", {
                   required: "Se requiere el área del servidor público",
                   pattern: {
-                    value: /^[a-zA-Z0-9\s]+$/,
+                    value: expJustLetters,
                     message: "Solo se permiten letras",
                   },
                   maxLength: {
@@ -612,7 +622,7 @@ function ComplaintFormPage() {
                 {...register("commentsCitizen", {
                   required: "Se requiere la explicación.",
                   pattern: {
-                    value: /^[a-zA-Z0-9\s.,]+$/,
+                    value: expTextGeneral,
                     message: "Solo se permiten letras, números, comas y puntos",
                   },
                   maxLength: {

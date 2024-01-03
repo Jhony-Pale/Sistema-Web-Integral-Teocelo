@@ -13,6 +13,7 @@ import lampRoutes from "./routes/lamp.routes.js";
 import waterRoutes from "./routes/water.routes.js";
 import natureRoutes from "./routes/nature.routes.js";
 import complaintRoutes from "./routes/complaint.routes.js";
+import officialRoutes from "./routes/official.routes.js";
 import emailRoutes from "./routes/email.routes.js";
 
 const app = express();
@@ -47,5 +48,6 @@ app.use("/api", waterRoutes);
 app.use("/api", natureRoutes);
 app.use("/api", complaintRoutes);
 app.use("/api", emailRoutes);
+app.use("/api", officialRoutes);
 
 export default app;

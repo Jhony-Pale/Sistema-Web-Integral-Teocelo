@@ -4,10 +4,11 @@ import IconoRecoBasura from "../assets/Icons/IconoRecoBasura.png";
 import IconoTabClasif from "../assets/Icons/IconoTabClasif.png";
 import IconoConstancias from "../assets/Icons/IconoConstancias.png";
 import IconoActaNacimiento from "../assets/Icons/IconoActaNacimiento.png";
+import IconoOficialia from "../assets/Icons/IconoOficialia.png";
 
 function ServicesOptions() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <div>
@@ -17,7 +18,11 @@ function ServicesOptions() {
         </h1>
       </div>
       <div className="flex flex-wrap justify-center gap-5 gap-y-10 text-center w-full">
-        <Link className="w-1/3 flex flex-col items-center" to="/garbage-collection-routes" onClick={scrollToTop}>
+        <Link
+          className="w-1/3 flex flex-col items-center"
+          to="/garbage-collection-routes"
+          onClick={scrollToTop}
+        >
           <motion.div whileHover={{ scale: 1.1 }} className="relative">
             <div className="rounded-full bg-[#6D1610] h-[5em] w-[5em] lg:h-[8em] lg:w-[8em]"></div>
             <img
@@ -38,6 +43,23 @@ function ServicesOptions() {
             />
           </motion.div>
           <div className="font-extrabold">Tablas de posiciones</div>
+        </div>
+        <div className="lg:w-full w-1/3 flex justify-center">
+          <Link
+            className="w-1/3 flex flex-col items-center"
+            to="/official-request"
+            onClick={scrollToTop}
+          >
+            <motion.div whileHover={{ scale: 1.1 }} className="relative">
+              <div className="rounded-full bg-[#6D1610] h-[5em] w-[5em] lg:h-[8em] lg:w-[8em]"></div>
+              <img
+                src={IconoOficialia}
+                alt="Icono de gotas de agua"
+                className="absolute top-[15%]"
+              />
+            </motion.div>
+            <div className="font-extrabold">Oficialía de partes</div>
+          </Link>
         </div>
         <a
           href="https://www.gob.mx/ActaNacimiento/"

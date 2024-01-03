@@ -40,6 +40,8 @@ import CSComplaintsPage from "./pages/employee.cs/CSComplaintsPage";
 import TourismPage from "./pages/TourismPage";
 import PServicesPage from "./pages/PServicesPage";
 import GarbageRoutesPage from "./pages/GarbageRoutesPage";
+import OPRequestsPage from "./pages/employee.op/OPRequestsPage";
+import OfficialFormPage from "./pages/citizen/OfficialFormPage";
 
 function App() {
   const location = useLocation();
@@ -74,7 +76,10 @@ function App() {
           />
           <Route path="/tourism" element={<TourismPage />} />
           <Route path="/procedures-and-services" element={<PServicesPage />} />
-          <Route path="/garbage-collection-routes" element={<GarbageRoutesPage />} />
+          <Route
+            path="/garbage-collection-routes"
+            element={<GarbageRoutesPage />}
+          />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<ProtectedRolRoute rolRoute="employee.sc" />}>
@@ -83,22 +88,40 @@ function App() {
               <Route path="/posts/edit/:title" element={<EditPost />} />
               <Route path="/posts/delete" element={<DeletePost />} />
             </Route>
+
             <Route element={<ProtectedRolRoute rolRoute="employee.sl" />}>
               <Route path="/sl-requests" element={<SLRequestsPage />} />
               <Route path="/sl-reports" element={<SLReportsPage />} />
             </Route>
+
             <Route element={<ProtectedRolRoute rolRoute="employee.dw" />}>
               <Route path="/dw-requests" element={<DWRequestsPage />} />
               <Route path="/dw-reports" element={<DWReportsPage />} />
             </Route>
+
             <Route element={<ProtectedRolRoute rolRoute="employee.es" />}>
-              <Route path="/es-cattle" element={<ESRequestsPage type="cattle" />} />
-              <Route path="/es-agricultural" element={<ESRequestsPage type="agricultural" />} />
-              <Route path="/es-bamboo" element={<ESRequestsPage type="bamboo" />} />
+              <Route
+                path="/es-cattle"
+                element={<ESRequestsPage type="cattle" />}
+              />
+              <Route
+                path="/es-agricultural"
+                element={<ESRequestsPage type="agricultural" />}
+              />
+              <Route
+                path="/es-bamboo"
+                element={<ESRequestsPage type="bamboo" />}
+              />
             </Route>
+
             <Route element={<ProtectedRolRoute rolRoute="employee.cs" />}>
               <Route path="/cs-complaints" element={<CSComplaintsPage />} />
             </Route>
+
+            <Route element={<ProtectedRolRoute rolRoute="employee.op" />}>
+              <Route path="/op-requests" element={<OPRequestsPage />} />
+            </Route>
+
             <Route element={<ProtectedRolRoute rolRoute="citizen" />}>
               <Route
                 path="/lamp-request"
@@ -128,10 +151,8 @@ function App() {
                 path="/nature-bamboo"
                 element={<NatureFormsPage type="bamboo" />}
               />
-              <Route
-                path="/complaints"
-                element={<ComplaintFormPage />}
-              />
+              <Route path="/complaints" element={<ComplaintFormPage />} />
+              <Route path="/official-request" element={<OfficialFormPage />} />
               <Route path="/perfile" element={<PerfilePage />} />
             </Route>
           </Route>

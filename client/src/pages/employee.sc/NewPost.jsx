@@ -21,7 +21,7 @@ function NewPost() {
   } = useForm();
   const { createPost, errors: createPostErrors } = usePosts();
   const navigate = useNavigate();
-  const { isMobile } = useExtaData();
+  const { isMobile, expNumLettExtended } = useExtaData();
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen((prev) => !prev);
@@ -87,9 +87,9 @@ function NewPost() {
                   {...register("title", {
                     required: "Se requiere un título",
                     pattern: {
-                      value: /^[a-zA-Z0-9\s.,¿?-_!¡"]+$/,
+                      value: expNumLettExtended,
                       message:
-                        'Solo se permiten letras, números, espacios y los signos (¿ ? _ - ! ¡ , . ")',
+                        'Solo se permiten letras, números, espacios, acentos y los signos (¿ ? _ - ! ¡ , . ")',
                     },
                     maxLength: {
                       value: 40,
@@ -135,7 +135,7 @@ function NewPost() {
                   {...register("body", {
                     required: "Se requiere la información de la publicación",
                     pattern: {
-                      value: /^[a-zA-Z0-9\s.,;¿?_!¡\-%"#]+$/,
+                      value: /^[a-zA-Z0-9\s.,;¿?_!¡\-%"#áéíóúÁÉÍÓÚ]+$/,
                       message:
                         'Solo se permiten letras, números, espacios y los signos (¿ ? _ - ! ¡ , . % " # $)',
                     },

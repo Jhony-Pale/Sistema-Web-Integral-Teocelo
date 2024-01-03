@@ -23,7 +23,7 @@ export const createComplaint = async (req, res) => {
   const image = req.file.filename;
   try {
 
-    const folio = await getNextSequence("folioCounter");
+    const folio = await getNextSequence("Complaint_Folio");
 
     const paddedCounter = folio.toString().padStart(4, '0');
 

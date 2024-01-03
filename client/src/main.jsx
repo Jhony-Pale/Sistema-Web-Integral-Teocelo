@@ -12,6 +12,7 @@ import { WaterProvider } from "./context/WaterContext.jsx";
 import { NatureProvider } from "./context/NatureContext.jsx";
 import { ComplaintProvider } from "./context/ComplaintContext.jsx";
 import { EmailProvider } from "./context/EmailCOntext.jsx";
+import { OfficialProvider } from "./context/OfficialContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -23,11 +24,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <WaterProvider>
                 <NatureProvider>
                   <ComplaintProvider>
-                    <EmailProvider>
-                      <BrowserRouter>
-                        <App />
-                      </BrowserRouter>
-                    </EmailProvider>
+                    <OfficialProvider>
+                      <EmailProvider>
+                        <BrowserRouter>
+                          <App />
+                        </BrowserRouter>
+                      </EmailProvider>
+                    </OfficialProvider>
                   </ComplaintProvider>
                 </NatureProvider>
               </WaterProvider>

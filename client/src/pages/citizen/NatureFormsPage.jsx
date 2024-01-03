@@ -6,9 +6,11 @@ import { useEffect } from "react";
 import { useNature } from "../../context/NatureContext";
 import HeaderTittle from "../../components/HeaderTittle";
 import AlertMessage from "../../components/AlertMessage";
+import { useExtaData } from "../../context/ExtraDataContext";
 
 function NatureFormsPage({ type }) {
   const { user } = useAuth();
+  const { expTextGeneral } = useExtaData();
   const { createNature, errors: createNatureErrors } = useNature();
   const {
     register,
@@ -91,7 +93,7 @@ function NatureFormsPage({ type }) {
             <input
               type="text"
               placeholder="Teléfono"
-              value={user.phonenumber ?? "2255114422"}
+              value={user.phonenumber ?? ""}
               className="w-full text-black font-montserrat font-medium text-base lg:text-xl px-4 py-2 rounded-md border-2 border-black"
               disabled
             />
@@ -145,7 +147,7 @@ function NatureFormsPage({ type }) {
               {...register("commentsCitizen", {
                 required: false,
                 pattern: {
-                  value: /^[a-zA-Z0-9\s.,]+$/,
+                  value: expTextGeneral,
                   message: "Solo se permiten letras, números, comas y puntos",
                 },
                 maxLength: {

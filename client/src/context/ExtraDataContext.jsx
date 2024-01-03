@@ -14,6 +14,11 @@ export function ExtraDataContextProvider(props) {
   const [isLogin, setIsLogin, ] = useState(true);
   const imageUrl = "http://localhost:4000/public/images/"
   const documentUrl = "http://localhost:4000/public/documentos/"
+  const expLettersNumbers = /^[a-zA-Z0-9]+$/
+  const expTextGeneral = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚ]+$/
+  const expJustLetters = /^[a-zA-Z\sáéíóúÁÉÍÓÚ]+$/
+  const expNumLettExtended = /^[a-zA-Z0-9\s.,¿?-_!¡"áéíóúÁÉÍÓÚ]+$/
+  const expJustNumbers = /^[0-9]+$/
 
   function changeIsLogin(value) {
     setIsLogin(value);
@@ -42,6 +47,11 @@ export function ExtraDataContextProvider(props) {
         isMobile,
         imageUrl,
         documentUrl,
+        expLettersNumbers,
+        expTextGeneral,
+        expJustLetters,
+        expJustNumbers,
+        expNumLettExtended,
         changeIsLogin,
       }}
     >
