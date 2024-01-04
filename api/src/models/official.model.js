@@ -24,6 +24,10 @@ const officialSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    documentAccepted: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
     },

@@ -30,6 +30,7 @@ import Footer from "../Footer";
 import DWOptions from "./DWOptions";
 import ESOptions from "./ESOptions";
 import CSOptions from "./CSOptions";
+import OPOptions from "./OPOptions";
 
 function NavBar() {
   const { register } = useForm();
@@ -414,6 +415,14 @@ function NavBar() {
                   {user.rol === "employee.cs" /* Contraloría */ && (
                     <>
                       <CSOptions
+                        handleLogout={handleLogout}
+                        userName={user.firstname + " " + user.lastname}
+                      />
+                    </>
+                  )}
+                  {user.rol === "employee.op" /* Contraloría */ && (
+                    <>
+                      <OPOptions
                         handleLogout={handleLogout}
                         userName={user.firstname + " " + user.lastname}
                       />

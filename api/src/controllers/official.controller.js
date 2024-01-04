@@ -1,5 +1,6 @@
 import { deletefile } from "../libs/deletefile.js";
 import { fileURLToPath } from "url";
+import fs from "fs";
 import getNextSequence from "../libs/counters.js";
 import Official from "../models/official.model.js";
 import User from "../models/user.model.js";
@@ -9,7 +10,7 @@ export const createOfficial = async (req, res) => {
   const { commentsCitizen } = req.body;
   try {
     const folio = await getNextSequence("Official_Folio");
-    const paddedCounter = folio.toString().padStart(4, '0');
+    const paddedCounter = folio.toString().padStart(4, "0");
 
     const newOfficial = new Official({
       user: req.user.id,
@@ -17,6 +18,7 @@ export const createOfficial = async (req, res) => {
       commentsCitizen: commentsCitizen ?? "",
       commentsEmployee: "",
       document: req.file.filename,
+      documentAccepted: "",
       type: "request",
       status: "Entregada",
     });
@@ -42,31 +44,31 @@ export const updateOfficial = async (req, res) => {
   try {
     const updates = {};
 
-    if(commentsEmployee) updates.commentsEmployee = commentsEmployee
+    if (commentsEmployee) updates.commentsEmployee = commentsEmployee;
 
-    if(status) updates.status = status
+    if (status) updates.status = status;
 
     if (req.file) {
       const previousDocument = await Official.findById(req.params.id);
       const document = req.file.filename;
       updates.document = document;
-      if(previousDocument.document !== ""){
-          const file = {
-            path: path.join(__dirname, "../public/documents/" + previousDocument.document),
-          };
-          deletefile(file);
+      updates.documentAccepted = document;
+      if (previousDocument.document !== "") {
+        const file = {
+          path: path.join(
+            __dirname,
+            "../public/documents/" + previousDocument.document
+          ),
+        };
+        if (fs.existsSync(file.path)) deletefile(file);
+        else console.log("document not exists");
       }
     }
 
-    if(status === "Rechazada"){
+    if (status === "Rechazada") {
       const deleteDocumentUploaded = await Official.findById(req.params.id);
-      if(deleteDocumentUploaded.document !== ""){
-          const file = {
-            path: path.join(__dirname, "../public/documents/" + deleteDocumentUploaded.document),
-          };
-          const result = deletefile(file);
-          if(result) updates.document = "";
-      }
+      if (deleteDocumentUploaded.documentAccepted !== "")
+        updates.documentAccepted = "";
     }
 
     const official = await Official.findByIdAndUpdate(
@@ -82,7 +84,7 @@ export const updateOfficial = async (req, res) => {
     if (!official) return res.status(400).json(["Registro no encontrado."]);
     res.json(official);
   } catch (error) {
-    if(req.file){
+    if (req.file) {
       const file = {
         path: path.join(__dirname, "../public/documents/" + req.file.filename),
       };

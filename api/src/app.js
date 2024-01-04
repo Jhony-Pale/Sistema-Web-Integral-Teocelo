@@ -36,7 +36,7 @@ app.use("/public/images", express.static(join(__dirname, "public/images")));
 app.use(
   "/public/documentos",
   authRequired,
-  validateRol(["employee.dw", "citizen"]),
+  validateRol(["employee.dw", "employee.op", "citizen"]),
   validateDocument(),
   express.static(join(__dirname, "public/documents"))
 );

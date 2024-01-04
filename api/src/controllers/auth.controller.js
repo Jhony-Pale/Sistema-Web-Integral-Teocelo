@@ -7,6 +7,7 @@ import Lamp from "../models/lamp.model.js";
 import Complaint from "../models/complaint.model.js";
 import Nature from "../models/nature.model.js";
 import Water from "../models/water.model.js";
+import Official from "../models/official.model.js";
 
 export const register = async (req, res) => {
   const { firstname, lastname, rol, email, password, phonenumber } = req.body;
@@ -84,6 +85,7 @@ export const history = async (req, res) => {
     const complaints = await Complaint.find().where("user", req.user.id).lean();
     const natures = await Nature.find().where("user", req.user.id).lean();
     const waters = await Water.find().where("user", req.user.id).lean();
+    const officials = await Official.find().where("user", req.user.id).lean();
 
     const lampsWithTitle = lamps.map((lamp) => ({ ...lamp, title: "lamp" }));
     const complaintsWithTitle = complaints.map((complaint) => ({
@@ -98,12 +100,17 @@ export const history = async (req, res) => {
       ...water,
       title: "water",
     }));
+    const officialsWithTitle = officials.map((official) => ({
+      ...official,
+      title: "official",
+    }));
 
     const allData = [
       ...lampsWithTitle,
       ...complaintsWithTitle,
       ...naturesWithTitle,
       ...watersWithTitle,
+      ...officialsWithTitle,
     ];
     const sortedData = allData.sort((a, b) => b.createdAt - a.createdAt);
 

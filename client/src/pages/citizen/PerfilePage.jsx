@@ -22,12 +22,7 @@ function PerfilePage() {
     updateUser,
     errors: updateErrors,
   } = useAuth();
-  const {
-    expLettersNumbers,
-    expTextGeneral,
-    expJustLetters,
-    expJustNumbers
-  } = useExtaData();
+  const { expJustLetters, expJustNumbers } = useExtaData();
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingHistory, setLoadingHistory] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -49,13 +44,13 @@ function PerfilePage() {
     }
   }, [dataSelected]);
 
-  const handleWater = async (documentName) => {
+  const handleDownload = async (documentName, fileName) => {
     try {
       const res = await getFile(documentName);
       const url = URL.createObjectURL(res.data);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "documento-generado.pdf";
+      a.download = `${fileName}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -101,6 +96,7 @@ function PerfilePage() {
         agricultural: "Constancia agrícola",
         bamboo: "Guía de traslado de bambú",
       },
+      official: "Envío de oficio",
     };
 
     const titleMapping = titleMappings[data.title];
@@ -307,9 +303,11 @@ function PerfilePage() {
           </p>
           <hr className="flex-1 border-t border-black border" />
         </div>
-        <div className="rounded-xl bg-[#EFEEEE] p-2 w-full border border-black h-[600px] overflow-auto">
+        <div className="w-full bg-[#EFEEEE] rounded-xl p-2">
+
+        <div className="w-full border border-black h-[600px] overflow-auto">
           <table className="w-full table-fixed min-w-[1400px]">
-            <thead className="bg-[#6D1610] text-center text-xl text-white h-16 font-bold">
+            <thead className="bg-[#6D1610] text-center text-xl text-white h-16 font-bold sticky top-0">
               <tr>
                 <th>Trámite o servicio</th>
                 <th>Fecha</th>
@@ -398,14 +396,45 @@ function PerfilePage() {
                                   <button
                                     className="bg-[#6d1610] text-white rounded-full font-montserrat text-base lg:text-3xl py-1 px-1 lg:px-5 w-full"
                                     type="button"
-                                    onClick={() => handleWater(data.document)}
+                                    onClick={() =>
+                                      handleDownload(
+                                        data.document,
+                                        `{userData.firstname} ${userData.lastname}`
+                                      )
+                                    }
                                   >
                                     Descargar
                                   </button>
                                 </div>
                               </motion.div>
                             ) : (
-                              "No aplica"
+                              <>
+                                {data.title === "official" &&
+                                data.status === "Aceptada" &&
+                                data.documentAccepted !== "" ? (
+                                  <motion.div
+                                    className="w-full flex"
+                                    whileTap={{ scale: 0.95 }}
+                                  >
+                                    <div className="bg-white border-[#6d1610] border-2 p-1 rounded-full w-full">
+                                      <button
+                                        className="bg-[#6d1610] text-white rounded-full font-montserrat text-base lg:text-3xl py-1 px-1 lg:px-5 w-full"
+                                        type="button"
+                                        onClick={() =>
+                                          handleDownload(
+                                            data.documentAccepted,
+                                            `${data.folio}_${userData.firstname} ${userData.lastname}`
+                                          )
+                                        }
+                                      >
+                                        Descargar
+                                      </button>
+                                    </div>
+                                  </motion.div>
+                                ) : (
+                                  "No aplica"
+                                )}
+                              </>
                             )}
                           </>
                         )}
@@ -417,6 +446,7 @@ function PerfilePage() {
               <tr></tr>
             </tbody>
           </table>
+        </div>
         </div>
       </div>
       <div className="hidden">

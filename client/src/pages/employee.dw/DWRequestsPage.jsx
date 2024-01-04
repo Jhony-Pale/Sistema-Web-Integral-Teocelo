@@ -12,19 +12,20 @@ import { useForm } from "react-hook-form";
 import { useExtaData } from "../../context/ExtraDataContext";
 import IconoX from "../../assets/Icons/IconoX.png";
 import InputSelect from "../../components/InputSelect";
-import "../../styles/ThTable.css";
 import HeaderTittle from "../../components/HeaderTittle";
+import "../../styles/ThTable.css";
 
 const options = ["Entregada", "En revisión", "Aceptada", "Rechazada"];
 
 function DWRequestsPage() {
   const { handleSubmit, setValue, getValues } = useForm();
+  const { getWaterRequests, waterRequest: water, updateWater } = useWater();
+  const { expTextGeneral } = useExtaData();
   const [inputValue, setInputValue] = useState("");
   const [inputComments, setInputComments] = useState(true);
   const [waterUpdateStatus, setWaterUpdateStatus] = useState(null);
   const [waterUpdateAll, setWaterUpdateAll] = useState(null);
   const [waterUpdateFile, setWaterUpdateFile] = useState(null);
-  const { getWaterRequests, waterRequest: water, updateWater } = useWater();
   const [filterWater, setFilterWater] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingUpdate, setLoadingUpdate] = useState(true);
@@ -87,11 +88,11 @@ function DWRequestsPage() {
 
   const handleChangeTextarea = (event) => {
     const newValue = event.target.value;
-    const regex = /^[a-zA-Z0-9\s.,]+$/;
+    const regex = expTextGeneral;
 
     if (!regex.test(newValue) && newValue !== "") {
-      event.target.value = getValues("commentsEmployee")
-      return
+      event.target.value = getValues("commentsEmployee");
+      return;
     }
 
     setValue("commentsEmployee", newValue);
@@ -333,7 +334,7 @@ function DWRequestsPage() {
                                 ? "bg-[#DB4545]"
                                 : "bg-[#FFFFFF]"
                             } ${
-                              request.document
+                              request.document && request.status === "Aceptada"
                                 ? "h-[80px] lg:h-[104px]"
                                 : "h-[56px]"
                             }`}
@@ -347,22 +348,25 @@ function DWRequestsPage() {
                             defaultValue={request.status}
                           />
                         </th>
-                        <th className="flex flex-col gap-3 border-[2px] rounded-md border-black p-2">
-                          {request.document && (
-                            <motion.div
-                              className="w-full flex self-center justify-center"
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              <a
-                                href={documentUrl + request.document}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-[#6d1610] text-white rounded-full text-sm lg:text-xl py-1 px-5 w-full"
+                        <th className="flex flex-col gap-3 border-[2px] rounded-md border-black p-2 min-h-[56px]">
+                          {request.document &&
+                            request.status === "Aceptada" && (
+                              <motion.div
+                                className="w-full flex self-center justify-center"
+                                whileTap={{ scale: 0.95 }}
+                                initial={{ scale: 0.5, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
                               >
-                                Visualizar
-                              </a>
-                            </motion.div>
-                          )}
+                                <a
+                                  href={documentUrl + request.document}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="bg-[#6d1610] text-white rounded-full text-sm lg:text-xl py-1 px-5 w-full"
+                                >
+                                  Visualizar
+                                </a>
+                              </motion.div>
+                            )}
                           <input
                             name="document"
                             type="file"
@@ -371,18 +375,22 @@ function DWRequestsPage() {
                             ref={fileInputRef}
                             onChange={handleFileChange}
                           />
-                          <motion.div
-                            className="w-full flex self-center"
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <button
-                              className="bg-[#6d1610] text-white rounded-full font-montserrat text-sm lg:text-xl py-1 px-5 w-full"
-                              type="button"
-                              onClick={() => handleButtonFile(request._id)}
+                          {request.status === "Aceptada" && (
+                            <motion.div
+                              className="w-full flex self-center"
+                              whileTap={{ scale: 0.95 }}
+                              initial={{ scale: 0.5, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
                             >
-                              Cargar
-                            </button>
-                          </motion.div>
+                              <button
+                                className="bg-[#6d1610] text-white rounded-full font-montserrat text-sm lg:text-xl py-1 px-5 w-full"
+                                type="button"
+                                onClick={() => handleButtonFile(request._id)}
+                              >
+                                Cargar
+                              </button>
+                            </motion.div>
+                          )}
                         </th>
                       </motion.tr>
                     ))}
