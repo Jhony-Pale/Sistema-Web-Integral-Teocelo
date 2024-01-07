@@ -31,6 +31,7 @@ import DWOptions from "./DWOptions";
 import ESOptions from "./ESOptions";
 import CSOptions from "./CSOptions";
 import OPOptions from "./OPOptions";
+import SPOptions from "./SPOptions";
 
 function NavBar() {
   const { register } = useForm();
@@ -144,7 +145,7 @@ function NavBar() {
           )}
         </div>
 
-        <div className="sticky top-0 z-[9999]">
+        <div className="sticky top-0 z-[9998]">
           {isMobile ? (
             <>
               <div className="w-full h-10 flex items-center justify-center bg-[#efeeee] shadow-lg">
@@ -420,9 +421,17 @@ function NavBar() {
                       />
                     </>
                   )}
-                  {user.rol === "employee.op" /* Contraloría */ && (
+                  {user.rol === "employee.op" /* Oficialía de partes */ && (
                     <>
                       <OPOptions
+                        handleLogout={handleLogout}
+                        userName={user.firstname + " " + user.lastname}
+                      />
+                    </>
+                  )}
+                  {user.rol === "employee.sp" /* Fomento deportivo */ && (
+                    <>
+                      <SPOptions
                         handleLogout={handleLogout}
                         userName={user.firstname + " " + user.lastname}
                       />

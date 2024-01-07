@@ -42,6 +42,8 @@ import PServicesPage from "./pages/PServicesPage";
 import GarbageRoutesPage from "./pages/GarbageRoutesPage";
 import OPRequestsPage from "./pages/employee.op/OPRequestsPage";
 import OfficialFormPage from "./pages/citizen/OfficialFormPage";
+import SPSoccerTeamsPage from "./pages/employee.sp/SPSoccerTeamsPage";
+import SoccerTeamsPage from "./pages/SoccerTeamsPage";
 
 function App() {
   const location = useLocation();
@@ -80,6 +82,7 @@ function App() {
             path="/garbage-collection-routes"
             element={<GarbageRoutesPage />}
           />
+          <Route path="/soccer-teams" element={<SoccerTeamsPage />} />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<ProtectedRolRoute rolRoute="employee.sc" />}>
@@ -120,6 +123,10 @@ function App() {
 
             <Route element={<ProtectedRolRoute rolRoute="employee.op" />}>
               <Route path="/op-requests" element={<OPRequestsPage />} />
+            </Route>
+
+            <Route element={<ProtectedRolRoute rolRoute="employee.sp" />}>
+              <Route path="/sp-soccerteams" element={<SPSoccerTeamsPage />} />
             </Route>
 
             <Route element={<ProtectedRolRoute rolRoute="citizen" />}>

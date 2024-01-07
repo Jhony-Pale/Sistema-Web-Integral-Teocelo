@@ -13,6 +13,7 @@ import { NatureProvider } from "./context/NatureContext.jsx";
 import { ComplaintProvider } from "./context/ComplaintContext.jsx";
 import { EmailProvider } from "./context/EmailCOntext.jsx";
 import { OfficialProvider } from "./context/OfficialContext.jsx";
+import { SoccerProvider } from "./context/SoccerContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -26,9 +27,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   <ComplaintProvider>
                     <OfficialProvider>
                       <EmailProvider>
-                        <BrowserRouter>
-                          <App />
-                        </BrowserRouter>
+                        <SoccerProvider>
+                          <BrowserRouter>
+                            <App />
+                          </BrowserRouter>
+                        </SoccerProvider>
                       </EmailProvider>
                     </OfficialProvider>
                   </ComplaintProvider>

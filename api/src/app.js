@@ -15,6 +15,7 @@ import natureRoutes from "./routes/nature.routes.js";
 import complaintRoutes from "./routes/complaint.routes.js";
 import officialRoutes from "./routes/official.routes.js";
 import emailRoutes from "./routes/email.routes.js";
+import soccerRoutes from "./routes/soccer.routes.js";
 
 const app = express();
 
@@ -49,5 +50,6 @@ app.use("/api", natureRoutes);
 app.use("/api", complaintRoutes);
 app.use("/api", emailRoutes);
 app.use("/api", officialRoutes);
+app.use("/api", soccerRoutes);
 
 export default app;
