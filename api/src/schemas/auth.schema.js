@@ -18,11 +18,6 @@ export const registerSchema = z.object({
   phonenumber: z.string().length(10, {
     message: "El teléfono debe tener 10 dígitos.",
   }),
-  rol: z
-    .string({
-      required_error: "Rol is required",
-    })
-    .default("citizen"),
   email: z
     .string({
       required_error: "El correo es requerido.",

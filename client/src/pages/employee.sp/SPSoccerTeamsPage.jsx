@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSoccer } from "../../context/SoccerContext";
 import { AnimatePresence, motion } from "framer-motion";
-import { Spinner } from "@material-tailwind/react";
+import {
+  Spinner,
+} from "@material-tailwind/react";
 import AlertMessage from "../../components/AlertMessage";
 import HeaderTittle from "../../components/HeaderTittle";
 import DialogMessage from "../../components/DialogMessage";
@@ -27,7 +29,6 @@ function SPSoccerTeamsPage() {
   const [open, setOpen] = useState(false);
   const [openEnd, setOpenEnd] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [progressErrors, setProgressErrors] = useState(0);
   const [titleDialog, setTitleDialog] = useState("");
 
   const handleOpen = () => setOpen((prev) => !prev);
@@ -76,7 +77,7 @@ function SPSoccerTeamsPage() {
           ...prevTeamsToDelete,
           teamToDelete,
         ]);
-      } else console.log("Equipo no añadido a teamsToDelete");
+      }
       setSelectedRowF(null);
       setSelectedRowL(null);
       setSelectedRowI(null);
@@ -265,7 +266,7 @@ function SPSoccerTeamsPage() {
                             <input
                               type="number"
                               defaultValue={team.position}
-                              className=" w-full h-12 px-3 text-center bg-transparent"
+                              className="w-full h-12 px-3 text-center bg-transparent"
                               onChange={(e) =>
                                 onChangeInputValue(
                                   team._id,

@@ -36,7 +36,8 @@ import SPOptions from "./SPOptions";
 function NavBar() {
   const { register } = useForm();
   const { isMobile } = useExtaData();
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, logout, getUser } = useAuth();
+  const [user, setUser] = useState([])
 
   const [openDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => setOpenDialog(!openDialog);
@@ -93,6 +94,15 @@ function NavBar() {
     },
   };
 
+  const getUserData = async () => {
+    if(!isAuthenticated) return handleOpenDialog()
+    try {
+      const res = await getUser()
+      setUser(res)
+      handleOpenDialog()
+    } catch (error) {  }
+  }
+
   return (
     <div>
       <ThemeProvider value={themeDrawer}>
@@ -138,7 +148,7 @@ function NavBar() {
               <motion.img
                 whileTap={{ scale: 0.95 }}
                 src={BtnMeGustaria}
-                onClick={handleOpenDialog}
+                onClick={getUserData}
                 className="w-1/2 md:w-[38%] lg:w-1/5 mr-5 mt-3 cursor-pointer"
               />
             </div>
@@ -183,7 +193,7 @@ function NavBar() {
                   <motion.img
                     whileTap={{ scale: 0.95 }}
                     src={BtnMeGustaria}
-                    onClick={handleOpenDialog}
+                    onClick={getUserData}
                     className="w-[70%] mr-5 mt-3 justify-self-center"
                   />
                 </div>
@@ -381,67 +391,67 @@ function NavBar() {
             <DialogBody>
               {isAuthenticated ? (
                 <>
-                  {user.rol === "employee.sc" /* Comunicación social */ && (
+                  {user.role?.name === "employee.sc" /* Comunicación social */ && (
                     <>
                       <SCOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}
-                  {user.rol === "employee.sl" /* Alumbrado público */ && (
+                  {user.role?.name === "employee.sl" /* Alumbrado público */ && (
                     <>
                       <SLOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}
-                  {user.rol === "employee.dw" /* Agua potable */ && (
+                  {user.role?.name === "employee.dw" /* Agua potable */ && (
                     <>
                       <DWOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}
-                  {user.rol === "employee.es" /* Medio ambiente */ && (
+                  {user.role?.name === "employee.es" /* Medio ambiente */ && (
                     <>
                       <ESOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}
-                  {user.rol === "employee.cs" /* Contraloría */ && (
+                  {user.role?.name === "employee.cs" /* Contraloría */ && (
                     <>
                       <CSOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}
-                  {user.rol === "employee.op" /* Oficialía de partes */ && (
+                  {user.role?.name === "employee.op" /* Oficialía de partes */ && (
                     <>
                       <OPOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}
-                  {user.rol === "employee.sp" /* Fomento deportivo */ && (
+                  {user.role?.name === "employee.sp" /* Fomento deportivo */ && (
                     <>
                       <SPOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}
-                  {user.rol === "citizen" && (
+                  {user.role?.name === "citizen" && (
                     <>
                       <CitizenOptions
                         handleLogout={handleLogout}
-                        userName={user.firstname + " " + user.lastname}
+                        userName={user?.firstname + " " + user?.lastname}
                       />
                     </>
                   )}

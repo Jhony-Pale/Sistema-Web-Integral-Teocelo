@@ -98,7 +98,6 @@ export const deleteTeam = async (req, res) => {
 export const getTeams = async (req, res) => {
   try {
     const soccer = await Soccer.find().sort({ position: "asc" });
-
     res.json(soccer);
   } catch (error) {
     res.status(500).json({ message: error.message });

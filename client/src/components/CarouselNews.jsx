@@ -46,7 +46,11 @@ function CarouselImages() {
         </div>
       </div>
       {posts.length === 0 ? (
-        <div>No hay publicaciones.</div>
+        <div
+        className={`h-[30rem] flex items-center justify-center font-montserrat font-extrabold text-2xl`}
+      >
+        No hay noticias o comunicados
+      </div>
       ) : (
         <Carousel autoplay={true} loop={true} className="z-0">
           {organizedNews.map((group, groupIndex) => (

@@ -25,6 +25,7 @@ const natureSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    versionKey: false
   }
 );
 

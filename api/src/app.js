@@ -3,6 +3,7 @@ import { dirname, join } from "path";
 import { validateRol } from "./middlewares/rol.middleware.js";
 import { validateDocument } from "./middlewares/document.middleware.js";
 import { authRequired } from "./middlewares/validateToken.js";
+import { createRoles, createUsers } from "./libs/initialSetup.js";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -18,6 +19,8 @@ import emailRoutes from "./routes/email.routes.js";
 import soccerRoutes from "./routes/soccer.routes.js";
 
 const app = express();
+createRoles()
+createUsers()
 
 const __filename = fileURLToPath(import.meta.url);
 

@@ -26,12 +26,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    rol: {
-      type: String,
+    role: {
+      ref: "Role",
+      type: mongoose.Schema.Types.ObjectId,
     },
   },
   {
     timestamps: true,
+    versionKey: false
   }
 );
 

@@ -52,6 +52,7 @@ const soccerSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    versionKey: false
   }
 );
 

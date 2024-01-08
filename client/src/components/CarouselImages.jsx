@@ -5,13 +5,15 @@ import { useExtaData } from "../context/ExtraDataContext";
 function CarouselImages() {
   const { posts } = usePosts();
   const { imageUrl } = useExtaData();
-  const {isMobile} = useExtaData()
+  const { isMobile } = useExtaData();
 
   return (
     <div className="bg-[#efeeee] mt-5 px-5">
       {posts.length > 0 ? (
         <Carousel
-          className={`rounded-xl z-0 !overflow-y-hidden ${isMobile ? "h-[30rem]" : "h-[45rem]"}`}
+          className={`rounded-xl z-0 !overflow-y-hidden ${
+            isMobile ? "h-[30rem]" : "h-[45rem]"
+          }`}
           autoplay={true}
           loop={true}
         >
@@ -37,7 +39,13 @@ function CarouselImages() {
           ))}
         </Carousel>
       ) : (
-        <>No hay publicaciones</>
+        <div
+          className={`${
+            isMobile ? "h-[30rem]" : "h-[45rem]"
+          } flex items-center justify-center font-montserrat font-extrabold text-2xl`}
+        >
+          No hay publicaciones
+        </div>
       )}
     </div>
   );

@@ -62,7 +62,6 @@ export const AuthProvider = ({ children }) => {
       const res = await getUserRequest();
       return res.data;
     } catch (error) {
-      console.log(error.response.data);
     }
   };
 

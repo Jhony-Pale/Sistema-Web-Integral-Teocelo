@@ -53,7 +53,7 @@ function CabildoPC() {
       ],
     },
     {
-      id: 2,
+      id: 3,
       src: CabildoRegidora,
       alt: "Cabildo - Regidora",
       commissions: [
@@ -70,7 +70,7 @@ function CabildoPC() {
       ],
     },
     {
-      id: 3,
+      id: 2,
       src: CabildoSindica,
       alt: "Cabildo - Sindica",
       commissions: [
@@ -169,6 +169,7 @@ function CabildoPC() {
 
       <div className="flex justify-center gap-10 z-10">
         {images
+          .sort((a, b) => a.id - b.id)
           .filter((image) => image.id !== selectedId)
           .map((image) => (
             <motion.div

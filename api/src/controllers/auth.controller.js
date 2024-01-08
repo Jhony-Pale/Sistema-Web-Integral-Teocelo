@@ -8,9 +8,10 @@ import Complaint from "../models/complaint.model.js";
 import Nature from "../models/nature.model.js";
 import Water from "../models/water.model.js";
 import Official from "../models/official.model.js";
+import Role from "../models/role.model.js";
 
 export const register = async (req, res) => {
-  const { firstname, lastname, rol, email, password, phonenumber } = req.body;
+  const { firstname, lastname, role, email, password, phonenumber } = req.body;
 
   try {
     const userFound = await User.findOne({ email });
@@ -20,26 +21,40 @@ export const register = async (req, res) => {
         .json(["El correo electrónico ya fue registrado anteriormente."]);
 
     const passwordHash = await bcrypt.hash(password, 10);
+
     const newUser = new User({
       firstname,
       lastname,
       phonenumber: phonenumber ?? "",
-      rol: rol ?? "citizen",
       email,
       password: passwordHash,
     });
+
+    if (role) {
+      const foundRol = await Role.findOne({ name: role });
+      newUser.role = foundRol._id;
+    } else {
+      const rolDefault = await Role.findOne({ name: "citizen" });
+      newUser.role = rolDefault._id;
+    }
 
     const userSaved = await newUser.save();
 
     const token = await createAccessToken({ id: userSaved._id });
 
     res.cookie("token", token);
+
+    const userAll = await User.findOne({ email }).populate({
+      path: "role",
+      select: "name",
+    });
+
     res.json({
-      firstname: userSaved.firstname,
-      lastname: userSaved.lastname,
-      phonenumber: userSaved.phonenumber,
-      rol: userSaved.rol,
-      email: userSaved.email,
+      firstname: userAll.firstname,
+      lastname: userAll.lastname,
+      phonenumber: userAll.phonenumber,
+      role: userAll.role,
+      email: userAll.email,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -50,7 +65,10 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const userFound = await User.findOne({ email });
+    const userFound = await User.findOne({ email }).populate({
+      path: "role",
+      select: "name",
+    });
 
     if (!userFound) return res.status(400).json(["User not found"]);
 
@@ -66,11 +84,12 @@ export const login = async (req, res) => {
       firstname: userFound.firstname,
       lastname: userFound.lastname,
       phonenumber: userFound.phonenumber,
-      rol: userFound.rol,
+      role: userFound.role,
       email: userFound.email,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json([error.message]);
+    console.log(error);
   }
 };
 
@@ -145,7 +164,7 @@ export const update = async (req, res) => {
       firstname: user.firstname,
       lastname: user.lastname,
       phonenumber: user.phonenumber,
-      rol: user.rol,
+      role: user.role,
       email: user.email,
     });
   } catch (error) {
@@ -155,12 +174,18 @@ export const update = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const userFound = await User.findById(req.user.id);
+    const userFound = await User.findById(req.user.id).populate({
+      path: "role",
+      select: "name",
+    });
+
     if (!userFound) return res.status(400).json(["Usuario no encontrado."]);
+
     res.json({
       firstname: userFound.firstname,
       lastname: userFound.lastname,
       phonenumber: userFound.phonenumber,
+      role: userFound.role,
       email: userFound.email,
     });
   } catch (error) {
@@ -176,14 +201,17 @@ export const verifyToken = async (req, res) => {
   jwt.verify(token, TOKEN_SECRET, async (err, user) => {
     if (err) return res.status(401).json({ message: "Unauthorized" });
 
-    const userFound = await User.findById(user.id);
+    const userFound = await User.findById(user.id).populate({
+      path: "role",
+      select: "name",
+    });
     if (!userFound) return res.status(401).json({ message: "Unauthorized" });
 
     return res.json({
       firstname: userFound.firstname,
       lastname: userFound.lastname,
       phonenumber: userFound.phonenumber,
-      rol: userFound.rol,
+      role: userFound.role,
       email: userFound.email,
     });
   });
