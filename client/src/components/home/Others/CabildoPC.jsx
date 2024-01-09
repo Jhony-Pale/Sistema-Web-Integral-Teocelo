@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import CabildoAlcalde from "../assets/Photos/CabildoAlcalde.jpg";
-import CabildoRegidora from "../assets/Photos/CabildoRegidora.jpg";
-import CabildoSindica from "../assets/Photos/CabildoSindica.png";
-import { useExtaData } from "../context/ExtraDataContext";
+import { useExtaData } from "../../../context/ExtraDataContext";
+import CabildoAlcalde from "../../../assets/Photos/CabildoAlcalde.jpg";
+import CabildoRegidora from "../../../assets/Photos/CabildoRegidora.jpg";
+import CabildoSindica from "../../../assets/Photos/CabildoSindica.png";
 
 function CabildoPC() {
   const [selectedId, setSelectedId] = useState(1);

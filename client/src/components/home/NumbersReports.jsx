@@ -1,9 +1,9 @@
 import { motion } from "framer-motion"
-import Logo075 from "../assets/Logos/Logo075.png";
-import Logo911 from "../assets/Logos/Logo911.png";
-import LogoAlerta from "../assets/Logos/LogoAlerta.png";
-import LogoDenuncia from "../assets/Logos/LogoDenuncia.png";
-import ReportHomeForm from "./ReportHomeForm";
+import Logo075 from "../../assets/Logos/Logo075.png";
+import Logo911 from "../../assets/Logos/Logo911.png";
+import LogoAlerta from "../../assets/Logos/LogoAlerta.png";
+import LogoDenuncia from "../../assets/Logos/LogoDenuncia.png";
+import ReportHomeForm from "./NumReports/ReportHomeForm";
 
 function NumbersReports() {
   return (

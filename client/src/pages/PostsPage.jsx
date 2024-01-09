@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { usePosts } from "../context/PostContext";
 import { AnimatePresence, motion } from "framer-motion";
-import InputSelect from "../components/InputSelect";
 import { FiAlertCircle } from "react-icons/fi";
 import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../context/ExtraDataContext";
-import ComponentNew from "../components/ComponentNew";
+import InputSelect from "../components/InputSelect";
+import ComponentNew from "../components/post/ComponentNew";
 import HeaderTittle from "../components/HeaderTittle";
 
 const options = ["Todo", "Noticias", "Comunicados", "Convocatorias"];
 
 function PostsPage() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   const { getPosts, posts } = usePosts();
   const { isMobile } = useExtaData();
   const [filterPosts, setFilterPosts] = useState([]);
@@ -33,8 +36,10 @@ function PostsPage() {
     setFilterPosts(filter);
   };
 
+  useEffect(() => scrollToTop(), []);
+
   return (
-    <div className="bg-white pt-6 pb-8 mt-5">
+    <div className="bg-white pt-6 pb-8 mt-5 relative z-[9995]">
       <HeaderTittle title={"Publicaciones"} />
       <div className="flex justify-center items-center m-10">
         {!isMobile && (

@@ -1,8 +1,8 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { useExtaData } from "../context/ExtraDataContext";
-import Footer1 from "../assets/Extras/Footer1.png";
-import Footer2 from "../assets/Extras/Footer2.png";
+import { useExtaData } from "../../../context/ExtraDataContext";
+import Footer1 from "../../../assets/Extras/Footer1.png";
+import Footer2 from "../../../assets/Extras/Footer2.png";
 
 
 function TourismComponent({ data }) {

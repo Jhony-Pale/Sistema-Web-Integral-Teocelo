@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import CarouselImages from "../components/CarouselImages";
-import CarouselNews from "../components/CarouselNews";
-import NumbersReports from "../components/NumbersReports";
-import ServicesAnnouncement from "../components/ServicesAnnouncement";
+import CarouselImages from "../components/home/CarouselImages";
+import CarouselNews from "../components/home/CarouselNews";
+import NumbersReports from "../components/home/NumbersReports";
+import ServicesAnnouncement from "../components/home/ServicesAnnouncement";
 import { usePosts } from "../context/PostContext";
 
 function HomePage() {

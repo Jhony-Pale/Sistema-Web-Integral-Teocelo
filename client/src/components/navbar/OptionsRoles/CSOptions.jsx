@@ -1,32 +1,31 @@
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useExtaData } from "../../context/ExtraDataContext";
-import IconoBalon from "../../assets/Icons/IconoTabClasif.png";
-import "../../styles/IconUserLogin.css";
+import { useExtaData } from "../../../context/ExtraDataContext";
+import IconoReportes from "../../../assets/Icons/IconoReportes.png";
+import "../../../styles/IconUserLogin.css";
 
-function SPOptions({ handleLogout, userName }) {
+function CSOptions({ userName, handleLogout }) {
   const { isMobile } = useExtaData();
   const handleLogoutClick = () => {
     handleLogout();
   };
-
   return (
     <div className={`grid ${isMobile ? "grid-cols-2" : "grid-cols-3"} mb-10`}>
       <div className="col-span-2 flex flex-wrap items-start gap-y-5">
         <Link
-          to="/sp-soccerteams"
+          to="/cs-complaints"
           className="lg:basis-1/2 flex items-center gap-2"
         >
           <div className="relative">
             <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
             <img
-              src={IconoBalon}
-              alt="Icono de agregar publicación"
-              className="absolute top-[0.15rem] p-1"
+              src={IconoReportes}
+              alt="Icono de reportes"
+              className="absolute top-[15%] p-[0.15rem]"
             />
           </div>
           <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Administrar tablas de posiciones
+            Quejas o denuncias
           </p>
         </Link>
       </div>
@@ -62,4 +61,4 @@ function SPOptions({ handleLogout, userName }) {
   );
 }
 
-export default SPOptions;
+export default CSOptions;

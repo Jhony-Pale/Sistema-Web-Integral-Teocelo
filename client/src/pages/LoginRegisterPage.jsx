@@ -3,9 +3,9 @@ import { useExtaData } from "../context/ExtraDataContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Collage from "../assets/Photos/Collage.png";
-import LoginComponent from "../components/LoginComponent";
-import RegisterComponent from "../components/RegisterComponent";
-import LoginRegisterMV from "../components/LoginRegisterMV";
+import LoginComponent from "../components/auth/LoginComponent";
+import RegisterComponent from "../components/auth/RegisterComponent";
+import LoginRegisterMV from "../components/auth/LoginRegisterMV";
 
 function LoginRegisterPage() {
   const { isLogin, isMobile } = useExtaData();

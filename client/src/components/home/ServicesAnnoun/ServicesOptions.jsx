@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import IconoRecoBasura from "../assets/Icons/IconoRecoBasura.png";
-import IconoTabClasif from "../assets/Icons/IconoTabClasif.png";
-import IconoActaNacimiento from "../assets/Icons/IconoActaNacimiento.png";
-import IconoOficialia from "../assets/Icons/IconoOficialia.png";
+import IconoRecoBasura from "../../../assets/Icons/IconoRecoBasura.png";
+import IconoTabClasif from "../../../assets/Icons/IconoTabClasif.png";
+import IconoActaNacimiento from "../../../assets/Icons/IconoActaNacimiento.png";
+import IconoOficialia from "../../../assets/Icons/IconoOficialia.png";
 
 function ServicesOptions() {
   const scrollToTop = () => {

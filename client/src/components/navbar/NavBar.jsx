@@ -22,16 +22,16 @@ import NavBarOptions from "./NavBarOptions";
 import NavBarOptionsMobileVersion from "./NavBarOptionsMobileVersion";
 import { useAuth } from "../../context/AuthContext";
 import { motion } from "framer-motion";
-import SCOptions from "./SCOptions";
-import CitizenOptions from "./CitizenOptions";
-import DefaultOptions from "./DefaultOptions";
-import SLOptions from "./SLOptions";
+import SCOptions from "./OptionsRoles/SCOptions";
+import CitizenOptions from "./OptionsRoles/CitizenOptions";
+import DefaultOptions from "./OptionsRoles/DefaultOptions";
+import SLOptions from "./OptionsRoles/SLOptions";
 import Footer from "../Footer";
-import DWOptions from "./DWOptions";
-import ESOptions from "./ESOptions";
-import CSOptions from "./CSOptions";
-import OPOptions from "./OPOptions";
-import SPOptions from "./SPOptions";
+import DWOptions from "./OptionsRoles/DWOptions";
+import ESOptions from "./OptionsRoles/ESOptions";
+import CSOptions from "./OptionsRoles/CSOptions";
+import OPOptions from "./OptionsRoles/OPOptions";
+import SPOptions from "./OptionsRoles/SPOptions";
 
 function NavBar() {
   const { register } = useForm();

@@ -1,11 +1,10 @@
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useExtaData } from "../../context/ExtraDataContext";
-import IconoReportes from "../../assets/Icons/IconoReportes.png";
-import IconoSolicitudes from "../../assets/Icons/IconoSolicitudes.png";
-import "../../styles/IconUserLogin.css";
+import { useExtaData } from "../../../context/ExtraDataContext";
+import IconoBalon from "../../../assets/Icons/IconoTabClasif.png";
+import "../../../styles/IconUserLogin.css";
 
-function DWOptions({ handleLogout, userName }) {
+function SPOptions({ handleLogout, userName }) {
   const { isMobile } = useExtaData();
   const handleLogoutClick = () => {
     handleLogout();
@@ -15,32 +14,19 @@ function DWOptions({ handleLogout, userName }) {
     <div className={`grid ${isMobile ? "grid-cols-2" : "grid-cols-3"} mb-10`}>
       <div className="col-span-2 flex flex-wrap items-start gap-y-5">
         <Link
-          to="/dw-requests"
+          to="/sp-soccerteams"
           className="lg:basis-1/2 flex items-center gap-2"
         >
           <div className="relative">
             <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
             <img
-              src={IconoSolicitudes}
-              alt="Icono de solicitudes"
-              className="absolute top-[15%] p-[0.15rem] ml-1"
+              src={IconoBalon}
+              alt="Icono de agregar publicación"
+              className="absolute top-[0.15rem] p-1"
             />
           </div>
           <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Solicitudes
-          </p>
-        </Link>
-        <Link to="/dw-reports" className="lg:basis-1/2 flex items-center gap-2">
-          <div className="relative">
-            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
-            <img
-              src={IconoReportes}
-              alt="Icono de reportes"
-              className="absolute top-[15%] p-[0.15rem]"
-            />
-          </div>
-          <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Reportes
+            Administrar tablas de posiciones
           </p>
         </Link>
       </div>
@@ -56,7 +42,9 @@ function DWOptions({ handleLogout, userName }) {
               <FaCheck size={isMobile ? "1.5em" : "2em"} color="white" />
             </div>
           </div>
-          <p className="font-extrabold text-black text-xl text-center">{userName}</p>
+          <p className="font-extrabold text-black text-xl text-center">
+            {userName}
+          </p>
         </div>
         <Link
           to="/"
@@ -74,4 +62,4 @@ function DWOptions({ handleLogout, userName }) {
   );
 }
 
-export default DWOptions;
+export default SPOptions;

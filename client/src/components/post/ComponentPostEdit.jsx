@@ -6,10 +6,10 @@ import {
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import { useExtaData } from "../context/ExtraDataContext";
+import { useExtaData } from "../../context/ExtraDataContext";
 import { Link } from "react-router-dom";
 
-function ComponentPostDelete({ newComponent, handleDelete }) {
+function ComponentPostEdit({ newComponent }) {
   const { imageUrl } = useExtaData();
   const urlImage = imageUrl + newComponent.image;
 
@@ -21,10 +21,6 @@ function ComponentPostDelete({ newComponent, handleDelete }) {
     );
     return formattedDate;
   };
-
-  const handleClickDelete = (post) =>{
-    handleDelete(post)
-  }
 
   return (
     <div className="w-full h-full">
@@ -63,9 +59,9 @@ function ComponentPostDelete({ newComponent, handleDelete }) {
               >
                 Leer más
               </Link>
-              <button onClick={() => handleClickDelete(newComponent)} className="bg-[#6d1610] text-white rounded-2xl py-1 px-5 font-montserrat w-full lg:w-2/3 justify-self-end text-center">
-                Eliminar
-              </button>
+              <Link to={"/posts/edit/" + newComponent.title} className="bg-[#6d1610] text-white rounded-2xl py-1 px-5 font-montserrat w-full lg:w-2/3 justify-self-end text-center">
+                Editar
+              </Link>
             </div>
           </div>
         </CardFooter>
@@ -74,4 +70,4 @@ function ComponentPostDelete({ newComponent, handleDelete }) {
   );
 }
 
-export default ComponentPostDelete;
+export default ComponentPostEdit;

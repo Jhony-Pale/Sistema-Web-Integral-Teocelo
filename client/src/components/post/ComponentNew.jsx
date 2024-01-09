@@ -6,11 +6,11 @@ import {
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import { useExtaData } from "../context/ExtraDataContext";
+import { useExtaData } from "../../context/ExtraDataContext";
 import { Link } from "react-router-dom";
-import IconoVerMas from "../assets/Icons/IconoVerMas.png";
+import IconoVerMas from "../../assets/Icons/IconoVerMas.png";
 
-function ComponentNew({ newComponent }) {
+function ComponentNew({ newComponent, handleDetails }) {
   const { imageUrl, isMobile } = useExtaData();
   const urlImage = imageUrl + newComponent.image;
 
@@ -21,6 +21,10 @@ function ComponentNew({ newComponent }) {
       options
     );
     return formattedDate;
+  };
+
+  const handleClickDetails = (post) => {
+    if (handleDetails) handleDetails(post);
   };
 
   return (
@@ -34,7 +38,11 @@ function ComponentNew({ newComponent }) {
               className="mb-2 font-montserrat text-[#494848] text-base lg:text-xl flex items-center"
             >
               <Link to="/posts">
-                <img src={IconoVerMas} alt="Icono para ver más publicaciones" className="h-full" />
+                <img
+                  src={IconoVerMas}
+                  alt="Icono para ver más publicaciones"
+                  className="h-full"
+                />
               </Link>
             </Typography>
           </CardBody>
@@ -58,7 +66,11 @@ function ComponentNew({ newComponent }) {
             >
               {newComponent.title}
             </Typography>
-            <p className={`font-montserrat text-[#A3A3A2] line-clamp-3 lg:line-clamp-5 ${newComponent.body.includes(" ") ? "break-words" : "break-all"}`}>
+            <p
+              className={`font-montserrat text-[#A3A3A2] line-clamp-3 lg:line-clamp-5 ${
+                newComponent.body.includes(" ") ? "break-words" : "break-all"
+              }`}
+            >
               {newComponent.body}
             </p>
           </CardBody>

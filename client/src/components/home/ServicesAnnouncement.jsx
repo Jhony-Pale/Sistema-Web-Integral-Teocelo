@@ -1,5 +1,5 @@
-import Announcement from "./Announcement";
-import ServicesOptions from "./ServicesOptions";
+import Announcement from "./ServicesAnnoun/Announcement";
+import ServicesOptions from "./ServicesAnnoun/ServicesOptions";
 
 function ServicesAnnouncement() {
   return (

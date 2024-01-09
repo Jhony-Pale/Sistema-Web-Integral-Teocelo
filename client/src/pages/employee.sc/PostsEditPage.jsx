@@ -5,7 +5,7 @@ import InputSelect from "../../components/InputSelect";
 import { FiAlertCircle } from "react-icons/fi";
 import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../../context/ExtraDataContext";
-import ComponentPostEdit from "../../components/ComponentPostEdit";
+import ComponentPostEdit from "../../components/post/ComponentPostEdit";
 import HeaderTittle from "../../components/HeaderTittle";
 
 const options = ["Todo", "Noticias", "Comunicados", "Convocatorias"];

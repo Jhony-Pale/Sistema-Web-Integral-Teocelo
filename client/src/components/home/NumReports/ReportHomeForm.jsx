@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import { useEmail } from "../context/EmailCOntext";
+import { useEmail } from "../../../context/EmailCOntext";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Spinner } from "@material-tailwind/react";
-import DialogMessage from "../components/DialogMessage";
-import AlertMessage from "./AlertMessage";
+import DialogMessage from "../../DialogMessage";
+import AlertMessage from "../../AlertMessage";
 
 const draw = {
   hidden: { pathLength: 0, opacity: 0 },

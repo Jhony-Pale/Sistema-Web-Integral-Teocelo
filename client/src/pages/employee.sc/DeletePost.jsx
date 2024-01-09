@@ -5,7 +5,7 @@ import InputSelect from "../../components/InputSelect";
 import { FiAlertCircle } from "react-icons/fi";
 import { Alert } from "@material-tailwind/react";
 import { useExtaData } from "../../context/ExtraDataContext";
-import ComponentPostDelete from "../../components/ComponentPostDelete";
+import ComponentPostDelete from "../../components/post/ComponentPostDelete";
 import DialogMessage from "../../components/DialogMessage";
 import HeaderTittle from "../../components/HeaderTittle";
 

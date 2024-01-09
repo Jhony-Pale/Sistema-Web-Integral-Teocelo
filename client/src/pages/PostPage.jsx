@@ -27,7 +27,11 @@ function PostPage() {
             <img
               src={imageUrl + post.image}
               alt={"Imagen de la publicación: " + post.title}
-              className={isMobile ? "" : "w-1/2"}
+              className={`${
+                isMobile
+                  ? "max-h-[20rem] min-h-[20rem]"
+                  : "max-h-[35rem] min-h-[35rem]"
+              } px-5`}
             />
           </div>
           <div className="mt-20 mb-20 mx-52">

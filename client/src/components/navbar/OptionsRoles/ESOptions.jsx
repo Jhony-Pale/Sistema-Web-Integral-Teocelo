@@ -1,12 +1,12 @@
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import IconoAgregarP from "../../assets/Icons/IconoAgregarP.png";
-import IconoBorrarP from "../../assets/Icons/IconoBorrarP.png";
-import IconoEditarP from "../../assets/Icons/IconoEditarP.png";
-import "../../styles/IconUserLogin.css";
-import { useExtaData } from "../../context/ExtraDataContext";
+import { useExtaData } from "../../../context/ExtraDataContext";
+import IconoAgricola from "../../../assets/Icons/IconoAgricola.png";
+import IconoGanadera from "../../../assets/Icons/IconoGanadera.png";
+import IconoBambu from "../../../assets/Icons/IconoBambu.png";
+import "../../../styles/IconUserLogin.css";
 
-function SCOptions({ handleLogout, userName }) {
+function ESOptions({ handleLogout, userName }) {
   const { isMobile } = useExtaData();
   const handleLogoutClick = () => {
     handleLogout();
@@ -14,47 +14,47 @@ function SCOptions({ handleLogout, userName }) {
 
   return (
     <div className={`grid ${isMobile ? "grid-cols-2" : "grid-cols-3"} mb-10`}>
-      <div className="col-span-2 flex flex-wrap items-center gap-y-5">
-        <Link to="/add-post" className="lg:basis-1/2 flex items-center gap-2">
+      <div className="col-span-2 flex flex-wrap items-start gap-y-5">
+        <Link to="/es-cattle" className="lg:basis-1/2 flex items-center gap-2">
           <div className="relative">
-            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
+            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[6em] min-w-[6em]"></div>
             <img
-              src={IconoAgregarP}
-              alt="Icono de agregar publicación"
-              className="absolute top-[15%] p-[0.15rem]"
+              src={IconoGanadera}
+              alt="Icono de ganadería"
+              className="absolute top-[15%] p-[0.5rem] ml-1"
             />
           </div>
           <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Añadir una nueva publicación
-          </p>
-        </Link>
-        <Link to="/posts/edit" className="lg:basis-1/2 flex items-center gap-2">
-          <div className="relative">
-            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
-            <img
-              src={IconoEditarP}
-              alt="Icono de agregar publicación"
-              className="absolute top-[15%] p-[0.15rem]"
-            />
-          </div>
-          <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Editar una publicación
+            Constancias de acreditación ganadera
           </p>
         </Link>
         <Link
-          to="/posts/delete"
+          to="/es-agricultural"
           className="lg:basis-1/2 flex items-center gap-2"
         >
           <div className="relative">
-            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[5em] min-w-[5em]"></div>
+            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[6em] min-w-[6em]"></div>
             <img
-              src={IconoBorrarP}
-              alt="Icono de agregar publicación"
-              className="absolute top-[15%] p-[0.15rem]"
+              src={IconoAgricola}
+              alt="Icono de agricultura"
+              className="absolute top-[15%] p-[0.2rem] mt-1"
             />
           </div>
           <p className="font-extrabold text-xl lg:text-2xl text-black">
-            Eliminar una publicación
+            Constancias agrícolas
+          </p>
+        </Link>
+        <Link to="/es-bamboo" className="lg:basis-1/2 flex items-center gap-2">
+          <div className="relative">
+            <div className="rounded-full bg-[#6D1610] max-h-[7em] max-w-[7em] min-h-[6em] min-w-[6em]"></div>
+            <img
+              src={IconoBambu}
+              alt="Icono de bambú"
+              className="absolute top-[15%]"
+            />
+          </div>
+          <p className="font-extrabold text-xl lg:text-2xl text-black">
+            Guías de traslado de bambú
           </p>
         </Link>
       </div>
@@ -70,7 +70,9 @@ function SCOptions({ handleLogout, userName }) {
               <FaCheck size={isMobile ? "1.5em" : "2em"} color="white" />
             </div>
           </div>
-          <p className="font-extrabold text-black text-xl text-center">{userName}</p>
+          <p className="font-extrabold text-black text-xl text-center">
+            {userName}
+          </p>
         </div>
         <Link
           to="/"
@@ -88,4 +90,4 @@ function SCOptions({ handleLogout, userName }) {
   );
 }
 
-export default SCOptions;
+export default ESOptions;

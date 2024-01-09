@@ -1,6 +1,6 @@
 import { Carousel, Typography } from "@material-tailwind/react";
-import { usePosts } from "../context/PostContext";
-import { useExtaData } from "../context/ExtraDataContext";
+import { usePosts } from "../../context/PostContext";
+import { useExtaData } from "../../context/ExtraDataContext";
 
 function CarouselImages() {
   const { posts } = usePosts();

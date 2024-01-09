@@ -1,7 +1,7 @@
-import ComponentNew from "./ComponentNew";
+import ComponentNew from "../post/ComponentNew";
 import { Carousel } from "@material-tailwind/react";
-import { useExtaData } from "../context/ExtraDataContext";
-import { usePosts } from "../context/PostContext";
+import { useExtaData } from "../../context/ExtraDataContext";
+import { usePosts } from "../../context/PostContext";
 
 function CarouselImages() {
   const { isMobile } = useExtaData();

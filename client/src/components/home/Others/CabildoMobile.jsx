@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
-import CabildoAlcalde from "../assets/Photos/CabildoAlcalde.jpg";
-import CabildoRegidora from "../assets/Photos/CabildoRegidora.jpg";
-import CabildoSindica from "../assets/Photos/CabildoSindica.png";
 import { Dialog, DialogBody, DialogHeader } from "@material-tailwind/react";
+import CabildoAlcalde from "../../../assets/Photos/CabildoAlcalde.jpg";
+import CabildoRegidora from "../../../assets/Photos/CabildoRegidora.jpg";
+import CabildoSindica from "../../../assets/Photos/CabildoSindica.png";
 
 function CabildoMobile() {
   const [selectedId, setSelectedId] = useState(1);

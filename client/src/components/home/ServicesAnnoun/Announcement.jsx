@@ -1,7 +1,7 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { usePosts } from "../context/PostContext";
-import { useExtaData } from "../context/ExtraDataContext";
+import { usePosts } from "../../../context/PostContext";
+import { useExtaData } from "../../../context/ExtraDataContext";
 
 function Announcement() {
   const { posts } = usePosts();

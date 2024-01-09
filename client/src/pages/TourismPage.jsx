@@ -1,6 +1,6 @@
 import { useExtaData } from "../context/ExtraDataContext";
 import { motion } from "framer-motion";
-import TourismComponent from "../components/TourismComponent";
+import TourismComponent from "../components/home/Others/TourismComponent";
 import Cascada from "../assets/Photos/Cascada-Tezozontla.jpg";
 import HeaderTittle from "../components/HeaderTittle";
 

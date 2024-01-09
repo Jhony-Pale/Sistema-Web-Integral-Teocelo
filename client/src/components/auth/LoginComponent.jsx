@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { GoEyeClosed } from "react-icons/go";
-import { useExtaData } from "../context/ExtraDataContext";
-import { useAuth } from "../context/AuthContext";
+import { useExtaData } from "../../context/ExtraDataContext";
+import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import LogoHorizontal from "../assets/Logos/LogoHorizontal.png";
-import EscudoVertical from "../assets/Logos/EscudoVertical.png";
-import AlertMessage from "./AlertMessage";
+import LogoHorizontal from "../../assets/Logos/LogoHorizontal.png";
+import EscudoVertical from "../../assets/Logos/EscudoVertical.png";
+import AlertMessage from "../AlertMessage";
 
 function LoginComponent() {
   const {
